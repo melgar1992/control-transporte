@@ -1,24 +1,40 @@
-const formularioNuevoConductor = document.querySelector('#nuevo_conductor');
+const formularioNuevoConductor = document.querySelector('#nuevo_empleado'),
+      listadoEmpleados = document.querySelector('#tablaEmpleados tbody')
+      formularioNuevoContrato = document.querySelector('#nuevo_contrato');
 
 addEventListeners();
 
 function addEventListeners(){
-    formularioNuevoConductor.addEventListener('submit', ingresarConductor);
+    if (formularioNuevoConductor){
+        formularioNuevoConductor.addEventListener('submit', ingresarEmpleado);
+    }
+
+        
+    if(formularioNuevoContrato){
+        formularioNuevoContrato.addEventListener('submit',ingresarContrato);
+    }
+    
+    
 }
 
-function ingresarConductor(e){
+function ingresarContrato(e){
+    e.preventDefault();
+    var nuevoContrato = document.querySelector('#tipoContrato').value;
+
+    console.log(nuevoContrato);
+}
+
+function ingresarEmpleado(e){
     
     e.preventDefault();
 
-    var nuevo_conductor = document.querySelector('#nuevo_conductor').value,
-        ci = document.querySelector('#CI').value,
+    const ci = document.querySelector('#CI').value,
         nombres = document.querySelector('#nombres').value,
         apellidop = document.querySelector('#apellido-paterno').value,
         apellidom = document.querySelector('#apellido-materno').value,
-        fechan = document.querySelector('#fecha-nacimiento').value,
-        email = document.querySelector('#email').value,
+        fechan = document.querySelector('#fecha-nacimiento').value,        
         direccion = document.querySelector('#direccion').value,
-        ciudad = document.querySelector('#ciudad').value,
+        departamento = document.querySelector('#departamento').value,
         telefono01 = document.querySelector('#telefono_01').value,
         telefono02 = document.querySelector('#telefono_02').value,
         calificacion = document.querySelector('#calificacion').value,
@@ -37,10 +53,9 @@ function ingresarConductor(e){
     datos.append('nombres',nombres);
     datos.append('apellido-paterno',apellidop);
     datos.append('apellido-materno',apellidom);
-    datos.append('fecha-nacimiento',fechan);
-    datos.append('email',email);
+    datos.append('fecha-nacimiento',fechan);    
     datos.append('direccion',direccion);
-    datos.append('ciudad',ciudad);
+    datos.append('departamento',departamento);
     datos.append('telefono_01',telefono01);
     datos.append('telefono_02',telefono02);
     datos.append('calificacion',calificacion);
@@ -48,7 +63,7 @@ function ingresarConductor(e){
     datos.append('tipo-licencia',tlicencia);
     datos.append('fecha-vencimiento-l',fechavl);
     
-    console.log(tipo);
+    console.log(datos);
     // Creanda un llamado Ajax
     var xhr = new XMLHttpRequest();
     
@@ -58,6 +73,7 @@ function ingresarConductor(e){
     // Retorno de datos
     xhr.onload = function(){
         if(this.status === 200){
+            // leemos la respuesta php
             var respuesta = JSON.parse(xhr.responseText);
 
             console.log(respuesta);
@@ -68,16 +84,51 @@ function ingresarConductor(e){
                 const nuevoEmpleado = document.createElement('tr');
 
                 nuevoEmpleado.innerHTML = `
+                    <td>${respuesta.datos.id_empleado}</td>
                     <td>${respuesta.datos.ci}</td>
                     <td>${respuesta.datos.nombres}</td>
                     <td>${respuesta.datos.apellidop}</td>
                     <td>${respuesta.datos.apellidom}</td>
                     <td>${respuesta.datos.fechan}</td>
                     <td>${respuesta.datos.telefono01}</td>
-                    <td>${respuesta.datos.ciudad}</td>
+                    <td>${respuesta.datos.departamento}</td>
                     <td>${respuesta.datos.tlicencia}</td>
                 `;
 
+                //crear conteneodr para los botonoes
+                const contenedorAcciones = document.createElement('td');
+
+                // Crea el icono de Editar
+                const iconoEditar = document.createElement('i');
+                iconoEditar.classList.add('fas', 'fa-pencil-alt');
+
+                // Crea el enlace para editar
+                const btnEditar = document.createElement('a');                
+                btnEditar.classList.add('btn', 'btn-info', 'btn-xs');                
+                btnEditar.textContent = " Edit ";                
+                btnEditar.appendChild(iconoEditar);
+
+                // Agregarlo al padre
+                contenedorAcciones.appendChild(btnEditar);
+
+                // Crea el icono eliminar
+                const iconoEliminar = document.createElement('i');
+                iconoEliminar.classList.add('far', 'fa-trash-alt');
+
+                // Crea el enlace para eliminar
+                const btnEliminar = document.createElement('a');
+                btnEliminar.classList.add('btn', 'btn-danger', 'btn-xs');
+                btnEliminar.textContent = " Delete ";
+                btnEliminar.appendChild(iconoEliminar);
+
+                // Agrego al pader
+                contenedorAcciones.appendChild(btnEliminar);
+
+                // Agrego al tr
+                nuevoEmpleado.appendChild(contenedorAcciones);
+
+                // agregarlos con los contactos existentes
+                listadoEmpleados.appendChild(nuevoEmpleado); 
                 swal({
                     title: 'Nuevo Conductor',
                     text: 'El conductor fue ingresado correctamente',
@@ -98,3 +149,5 @@ function ingresarConductor(e){
 
     
 }
+
+

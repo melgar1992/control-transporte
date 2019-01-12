@@ -14,12 +14,14 @@
                     <ul class="nav child_menu">
                       <li><a href="form.html">Cliente</a></li>
                       <li><a href="form_advanced.html">Contratista</a></li>
-                      <li><a>Conductor <span class="fas fa-chevron-down"></span></a>
+                      <li><a>Empleado <span class="fas fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="<?php echo site_url("form/Conductor/index")?>">Registro</a>
+                            <li><a href="<?php echo site_url("form/Empleado/index")?>">Registro Empleado</a>
                             </li>
-                            <li><a href="#level2_1">Modificar - Eliminar</a>
-                            </li>                            
+                            <li><a href="#level2_1">Modificar - Eliminar Empleado</a>
+                            </li>
+                            <li><a href="<?php echo site_url("form/Contrato/index")?>">Tipo Contrato</a>
+                            </li>                          
                         </ul>
                       </li>
                       <li><a href="form_wizards.html">Form Wizard</a></li>

@@ -1,5 +1,5 @@
 <?php
-    class datos_Conductor {
+    class datos_Empleado {
         
         function __construct(){
             parent::Model();
@@ -7,7 +7,7 @@
         }
     }
 
-    class Conductor_model extends CI_Model {
+    class Empleado_model extends CI_Model {
 
 
         public function insertar($id_persona,$calificacion,$descripcion,$tlicencia,$fechavl){           
@@ -22,13 +22,19 @@
                 'FechaVencimientoL' => $fechavl
             );
 
-            $this->db->insert('conductor', $data2);
+            $this->db->insert('empleado', $data2);
 
             $id_conductor = $this->db->insert_id();
 
             return $id_conductor;
 
-        }      
+        }    
+        public function obtenerEmpleado(){
+
+            $query = $this->db->query("select * from persona p inner join empleado e on p.ID_persona = e.ID_persona");
+
+            return $query;
+        }  
 
         
 

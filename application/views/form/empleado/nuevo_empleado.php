@@ -25,7 +25,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form method="post" id="nuevo_conductor"  data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
+                  <form method="post" id="nuevo_empleado"  data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CI">CI <span class="required">*</span>
@@ -57,22 +57,16 @@
                         </div>
                       </div>
                                                                                                     
-                                  <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha-nacimiento">Fecha de Nacimiento <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <div class='input-group date' id='myDatepicker2'>
-                                        <input type='date' class="form-control" id="fecha-nacimiento" name="fecha-nacimiento"/>                                        
-                                      </div>
-                                    </div>
-                                  </div> 
-
                       <div class="form-group">
-                        <label for="email" class="control-label col-md-3 col-sm-3 col-xs-12">Email</label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha-nacimiento">Fecha de Nacimiento <span class="required">*</span>
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="email" class="form-control col-md-7 col-xs-12" type="email" name="email" placeholder = "correo@dominio.com">
+                          <div class='input-group date' id='myDatepicker2'>
+                            <input type='date' class="form-control" id="fecha-nacimiento" name="fecha-nacimiento"/>                                        
+                          </div>
                         </div>
-                      </div>
+                      </div> 
+
                       <div class="form-group">
                         <label for="direccion" class="control-label col-md-3 col-sm-3 col-xs-12">Dirección <span class="required">*</span>
                         </label>
@@ -83,9 +77,9 @@
 
 
                       <div class="form-group">
-                        <label for="ciudad" class="control-label col-md-3 col-sm-3 col-xs-12">Ciudad *:</label>
+                        <label for="departamento" class="control-label col-md-3 col-sm-3 col-xs-12">Departamento *:</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <select id="ciudad" name="ciudad" class="form-control" required>
+                          <select id="departamento" name="departamento" class="form-control" required>
                             <option value=""></option>
                             <option value="Pando">Pando</option>
                             <option value="Beni">Beni</option>
@@ -148,25 +142,22 @@
                         </div>  
                       </div>
                       
-                                  <div class="form-group">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha-vencimiento-l">Fecha de Vencimiento Licencia <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                      <div class='input-group date' id='myDatepicker2'>
-                                        <input type='date' class="form-control" id ="fecha-vencimiento-l" name="fecha-vencimiento-l" />                                        
-                                      </div>
-                                    </div>
-                                  </div> 
-
-                                            
-
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha-vencimiento-l">Fecha de Vencimiento Licencia <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class='input-group date' id='myDatepicker2'>
+                            <input type='date' class="form-control" id ="fecha-vencimiento-l" name="fecha-vencimiento-l" />                                        
+                          </div>
+                        </div>
+                      </div>     
 
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancelar</button>              
                           <button class="btn btn-primary" type="reset">Borrar</button>
-                          <button type="submit" id="tipo" value="<?php echo site_url('/form/Conductor/ingresar_conductor') ?>" class="btn btn-success">Guardar</button>
+                          <button type="submit" id="tipo" value="<?php echo site_url('/form/Empleado/ingresar_empleado') ?>" class="btn btn-success">Guardar</button>
                         </div>
                       </div>
 
@@ -196,10 +187,10 @@
                       <div class="x_content">
                                                  
                         <div class="table-responsive">
-                          <table class="table table-bordered">
+                          <table class="table table-bordered" id="tablaEmpleados">
                             <thead>
                               <tr>
-                                <th>#</th>
+                                <th>ID Empleado</th>
                                 <th>CI</th>
                                 <th>Nombres</th>
                                 <th>Apellido Paterno</th>
@@ -211,64 +202,37 @@
                                 <th>Acciones</th>
                               </tr>
                             </thead>
-                            <tbody>
-                              <tr>
-                                <th scope="row">1</th>
-                                <td>1733305</td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>dellien</td>
-                                <td>25-12-1864</td>   
-                                <td>77800925</td>
-                                <td>Beni</td>
-                                <td>Profecional C</td>
-                                <td>
-                                  <a href="#" class="btn btn-info btn-xs"><i class="fas fa-pencil-alt"></i> Edit </a>
-                                  <a href="#" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i> Delete </a>
-                                </td>                           
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>1718552</td>
-                                <td>Yerko</td>
-                                <td>Melgar</td>
-                                <td>dellien</td>
-                                <td>09-10-1984</td>
-                                <td>77800925</td>
-                                <td>Santa Cruz</td>
-                                <td>Profecional C</td>
-                                <td>
-                                  <a href="#" class="btn btn-info btn-xs"><i class="fas fa-pencil-alt"></i> Edit </a>
-                                  <a href="#" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i> Delete </a>
-                                </td>  
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td>1415552</td>
-                                <td>Natalia</td>
-                                <td>Otto</td>
-                                <td>Suarez</td>
-                                <td>14-02-1745</td>
-                                <td>77800925</td>
-                                <td>Pando</td>
-                                <td>Profecional C</td>
-                                <td>
-                                  <a href="#" class="btn btn-info btn-xs"><i class="fas fa-pencil-alt"></i> Edit </a>
-                                  <a href="#" class="btn btn-danger btn-xs"><i class="far fa-trash-alt"></i> Delete </a>
-                                </td>  
-                              </tr>
+                            <tbody> 
+                              <?php
+                                if($datos->num_rows()){
+                                  foreach ($datos->result() as $row){ ?>
+                                    <tr>
+                                    <th scope="row"><?php echo $row->ID_empleado ?></th>
+                                    <td><?php echo $row->CI ?></td>
+                                    <td><?php echo $row->Nombres ?></td>
+                                    <td><?php echo $row->Apellido_p ?></td>
+                                    <td><?php echo $row->Apellido_m ?></td>   
+                                    <td><?php echo $row->Fecha_nacimiento ?></td>
+                                    <td><?php echo $row->Telefono_01 ?></td>
+                                    <td><?php echo $row->Departamento ?></td>
+                                    <td><?php echo $row->TipoLicencia ?></td>                                    
+                                    <td>
+                                      <a href="#" class="btn btn-info btn-xs"> Edit <i class="fas fa-pencil-alt"></i></a>
+                                      <a href="#" class="btn btn-danger btn-xs"> Delete <i class="far fa-trash-alt"></i></a>
+                                    </td>                           
+                                  </tr>                                                    
+                                  <?php }
+                                }
+                              ?>                   
                             </tbody>
                           </table>
-                        </div>
-                      </div>
+                        </div> <!-- Tabla responsiva-->
+                      </div> <!-- contenedor Tabla -->
                     </div>
-                  </div>
-
-                    </form>
-                  </div>
+                  </div> <!-- Contenedor de toda la tabla -->
+                  </form>                  
                 </div>
-                
-
+              </div>       
 
               </div>
             </div>
