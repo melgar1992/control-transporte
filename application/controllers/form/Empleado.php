@@ -70,5 +70,9 @@ class Empleado extends CI_Controller {
         return $obtenerEmpleado;
     }
 
+    public function eliminarEmpleado(){
+        
+    }
+
     
 }

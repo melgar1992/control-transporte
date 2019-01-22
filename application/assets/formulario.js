@@ -9,6 +9,10 @@ function addEventListeners(){
         formularioNuevoConductor.addEventListener('submit', ingresarEmpleado);
     }
 
+    if(listadoEmpleados){
+        listadoEmpleados.addEventListener('click',identificarAccion);
+    }
+
         
     if(formularioNuevoContrato){
         formularioNuevoContrato.addEventListener('submit',ingresarContrato);
@@ -73,6 +77,7 @@ function ingresarEmpleado(e){
     // Retorno de datos
     xhr.onload = function(){
         if(this.status === 200){
+
             // leemos la respuesta php
             var respuesta = JSON.parse(xhr.responseText);
 
@@ -103,7 +108,9 @@ function ingresarEmpleado(e){
                 iconoEditar.classList.add('fas', 'fa-pencil-alt');
 
                 // Crea el enlace para editar
-                const btnEditar = document.createElement('a');                
+                const btnEditar = document.createElement('a');
+                btnEditar.setAttribute("data-id",respuesta.datos.id_empleado);  
+                btnEditar.setAttribute("data-acction","editar");       
                 btnEditar.classList.add('btn', 'btn-info', 'btn-xs');                
                 btnEditar.textContent = " Edit ";                
                 btnEditar.appendChild(iconoEditar);
@@ -117,6 +124,8 @@ function ingresarEmpleado(e){
 
                 // Crea el enlace para eliminar
                 const btnEliminar = document.createElement('a');
+                btnEliminar.setAttribute("data-id",respuesta.datos.id_empleado);  
+                btnEliminar.setAttribute("data-acction","borrar"); 
                 btnEliminar.classList.add('btn', 'btn-danger', 'btn-xs');
                 btnEliminar.textContent = " Delete ";
                 btnEliminar.appendChild(iconoEliminar);
@@ -145,9 +154,19 @@ function ingresarEmpleado(e){
     }
 
     // Enviar la peticion
-    xhr.send(datos);   
+    xhr.send(datos);       
+}
 
-    
+function identificarAccion(e){
+    console.log(e.target.getAttribute('data-acction'));
+    if (e.target.getAttribute('data-acction')==='borrar'){
+        borrarEmpleado(e.target.getAttribute('data-id'));
+    }
+    else(e.target.getAttribute('data-acction')==='editar')
+}
+
+function borrarEmpleado(id_empleado){
+    console.log("se borro el empleado :"+id_empleado);
 }
 
 

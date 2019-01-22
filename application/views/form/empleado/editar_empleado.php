@@ -161,75 +161,7 @@
                         </div>
                       </div>
 
-                      <br>
-
-                  <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                      <div class="x_title">
-                        <h2>Boardered table <small>Conductores</small></h2>
-                        <ul class="nav navbar-right panel_toolbox">
-                          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                          </li>
-                          <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                            <ul class="dropdown-menu" role="menu">
-                              <li><a href="#">Settings 1</a>
-                              </li>
-                              <li><a href="#">Settings 2</a>
-                              </li>
-                            </ul>
-                          </li>
-                          <li><a class="close-link"><i class="fa fa-close"></i></a>
-                          </li>
-                        </ul>
-                        <div class="clearfix"></div>
-                      </div>
-                      <div class="x_content">
-                                                 
-                        <div class="table-responsive">
-                          <table class="table table-bordered" id="tablaEmpleados">
-                            <thead>
-                              <tr>
-                                <th>ID Empleado</th>
-                                <th>CI</th>
-                                <th>Nombres</th>
-                                <th>Apellido Paterno</th>
-                                <th>Apellido Materno</th>
-                                <th>Fecha de Nacimiento</th>
-                                <th>Teléfono 01</th>
-                                <th>Departamento</th>
-                                <th>Tipo de Licencia</th>
-                                <th>Acciones</th>
-                              </tr>
-                            </thead>
-                            <tbody> 
-                              <?php
-                                if($datos->num_rows()){
-                                  foreach ($datos->result() as $row){ ?>
-                                    <tr>
-                                    <th scope="row"><?php echo $row->ID_empleado ?></th>
-                                    <td><?php echo $row->CI ?></td>
-                                    <td><?php echo $row->Nombres ?></td>
-                                    <td><?php echo $row->Apellido_p ?></td>
-                                    <td><?php echo $row->Apellido_m ?></td>   
-                                    <td><?php echo $row->Fecha_nacimiento ?></td>
-                                    <td><?php echo $row->Telefono_01 ?></td>
-                                    <td><?php echo $row->Departamento ?></td>
-                                    <td><?php echo $row->TipoLicencia ?></td>                                    
-                                    <td>
-                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "editar" class="btn btn-info btn-xs"> Edit <i class="fas fa-pencil-alt"></i></a>
-                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "borrar" class="btn btn-danger btn-xs"> Delete <i class="far fa-trash-alt"></i></a>
-                                    </td>                           
-                                  </tr>                                                    
-                                  <?php }
-                                }
-                              ?>                   
-                            </tbody>
-                          </table>
-                        </div> <!-- Tabla responsiva-->
-                      </div> <!-- contenedor Tabla -->
-                    </div>
-                  </div> <!-- Contenedor de toda la tabla -->
+                  
                   </form>                  
                 </div>
               </div>       

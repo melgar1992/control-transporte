@@ -36,6 +36,10 @@
             return $query;
         }  
 
+        public function eliminarEmpleado($id_empleado){
+
+        }
+
         
 
         
