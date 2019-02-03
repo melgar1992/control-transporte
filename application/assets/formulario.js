@@ -162,11 +162,20 @@ function identificarAccion(e){
     if (e.target.getAttribute('data-acction')==='borrar'){
         borrarEmpleado(e.target.getAttribute('data-id'));
     }
-    else(e.target.getAttribute('data-acction')==='editar')
+    else if(e.target.getAttribute('data-acction')==='editar'){
+        editarEmpleado(e.target.getAttribute('data-id'));
+
+    }
 }
 
 function borrarEmpleado(id_empleado){
     console.log("se borro el empleado :"+id_empleado);
 }
+function editarEmpleado(id_empleado){
+    
+    console.log("Editar Empleado: "+id_empleado);
+
+}
+
 
 

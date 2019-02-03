@@ -73,6 +73,38 @@ class Empleado extends CI_Controller {
     public function eliminarEmpleado(){
         
     }
+    public function editarEmpleado(){
+        $id_empleado = $this->input->get('id');
+        if($id_empleado){
+            $empleado['datos']= $this->Empleado_model->idempleado($id_empleado);;
+            $this->load->view('template/header');
+		    $this->load->view('template/menu_quick_info');
+		    $this->load->view('template/sidebar_menu');
+            $this->load->view('/form/empleado/editar_empleado', $empleado);
+            $this->load->view('template/footer');
+        }
+        else{
+            $formulario = $this->input->post('button');
+            if($formulario == "editar"){
+                $ci= $this->input->post('CI');
+                $nombres= $this->input->post('nombres');
+                $apellidop= $this->input->post('apellido-paterno');
+                $apellidom= $this->input->post('apellido-materno');
+                $fechan= $this->input->post('fecha-nacimiento');
+                $direccion= $this->input->post('direccion');
+                $departamento= $this->input->post('departamento');
+                $telefono01= $this->input->post('telefono_01');
+                $telefono02= $this->input->post('telefono_02');
+                $calificacion= $this->input->post('calificacion');
+                $descripcion= $this->input->post('descripcion');
+                $tlicencia= $this->input->post('tipo-licencia');
+                $fechavl= $this->input->post('fecha-vencimiento-l');
+            }                       
+        }
+        
+        
+
+    }
 
     
 }
