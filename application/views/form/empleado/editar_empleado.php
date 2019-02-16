@@ -27,7 +27,8 @@
                   <div class="x_content">
                     <br />
                   <form method="post" id="editar_empleado" action="<?php echo site_url('/form/Empleado/editarEmpleado') ?>" data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
-
+                  <input type="hidden" name="ID_persona" value="<?php echo $datos->ID_persona ?>" >
+                  <input type="hidden" name="ID_empleado" value="<?php echo $datos->ID_empleado ?>">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CI">CI <span class="required">*</span>
                         </label>
@@ -239,6 +240,9 @@
               </div>
             </div>
         </div>
+        <script>
+        
+        </script>
   
 
 

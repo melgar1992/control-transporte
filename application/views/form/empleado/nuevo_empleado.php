@@ -25,7 +25,9 @@
                   </div>
                   <div class="x_content">
                     <br />
-                  <form method="post" id="nuevo_empleado"  data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
+                  <form method="post" id="nuevo_empleado"  data-parsley-validate class="form-horizontal form-label-left" > <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
+                  <div class="error_formulario">
+                  </div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CI">CI <span class="required">*</span>

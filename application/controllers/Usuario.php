@@ -33,6 +33,15 @@ class Usuario extends CI_Controller {
 		$this->load->view('login');
 	}
 
+	// Validar usuario y seguridad
+	function loadweb($url,$data){
+		$this->load->view('template/header');
+		$this->load->view('template/menu_quick_info');
+		$this->load->view('template/sidebar_menu');
+		$this->load->view($url,$data);
+		$this->load->view('template/footer');
+	}
+
 	function val_ajax($val_usuario=true,$val_admin=false){
 		$ajax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest';
 		if ($ajax){

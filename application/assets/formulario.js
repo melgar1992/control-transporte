@@ -46,9 +46,6 @@ function ingresarEmpleado(e){
         tlicencia = document.querySelector('#tipo-licencia').value,
         fechavl = document.querySelector('#fecha-vencimiento-l').value,
         tipo = document.querySelector('#tipo').value;
-
-    console.log(tipo);
-
     
 
     // Datos que se enviaran al servidor
@@ -143,12 +140,25 @@ function ingresarEmpleado(e){
                     text: 'El conductor fue ingresado correctamente',
                     type: 'success'
                 });
-            } else if(respuesta.respuesta === 'Duplicada'){
-                swal({
-                    title: 'Nuevo Conductor',
-                    text: 'La Cedula de identidad esta duplicada',
-                    type: 'error'
-                });
+            } else {
+                if (respuesta.tipo === 'Formulario'){
+                    error_formulario = document.querySelector('.error_formulario');                    
+                    error_formulario.innerHTML = respuesta.respuesta;
+                    swal({
+                        title: 'Nuevo Conductor',
+                        text: 'Error en el formulario',
+                        type: 'error'
+                    });
+                }else{
+                    swal({
+                        title: 'Nuevo Conductor',
+                        text: 'Error Cedula de identidad duplicada',
+                        type: 'error'
+                    });
+
+                }
+                     
+                
             }
         }
     }

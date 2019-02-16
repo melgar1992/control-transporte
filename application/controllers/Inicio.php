@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Inicio extends CI_Controller {
+class Inicio extends Usuario {
 	function __construct(){
-		parent::__construct();		
+		parent::__construct();
     }
 
 
@@ -32,11 +32,11 @@ class Inicio extends CI_Controller {
 	{
 		if(Usr::ok()){
 
-			$this->load->view('template/header');
-			$this->load->view('template/menu_quick_info');
-			$this->load->view('template/sidebar_menu');
-			$this->load->view('inicio');
-			$this->load->view('template/footer');
+			//$this->load->view('template/header');
+			//$this->load->view('template/menu_quick_info');
+			//$this->load->view('template/sidebar_menu');
+			$this->loadweb('inicio');
+			//$this->load->view('template/footer');
 
 		}
 		else{
