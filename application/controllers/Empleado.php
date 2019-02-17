@@ -1,5 +1,5 @@
 <?php
-class Empleado extends CI_Controller {
+class Empleado extends BaseController {
     
     function __construct(){
         parent::__construct();
@@ -14,7 +14,7 @@ class Empleado extends CI_Controller {
             //$this->load->view('template/header');
             //$this->load->view('template/menu_quick_info');
             //$this->load->view('template/sidebar_menu');
-            loadWeb('/form/empleado/nuevo_empleado', $empleados);
+            $this->loadWeb('/form/empleado/nuevo_empleado', $empleados);
             //$this->load->view('template/footer');
         }else{
             $this->load->view('login');

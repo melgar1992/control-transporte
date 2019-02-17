@@ -26,7 +26,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                  <form method="post" id="editar_empleado" action="<?php echo site_url('/form/Empleado/editarEmpleado') ?>" data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
+                  <form method="post" id="editar_empleado" action="<?php echo site_url('/Empleado/editarEmpleado') ?>" data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
                   <input type="hidden" name="ID_persona" value="<?php echo $datos->ID_persona ?>" >
                   <input type="hidden" name="ID_empleado" value="<?php echo $datos->ID_empleado ?>">
                       <div class="form-group">

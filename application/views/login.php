@@ -36,7 +36,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="post" id="Formulario" action="<?php echo site_url('usuario/dbLogin') ?>">
+            <form method="post" id="Formulario" action="<?php echo site_url('BaseController/dbLogin') ?>">
               <h1>Iniciar sesión</h1>
               <div>
                 <input type="text" id="usr" name="username" class="form-control" placeholder="Username" required="" />

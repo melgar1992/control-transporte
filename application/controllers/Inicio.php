@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Inicio extends Usuario {
+class Inicio extends BaseController {
 	function __construct(){
 		parent::__construct();
     }
@@ -31,16 +31,16 @@ class Inicio extends Usuario {
 	 public function index()
 	{
 		if(Usr::ok()){
-
-			//$this->load->view('template/header');
-			//$this->load->view('template/menu_quick_info');
-			//$this->load->view('template/sidebar_menu');
-			$this->loadweb('inicio');
-			//$this->load->view('template/footer');
+			
+			$this->load->view('template/header');
+			$this->load->view('template/menu_quick_info');
+			$this->load->view('template/sidebar_menu');
+			$this->load->view('inicio');
+			$this->load->view('template/footer');
 
 		}
 		else{
-			$this->load->view('login');
+			$this->login();
 		}
 
 	}

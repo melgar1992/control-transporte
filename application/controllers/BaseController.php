@@ -1,6 +1,8 @@
 <?php
-class Usuario extends CI_Controller {
-    
+defined('BASEPATH') OR exit('No direct script access allowed');
+class BaseController extends CI_Controller {
+
+	public $SSS;    
     function __construct(){
 		parent::__construct();
 		$this->SSS=new SesionMagica();
@@ -34,11 +36,11 @@ class Usuario extends CI_Controller {
 	}
 
 	// Validar usuario y seguridad
-	function loadweb($url,$data){
+	public function loadweb($url,$datos){
 		$this->load->view('template/header');
 		$this->load->view('template/menu_quick_info');
 		$this->load->view('template/sidebar_menu');
-		$this->load->view($url,$data);
+		$this->load->view($url,$datos);
 		$this->load->view('template/footer');
 	}
 

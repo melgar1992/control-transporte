@@ -16,11 +16,11 @@
                       <li><a href="form_advanced.html">Contratista</a></li>
                       <li><a>Empleado <span class="fas fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
-                            <li><a href="<?php echo site_url("form/Empleado/index")?>">Registro Empleado</a>
+                            <li><a href="<?php echo site_url("Empleado/index")?>">Registro Empleado</a>
                             </li>
                             <li><a href="#level2_1">Modificar - Eliminar Empleado</a>
                             </li>
-                            <li><a href="<?php echo site_url("form/Contrato/index")?>">Tipo Contrato</a>
+                            <li><a href="<?php echo site_url("Contrato/index")?>">Tipo Contrato</a>
                             </li>                          
                         </ul>
                       </li>
