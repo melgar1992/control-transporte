@@ -3,22 +3,14 @@ class Empleado extends BaseController {
     
     function __construct(){
         parent::__construct();
-        $this->load->library('form_validation');
-        $this->load->helper('codhtml_helper');
     }
     
     public function index(){
 
-        if (Usr::ok()){
+        
             $empleados['datos'] = $this->Empleado_model->obtenerEmpleado();
-            //$this->load->view('template/header');
-            //$this->load->view('template/menu_quick_info');
-            //$this->load->view('template/sidebar_menu');
-            $this->loadWeb('/form/empleado/nuevo_empleado', $empleados);
-            //$this->load->view('template/footer');
-        }else{
-            $this->load->view('login');
-        }
+            $this->loadView('nuevo_empleado','/form/empleado/nuevo_empleado', $empleados);
+
         
         
     }
@@ -94,12 +86,8 @@ class Empleado extends BaseController {
     public function editarEmpleado(){
         $id_empleado = $this->input->get('id');
         if($id_empleado){
-            $empleado['datos']= $this->Empleado_model->idempleado($id_empleado);;
-            $this->load->view('template/header');
-		    $this->load->view('template/menu_quick_info');
-		    $this->load->view('template/sidebar_menu');
-            $this->load->view('/form/empleado/editar_empleado', $empleado);
-            $this->load->view('template/footer');
+            $empleado['datos']= $this->Empleado_model->idempleado($id_empleado);
+            $this->loadView('editar_empleado','/form/empleado/editar_empleado', $empleado);
         }
         else{
             $formulario = $this->input->post('button');
@@ -125,12 +113,10 @@ class Empleado extends BaseController {
 
                     $this->Persona_model->updatePersona($id_persona,$ci,$nombres,$apellidop,$apellidom,$fechan,$direccion,$departamento,$telefono01,$telefono02);
                     $this->Empleado_model->updateEmpleado($id_empleado,$calificacion,$descripcion,$tlicencia,$fechavl);
-                    $datos['estado'] = 'successful';
-                    $this->load->view('template/header');
-                    $this->load->view('template/menu_quick_info');
-                    $this->load->view('template/sidebar_menu');
-                    $this->load->view('/form/empleado/editar_empleado', $datos);
-                    $this->load->view('template/footer');
+                    $empleado['datos']= $this->Empleado_model->idempleado($id_empleado);
+                    $empleado['estado'] = 'successful';
+                    $this->loadView('editar_empleado','/form/empleado/editar_empleado', $empleado);
+
 
                 } catch (\Throwable $th) {
                     //throw $th;

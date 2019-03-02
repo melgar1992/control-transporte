@@ -159,7 +159,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancelar</button>              
                           <button class="btn btn-primary" type="reset">Borrar</button>
-                          <button type="submit" id="tipo" value="<?php echo site_url('/form/Empleado/ingresar_empleado') ?>" class="btn btn-success">Guardar</button>
+                          <button type="submit" id="tipo" value="<?php echo site_url('/Empleado/ingresar_empleado') ?>" class="btn btn-success">Guardar</button>
                         </div>
                       </div>
 

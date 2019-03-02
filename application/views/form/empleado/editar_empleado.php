@@ -224,7 +224,7 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancelar</button>
+                          <a href="<?php echo site_url("Empleado/index")?>" class="btn btn-primary" type="button">Cancelar</a>
                           <button type="submit" name="button" value="editar" class="btn btn-success">Editar</button>
                         </div>
                       </div>                  

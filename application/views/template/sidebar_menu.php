@@ -121,7 +121,7 @@
               <a data-toggle="tooltip" data-placement="top" title="Lock">
                 <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo site_url("Usuario/salir")?>">
+              <a data-toggle="tooltip" data-placement="top" title="Logout" href="<?php echo site_url("BaseController/logout")?>">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
               </a>
             </div>

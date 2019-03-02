@@ -29,19 +29,10 @@ class Inicio extends BaseController {
 	}
 	
 	 public function index()
-	{
-		if(Usr::ok()){
-			
-			$this->load->view('template/header');
-			$this->load->view('template/menu_quick_info');
-			$this->load->view('template/sidebar_menu');
-			$this->load->view('inicio');
-			$this->load->view('template/footer');
+	{				
 
-		}
-		else{
-			$this->login();
-		}
+			$this->loadView('inicio','inicio');
+
 
 	}
 
