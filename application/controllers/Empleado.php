@@ -7,12 +7,9 @@ class Empleado extends BaseController {
     
     public function index(){
 
-        
-            $empleados['datos'] = $this->Empleado_model->obtenerEmpleado();
-            $this->loadView('nuevo_empleado','/form/empleado/nuevo_empleado', $empleados);
+        $empleados['datos'] = $this->Empleado_model->obtenerEmpleado();
+        $this->loadView('nuevo_empleado','/form/empleado/nuevo_empleado', $empleados);
 
-        
-        
     }
     public function ingresar_empleado(){
 
@@ -95,6 +92,22 @@ class Empleado extends BaseController {
                 
                 try {
                     //code...
+                    $this->form_validation->set_rules('ID_persona', 'ID', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('ID_empleado', 'Username', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('CI', 'CI', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('apellido-paterno', 'Apellido Paterno', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('apellido-materno', 'Apellido Materno', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('fecha-nacimiento', 'Fecha de Nacimiento', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('direccion', 'Direccion', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('departamento', 'departamento', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('telefono_01', 'Telefono', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('telefono_02', 'Telefono', 'trim|xss_clean');
+                    $this->form_validation->set_rules('calificacion', 'Calificacion', 'trim|xss_clean');
+                    $this->form_validation->set_rules('descripcion', 'Descripcion', 'trim|xss_clean');
+                    $this->form_validation->set_rules('tipo-licencia', 'Licencia', 'trim|required|xss_clean');
+                    $this->form_validation->set_rules('fecha-vencimiento-l', 'Fecha de Vencimiento', 'trim|required|xss_clean');
+
+
                     $id_persona= $this->input->post('ID_persona');
                     $id_empleado= $this->input->post('ID_empleado');
                     $ci= $this->input->post('CI');
@@ -122,6 +135,7 @@ class Empleado extends BaseController {
                     //throw $th;
                     $datos['estado'] = 'Error';
                     $datos['message'] = $th->getMessage();
+                    $this->loadView('editar_empleado','/form/empleado/editar_empleado', $datos);
                 }
             }                       
         }

@@ -228,20 +228,24 @@
                           <button type="submit" name="button" value="editar" class="btn btn-success">Editar</button>
                         </div>
                       </div>                  
-                  </form>   
-                  <pre>
-                  <?php 
-                    var_dump($datos);        
-                  ?>
-                  </pre>               
+                  </form>                
                 </div>
               </div>       
 
               </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-        
+          $(document).ready(function(){
+            if ('successful' === '<?php if (isset($estado)){ echo $estado;} else{echo "no hay datos";} ?>'){
+              swal({
+                    title: 'Editar Empleado',
+                    text: 'El empleado fue editado correctamente',
+                    type: 'success'
+                });              
+            }
+          });      
         </script>
   
 

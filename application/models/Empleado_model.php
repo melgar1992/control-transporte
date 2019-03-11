@@ -19,7 +19,8 @@
                 'Calificacion' => $calificacion,
                 'Descripcion' => $descripcion,
                 'TipoLicencia' => $tlicencia,
-                'FechaVencimientoL' => $fechavl
+                'FechaVencimientoL' => $fechavl,
+                'Estado' => 'Activo'
             );
 
             $this->db->insert('empleado', $data2);
@@ -37,6 +38,11 @@
         }  
 
         public function eliminarEmpleado($id_empleado){
+            $data2 = array(
+                'Estado' => 'Inactivo'
+            );
+            $this->db->where('ID_Empleado',$id_empleado);
+            $this->db->update('empleado', $data2);
 
         }
 

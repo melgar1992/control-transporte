@@ -6,7 +6,7 @@
           $username = ($this->session->userdata['logged_in']['username']);
           $url_img = ($this->session->userdata['logged_in']['url_img']);
       } else {
-          //header("location: login");
+          header("location: index.php/inicio/login");
       }
       
   ?>
