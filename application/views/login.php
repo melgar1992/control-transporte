@@ -36,7 +36,7 @@
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
-            <form method="post" id="Formulario" action="<?php echo site_url('usuario/dbLogin') ?>">
+            <form method="post" id="Formulario" action="<?php echo site_url('BaseController/user_login_process') ?>">
               <h1>Iniciar sesión</h1>
               <div>
                 <input type="text" id="usr" name="username" class="form-control" placeholder="Username" required="" />
@@ -71,19 +71,19 @@
 
         <div id="register" class="animate form registration_form">
           <section class="login_content">
-            <form>
+            <form method="post" id="Registro" action="<?php echo site_url('BaseController/new_user_registration') ?>">
               <h1>Create Account</h1>
               <div>
-                <input type="text" class="form-control" placeholder="Username" required="" />
+                <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" />
               </div>
               <div>
-                <input type="email" class="form-control" placeholder="Email" required="" />
+                <input type="text" id="privilegio" name="privilegio" class="form-control" placeholder="Privilegio" required="" />
               </div>
               <div>
-                <input type="password" class="form-control" placeholder="Password" required="" />
+                <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="" />
               </div>
               <div>
-                <a class="btn btn-default submit" href="index.html">Submit</a>
+                <button type="submit" class="btn btn-default submit" >Submit</a>
               </div>
 
               <div class="clearfix"></div>
@@ -94,16 +94,17 @@
                 </p>
 
                 <div class="clearfix"></div>
-                <br />
+                <br />                
 
                 <div>
                   <h1><i class="fas fa-truck-moving"></i></i> Gentelella Alela!</h1>
                   <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
-                </div>
+                </div>                
               </div>
             </form>
           </section>
         </div>
+        <div class="clearfix"><?php echo validation_errors(); ?></div>
       </div>
     </div>
 
@@ -134,7 +135,7 @@
 
 </html>
 <script>
-	$(document).ready(function(){
+/* 	$(document).ready(function(){
 		frmAccion("#Formulario",function(res) {
 			if(res.ok){
 				location.reload();
@@ -144,5 +145,5 @@
 				//location.reload();
 			}
 		})
-	});
+	});*/
 </script>

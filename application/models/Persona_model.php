@@ -43,4 +43,23 @@
 
         }
 
+        public function updatePersona($id_persona,$ci,$nombres,$apellidop,$apellidom,$fechan,$direccion,$departamento,$telefono01,$telefono02){
+
+            $data = array(
+                'CI' => $ci,
+                'Nombres' => $nombres,
+                'Apellido_p' => $apellidop,
+                'Apellido_m' => $apellidom,
+                'Fecha_nacimiento' => $fechan,                
+                'Direccion' => $direccion,
+                'Departamento' => $departamento,
+                'Telefono_01' => $telefono01,
+                'Telefono_02' => $telefono02
+
+            );
+            $this->db->where('ID_persona', $id_persona);
+            $this->db->update('persona', $data);
+
+        }
+
     }

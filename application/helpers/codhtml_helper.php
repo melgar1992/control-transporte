@@ -1,5 +1,7 @@
 <?php
 
+
+
 //const RAIZ="http://localhost/control-transporte";
 
 const PREFIJO_SESION='dddsd';
@@ -48,7 +50,7 @@ function print_dt($id,$title,$cols,$arr){
 	$html .= '</tr> </thead> <tbody>';
 	
 	//cargar filas
-	for( $f=0 ; $f<count($arr) ; $f++){
+	for( $f=0 ; $f < count($arr) ; $f++){
 		$html .= '<tr>';
 		for ( $c=0 ; $c<count($arr[$f]) ; $c++){
 			/*if(is_object($arr[$f][$c]))

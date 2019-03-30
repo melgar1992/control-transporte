@@ -26,8 +26,9 @@
                   </div>
                   <div class="x_content">
                     <br />
-                  <form method="post" id="editar_empleado" action="<?php echo site_url('/form/Empleado/editarEmpleado') ?>" data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
-
+                  <form method="post" id="editar_empleado" action="<?php echo site_url('/Empleado/editarEmpleado') ?>" data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
+                  <input type="hidden" name="ID_persona" value="<?php echo $datos->ID_persona ?>" >
+                  <input type="hidden" name="ID_empleado" value="<?php echo $datos->ID_empleado ?>">
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CI">CI <span class="required">*</span>
                         </label>
@@ -223,22 +224,29 @@
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-primary" type="button">Cancelar</button>
+                          <a href="<?php echo site_url("Empleado/index")?>" class="btn btn-primary" type="button">Cancelar</a>
                           <button type="submit" name="button" value="editar" class="btn btn-success">Editar</button>
                         </div>
                       </div>                  
-                  </form>   
-                  <pre>
-                  <?php 
-                    var_dump($datos);        
-                  ?>
-                  </pre>               
+                  </form>                
                 </div>
               </div>       
 
               </div>
             </div>
         </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+          $(document).ready(function(){
+            if ('successful' === '<?php if (isset($estado)){ echo $estado;} else{echo "no hay datos";} ?>'){
+              swal({
+                    title: 'Editar Empleado',
+                    text: 'El empleado fue editado correctamente',
+                    type: 'success'
+                });              
+            }
+          });      
+        </script>
   
 
 

@@ -12,7 +12,6 @@ function addEventListeners(){
     if(listadoEmpleados){
         listadoEmpleados.addEventListener('click',identificarAccion);
     }
-
         
     if(formularioNuevoContrato){
         formularioNuevoContrato.addEventListener('submit',ingresarContrato);
@@ -46,9 +45,6 @@ function ingresarEmpleado(e){
         tlicencia = document.querySelector('#tipo-licencia').value,
         fechavl = document.querySelector('#fecha-vencimiento-l').value,
         tipo = document.querySelector('#tipo').value;
-
-    console.log(tipo);
-
     
 
     // Datos que se enviaran al servidor
@@ -137,18 +133,32 @@ function ingresarEmpleado(e){
                 nuevoEmpleado.appendChild(contenedorAcciones);
 
                 // agregarlos con los contactos existentes
-                listadoEmpleados.appendChild(nuevoEmpleado); 
+                listadoEmpleados.appendChild(nuevoEmpleado);
+                // Muestra mensaje que el empleado se adiciono exitosamente. 
                 swal({
                     title: 'Nuevo Conductor',
                     text: 'El conductor fue ingresado correctamente',
                     type: 'success'
                 });
-            } else if(respuesta.respuesta === 'Duplicada'){
-                swal({
-                    title: 'Nuevo Conductor',
-                    text: 'La Cedula de identidad esta duplicada',
-                    type: 'error'
-                });
+            } else {
+                if (respuesta.tipo === 'Formulario'){
+                    error_formulario = document.querySelector('.error_formulario');                    
+                    error_formulario.innerHTML = respuesta.respuesta;
+                    swal({
+                        title: 'Nuevo Conductor',
+                        text: 'Error en el formulario',
+                        type: 'error'
+                    });
+                }else{
+                    swal({
+                        title: 'Nuevo Conductor',
+                        text: 'Error Cedula de identidad duplicada',
+                        type: 'error'
+                    });
+
+                }
+                     
+                
             }
         }
     }
@@ -158,9 +168,16 @@ function ingresarEmpleado(e){
 }
 
 function identificarAccion(e){
-    console.log(e.target.getAttribute('data-acction'));
+    
     if (e.target.getAttribute('data-acction')==='borrar'){
-        borrarEmpleado(e.target.getAttribute('data-id'));
+        borrarEmpleado(e.target.getAttribute('data-id'), e.target.getAttribute('value') );
+        
+        console.log(e.target.parentNode.parentNode.rowIndex);
+        var i = e.target.parentNode.parentNode.rowIndex;
+        i = i -1;
+        listadoEmpleados.deleteRow(i);     
+        
+        
     }
     else if(e.target.getAttribute('data-acction')==='editar'){
         editarEmpleado(e.target.getAttribute('data-id'));
@@ -168,14 +185,57 @@ function identificarAccion(e){
     }
 }
 
-function borrarEmpleado(id_empleado){
+function borrarEmpleado(id_empleado, dircontroller){
     console.log("se borro el empleado :"+id_empleado);
+    console.log("Dirección del cotrolador :"+dircontroller);
+
+    // Datos que se enviaran al servidor
+    var datos = new FormData();
+    datos.append('ID_empleado',id_empleado);
+
+    // Creanda un llamado Ajax
+    var xhr = new XMLHttpRequest();
+    
+    // Abrir la conexión
+    xhr.open('POST', dircontroller, true);
+
+    // Retorno de datos
+    xhr.onload = function(){
+        if(this.status === 200){
+
+            // leemos la respuesta php
+            var respuesta = JSON.parse(xhr.responseText);
+            console.log(respuesta);
+
+                if (respuesta.tipo === 'Exitoso'){
+
+                    swal({
+                        title: 'Eliminar',
+                        text: 'Se elimino al empleado satisfactoriamente',
+                        type: 'success'
+                    });
+
+                }else {
+                    error_formulario = document.querySelector('.error_formulario');                    
+                    error_formulario.innerHTML = respuesta.respuesta;
+                    swal({
+                        title: 'Eliminar',
+                        text: 'Error al enviar la información',
+                        type: 'error'
+                    });
+                }
+            
+
+        }
+    }
+
+    // Enviar la peticion
+    xhr.send(datos);
+
 }
 function editarEmpleado(id_empleado){
     
     console.log("Editar Empleado: "+id_empleado);
 
+
 }
-
-
-

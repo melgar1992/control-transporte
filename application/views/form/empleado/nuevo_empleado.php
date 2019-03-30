@@ -25,7 +25,9 @@
                   </div>
                   <div class="x_content">
                     <br />
-                  <form method="post" id="nuevo_empleado"  data-parsley-validate class="form-horizontal form-label-left" novalidate> <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
+                  <form method="post" id="nuevo_empleado"  data-parsley-validate class="form-horizontal form-label-left" > <!--value="<?php //echo site_url('/form/conductor/ingresar_conductor') ?>" -->
+                  <div class="error_formulario">
+                  </div>
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CI">CI <span class="required">*</span>
@@ -157,7 +159,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancelar</button>              
                           <button class="btn btn-primary" type="reset">Borrar</button>
-                          <button type="submit" id="tipo" value="<?php echo site_url('/form/Empleado/ingresar_empleado') ?>" class="btn btn-success">Guardar</button>
+                          <button type="submit" id="tipo" value="<?php echo site_url('/Empleado/ingresar_empleado') ?>" class="btn btn-success">Guardar</button>
                         </div>
                       </div>
 
@@ -217,8 +219,8 @@
                                     <td><?php echo $row->Departamento ?></td>
                                     <td><?php echo $row->TipoLicencia ?></td>                                    
                                     <td>
-                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "editar" href="<?php echo site_url('/form/Empleado/editarEmpleado?id=').$row->ID_empleado?>" class="btn btn-info btn-xs"> Edit <i class="fas fa-pencil-alt"></i></a>
-                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "borrar" class="btn btn-danger btn-xs"> Delete <i class="far fa-trash-alt"></i></a>
+                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "editar" href="<?php echo site_url('/Empleado/editarEmpleado?id=').$row->ID_empleado?>" class="btn btn-info btn-xs"> Edit <i class="fas fa-pencil-alt"></i></a>
+                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "borrar" value="<?php echo site_url('/Empleado/eliminarEmpleado') ?>" class="btn btn-danger btn-xs"> Delete <i class="far fa-trash-alt"></i></a>
                                     </td>                           
                                   </tr>                                                    
                                   <?php }

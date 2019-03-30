@@ -83,7 +83,11 @@
     <!-- <script src="../build/js/custom.min.js"></script> -->
 
     <!-- formulario -->
-    <?php script('formulario.js') ?>
+    <?php
+      if (isset($pagina)){
+        script('js'.$pagina.'.js');
+      }       
+    ?>
 
     <!-- sweetalert -->
     <?php script('sweetalert2.all.min.js') ?>

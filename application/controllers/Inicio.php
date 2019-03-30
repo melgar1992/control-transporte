@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Inicio extends CI_Controller {
+class Inicio extends BaseController {
 	function __construct(){
-		parent::__construct();		
+		parent::__construct();
     }
 
 
@@ -29,19 +29,10 @@ class Inicio extends CI_Controller {
 	}
 	
 	 public function index()
-	{
-		if(Usr::ok()){
+	{				
 
-			$this->load->view('template/header');
-			$this->load->view('template/menu_quick_info');
-			$this->load->view('template/sidebar_menu');
-			$this->load->view('inicio');
-			$this->load->view('template/footer');
+			$this->loadView('inicio','inicio');
 
-		}
-		else{
-			$this->load->view('login');
-		}
 
 	}
 

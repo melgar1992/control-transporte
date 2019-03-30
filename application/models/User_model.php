@@ -29,34 +29,82 @@ class Usr {
 	
 }
 class User_model extends CI_Model {
+
+    // Insert registration data in database
+    public function registration_insert($data) {
+
+        // Query to check whether username already exist or not
+        $condition = "username =" . "'" . $data['username'] . "'";
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if ($query->num_rows() == 0) {
+
+            // Query to insert data in database
+            $this->db->insert('user', $data);
+            if ($this->db->affected_rows() > 0) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
     
 
-    public function Login($user, $pass){
+    public function Login($data){
 
-        Usr::limpiar();
+        //Usr::limpiar();
 
         //$query = "select username, password, url_img from user where username = '".$user."' and password = '".$pass."';";
         
-        $this->db->where('username', $user);
-        $this->db->where('password', $pass);
+        $condition = "username =" . "'" . $data['username'] . "'";
+        $this->db->select('*');
         $this->db->from('user');
+        $this->db->where($condition);
+        $this->db->limit(1);
         
-        $result = $this->db->get();
+        $query = $this->db->get();
 
-        $row = $result->row_array();
-
-        if (($result->num_rows())==1){
-
-            Usr::setUsuario(
-                $row['username'],
-                $row['password'],
-                $row['url_img']
-            );
+        if ($query->num_rows() == 1) {
+            return $query->result();
+        } else {
+            return false;
         }
-        else{
-            Usr::limpiar();
+
+        //$row = $result->row_array();
+
+        
+        //if (($result->num_rows())==1){
+
+         //   Usr::setUsuario(
+        //        $row['username'],
+        //        $row['password'],
+        //        $row['url_img']
+        //    );
+        //}
+        //else{
+       //     Usr::limpiar();
+        //}
+        //return $result->result();      
+    }
+
+    //Lee información del usuario final
+
+    public function read_user_information($username) {
+        $condition = "username =" . "'" . $username . "'";
+        $this->db->select('*');
+        $this->db->from('user');
+        $this->db->where($condition);
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        if($query->num_rows() == 1) {
+            return $query->result( );
+        } else {
+            return false;
         }
-        return $result->result();      
     }
     
 

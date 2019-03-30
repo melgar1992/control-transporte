@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
+  <?php
+      if (isset($this->session->userdata['logged_in'])) {
+          $username = ($this->session->userdata['logged_in']['username']);
+          $url_img = ($this->session->userdata['logged_in']['url_img']);
+      } else {
+          header("location: index.php/inicio/login");
+      }
+      
+  ?>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->

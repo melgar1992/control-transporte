@@ -1,5 +1,5 @@
 <?php
-class Contrato extends CI_Controller {
+class Contrato extends BaseController {
     
     function __construct(){
 		parent::__construct();			
