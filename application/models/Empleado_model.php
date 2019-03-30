@@ -32,7 +32,7 @@
         }    
         public function obtenerEmpleado(){
 
-            $query = $this->db->query("select * from persona p inner join empleado e on p.ID_persona = e.ID_persona");
+            $query = $this->db->query('select * from persona p inner join empleado e on p.ID_persona = e.ID_persona where e.Estado = "Activo"');
 
             return $query;
         }  

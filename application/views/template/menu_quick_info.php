@@ -12,11 +12,11 @@
               <!-- menu profile quick info -->
               <div class="profile clearfix">
                 <div class="profile_pic">
-                  <img src="<?php img('images/img.jpg')?>" alt="..." class="img-circle profile_img">
+                  <img src="<?php img($this->session->userdata['logged_in']['url_img'])?>" alt="..." class="img-circle profile_img">
                 </div>
                 <div class="profile_info">
                   <span>Welcome,</span>
-                  <h2><?php echo Usr::gUsuario(); ?></h2>
+                  <h2><?php echo $this->session->userdata['logged_in']['username'];?></h2>
                 </div>
               </div>
               <!-- /menu profile quick info -->

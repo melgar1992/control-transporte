@@ -220,7 +220,7 @@
                                     <td><?php echo $row->TipoLicencia ?></td>                                    
                                     <td>
                                       <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "editar" href="<?php echo site_url('/Empleado/editarEmpleado?id=').$row->ID_empleado?>" class="btn btn-info btn-xs"> Edit <i class="fas fa-pencil-alt"></i></a>
-                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "borrar" class="btn btn-danger btn-xs"> Delete <i class="far fa-trash-alt"></i></a>
+                                      <a data-id = "<?php echo $row->ID_empleado?>" data-acction = "borrar" value="<?php echo site_url('/Empleado/eliminarEmpleado') ?>" class="btn btn-danger btn-xs"> Delete <i class="far fa-trash-alt"></i></a>
                                     </td>                           
                                   </tr>                                                    
                                   <?php }

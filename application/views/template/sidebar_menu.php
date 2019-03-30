@@ -13,18 +13,18 @@
                   <li><a><i class="fas fa-edit"></i> Formularios <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="form.html">Cliente</a></li>
-                      <li><a href="form_advanced.html">Contratista</a></li>
-                      <li><a>Empleado <span class="fas fa-chevron-down"></span></a>
-                        <ul class="nav child_menu">
-                            <li><a href="<?php echo site_url("Empleado/index")?>">Registro Empleado</a>
+                      <li><a href="form_advanced.html">Proveedor</a></li>
+                      <li><a href="<?php echo site_url("Empleado/index")?>">Empleado</a></li>
+                        <!--<ul class="nav child_menu">
+                            <li><a >Registro Empleado</a>
                             </li>
                             <li><a href="#level2_1">Modificar - Eliminar Empleado</a>
                             </li>
-                            <li><a href="<?php echo site_url("Contrato/index")?>">Tipo Contrato</a>
+                            <li><a >Tipo Contrato</a>
                             </li>                          
                         </ul>
-                      </li>
-                      <li><a href="form_wizards.html">Form Wizard</a></li>
+                      </li>-->
+                      <li><a href="<?php echo site_url("Contrato/index")?>">Contrato Empleado</a></li>
                       <li><a href="form_upload.html">Form Upload</a></li>
                       <li><a href="form_buttons.html">Form Buttons</a></li>
                     </ul>
@@ -48,7 +48,7 @@
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li> -->
-                  <li><a><i class="far fa-chart-bar"></i> Data Presentation <span class="fas fa-chevron-down"></span></a>
+                  <li><a><i class="far fa-chart-bar"></i> Reportes <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
                       <li><a href="chartjs2.html">Chart JS2</a></li>
@@ -152,7 +152,7 @@
                       </a>
                     </li>
                     <li><a href="javascript:;">Help</a></li>
-                    <li><a href="login.html"><i class="fas fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="<?php echo site_url("BaseController/logout")?>"><i class="fas fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 
