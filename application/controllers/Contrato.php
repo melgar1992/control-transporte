@@ -7,13 +7,13 @@ class Contrato extends BaseController {
     
     public function index(){
 
-        $this->load->view('template/header');
-		$this->load->view('template/menu_quick_info');
-		$this->load->view('template/sidebar_menu');
-        $this->load->view('/form/contrato/nuevo_contrato');
-        $this->load->view('template/footer');
+        $contratos['datos'] = $this->Contrato_model->obtenerContrato();
+        $this->loadView('Contrato', '/form/contrato/nuevo_contrato',$contratos);
         
     }
 
+    public function ingresar_contrato(){
+
+    }
     
 }

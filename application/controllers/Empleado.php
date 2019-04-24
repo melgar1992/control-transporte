@@ -69,7 +69,9 @@ class Empleado extends BaseController {
                         'fechan' => $fechan,
                         'telefono01' => $telefono01,
                         'departamento' => $departamento,
-                        'tlicencia' => $tlicencia
+                        'tlicencia' => $tlicencia,
+                        'hrefEditar' => site_url('/Empleado/editarEmpleado?id=').$id_empleado,
+                        'hrefEliminar' => site_url('/Empleado/eliminarEmpleado')                     
                     )
                 );
             }   

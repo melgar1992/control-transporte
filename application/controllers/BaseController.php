@@ -25,7 +25,7 @@ class BaseController extends CI_Controller {
 						'username' => $this->input->post('username'),
 						'privilegios' => $this->input->post('privilegio'),
 						'password' => $this->input->post('password'),
-						'url_img' => '/assets/images/user.png'
+						'url_img' => 'images/user.png'
 				);
 
 				//Applying security to the password. Must be encrypted

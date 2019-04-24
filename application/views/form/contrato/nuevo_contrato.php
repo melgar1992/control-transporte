@@ -33,10 +33,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="tipoContrato" name="tipoContrato"required="required" class="form-control col-md-7 col-xs-12" placeholder = "Introdusca el tipo de Contrato 'Conductor', 'Ayudante', 'Contador'">
                         </div>
-                      </div>
-                                            
-
-
+                      </div> 
                       <div class="ln_solid"></div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
@@ -73,7 +70,7 @@
                       
                                                  
                         <div class="table-responsive">
-                          <table class="table table-bordered">
+                          <table class="table table-bordered" id="tablaContrato">
                             <thead>
                               <tr>
                                 <th>#</th>
@@ -112,14 +109,10 @@
                       </div>
                     </div>
                   </div>
-
-                    </form>
-                  </div>
-                </div>
-                
-
-
+                </form>
               </div>
-            </div>
+            </div>     
+          </div>
         </div>
+    </div>
   
