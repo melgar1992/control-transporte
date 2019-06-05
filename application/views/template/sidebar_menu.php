@@ -24,9 +24,9 @@
                             </li>                          
                         </ul>
                       </li>-->
-                      <li><a href="<?php echo site_url("Contrato/index")?>">Contrato Empleado</a></li>
-                      <li><a href="form_upload.html">Form Upload</a></li>
-                      <li><a href="form_buttons.html">Form Buttons</a></li>
+                      <li><a href="<?php echo site_url("Contrato/tipocontrato")?>">Tipo Contrato Empleado</a></li>
+                      <li><a href="#">Form Upload</a></li>
+                      <li><a href="#">Form Buttons</a></li>
                     </ul>
                   </li>
                  <!-- <li><a><i class="fas fa-desktop"></i> UI Elements <span class="fas fa-chevron-down"></span></a>

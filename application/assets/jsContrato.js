@@ -1,16 +1,22 @@
-const formularioNuevoConductor = document.querySelector('#nuevo_empleado'),
-      listadoEmpleados = document.querySelector('#tablaEmpleados tbody')
+const formularioNuevoTipoContrato = document.querySelector('#nuevo_tipo_contrato'),
+      formularioEditarTipoContrato = document.querySelector('#editar_tipo_contrato'),
+      listadoTipoContrato = document.querySelector('#tablaTipoContrato tbody'),
       formularioNuevoContrato = document.querySelector('#nuevo_contrato');
 
 addEventListeners();
 
 function addEventListeners(){
-    if (formularioNuevoConductor){
-        formularioNuevoConductor.addEventListener('submit', ingresarEmpleado);
+    if (formularioNuevoTipoContrato){
+        formularioNuevoTipoContrato.addEventListener('submit', ingresarTipoContrato);
     }
 
-    if(listadoEmpleados){
-        listadoEmpleados.addEventListener('click',identificarAccion);
+    if (formularioEditarTipoContrato){
+        formularioEditarTipoContrato.addEventListener('submit', editarTipoContrato);
+    }
+
+
+    if(listadoTipoContrato){
+        listadoTipoContrato.addEventListener('click',identificarAccion);
     }
         
     if(formularioNuevoContrato){
@@ -27,41 +33,18 @@ function ingresarContrato(e){
     console.log(nuevoContrato);
 }
 
-function ingresarEmpleado(e){
+function ingresarTipoContrato(e){
     
     e.preventDefault();
 
-    const ci = document.querySelector('#CI').value,
-        nombres = document.querySelector('#nombres').value,
-        apellidop = document.querySelector('#apellido-paterno').value,
-        apellidom = document.querySelector('#apellido-materno').value,
-        fechan = document.querySelector('#fecha-nacimiento').value,        
-        direccion = document.querySelector('#direccion').value,
-        departamento = document.querySelector('#departamento').value,
-        telefono01 = document.querySelector('#telefono_01').value,
-        telefono02 = document.querySelector('#telefono_02').value,
-        calificacion = document.querySelector('#calificacion').value,
-        descripcion = document.querySelector('#descripcion').value,
-        tlicencia = document.querySelector('#tipo-licencia').value,
-        fechavl = document.querySelector('#fecha-vencimiento-l').value,
+    const tipoContrato = document.querySelector('#tipoContrato').value,
         tipo = document.querySelector('#tipo').value;
     
 
     // Datos que se enviaran al servidor
     var datos = new FormData();
-    datos.append('CI',ci);
-    datos.append('nombres',nombres);
-    datos.append('apellido-paterno',apellidop);
-    datos.append('apellido-materno',apellidom);
-    datos.append('fecha-nacimiento',fechan);    
-    datos.append('direccion',direccion);
-    datos.append('departamento',departamento);
-    datos.append('telefono_01',telefono01);
-    datos.append('telefono_02',telefono02);
-    datos.append('calificacion',calificacion);
-    datos.append('descripcion',descripcion);
-    datos.append('tipo-licencia',tlicencia);
-    datos.append('fecha-vencimiento-l',fechavl);
+    datos.append('tipoContrato',tipoContrato);
+
     
     console.log(datos);
     // Creanda un llamado Ajax
@@ -82,18 +65,11 @@ function ingresarEmpleado(e){
             if(respuesta.respuesta === 'Exitoso'){
 
                 // Inserta un nuevo elemento a la tabla
-                const nuevoEmpleado = document.createElement('tr');
+                const nuevoTipoContrato = document.createElement('tr');
 
-                nuevoEmpleado.innerHTML = `
-                    <td>${respuesta.datos.id_empleado}</td>
-                    <td>${respuesta.datos.ci}</td>
-                    <td>${respuesta.datos.nombres}</td>
-                    <td>${respuesta.datos.apellidop}</td>
-                    <td>${respuesta.datos.apellidom}</td>
-                    <td>${respuesta.datos.fechan}</td>
-                    <td>${respuesta.datos.telefono01}</td>
-                    <td>${respuesta.datos.departamento}</td>
-                    <td>${respuesta.datos.tlicencia}</td>
+                nuevoTipoContrato.innerHTML = `
+                    <td>${respuesta.datos.id_tipocontrato}</td>
+                    <td>${respuesta.datos.tipocontrato}</td>                    
                 `;
 
                 //crear conteneodr para los botonoes
@@ -105,7 +81,7 @@ function ingresarEmpleado(e){
 
                 // Crea el enlace para editar
                 const btnEditar = document.createElement('a');
-                btnEditar.setAttribute("data-id",respuesta.datos.id_empleado); 
+                btnEditar.setAttribute("data-id",respuesta.datos.id_tipocontrato); 
                 btnEditar.setAttribute("href", respuesta.datos.hrefEditar); 
                 btnEditar.setAttribute("data-acction","editar");       
                 btnEditar.classList.add('btn', 'btn-info', 'btn-xs');                
@@ -121,7 +97,7 @@ function ingresarEmpleado(e){
 
                 // Crea el enlace para eliminar
                 const btnEliminar = document.createElement('a');
-                btnEliminar.setAttribute("data-id",respuesta.datos.id_empleado);
+                btnEliminar.setAttribute("data-id",respuesta.datos.id_tipocontrato);
                 btnEliminar.setAttribute("value",respuesta.datos.hrefEliminar);
                 btnEliminar.setAttribute("data-acction","borrar"); 
                 btnEliminar.classList.add('btn', 'btn-danger', 'btn-xs');
@@ -132,14 +108,14 @@ function ingresarEmpleado(e){
                 contenedorAcciones.appendChild(btnEliminar);
 
                 // Agrego al tr
-                nuevoEmpleado.appendChild(contenedorAcciones);
+                nuevoTipoContrato.appendChild(contenedorAcciones);
 
                 // agregarlos con los contactos existentes
-                listadoEmpleados.appendChild(nuevoEmpleado);
+                listadoTipoContrato.appendChild(nuevoTipoContrato);
                 // Muestra mensaje que el empleado se adiciono exitosamente. 
                 swal({
-                    title: 'Nuevo Conductor',
-                    text: 'El conductor fue ingresado correctamente',
+                    title: 'Nuevo Tipo Contrato',
+                    text: 'El tipo de contrato fue ingresado correctamente',
                     type: 'success'
                 });
             } else {
@@ -147,14 +123,14 @@ function ingresarEmpleado(e){
                     error_formulario = document.querySelector('.error_formulario');                    
                     error_formulario.innerHTML = respuesta.respuesta;
                     swal({
-                        title: 'Nuevo Conductor',
+                        title: 'Nuevo Tipo Contrato',
                         text: 'Error en el formulario',
                         type: 'error'
                     });
                 }else{
                     swal({
-                        title: 'Nuevo Conductor',
-                        text: 'Error Cedula de identidad duplicada',
+                        title: 'Nuevo Tipo Contrato',
+                        text: 'Error no clasificado',
                         type: 'error'
                     });
 
@@ -172,25 +148,24 @@ function ingresarEmpleado(e){
 function identificarAccion(e){
     
     if (e.target.getAttribute('data-acction')==='borrar'){
+
         borrarEmpleado(e.target.getAttribute('data-id'), e.target.getAttribute('value') );
         
         console.log(e.target.parentNode.parentNode.rowIndex);
         var i = e.target.parentNode.parentNode.rowIndex;
         i = i -1;
-        listadoEmpleados.deleteRow(i);     
+        listadoTipoContrato.deleteRow(i);     
         
         
     }
     else if(e.target.getAttribute('data-acction')==='editar'){
-        editarEmpleado(e.target.getAttribute('data-id'));
+        //editarEmpleado(e.target.getAttribute('data-id'));
 
     }
 }
 
-function borrarEmpleado(id_empleado, dircontroller){
-    console.log("se borro el empleado :"+id_empleado);
-    console.log("Dirección del cotrolador :"+dircontroller);
-
+function borrarTipoContrato(id_empleado, dircontroller){
+//Falta desarrolloar el borrado, esta con el codigo de empleado.
     // Datos que se enviaran al servidor
     var datos = new FormData();
     datos.append('ID_empleado',id_empleado);
@@ -235,9 +210,61 @@ function borrarEmpleado(id_empleado, dircontroller){
     xhr.send(datos);
 
 }
-function editarEmpleado(id_empleado){
+function editarTipoContrato(e){
+
+    e.preventDefault();
     
-    console.log("Editar Empleado: "+id_empleado);
+    Boton = document.querySelector('#tipo');
+
+    const   id_tipocontrato = Boton.getAttribute('id_data'),
+            Descripcion = document.querySelector('#tipoContrato').value,
+            tipo = document.querySelector('#tipo').value;
+            accion = 'Editar';
+
+    console.log(id_tipocontrato);
+    console.log(Descripcion);
+    console.log(tipo);
+
+    var datos = new FormData();
+    datos.append('id_tipoContrato',id_tipocontrato);
+    datos.append('Descripcion', Descripcion);
+    datos.append('accion', accion);
+    
+    // Creamos un llamado Ajax
+    var xhr = new XMLHttpRequest();
+
+    // Abrir la conexión
+    xhr.open('POST', tipo, true);
+
+    //Retorno de datos
+    xhr.onload = function(){
+        if(this.status ===200){
+            //leemos la respuesta phph
+            var respuesta = JSON.parse(xhr.responseText);
+            if (respuesta.respuesta === 'Exitoso'){
+                swal({
+                    title: 'Editar tipo Contrato',
+                    text: 'El tipo de contrato fue editado correctamente',
+                    type: 'success'
+                });
+            }else{
+                swal({
+                    title: 'Editar tipo Contrato',
+                    text: respuesta.mensage,
+                    type: 'error'
+                });
+            }
+            
+
+
+            console.log(respuesta);
+        }
+    }
+
+    // Envia la peticion
+    xhr.send(datos);
+    
+    
 
 
 }

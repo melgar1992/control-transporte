@@ -75,10 +75,4 @@
             $this->db->update('empleado', $data2);
         }
 
-
-
-        
-
-        
-
     }
