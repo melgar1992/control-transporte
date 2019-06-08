@@ -8,7 +8,7 @@ class Contrato extends BaseController {
     public function tipocontrato(){
       $contratos['datos'] = $this->Contrato_model->obtenerTipoContrato();
       $contratos['Accion_pagina'] = 'NuevoTipoContrato';
-      $this->loadView('Contrato', '/form/contrato/nuevo_tipo_contrato',$contratos);
+      $this->loadView('Contrato','/form/contrato/nuevo_tipo_contrato',$contratos);
     }
 
     public function ingresar_tipo_contrato(){
@@ -83,5 +83,5 @@ class Contrato extends BaseController {
       }
       
     }
-    
+  
 }

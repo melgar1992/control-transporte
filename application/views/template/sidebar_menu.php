@@ -12,8 +12,7 @@
                   </li>
                   <li><a><i class="fas fa-edit"></i> Formularios <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">Cliente</a></li>
-                      <li><a href="form_advanced.html">Proveedor</a></li>
+                      
                       <li><a href="<?php echo site_url("Empleado/index")?>">Empleado</a></li>
                         <!--<ul class="nav child_menu">
                             <li><a >Registro Empleado</a>
@@ -24,7 +23,8 @@
                             </li>                          
                         </ul>
                       </li>-->
-                      <li><a href="<?php echo site_url("Contrato/tipocontrato")?>">Tipo Contrato Empleado</a></li>
+                      <li><a href="<?php echo site_url("Contrato/tipocontrato")?>">Tipos de Contratos Empleado</a></li>
+                      <li><a href="<?php echo site_url("ContratoEmpleado/ContratoEmpleado")?>">Contrato Empleados</a></li>
                       <li><a href="#">Form Upload</a></li>
                       <li><a href="#">Form Buttons</a></li>
                     </ul>

@@ -187,6 +187,34 @@ class Empleado extends BaseController {
         
 
     }
+    public function obtenerEmpleadoId(){
 
+        $ci= $this->input->post('id_empleado');
+        
+        
+
+        if ($this->Persona_model->id_persona($ci) == true) {
+            
+            $obtenerpersona = $this->Persona_model->obtenerPersona($ci);
+
+            $respuesta = array(
+                'respuesta' => 'encontrato',
+                    'datos' => array(
+                        
+                        'ci' => $obtenerpersona['CI'],
+                        'nombres' => $obtenerpersona['Nombres'] )
+            );
+
+
+        } else {
+            $respuesta = array(
+                'tipo' => 'No Existe',
+                'respuesta' => ' El epmleado no esta registrado'
+            ); 
+        }
+        
+        echo json_encode($respuesta);
+
+    }
     
 }

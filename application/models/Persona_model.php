@@ -61,5 +61,19 @@
             $this->db->update('persona', $data);
 
         }
+        function obtenerPersona($ci){
+
+            $this->db->where('CI',$ci);
+            $this->db->from('persona');
+            $persona = $this->db->get();
+
+            $row = $persona->row_array();
+
+            if (isset($row)){
+                return  $row;
+            }
+            else{return false;}
+
+        }
 
     }

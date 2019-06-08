@@ -74,5 +74,29 @@
             $this->db->where('ID_Empleado',$id_empleado);
             $this->db->update('empleado', $data2);
         }
+        public function ObtenerEmpleadoxCI($CI){
+
+            //Valida que exista un empleado por CI y retorna todos los datos del empleado
+
+            $this->db->select('*');
+            $this->db->from('persona');
+            $this->db->join('empleado','persona.ID_persona = empleado.ID_persona');
+            $this->db->where('persona.CI',$CI);
+            $this->db->where('empleado.Estado','Activo');
+            
+            $query = $this->db->get();
+            
+            $row = $query->row_array();
+            
+            if (isset($row)){
+                
+                return  $row;
+                
+            }
+            else{return false;}
+
+
+
+        }
 
     }
