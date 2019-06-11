@@ -25,7 +25,7 @@
                       </li>-->
                       <li><a href="<?php echo site_url("Contrato/tipocontrato")?>">Tipos de Contratos Empleado</a></li>
                       <li><a href="<?php echo site_url("ContratoEmpleado/ContratoEmpleado")?>">Contrato Empleados</a></li>
-                      <li><a href="#">Form Upload</a></li>
+                      <li><a href="<?php echo site_url("pagoEmpleados/pagoEmpleado")?>">Pago Empleados</a></li>
                       <li><a href="#">Form Buttons</a></li>
                     </ul>
                   </li>
