@@ -14,8 +14,7 @@ class ContratoEmpleado extends BaseController {
   
     }
 
-    public function ingresar_contrato()
-  {
+    public function ingresar_contrato(){
 
     $this->form_validation->set_rules('tipoContrato', 'TipoContrato', 'trim|xss_clean');
 
