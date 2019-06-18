@@ -97,6 +97,70 @@
             </div>
           </form>
         </div>
+
+        <div class="x_panel">
+              <div class="x_title">
+                <h2>Tabla de Contratos</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </li>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li><a href="#">Settings 1</a>
+                      </li>
+                      <li><a href="#">Settings 2</a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  </li>
+                </ul>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="tablaContratos">
+                    <thead>
+                      <tr>
+
+                        <th>ID de pago</th>
+                        <th>Nombres</th>
+                        <th>Apellido Paterno</th>
+                        <th>Fecha</th>
+                        <th>Mes correspondiente</th>
+                        <th>Descripcion</th>
+                        <th>Monto</th>
+                        
+                      </tr>
+                    </thead>
+                    <tbody id="datos-contratos">
+                      <?php
+
+                      if ($datos->num_rows()) {
+                        foreach ($datos->result() as $row) { ?>
+                          <tr>
+                          <td><?php echo $row->ID_pago ?></td>
+                          <td><?php echo $row->nombres ?></td>  
+                          <td><?php echo $row->Apellido_p ?></td>
+                          <td><?php echo $row->Fecha ?></td>
+                          <td><?php echo $row->MesCorrespondiente ?></td>
+                          <td><?php echo $row->Descripcion ?></td>
+                          <td><?php echo $row->Monto ?></td>
+                            <td>
+                              <a data-id="" data-acction="editar" value="<?php echo site_url('') ?>" class="btn btn-info btn-xs"> Editar <i class="fas fa-pencil-alt"></i></a>
+                              <a data-id="" data-acction="borrar" value="<?php echo site_url('') ?>" class="btn btn-danger btn-xs"> Borrar <i class="far fa-trash-alt"></i></a>
+                            </td>
+                          </tr>
+                        <?php }
+                    }
+                    ?>
+                    </tbody>
+                  </table>
+                </div> <!-- Tabla responsiva-->
+              </div>
+            </div>
       </div>
     </div>
   </div>

@@ -5,8 +5,19 @@ class pagoEmpleado_model extends CI_Model
 
     public function obtenerPagoEmpleados()
     {
-        $query = $this->db->query('select * from pago');
-        return $query;
+        $this->db->select('pago.ID_pago, persona.nombres, persona.Apellido_p, Fecha, MesCorrespondiente, pago.Descripcion, Monto');
+        $this->db->from('pago');
+        $this->db->join('contrato','pago.ID_contrato = contrato.ID_contrato');
+        $this->db->join('empleado','empleado.ID_empleado = contrato.ID_empleado');
+        $this->db->join('tipocontrato','contrato.ID_tipocontrato = tipocontrato.ID_tipocontrato');
+        $this->db->join('persona','persona.ID_persona = empleado.ID_persona');
+        $this->db->where('contrato.Estado','Activo');
+        $this->db->where('empleado.Estado','Activo');
+      
+
+        $datos = $this->db->get();
+        
+        return $datos;
     }
     public function insertarPagoEmpleado($id_contrato, $fecha_pago, $mes_correspondiente, $descripcion, $pago)
     {
