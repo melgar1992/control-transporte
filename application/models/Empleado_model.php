@@ -98,5 +98,17 @@
 
 
         }
+        public function BuscarEmpleado($teclaPulsada)
+        {
+            $this->db->select('ID_empleado, Nombres, Apellido_p, Apellido_m ');
+            $this->db->from('empleado');
+            $this->db->join('persona','empleado.ID_persona = persona.ID_persona');
+            $this->db->where('empleado.Estado','Activo');
+            $this->db->like('Nombres',$teclaPulsada);
+
+            $query = $this->db->get();
+            $listaNombres = $query->result_array();
+            return $listaNombres;
+        }
 
     }

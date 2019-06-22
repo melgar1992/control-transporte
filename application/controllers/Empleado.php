@@ -216,5 +216,6 @@ class Empleado extends BaseController {
         echo json_encode($respuesta);
 
     }
+  
     
 }

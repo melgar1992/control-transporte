@@ -4,7 +4,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
       <div class="x_panel">
         <div class="x_title">
-          <h2>Nuevo tipo de contrato <small>-</small></h2>
+          <h2>Nuevo pago Empleado <small>-</small></h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
@@ -25,11 +25,19 @@
         <div class="x_content">
           <br />
 
-          <form method="post" id="nuevo_pago" data-parsley-validate class="form-horizontal form-label-left">
+          <form method="post" 
+          id = "<?php if ($Accion_pagina == 'NuevoPago') {
+            echo 'nuevo_pago';
+          } else {
+            echo 'EditarPago';
+          }
+          ?>"
+         autocomplete="off" data-parsley-validate class="form-horizontal form-label-left">
           <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CI">CI <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
+              <?php if ($Accion_pagina == 'NuevoPago') { ?>
                 <input type="text"  list="listCI" id="CI" name="CI" required="required" class="form-control col-md-7 col-xs-12" placeholder="Número de Carnet de Identidad">
               <!-- Lista de Nombres -->
               <datalist id="listCI">
@@ -40,7 +48,13 @@
                       <option value="<?php echo $row->CI ?>"><?php echo $row->Nombres ?>  <?php echo $row->Apellido_p ?></option>
                     <?php }
                 }
-                ?>
+               }
+               else {?>
+                <input type="text" disabled id="disabledInput" placeholder="<?php  echo $datos->CI ?>" class="form-control col-md-7 col-xs-12">
+                
+                <?php
+               }
+               ?>
                 </datalist>
               
               </div>
@@ -49,16 +63,32 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombres">Nombres <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
+              <?php if ($Accion_pagina == 'NuevoPago') { ?>
                 <input type="text" id="nombres" name="nombres" required="required" class="form-control col-md-7 col-xs-12">
+                <?php 
+              }
+              else {?>
+                <input type="text" disabled id="disabledInput" placeholder="<?php  echo $datos->nombres ?>" class="form-control col-md-7 col-xs-12">
+                <?php  
+              }
+                ?>
               </div>
-
+              
             </div>
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="fecha_pago">Fecha de Pago <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class='input-group date' id='myDatepicker2'>
+                <?php if ($Accion_pagina == 'NuevoPago') { ?>
                   <input type='date' class="form-control" id="fecha_pago" name="fecha_pago" required="required" />
+                  <?php 
+              }
+              else {?>
+                <input type='date' class="form-control" id="fecha_pago" name="fecha_pago" required="required" value="<?php echo $datos->Fecha; ?>" />
+              <?php  
+              }
+                ?>
                 </div>
               </div>
             </div>
@@ -67,7 +97,15 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class='input-group date' id='myDatepicker2'>
+                <?php if ($Accion_pagina == 'NuevoPago') { ?>
                   <input type='month' class="form-control" id="mes_correspondiente" name="mes_correspondiente" required="required" />
+                  <?php 
+              }
+              else {?>
+                 <input type='month' class="form-control" id="mes_correspondiente" name="mes_correspondiente" value="<?php echo $datos->MesCorrespondiente; ?>"  required="required" />
+                 <?php  
+              }
+                ?>
                 </div>
               </div>
             </div>
@@ -75,24 +113,72 @@
               <label for="Descripcion" class="control-label col-md-3 col-sm-3 col-xs-12">Descripcion <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
+              <?php if ($Accion_pagina == 'NuevoPago') { ?>
                 <textarea name="Descripcion" id="Descripcion" class="form-control" rows="3"  placeholder="Descripcion" required="required"></textarea>
+                <?php 
+              }
+              else {?>
+                <textarea name="Descripcion" id="Descripcion" class="form-control" rows="3"   placeholder="Descripcion" required="required"><?php echo $datos->Descripcion ?></textarea>
+             
+              <?php  
+              }
+                ?>
               </div>
             </div>
             <div class="form-group">
               <label for="pago" class="control-label col-md-3 col-sm-3 col-xs-12"> Bs <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
+              <?php if ($Accion_pagina == 'NuevoPago') { ?>
                 <input id="pago" class="form-control col-md-7 col-xs-12" type="decimal" name="pago" required="required" placeholder="2000">
+                <?php 
+              }
+              else {?>
+
+                <input id="pago" class="form-control col-md-7 col-xs-12" type="decimal" name="pago" value="<?php echo $datos->Monto ?>" required="required" placeholder="2000">
+
+              <?php  
+              }
+                ?>
               </div>
             </div>
 
             <div class="ln_solid"></div>
             <div class="form-group" id="botones">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button class="btn btn-primary" type="button">Cancelar</button>
+                
+              <a class="btn btn-primary"
+                                  <?php  if ($Accion_pagina == 'EditarPago'){ 
+                                           echo 'href = "'.site_url("/pagoEmpleados/pagoEmpleado").'"';
+                                          }
+                                  ?> 
+                                  type="button"> <?php  if ($Accion_pagina == 'EditarPago'){ 
+                                                                      echo "Volver";
+                                                                  }
+                                                                  else {
+                                                                    echo "Cancelar";
+                                                                  } 
+                                                    ?>
+                          </a> 
                 <button class="btn btn-primary" type="reset">Borrar</button>
-                <button type="submit" id="tipo" value="<?php echo site_url('/pagoEmpleados/IngresarPagoEmpleado') ?>" class="btn btn-success">Guardar</button>
-                <button type='button' data-acction="editar" id="editar" value="<?php echo site_url('') ?>" class="btn btn-warning">Editar</button>
+                <button type="submit" 
+                                  id="tipo" 
+                                  <?php if($Accion_pagina == 'EditarPago'){
+                                    echo 'id_data = "'.$datos->ID_pago.'"';
+                                  } ?>
+                                  value="<?php if ($Accion_pagina == 'EditarPago'){ 
+                                                  echo site_url('/pagoEmpleados/editar_pago_empleado');
+                                                } else {
+                                                  echo site_url('/pagoEmpleados/IngresarPagoEmpleado');
+                                                  } ?>" 
+                                  class="btn btn-success"> <?php  if ($Accion_pagina == 'EditarPago'){ 
+                                                                      echo "Editar";
+                                                                  }
+                                                                  else {
+                                                                    echo "Guardar";
+                                                                  } 
+                                                              ?>
+                          </button>
               </div>
             </div>
           </form>
@@ -100,7 +186,7 @@
 
         <div class="x_panel">
               <div class="x_title">
-                <h2>Tabla de Contratos</h2>
+                <h2>Tabla de Pagos</h2>
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
@@ -121,7 +207,7 @@
               <div class="x_content">
 
                 <div class="table-responsive">
-                  <table class="table table-bordered" id="tablaContratos">
+                  <table class="table table-bordered" id="tablaPagos">
                     <thead>
                       <tr>
 
@@ -132,29 +218,33 @@
                         <th>Mes correspondiente</th>
                         <th>Descripcion</th>
                         <th>Monto</th>
+                        <th>Acciones</th>
                         
                       </tr>
                     </thead>
                     <tbody id="datos-contratos">
                       <?php
-
-                      if ($datos->num_rows()) {
-                        foreach ($datos->result() as $row) { ?>
-                          <tr>
-                          <td><?php echo $row->ID_pago ?></td>
-                          <td><?php echo $row->nombres ?></td>  
-                          <td><?php echo $row->Apellido_p ?></td>
-                          <td><?php echo $row->Fecha ?></td>
-                          <td><?php echo $row->MesCorrespondiente ?></td>
-                          <td><?php echo $row->Descripcion ?></td>
-                          <td><?php echo $row->Monto ?></td>
-                            <td>
-                              <a data-id="" data-acction="editar" value="<?php echo site_url('') ?>" class="btn btn-info btn-xs"> Editar <i class="fas fa-pencil-alt"></i></a>
-                              <a data-id="" data-acction="borrar" value="<?php echo site_url('') ?>" class="btn btn-danger btn-xs"> Borrar <i class="far fa-trash-alt"></i></a>
-                            </td>
-                          </tr>
-                        <?php }
-                    }
+                      if ($Accion_pagina == 'NuevoPago')
+                      {
+                        if ($datos->num_rows())
+                         {
+                          foreach ($datos->result() as $row) { ?>
+                            <tr>
+                            <td><?php echo $row->ID_pago ?></td>
+                            <td><?php echo $row->nombres ?></td>  
+                            <td><?php echo $row->Apellido_p ?></td>
+                            <td><?php echo $row->Fecha ?></td>
+                            <td><?php echo $row->MesCorrespondiente ?></td>
+                            <td><?php echo $row->Descripcion ?></td>
+                            <td><?php echo $row->Monto ?></td>
+                              <td>
+                                <a data-id="<?php echo $row->ID_pago ?>" data-acction="editar" href="<?php echo site_url('/pagoEmpleados/editar_pago_empleado?id=').$row->ID_pago ?>" class="btn btn-info btn-xs"> Editar <i class="fas fa-pencil-alt"></i></a>
+                                <a data-id="<?php echo $row->ID_pago ?>" data-acction="borrar" value="<?php echo site_url('') ?>" class="btn btn-danger btn-xs"> Borrar <i class="far fa-trash-alt"></i></a>
+                              </td>
+                            </tr>
+                          <?php }
+                        }
+                       }
                     ?>
                     </tbody>
                   </table>
@@ -162,6 +252,7 @@
               </div>
             </div>
       </div>
+      
     </div>
   </div>
 

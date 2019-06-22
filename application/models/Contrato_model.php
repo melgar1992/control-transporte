@@ -65,9 +65,18 @@ class Contrato_model extends CI_Model
     public function obtenerContratoEmpleado()
     {
 
-        $query = $this->db->query('select ID_contrato,c.ID_empleado, CI, Nombres, Apellido_p, Apellido_m, t.Descripcion, sueldo, FechaIngreso, FechaSalida from contrato c inner join tipocontrato t inner join empleado e inner join persona p on  p.ID_persona = e.ID_persona where  c.Estado = "Activo" and e.ID_empleado = c.ID_empleado and c.ID_tipocontrato = t.ID_tipocontrato');
+        $this->db->select('ID_contrato, contrato.ID_empleado, CI, Nombres, Apellido_p, Apellido_m, tipocontrato.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->from('contrato');
+        $this->db->join('tipocontrato','contrato.ID_tipoContrato = tipocontrato.ID_tipoContrato');
+        $this->db->join('empleado','empleado.ID_empleado = contrato.ID_empleado');
+        $this->db->join('persona','empleado.ID_persona = persona.ID_persona');
+        $this->db->where('contrato.Estado','Activo');
+        $this->db->where('empleado.Estado','Activo');
 
-        return $query;
+        $datos = $this->db->get();
+        
+        return $datos;
+
     }
 
     public function insertarContratoEmpleado($id_Empleado, $id_tipoContrato, $sueldo, $fechain, $fechafin)
