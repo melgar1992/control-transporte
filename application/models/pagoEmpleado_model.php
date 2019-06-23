@@ -59,4 +59,9 @@ class pagoEmpleado_model extends CI_Model
         $query = $this->db->get();
         return $query->row();
     }
+    public function EliminarPago($ID_pago)
+    {
+        $this->db->where('ID_pago', $ID_pago);
+        $this->db->delete('pago'); 
+    }
 }

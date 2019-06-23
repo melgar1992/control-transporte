@@ -239,7 +239,7 @@
                             <td><?php echo $row->Monto ?></td>
                               <td>
                                 <a data-id="<?php echo $row->ID_pago ?>" data-acction="editar" href="<?php echo site_url('/pagoEmpleados/editar_pago_empleado?id=').$row->ID_pago ?>" class="btn btn-info btn-xs"> Editar <i class="fas fa-pencil-alt"></i></a>
-                                <a data-id="<?php echo $row->ID_pago ?>" data-acction="borrar" value="<?php echo site_url('') ?>" class="btn btn-danger btn-xs"> Borrar <i class="far fa-trash-alt"></i></a>
+                                <a data-id="<?php echo $row->ID_pago ?>" data-acction="borrar" value="<?php echo site_url('/pagoEmpleados/EliminarPagoEmpleado') ?>" class="btn btn-danger btn-xs"> Borrar <i class="far fa-trash-alt"></i></a>
                               </td>
                             </tr>
                           <?php }

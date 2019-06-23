@@ -1,6 +1,6 @@
 const formularioNuevoPago = document.querySelector('#nuevo_pago');
-      formularioEditarPagoEmpleado = document.querySelector('#EditarPago');
-      ListadoPagos = document.querySelector('#tablaPagos tbody');
+formularioEditarPagoEmpleado = document.querySelector('#EditarPago');
+ListadoPagos = document.querySelector('#tablaPagos tbody');
 
 
 
@@ -9,16 +9,16 @@ const formularioNuevoPago = document.querySelector('#nuevo_pago');
 
 addEventListener();
 
-function addEventListener(){
+function addEventListener() {
 
     if (formularioNuevoPago) {
-        formularioNuevoPago.addEventListener('submit',ingresarNuevoPagoEmpleado);
+        formularioNuevoPago.addEventListener('submit', ingresarNuevoPagoEmpleado);
     }
     if (formularioEditarPagoEmpleado) {
-        formularioEditarPagoEmpleado.addEventListener('submit',EditarPagoEmpleado);
+        formularioEditarPagoEmpleado.addEventListener('submit', EditarPagoEmpleado);
     }
     if (ListadoPagos) {
-        ListadoPagos.addEventListener('click',identificarAccion);
+        ListadoPagos.addEventListener('click', BorrarPagoEmpleado);
     }
 
 }
@@ -27,31 +27,31 @@ function ingresarNuevoPagoEmpleado(e) {
     e.preventDefault();
 
     const ci = document.querySelector('#CI').value;
-          fecha_Pago = document.querySelector('#fecha_pago').value;
-          mes_correspondiente = document.querySelector('#mes_correspondiente').value;
-          descripcion = document.querySelector('#Descripcion').value;
-          pago = document.querySelector('#pago').value;
-          tipo = document.querySelector('#tipo').value;
-    var datos   = new FormData();
+    fecha_Pago = document.querySelector('#fecha_pago').value;
+    mes_correspondiente = document.querySelector('#mes_correspondiente').value;
+    descripcion = document.querySelector('#Descripcion').value;
+    pago = document.querySelector('#pago').value;
+    tipo = document.querySelector('#tipo').value;
+    var datos = new FormData();
 
     // datos que se enviaran al servidor
-    datos.append('CI',ci);
-    datos.append('fecha_pago',fecha_Pago);
+    datos.append('CI', ci);
+    datos.append('fecha_pago', fecha_Pago);
     datos.append('mes_correspondiente', mes_correspondiente);
-    datos.append('descripcion',descripcion);
-    datos.append('pago',pago);
-    
-  
+    datos.append('descripcion', descripcion);
+    datos.append('pago', pago);
+
+
     console.log(...datos);
     // creando una llamada ajax
     var xhr = new XMLHttpRequest();
     //Abrir la conexion
-    xhr.open('POST',tipo,true);
+    xhr.open('POST', tipo, true);
     //Retorno de datos
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (this.status === 200) {
             var respuesta = JSON.parse(xhr.responseText);
-            
+
             console.log(respuesta.datos);
 
             if (respuesta.respuesta === 'Exitoso') {
@@ -68,51 +68,51 @@ function ingresarNuevoPagoEmpleado(e) {
                 <td>${respuesta.datos.mes_correspondiente}</td>
                 <td>${respuesta.datos.descripcion}</td>
                 <td>${respuesta.datos.pago}</td>
-                `;  
+                `;
                 //Crear el contenedor para los botones
                 const contenedorAcciones = document.createElement('td');
-                             
+
                 //crear el icono de editar
                 const iconoEditar = document.createElement('i');
-                iconoEditar.classList.add('fas','fa-pencil-alt');
+                iconoEditar.classList.add('fas', 'fa-pencil-alt');
                 //crea el enlace para editar
 
                 const btnEditar = document.createElement('a');
-                    btnEditar.setAttribute("data-id",respuesta.datos.id_pago); 
-                    btnEditar.setAttribute("value", ''); 
-                    btnEditar.setAttribute("data-acction","editar");       
-                    btnEditar.classList.add('btn', 'btn-info', 'btn-xs');                
-                    btnEditar.textContent = " Editar ";                
-                    btnEditar.appendChild(iconoEditar);
-                
+                btnEditar.setAttribute("data-id", respuesta.datos.id_pago);
+                btnEditar.setAttribute("href", respuesta.datos.hrefEditar);
+                btnEditar.setAttribute("data-acction", "editar");
+                btnEditar.classList.add('btn', 'btn-info', 'btn-xs');
+                btnEditar.textContent = " Editar ";
+                btnEditar.appendChild(iconoEditar);
+
                 // agregando el editar al padre
                 contenedorAcciones.appendChild(btnEditar);
 
-                 //Crear el boton eliminar
-                 const iconoEliminar = document.createElement('i');
-                 iconoEliminar.classList.add('far', 'fa-trash-alt');
+                //Crear el boton eliminar
+                const iconoEliminar = document.createElement('i');
+                iconoEliminar.classList.add('far', 'fa-trash-alt');
 
-                 // Crea el enlace para eliminar
-                 const btnEliminar = document.createElement('a');
-                 btnEliminar.setAttribute("data-id",respuesta.datos.id_contrato);
-                 btnEliminar.setAttribute("value",'');
-                 btnEliminar.setAttribute("data-acction","borrar"); 
-                 btnEliminar.classList.add('btn', 'btn-danger', 'btn-xs');
-                 btnEliminar.textContent = " Borrar ";
-                 btnEliminar.appendChild(iconoEliminar);
+                // Crea el enlace para eliminar
+                const btnEliminar = document.createElement('a');
+                btnEliminar.setAttribute("data-id", respuesta.datos.id_contrato);
+                btnEliminar.setAttribute("value", '');
+                btnEliminar.setAttribute("data-acction", "borrar");
+                btnEliminar.classList.add('btn', 'btn-danger', 'btn-xs');
+                btnEliminar.textContent = " Borrar ";
+                btnEliminar.appendChild(iconoEliminar);
 
-                 //Agregarlo al padre
+                //Agregarlo al padre
 
-                 contenedorAcciones.appendChild(btnEliminar);
+                contenedorAcciones.appendChild(btnEliminar);
 
-                 //Agregando al tr
+                //Agregando al tr
 
-                 nuevoPago_Empleado.appendChild(contenedorAcciones);
+                nuevoPago_Empleado.appendChild(contenedorAcciones);
 
-                 //Agregando con los contratos existentes
+                //Agregando con los contratos existentes
 
-                 ListadoPagos.appendChild(nuevoPago_Empleado);
-                
+                ListadoPagos.appendChild(nuevoPago_Empleado);
+
 
 
                 swal({
@@ -120,11 +120,11 @@ function ingresarNuevoPagoEmpleado(e) {
                     text: 'El contrato fue ingresado correctamente',
                     type: 'success'
                 });
-                
+
             } else {
 
-                if (respuesta.tipo === 'Formulario'){
-                    error_formulario = document.querySelector('.error_formulario');                    
+                if (respuesta.tipo === 'Formulario') {
+                    error_formulario = document.querySelector('.error_formulario');
                     error_formulario.innerHTML = respuesta.respuesta;
 
 
@@ -133,7 +133,7 @@ function ingresarNuevoPagoEmpleado(e) {
                         text: 'Error en el formulario',
                         type: 'error'
                     });
-                }else{
+                } else {
                     if (respuesta.tipo === 'No Existe') {
 
                         swal({
@@ -144,30 +144,16 @@ function ingresarNuevoPagoEmpleado(e) {
                     }
 
                 }
-                
+
             }
-            
-            
+
+
         }
-        
+
     }
     // se lee la respuesta
     // se envian los datos
     xhr.send(datos);
-}
-
-function identificarAccion(e){
-    
-    if (e.target.getAttribute('data-acction')==='borrar'){
-
-            
-        console.log('borrar');
-        
-    }
-    else if(e.target.getAttribute('data-acction')==='editar'){
-        //editarEmpleado(e.target.getAttribute('data-id'));
-
-    }
 }
 
 function EditarPagoEmpleado(e) {
@@ -175,33 +161,33 @@ function EditarPagoEmpleado(e) {
 
     Boton = document.querySelector('#tipo');
     const id_pago = Boton.getAttribute('id_data');
-          fecha_Pago = document.querySelector('#fecha_pago').value;
-          mes_correspondiente = document.querySelector('#mes_correspondiente').value;
-          descripcion = document.querySelector('#Descripcion').value;
-          pago = document.querySelector('#pago').value;
-          tipo = document.querySelector('#tipo').value;
-          accion = 'Editar';
-    var datos   = new FormData();
+    fecha_Pago = document.querySelector('#fecha_pago').value;
+    mes_correspondiente = document.querySelector('#mes_correspondiente').value;
+    descripcion = document.querySelector('#Descripcion').value;
+    pago = document.querySelector('#pago').value;
+    tipo = document.querySelector('#tipo').value;
+    accion = 'Editar';
+    var datos = new FormData();
 
     // datos que se enviaran al servidor
-    datos.append('ID_pago',id_pago);
-    datos.append('fecha_pago',fecha_Pago);
+    datos.append('ID_pago', id_pago);
+    datos.append('fecha_pago', fecha_Pago);
     datos.append('mes_correspondiente', mes_correspondiente);
-    datos.append('descripcion',descripcion);
-    datos.append('pago',pago);
-    datos.append('accion',accion);
+    datos.append('descripcion', descripcion);
+    datos.append('pago', pago);
+    datos.append('accion', accion);
 
     console.log(...datos);
     // creando una llamada ajax
     var xhr = new XMLHttpRequest();
     //Abrir la conexion
-    xhr.open('POST',tipo,true);
+    xhr.open('POST', tipo, true);
     //Retorno de datos
-    xhr.onload = function(){
+    xhr.onload = function () {
         if (this.status === 200) {
 
             var respuesta = JSON.parse(xhr.responseText);
-            
+
             console.log(respuesta.datos);
 
             if (respuesta.respuesta === 'Exitoso') {
@@ -210,8 +196,8 @@ function EditarPagoEmpleado(e) {
                     text: 'El pago fue editado correctamente',
                     type: 'success'
                 });
-            
-            
+
+
             }
 
 
@@ -219,5 +205,63 @@ function EditarPagoEmpleado(e) {
     }
     xhr.send(datos);
 
-    
+
+}
+
+function BorrarPagoEmpleado(e) {
+
+    if (e.target.getAttribute('data-acction') === 'borrar') {
+        const tipo = e.target.getAttribute('value');
+
+        var datos = new FormData();
+
+        datos.append('ID_pago', e.target.getAttribute('data-id'));
+
+        // Creando un llamado Ajax  
+
+        var xhr = new XMLHttpRequest();
+        // Abrir la conexion
+
+        xhr.open('POST', tipo, true);
+        // Retorno de datos
+        xhr.onload = function () {
+            if (this.status === 200) {
+                // Leemos la respuesta php
+                var respuesta = JSON.parse(xhr.responseText);
+                if (respuesta.tipo === 'Exitoso') {
+
+                    var i = e.target.parentNode.parentNode.rowIndex;
+                    i = i - 1;
+                    ListadoPagos.deleteRow(i);
+
+                    swal({
+                        title: 'Eliminar',
+                        text: 'Se elimino al empleado satisfactoriamente',
+                        type: 'success'
+                    });
+
+                } else {
+                    error_formulario = document.querySelector('.error_formulario');
+                    error_formulario.innerHTML = respuesta.respuesta;
+                    swal({
+                        title: 'Eliminar',
+                        text: 'Error al enviar la información',
+                        type: 'error'
+                    });
+                }
+
+            } else {
+
+                swal({
+                    title: 'Eliminar',
+                    text: 'Error al enviar la información',
+                    type: 'error'
+                });
+            }
+        }
+
+        // Envio de datos
+        xhr.send(datos);
+
+    }
 }
