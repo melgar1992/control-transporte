@@ -241,3 +241,4 @@ function editarEmpleado(id_empleado){
 
 
 }
+$('#tablaEmpleados').DataTable();

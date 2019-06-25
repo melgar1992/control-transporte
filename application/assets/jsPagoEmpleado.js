@@ -265,3 +265,4 @@ function BorrarPagoEmpleado(e) {
 
     }
 }
+$('#tablaPagos').DataTable();
