@@ -76,7 +76,10 @@
     <!-- jquery.inputmask -->
     <?php script('/vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js') ?>
     <!-- <script src="../vendors/jquery.inputmask/dist/min/jquery.inputmask.bundle.min.js"></script> -->
-
+    
+    <!-- DataTables -->
+    <?php script('/vendors/datatables.net/js/jquery.dataTables.min.js') ?>
+    <?php script('/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>
 
     <!-- Custom Theme Scripts -->
     <?php script('/build/js/custom.min.js') ?>

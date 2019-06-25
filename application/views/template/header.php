@@ -33,6 +33,8 @@
     <!-- iCheck -->
     <?php css('/vendors/iCheck/skins/flat/green.css') ?>
     <!-- <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet"> -->
+    <!-- DataTables -->
+    <?php css('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>
 	
     <!-- bootstrap-progressbar -->
     <?php css('/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') ?>

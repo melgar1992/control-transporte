@@ -65,7 +65,7 @@
                 ?>
                 </datalist>
               </div>
-              <button type="button" id="buscar" class="btn btn-primary">Buscar Empleado</button>
+              
             </div>
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoContrato">Tipo de Contrato <span class="required">*</span>
@@ -195,81 +195,7 @@
             </div>
 
 
-            <!--Tabla para seleccionar empleados  -->
-
-            <div class="x_panel">
-              <div class="x_title">
-                <h2>Selecionar el Empleado<small></small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                  <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                  </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Settings 1</a>
-                      </li>
-                      <li><a href="#">Settings 2</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
-                  </li>
-                </ul>
-                <div class="clearfix"></div>
-              </div>
-              <div class="x_content" id='seleccionarEmpleado'>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="buscar-empleado">Buscar Empleado por Nombre
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="buscar-empleado" name="buscar-empleado" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="buscar-ci">Buscar Empleado Carnet Identidad
-                  </label>
-                  <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="number" id="buscar-ci" name="buscar-ci" class="form-control col-md-7 col-xs-12">
-                  </div>
-                </div>
-
-                <div class="table-responsive">
-                  <table class="table table-bordered" id="tablaEmpleados">
-                    <thead>
-                      <tr>
-                        <th>ID Empleado</th>
-                        <th>CI</th>
-                        <th>Nombres</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-                        <th>Acciones</th>
-                      </tr>
-                    </thead>
-                    <tbody id="datos-empleados">
-                      <?php
-                      $datosC = $this->Empleado_model->obtenerEmpleado();
-                      if ($datosC->num_rows()) {
-                        foreach ($datosC->result() as $row) { ?>
-                          <tr>
-                            <th scope="row"><?php echo $row->ID_empleado ?></th>
-                            <td><?php echo $row->CI ?></td>
-                            <td><?php echo $row->Nombres ?></td>
-                            <td><?php echo $row->Apellido_p ?></td>
-                            <td><?php echo $row->Apellido_m ?></td>
-
-                            <td>
-                              <a data-id="<?php echo $row->CI ?>" data-acction="seleccionar" id="seleccionar" value="<?php echo site_url('/Empleado/obtenerEmpleadoId') ?>" class="btn btn-info btn-xs"> Seleccionar <i class="fas fa-pencil-alt"></i></a>
-
-                            </td>
-                          </tr>
-                        <?php }
-                    }
-                    ?>
-                    </tbody>
-                  </table>
-                </div> <!-- Tabla responsiva-->
-              </div>
-            </div>
+           
 
             <!--Termina el contenido principal -->
 
