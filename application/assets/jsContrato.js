@@ -263,8 +263,5 @@ function editarTipoContrato(e){
 
     // Envia la peticion
     xhr.send(datos);
-    
-    
-
-
 }
+$('#tablaTipoContrato').DataTable();
