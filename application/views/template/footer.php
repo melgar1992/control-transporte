@@ -81,6 +81,9 @@
     <?php script('/vendors/datatables.net/js/jquery.dataTables.min.js') ?>
     <?php script('/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>
 
+   
+   
+
     <!-- Custom Theme Scripts -->
     <?php script('/build/js/custom.min.js') ?>
     <!-- <script src="../build/js/custom.min.js"></script> -->
