@@ -64,4 +64,9 @@ class pagoEmpleado_model extends CI_Model
         $this->db->where('ID_pago', $ID_pago);
         $this->db->delete('pago'); 
     }
+    public function ObtenerPagosDelMesActual()
+    {
+       $this->db-set_select('');
+        $this->db->where();
+    }
 }

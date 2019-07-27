@@ -51,7 +51,7 @@
             $this->db->select('*');
             $this->db->from('persona');
             $this->db->join('empleado','persona.ID_persona = empleado.ID_persona');
-            $this->db->where('empleado.ID_persona',$id_empleado);
+            $this->db->where('empleado.ID_empleado',$id_empleado);
             $query = $this->db->get();
 
 

@@ -25,7 +25,7 @@
     <!-- <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"> -->
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <?php //css('/vendors/font-awesome/css/font-awesome.min.css') ?>
+    <?php css('/vendors/font-awesome/css/font-awesome.min.css') ?>
     <!-- <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet"> -->
     <!-- NProgress -->
     <?php css('/vendors/nprogress/nprogress.css') ?>

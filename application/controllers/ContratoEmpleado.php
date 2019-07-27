@@ -9,6 +9,7 @@ class ContratoEmpleado extends BaseController {
     {
   
       $contratos['datos'] = $this->Contrato_model->obtenerContratoEmpleado();
+      $contratos['Accion_pagina'] = 'NuevoContrato';
       $this->loadView('ContratoEmpleado','/form/ContratoEmpleado/nuevo_ContratoEmpleado',$contratos);
       
   

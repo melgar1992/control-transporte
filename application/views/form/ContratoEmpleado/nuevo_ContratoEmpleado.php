@@ -24,27 +24,37 @@
         </div>
         <div class="x_content">
           <br />
-          <form method="post" id="nuevo_contrato"  data-parsley-validate class="form-horizontal form-label-left">
-            <!--value="<?php
-                        ?>" -->
+          <form method="post" id="<?php if ($Accion_pagina == 'NuevoContrato') {
+                                    echo 'nuevo_contrato';
+                                  } else {
+                                    echo 'editar_contrato';
+                                  }
+                                  ?>" data-parsley-validate class="form-horizontal form-label-left">
+            <!--value="" -->
 
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="CI">CI <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text"  list="listCI" id="CI" name="CI" required="required" class="form-control col-md-7 col-xs-12" placeholder="Número de Carnet de Identidad">
-              <!-- Lista de Nombres -->
-              <datalist id="listCI">
+                <?php if ($Accion_pagina == 'NuevoContrato') { ?>
+                  <input type="text" list="listCI" id="CI" name="CI" required="required" class="form-control col-md-7 col-xs-12" placeholder="Número de Carnet de Identidad">
+                  <!-- Lista de Nombres -->
+                  <datalist id="listCI">
+                    <?php
+                    $datosC = $this->Empleado_model->obtenerEmpleado();
+                    if ($datosC->num_rows()) {
+                      foreach ($datosC->result() as $row) { ?>
+                        <option value="<?php echo $row->CI ?>"><?php echo $row->Nombres ?> <?php echo $row->Apellido_p ?></option>
+                      <?php }
+                    }
+                  } else { ?>
+                    <input type="text" disabled id="disabledInput" placeholder="<?php echo $datos->CI ?>" class="form-control col-md-7 col-xs-12">
+
                   <?php
-                  $datosC = $this->Empleado_model->obtenerEmpleado();
-                  if ($datosC->num_rows()) {
-                    foreach ($datosC->result() as $row) { ?>
-                      <option value="<?php echo $row->CI ?>"><?php echo $row->Nombres ?>  <?php echo $row->Apellido_p ?></option>
-                    <?php }
-                }
-                ?>
+                  }
+                  ?>
                 </datalist>
-              
+
               </div>
             </div>
 
@@ -52,44 +62,65 @@
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="nombres">Nombres <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" list="listN" id="nombres" name="nombres" required="required" class="form-control col-md-7 col-xs-12">
-                <!-- Lista de Nombres -->
-                <datalist id="listN">
-                  <?php
-                  
-                  if ($datosC->num_rows()) {
-                    foreach ($datosC->result() as $row) { ?>
-                      <option value="<?php echo $row->Nombres ?>"><?php echo $row->Nombres ?>"</option>
-                    <?php }
+                <?php if ($Accion_pagina == 'NuevoContrato') { ?>
+                  <input type="text" id="nombres" name="nombres" required="required" class="form-control col-md-7 col-xs-12">
+                <?php
+                } else { ?>
+                  <input type="text" disabled id="disabledInput" placeholder="<?php echo $datos->nombres ?>" class="form-control col-md-7 col-xs-12">
+                <?php
                 }
                 ?>
-                </datalist>
               </div>
-              
+
             </div>
             <div class="form-group">
               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="tipoContrato">Tipo de Contrato <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <select id="tipoContrato" name="tipoContrato" class="form-control" required>
-                  <?php $tipocontratos = $this->Contrato_model->obtenerTipoContrato();
+                <?php if ($Accion_pagina == 'NuevoContrato') { ?>
+                  <select id="tipoContrato" name="tipoContrato" class="form-control" required>
+                    <?php $tipocontratos = $this->Contrato_model->obtenerTipoContrato();
+                    if ($tipocontratos->num_rows()) {
+                      foreach ($tipocontratos->result() as $row) { ?>
 
-                  if ($tipocontratos->num_rows()) {
-                    foreach ($tipocontratos->result() as $row) { ?>
+                        <option value="<?php echo $row->Descripcion ?>"><?php echo $row->Descripcion ?></option>
 
-                      <option value="<?php echo $row->Descripcion ?>"><?php echo $row->Descripcion ?></option>
+                      <?php }
+                    } ?>
+                  </select>
+                <?php
+                } else { ?>
+                  <select id="tipoContrato" name="tipoContrato" class="form-control" required>
+                    <?php $tipocontratos = $this->Contrato_model->obtenerTipoContrato();
+                    if ($tipocontratos->num_rows()) {
+                      foreach ($tipocontratos->result() as $row) { ?>
 
-                    <?php }
-                } ?>
-                </select>
 
+                        <option value="<?php echo $row->Descripcion ?>" <?php if ($row->Descripcion == $datos->Descripcion) {
+                                                                          echo "selected";
+                                                                        } ?>><?php echo $row->Descripcion ?></option>
+
+                      <?php }
+                    } ?>
+                  </select>
+                <?php
+                }
+                ?>
               </div>
             </div>
             <div class="form-group">
               <label for="sueldo" class="control-label col-md-3 col-sm-3 col-xs-12">Sueldo en Bs <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="sueldo" class="form-control col-md-7 col-xs-12" type="float" name="sueldo" required="required" placeholder="2000">
+                <?php if ($Accion_pagina == 'NuevoContrato') { ?>
+                  <input id="sueldo" class="form-control col-md-7 col-xs-12" type="float" name="sueldo" required="required" placeholder="2000">
+                <?php
+                } else { ?>
+                  <input id="sueldo" value="<?php echo $datos->sueldo ?>" class="form-control col-md-7 col-xs-12" type="float" name="sueldo" required="required" placeholder="2000">
+
+                <?php
+                }
+                ?>
               </div>
             </div>
             <div class="form-group">
@@ -97,7 +128,14 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class='input-group date' id='myDatepicker2'>
-                  <input type='date' class="form-control" id="fecha-ingreso" name="fecha-ingreso" required="required" />
+                  <?php if ($Accion_pagina == 'NuevoContrato') { ?>
+                    <input type='date' class="form-control" id="fecha-ingreso" name="fecha-ingreso" required="required" />
+                  <?php
+                  } else { ?>
+                    <input type='date' value="<?php echo $datos->FechaIngreso; ?>" class="form-control" id="fecha-ingreso" name="fecha-ingreso" required="required" />
+                  <?php
+                  }
+                  ?>
                 </div>
               </div>
             </div>
@@ -106,7 +144,15 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class='input-group date' id='myDatepicker2'>
-                  <input type='date' class="form-control" id="fecha-salida" name="fecha-salida" />
+                  <?php if ($Accion_pagina == 'NuevoContrato') { ?>
+                    <input type='date' class="form-control" id="fecha-salida" name="fecha-salida" />
+                  <?php
+                  } else { ?>
+                    <input type='date' value="<?php echo $datos->FechaSalida; ?>" class="form-control" id="fecha-salida" name="fecha-salida" />
+
+                  <?php
+                  }
+                  ?>
                 </div>
               </div>
             </div>
@@ -114,11 +160,12 @@
             <div class="ln_solid"></div>
             <div class="form-group" id="botones">
               <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <button class="btn btn-primary" type="button">Cancelar</button>
+              <button class="btn btn-primary" id='volver' style="display:none" type="button">volver</button>
                 <button class="btn btn-primary" type="reset">Borrar</button>
-                <button type="submit" id="tipo" value="<?php echo site_url('ContratoEmpleado/ingresar_contrato_empleado') ?>" class="btn btn-success">Guardar</button>
-                <button type='button' data-acction="editar" id="editar" value="<?php echo site_url('ContratoEmpleado/editar_contrato_empleado') ?>" class="btn btn-warning">Editar</button>
+              <button type="submit" id="tipo" value="<?php echo site_url('ContratoEmpleado/ingresar_contrato_empleado') ?>" class="btn btn-success">Guardar</button>
+                <button type='button' data-acction="editar"  style="display:none" id="editar" value="<?php echo site_url('ContratoEmpleado/editar_contrato_empleado') ?>" class="btn btn-warning">Editar</button>
               </div>
+                </button> </div>
             </div>
 
             <br>
@@ -165,29 +212,31 @@
                     </thead>
                     <tbody id="datos-contratos">
                       <?php
+                      if ($Accion_pagina == 'NuevoContrato') {
 
-                      if ($datos->num_rows()) {
-                        foreach ($datos->result() as $row) { ?>
-                          <tr>
+                        if ($datos->num_rows()) {
+                          foreach ($datos->result() as $row) { ?>
+                            <tr>
 
-                            <td><?php echo $row->CI ?></td>
-                            <td><?php echo $row->Nombres ?></td>
-                            <td><?php echo $row->Apellido_p ?></td>
-                            <td><?php echo $row->Apellido_m ?></td>
-                            <td><?php echo $row->Descripcion ?></td>
-                            <td><?php echo $row->sueldo ?></td>
-                            <td><?php echo $row->FechaIngreso ?></td>
-                            <td><?php echo $row->FechaSalida ?></td>
+                              <td><?php echo $row->CI ?></td>
+                              <td><?php echo $row->Nombres ?></td>
+                              <td><?php echo $row->Apellido_p ?></td>
+                              <td><?php echo $row->Apellido_m ?></td>
+                              <td><?php echo $row->Descripcion ?></td>
+                              <td><?php echo $row->sueldo ?></td>
+                              <td><?php echo $row->FechaIngreso ?></td>
+                              <td><?php echo $row->FechaSalida ?></td>
 
 
-                            <td>
-                              <a data-id="<?php echo $row->ID_contrato ?>" data-acction="editar" value="<?php echo site_url('ContratoEmpleado/obtenerContratoxID') ?>" class="btn btn-info btn-xs"> Editar <i class="fas fa-pencil-alt"></i></a>
-                              <a data-id="<?php echo $row->ID_contrato ?>" data-acction="borrar" value="<?php echo site_url('ContratoEmpleado/eliminar_contrato_empleado') ?>" class="btn btn-danger btn-xs"> Borrar <i class="far fa-trash-alt"></i></a>
-                            </td>
-                          </tr>
-                        <?php }
-                    }
-                    ?>
+                              <td>
+                                <a data-id="<?php echo $row->ID_contrato ?>" data-acction="editar" value="<?php echo site_url('ContratoEmpleado/obtenerContratoxID') ?>" class="btn btn-info btn-xs"> Editar <i class="fas fa-pencil-alt"></i></a>
+                                <a data-id="<?php echo $row->ID_contrato ?>" data-acction="borrar" value="<?php echo site_url('ContratoEmpleado/eliminar_contrato_empleado') ?>" class="btn btn-danger btn-xs"> Borrar <i class="far fa-trash-alt"></i></a>
+                              </td>
+                            </tr>
+                          <?php }
+                        }
+                      }
+                      ?>
                     </tbody>
                   </table>
                 </div> <!-- Tabla responsiva-->
@@ -195,7 +244,7 @@
             </div>
 
 
-           
+
 
             <!--Termina el contenido principal -->
 

@@ -6,7 +6,7 @@
                   <li><a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url("Inicio")?>">Dashboard</a></li>
-                      <li><a href="#">Dashboard2</a></li>
+                      <li><a href=<?php echo site_url("dashboardEmpleado/index")?>>Dashboard de empleados</a></li>
                       <li><a href="#">Dashboard3</a></li>
                     </ul>
                   </li>

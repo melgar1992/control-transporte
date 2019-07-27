@@ -398,14 +398,19 @@ function identificarAccion(e) {
                 console.log(respuesta);
                 if (respuesta.respuesta === 'Exitoso') {
 
+                    
                     $("#CI").val(respuesta.datos.CI);
+                    $("#CI").attr('disabled',true);
                     $('#nombres').val(respuesta.datos.Nombres);
+                    $('#nombres').attr('disabled',true);
                     $('#tipoContrato').val(respuesta.datos.Descripcion);
                     $('#sueldo').val(respuesta.datos.sueldo);
                     $('#fecha-ingreso').val(respuesta.datos.fechain);
                     $('#fecha-salida').val(respuesta.datos.fechafin);
-
-
+                    $('#tipo').attr('style','display:none');
+                    $('#editar').removeAttr('style');
+                    $('#volver').removeAttr('style');
+                    $('#tablaContratos').parents('div.dataTables_wrapper').first().hide();
 
                 } else {
                     swal({
@@ -437,4 +442,13 @@ function identificarAccion(e) {
 
 }
 
+$( "#volver" ).click(function() {
+    $('#tablaContratos').parents('div.dataTables_wrapper').first().show();
+    $('#editar').attr('style','display:none');
+    $('#volver').attr('style','display:none');
+    $('#tipo').removeAttr('style');
+    $('#nuevo_contrato').trigger("reset");
+    $("#CI").attr('disabled',false);
+    $('#nombres').attr('disabled',false);
+  });
 $('#tablaContratos').DataTable();

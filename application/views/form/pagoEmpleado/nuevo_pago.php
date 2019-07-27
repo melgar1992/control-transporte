@@ -98,11 +98,11 @@
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class='input-group date' id='myDatepicker2'>
                 <?php if ($Accion_pagina == 'NuevoPago') { ?>
-                  <input type='month' class="form-control" id="mes_correspondiente" name="mes_correspondiente" required="required" />
+                  <input type='date' class="form-control" id="mes_correspondiente" name="mes_correspondiente" required="required" />
                   <?php 
               }
               else {?>
-                 <input type='month' class="form-control" id="mes_correspondiente" name="mes_correspondiente" value="<?php echo $datos->MesCorrespondiente; ?>"  required="required" />
+                 <input type='date' class="form-control" id="mes_correspondiente" name="mes_correspondiente" value="<?php echo $datos->MesCorrespondiente; ?>"  required="required" />
                  <?php  
               }
                 ?>
