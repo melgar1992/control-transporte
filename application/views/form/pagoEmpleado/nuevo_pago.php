@@ -38,7 +38,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
               <?php if ($Accion_pagina == 'NuevoPago') { ?>
-                <input type="text"  list="listCI" id="CI" name="CI" required="required" class="form-control col-md-7 col-xs-12" placeholder="Número de Carnet de Identidad">
+                <input type="number"  list="listCI" id="CI" name="CI" required="required" class="form-control col-md-7 col-xs-12" placeholder="Número de Carnet de Identidad">
               <!-- Lista de Nombres -->
               <datalist id="listCI">
                   <?php
@@ -50,7 +50,7 @@
                 }
                }
                else {?>
-                <input type="text" disabled id="disabledInput" placeholder="<?php  echo $datos->CI ?>" class="form-control col-md-7 col-xs-12">
+                <input type="number" disabled id="disabledInput" placeholder="<?php  echo $datos->CI ?>" class="form-control col-md-7 col-xs-12">
                 
                 <?php
                }
@@ -130,12 +130,12 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
               <?php if ($Accion_pagina == 'NuevoPago') { ?>
-                <input id="pago" class="form-control col-md-7 col-xs-12" type="decimal" name="pago" required="required" placeholder="2000">
+                <input id="pago" class="form-control col-md-7 col-xs-12" type="number" name="pago" required="required" placeholder="2000">
                 <?php 
               }
               else {?>
 
-                <input id="pago" class="form-control col-md-7 col-xs-12" type="decimal" name="pago" value="<?php echo $datos->Monto ?>" required="required" placeholder="2000">
+                <input id="pago" class="form-control col-md-7 col-xs-12" type="number" name="pago" value="<?php echo $datos->Monto ?>" required="required" placeholder="2000">
 
               <?php  
               }

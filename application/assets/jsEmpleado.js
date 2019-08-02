@@ -136,6 +136,7 @@ function ingresarEmpleado(e){
 
                 // agregarlos con los contactos existentes
                 listadoEmpleados.appendChild(nuevoEmpleado);
+                $('#tablaEmpleados').DataTable();
                 // Muestra mensaje que el empleado se adiciono exitosamente. 
                 swal({
                     title: 'Nuevo Conductor',

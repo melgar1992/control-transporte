@@ -22,7 +22,7 @@
                  <div class="animated flipInY col-lg-4 col-md-3 col-sm-6 col-xs-12">
                      <div class="tile-stats">
                          <div class="icon"><i class="fa fa-money"></i></div>
-                         <div class="count">179</div>
+                         <div class="count"><?php echo $pago->Monto;?> Bs</div>
                          <h3>Pagos Realizados del mes</h3>
                          <a href="<?php echo site_url("pagoEmpleados/pagoEmpleado")?>"> <p>Para mas informacion</p> </a>
                      </div>
