@@ -1,5 +1,5 @@
 <?php
-class pagoEmpleado_model extends CI_Model
+class PagoEmpleado_model extends CI_Model
 {
     // En este modulo se manejara los pagos de los empleados
 
