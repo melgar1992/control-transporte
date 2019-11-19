@@ -41,9 +41,9 @@
                   <!-- Lista de Nombres -->
                   <datalist id="listCI">
                     <?php
-                    $datosC = $this->Empleado_model->obtenerEmpleado();
-                    if ($datosC->num_rows()) {
-                      foreach ($datosC->result() as $row) { ?>
+                    
+                    if ($empleados->num_rows()) {
+                      foreach ($empleados->result() as $row) { ?>
                         <option value="<?php echo $row->CI ?>"><?php echo $row->Nombres ?> <?php echo $row->Apellido_p ?></option>
                       <?php }
                     }
