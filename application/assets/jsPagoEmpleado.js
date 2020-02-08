@@ -9,6 +9,7 @@ ListadoPagos = document.querySelector('#tablaPagos tbody');
 
 addEventListener();
 
+var table = $('#tablaPagos').DataTable();
 function addEventListener() {
 
     if (formularioNuevoPago) {
@@ -82,8 +83,9 @@ function ingresarNuevoPagoEmpleado(e) {
                 btnEditar.setAttribute("href", respuesta.datos.hrefEditar);
                 btnEditar.setAttribute("data-acction", "editar");
                 btnEditar.classList.add('btn', 'btn-info', 'btn-xs');
-                btnEditar.textContent = " Editar ";
                 btnEditar.appendChild(iconoEditar);
+                btnEditar.textContent = " Editar ";
+                
 
                 // agregando el editar al padre
                 contenedorAcciones.appendChild(btnEditar);
@@ -98,8 +100,9 @@ function ingresarNuevoPagoEmpleado(e) {
                 btnEliminar.setAttribute("value", '');
                 btnEliminar.setAttribute("data-acction", "borrar");
                 btnEliminar.classList.add('btn', 'btn-danger', 'btn-xs');
-                btnEliminar.textContent = " Borrar ";
                 btnEliminar.appendChild(iconoEliminar);
+                btnEliminar.textContent = " Borrar ";
+                
 
                 //Agregarlo al padre
 
@@ -111,7 +114,8 @@ function ingresarNuevoPagoEmpleado(e) {
 
                 //Agregando con los contratos existentes
 
-                ListadoPagos.appendChild(nuevoPago_Empleado);
+                //ListadoPagos.appendChild(nuevoPago_Empleado);
+                tabla.row.add(nuevoPago_Empleado).draw(false);
 
 
 
@@ -265,4 +269,3 @@ function BorrarPagoEmpleado(e) {
 
     }
 }
-$('#tablaPagos').DataTable();

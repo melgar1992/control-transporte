@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <?php
-      if (isset($this->session->userdata['logged_in'])) {
-          $username = ($this->session->userdata['logged_in']['username']);
-          $url_img = ($this->session->userdata['logged_in']['url_img']);
-      } else {
-          header("location: index.php/inicio/login");
-      }
-      
-  ?>
-  <head>
+<?php
+if (isset($this->session->userdata['logged_in'])) {
+    $username = ($this->session->userdata['logged_in']['username']);
+    $url_img = ($this->session->userdata['logged_in']['url_img']);
+} else {
+    redirect(base_url() . 'index.php/inicio/login');
+}
+
+?>
+
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" href="<?php img('images/favicon.ico') ?>" type="image/ico" />
+    <link rel="icon" href="<?php img('images/favicon.ico') ?>" type="image/ico" />
 
     <title>Control de transporte El Oso! | </title>
 
@@ -35,7 +36,7 @@
     <!-- <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet"> -->
     <!-- DataTables -->
     <?php css('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>
-	
+
     <!-- bootstrap-progressbar -->
     <?php css('/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') ?>
     <!-- <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet"> -->
@@ -49,6 +50,6 @@
     <!-- Custom Theme Style -->
     <?php css('/build/css/custom.min.css') ?>
     <!-- <link href="../build/css/custom.min.css" rel="stylesheet"> -->
-    
-    
-  </head>
+
+
+</head>

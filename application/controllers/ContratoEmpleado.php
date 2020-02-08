@@ -99,8 +99,8 @@ class ContratoEmpleado extends BaseController
                 'sueldo' => $sueldo,
                 'fechain' => $fechain,
                 'fechafin' => $fechafin,
-                'hrefEditar' => site_url('/Contrato/obtenerContratoxID'),
-                'hreBorrar' => site_url('Contrato/eliminar_contrato_empleado'),
+                'hrefEditar' => site_url('/ContratoEmpleado/obtenerContratoxID'),
+                'hreBorrar' => site_url('ContratoEmpleado/eliminar_contrato_empleado'),
               )
             );
           } else {

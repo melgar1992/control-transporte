@@ -4,6 +4,7 @@ const formularioNuevoConductor = document.querySelector('#nuevo_empleado'),
 
 addEventListeners();
 
+var tabla = $('#tablaEmpleados').DataTable();
 function addEventListeners(){
     if (formularioNuevoConductor){
         formularioNuevoConductor.addEventListener('submit', ingresarEmpleado);
@@ -135,8 +136,8 @@ function ingresarEmpleado(e){
                 nuevoEmpleado.appendChild(contenedorAcciones);
 
                 // agregarlos con los contactos existentes
-                listadoEmpleados.appendChild(nuevoEmpleado);
-                $('#tablaEmpleados').DataTable();
+                //listadoEmpleados.appendChild(nuevoEmpleado);
+                tabla.row.add(nuevoEmpleado).draw(fasle);
                 // Muestra mensaje que el empleado se adiciono exitosamente. 
                 swal({
                     title: 'Nuevo Conductor',
@@ -242,7 +243,7 @@ function editarEmpleado(id_empleado){
 
 
 }
-$('#tablaEmpleados').DataTable();
+
 
 $('#checkbox-chofer').change(function() {
     

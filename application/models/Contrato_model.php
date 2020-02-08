@@ -128,6 +128,7 @@ class Contrato_model extends CI_Model
         $this->db->from('contrato');
         $this->db->where('ID_empleado', $id_Empleado);
         $this->db->where('Estado', 'Activo');
+        $this->db->where('FechaSalida >',date("Y-m-d"));
 
         $contrato = $this->db->get();
 

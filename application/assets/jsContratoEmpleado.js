@@ -6,6 +6,7 @@ const formularioNuevoContrato = document.querySelector('#nuevo_contrato');
 
 
 addEventListeners();
+var tabla = $('#tablaContratos').DataTable();
 
 function addEventListeners() {
 
@@ -132,8 +133,8 @@ function ingresarContratoEmpleado(e) {
 
                 //Agregando con los contratos existentes
 
-                listadoContratos.appendChild(nuevoContrato_Empleado);
-
+                //listadoContratos.appendChild(nuevoContrato_Empleado);
+                tabla.row.add(nuevoContrato_Empleado).draw(false);
                 swal({
                     title: 'Nuevo contrato',
                     text: 'El contrato fue ingresado correctamente',
@@ -451,4 +452,4 @@ $( "#volver" ).click(function() {
     $("#CI").attr('disabled',false);
     $('#nombres').attr('disabled',false);
   });
-$('#tablaContratos').DataTable();
+

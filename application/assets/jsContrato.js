@@ -4,7 +4,7 @@ const formularioNuevoTipoContrato = document.querySelector('#nuevo_tipo_contrato
       formularioNuevoContrato = document.querySelector('#nuevo_contrato');
 
 addEventListeners();
-
+var tabla = $('#tablaTipoContrato').DataTable();
 function addEventListeners(){
     if (formularioNuevoTipoContrato){
         formularioNuevoTipoContrato.addEventListener('submit', ingresarTipoContrato);
@@ -111,7 +111,8 @@ function ingresarTipoContrato(e){
                 nuevoTipoContrato.appendChild(contenedorAcciones);
 
                 // agregarlos con los contactos existentes
-                listadoTipoContrato.appendChild(nuevoTipoContrato);
+                //listadoTipoContrato.appendChild(nuevoTipoContrato);
+                tabla.row.add(nuevoTipoContrato).draw(true);
                 // Muestra mensaje que el empleado se adiciono exitosamente. 
                 swal({
                     title: 'Nuevo Tipo Contrato',
@@ -264,4 +265,4 @@ function editarTipoContrato(e){
     // Envia la peticion
     xhr.send(datos);
 }
-$('#tablaTipoContrato').DataTable();
+

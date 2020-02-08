@@ -39,10 +39,17 @@
 
         public function eliminarEmpleado($id_empleado){
             $data2 = array(
-                'Estado' => 'Inactivo'
+                'Estado' => 'Inactivo',
             );
             $this->db->where('ID_Empleado',$id_empleado);
             $this->db->update('empleado', $data2);
+
+            $this->db->where('ID_Empleado',$id_empleado);
+            $empleado = $this->db->get('empleado')->row();
+            $data = array(
+                'CI' => '0',
+            );
+            $this->db->update('persona',$data, array('ID_persona' => $empleado->ID_persona));
 
         }
 
