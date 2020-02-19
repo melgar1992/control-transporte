@@ -245,6 +245,8 @@ function editarEmpleado(id_empleado){
 }
 
 
+$('#tablaEmpleados').DataTable();
+/*
 $('#checkbox-chofer').change(function() {
     
     if($(this).is(":checked")) {
@@ -256,4 +258,4 @@ $('#checkbox-chofer').change(function() {
         $('.chofer').prop('required',false);
     }
   });
-
+*/

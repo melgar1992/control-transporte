@@ -106,35 +106,35 @@
             </div>
 
             <div class="form-group">
-              <label for="telefono_02" class="control-label col-md-3 col-sm-3 col-xs-12">Telefono 02 <span class="required">*</span>
+              <label for="telefono_02" class="control-label col-md-3 col-sm-3 col-xs-12">Telefono 02
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="telefono_02" class="form-control col-md-7 col-xs-12" type="number" name="telefono_02" required="required" placeholder="77800975-34622503">
+                <input id="telefono_02" class="form-control col-md-7 col-xs-12" type="number" name="telefono_02" placeholder="77800975-34622503">
               </div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
             <label for="checkbox-chofer2" class="control-label col-md-3 col-sm-3 col-xs-12">
             </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                 <label >
+                  <label >
                   <input id="checkbox-chofer" type="checkbox" class=""> Seleccione para ingresar conductor
                   </label>
               </div>
-            </div>
+            </div> -->
            
             <div class="form-group">
               <label for="calificacion" class="control-label col-md-3 col-sm-3 col-xs-12">Calificación <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="calificacion" class="form-control col-md-7 col-xs-12 chofer" disabled type="number" name="calificacion"  placeholder="Calificación del Conductor" min="1" max="10">
+                <input id="calificacion" class="form-control col-md-7 col-xs-12 chofer"  type="number" name="calificacion"  placeholder="Calificación del personal" min="1" max="10">
               </div>
             </div>
 
             <div class="form-group">
-              <label for="descripcion" class="control-label col-md-3 col-sm-3 col-xs-12">Descripción <span class="required">*</span>
+              <label for="descripcion" class="control-label col-md-3 col-sm-3 col-xs-12">Descripción 
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <textarea name="descripcion" id="descripcion" class="form-control chofer" rows="3" disabled placeholder="Una brever descripción del conductor" ></textarea>
+                <textarea name="descripcion" id="descripcion" class="form-control chofer" rows="3"  placeholder="Una brever descripción del personal" ></textarea>
               </div>
             </div>
 
@@ -142,7 +142,7 @@
               <label for="tipo-licencia" class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de licencia <span class="required">*</span>
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
-                <select id="tipo-licencia" name="tipo-licencia" disabled class="form-control chofer" >
+                <select id="tipo-licencia" name="tipo-licencia"  class="form-control chofer" >
                   <option value=""></option>
                   <option value="Motociclista">Motociclista</option>
                   <option value="Particular">Particular</option>
@@ -159,7 +159,7 @@
               </label>
               <div class="col-md-6 col-sm-6 col-xs-12">
                 <div class='input-group date' id='myDatepicker2'>
-                  <input type='date' class="form-control chofer" disabled id="fecha-vencimiento-l" name="fecha-vencimiento-l" />
+                  <input type='date' class="form-control chofer"  id="fecha-vencimiento-l" name="fecha-vencimiento-l" />
                 </div>
               </div>
             </div>
