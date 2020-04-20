@@ -271,6 +271,7 @@ function borrarContrato(id_contrato, dircontroller) {
     console.log('Se borro el contrato' + id_contrato);
     console.log('Direccion del controlador' + dircontroller);
 
+   
     //datos que se enviaran al servidor
     var datos = new FormData();
     datos.append('ID_contrato', id_contrato);
@@ -286,7 +287,7 @@ function borrarContrato(id_contrato, dircontroller) {
             var respuesta = JSON.parse(xhr.responseText);
             console.log(respuesta);
             if (respuesta.tipo === 'Exitoso') {
-
+                tabla.row($(this).parents('tr')).remove().draw();
                 swal({
                     title: 'Eliminar',
                     text: 'Se elimino al empleado satisfactoriamente',

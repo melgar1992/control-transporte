@@ -219,7 +219,7 @@
                         if ($datos->num_rows()) {
                           foreach ($datos->result() as $row) { ?>
                             <tr>
-                              <th scope="row"><?php echo $row->ID_empleado ?></th>
+                              <th ><?php echo $row->ID_empleado ?></th>
                               <td><?php echo $row->CI ?></td>
                               <td><?php echo $row->Nombres ?></td>
                               <td><?php echo $row->Apellido_p ?></td>

@@ -166,4 +166,9 @@ class Contrato_model extends CI_Model
             return false;
         }
     }
+    public function eliminarTipoContrato($id_tipoContrato)
+    {
+        $this->db->where('ID_tipoContrato',$id_tipoContrato);
+        return $this->db->delete('tipocontrato');
+    }
 }
