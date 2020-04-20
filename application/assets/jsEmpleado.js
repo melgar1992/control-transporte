@@ -1,5 +1,6 @@
 $(document).ready(function () {
-	tabla = $('#tablaEmpleados').DataTable({
+	opcion = '';
+	var tabla = $('#tablaEmpleados').DataTable({
 		responsive: "true",
 		"order": [
 			[0, "desc"]
@@ -7,7 +8,7 @@ $(document).ready(function () {
 		"columnDefs": [{
 			"targets": -1,
 			"data": null,
-			"defaultContent": "<div class='text-right'> <div class='btn-group'><button class='btn btn-warning' id='btn-editar'><i class='fas fa-pencil-alt'></i> Editar</button><button class='btn btn-danger' id='btn-borrar'><i class='fas fa-trash-alt'></i> Borrar</button></div></div>",
+			"defaultContent": "<div class='text-right'> <div class='btn-group'><button class='btn btn-warning btn-sm' id='btn-editar'><i class='fas fa-pencil-alt'></i> Editar</button><button class='btn btn-danger btn-sm' id='btn-borrar'><i class='fas fa-trash-alt'></i> Borrar</button></div></div>",
 		}],
 		"language": {
 			'lengthMenu': "Mostrar _MENU_ registros",
@@ -154,15 +155,15 @@ $(document).ready(function () {
 				dataType: "json",
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
-						id_empleado = respuesta['datos']['id_empleado'];
-						CI = respuesta['datos']['ci'];
-						nombres = respuesta['datos']['nombres'];
-						apellidop = respuesta['datos']['apellidop'];
-						apellidom = respuesta['datos']['apellidom'];
-						fechan = respuesta['datos']['fechan'];
-						telefono01 = respuesta['datos']['telefono01'];
-						departamento = respuesta['datos']['departamento'];
-						tlicencia = respuesta['datos']['tlicencia'];
+						id_empleado = respuesta['datos']['ID_empleado'];
+						CI = respuesta['datos']['CI'];
+						nombres = respuesta['datos']['Nombres'];
+						apellidop = respuesta['datos']['Apellido_p'];
+						apellidom = respuesta['datos']['Apellido_m'];
+						fechan = respuesta['datos']['Fecha_nacimiento'];
+						telefono01 = respuesta['datos']['Telefono_01'];
+						departamento = respuesta['datos']['Departamento'];
+						tlicencia = respuesta['datos']['TipoLicencia'];
 						tabla.row(fila).data([id_empleado, CI, nombres, apellidop, apellidom, fechan, telefono01, departamento, tlicencia]).draw();
 						$('#modal-empleados').modal('hide');
 						$('.modal-title').text('Formulario empleado');
@@ -170,14 +171,14 @@ $(document).ready(function () {
 						$('#formEmpleados').trigger('reset');
 						swal({
 							title: 'Editado',
-							text: respuesta['mensage'],
+							text: respuesta['message'],
 							type: 'success'
 						});
 						$('#formEmpleados').trigger('reset');
 					} else {
 						swal({
 							title: 'Error',
-							text: respuesta['mensage'],
+							text: respuesta['message'],
 							type: 'error'
 						});
 					}
@@ -193,7 +194,7 @@ $(document).ready(function () {
 
 		Swal.fire({
 			title: 'Esta seguro de elimar?',
-			text: "El tipo de contrato se eliminara, una vez eliminado no se recuperara!",
+			text: "El empleado se eliminara, una vez eliminado no se recuperara!",
 			type: 'warning',
 			showCancelButton: true,
 			confirmButtonColor: '#3085d6',
@@ -207,9 +208,8 @@ $(document).ready(function () {
 				id = parseInt(fila.find('td:eq(0)').text());
 
 				$.ajax({
-					url: base_url + "/Contrato/eliminar/" + id,
+					url: base_url + "/Empleado/eliminarEmpleado/" + id,
 					type: 'POST',
-
 					success: function (respuesta) {
 
 						tabla.row(fila).remove().draw();

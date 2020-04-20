@@ -98,28 +98,15 @@ class Empleado extends BaseController
         echo json_encode($respuesta);
     }
 
-    public function eliminarEmpleado()
+    public function eliminarEmpleado($id_empleado)
     {
-        $this->form_validation->set_rules('ID_empleado', 'ID Empleado', 'trim|xss_clean');
 
-        if ($this->form_validation->run() === false) {
+        $this->Empleado_model->eliminarEmpleado($id_empleado);
+        $respuesta = array(
+            'tipo' => 'Exitoso',
+            'respuesta' => 'Se elimino al empleado'
+        );
 
-            $error = form_error('ID_empleado');
-
-            $respuesta = array(
-                'tipo' => 'Formulario',
-                'respuesta' => $error
-            );
-        } else {
-            $id_empleado = $this->input->post('ID_empleado');
-
-            $this->Empleado_model->eliminarEmpleado($id_empleado);
-
-            $respuesta = array(
-                'tipo' => 'Exitoso',
-                'respuesta' => 'Se elimino al empleado'
-            );
-        }
 
         echo json_encode($respuesta);
     }
@@ -131,7 +118,7 @@ class Empleado extends BaseController
 
         try {
             //code...
-            $this->form_validation->set_rules('id', 'Username', 'trim|required|xss_clean');
+            $this->form_validation->set_rules('id', 'Id del empleado', 'trim|required|xss_clean');
             $this->form_validation->set_rules('CI', 'CI', 'trim|xss_clean');
             $this->form_validation->set_rules('apellido-paterno', 'Apellido Paterno', 'trim|xss_clean');
             $this->form_validation->set_rules('apellido_materno', 'Apellido Materno', 'trim|xss_clean');
@@ -170,14 +157,14 @@ class Empleado extends BaseController
                 $this->Empleado_model->updateEmpleado($id_empleado, $calificacion, $descripcion, $tlicencia, $fechavl);
                 $datos['datos'] = $this->Empleado_model->idempleado($id_empleado);
                 $datos['respuesta'] = 'Exitoso';
-                
+                $datos['message'] = 'Los datos se editaron correctamente.';
             }
         } catch (\Throwable $th) {
             //throw $th;
             $datos['respuesta'] = 'Error';
             $datos['message'] = $th->getMessage();
-
         }
+
         echo json_encode($datos);
     }
     public function obtenerEmpleadoId()

@@ -8,11 +8,7 @@
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
 
-            </li>
-            <li><a class="close-link"><i class="fa fa-close"></i></a>
             </li>
           </ul>
           <div class="clearfix"></div>
@@ -36,11 +32,7 @@
                 <ul class="nav navbar-right panel_toolbox">
                   <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                   </li>
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-
-                  </li>
-                  <li><a class="close-link"><i class="fa fa-close"></i></a>
+                  
                   </li>
                 </ul>
                 <div class="clearfix"></div>
@@ -78,8 +70,8 @@
                             <td><?php echo $row->Departamento ?></td>
                             <td><?php echo $row->TipoLicencia ?></td>
                             <td>
-                              <button class="btn btn-warning" id="btn-editar"><i class="fas fa-pencil-alt"></i> Editar</button>
-                              <button class="btn btn-danger" id="btn-borrar"><i class="fas fa-trash-alt"></i> Borrar</button>
+                              <button class="btn btn-warning btn-sm" id="btn-editar"><i class="fas fa-pencil-alt"></i> Editar</button>
+                              <button class="btn btn-danger btn-sm" id="btn-borrar"><i class="fas fa-trash-alt"></i> Borrar</button>
                             </td>
                           </tr>
                       <?php }
