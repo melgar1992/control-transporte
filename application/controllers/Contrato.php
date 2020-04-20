@@ -50,47 +50,32 @@ class Contrato extends BaseController
   public function editar_tipo_contrato()
   {
 
-    $id_tipoContrato = $this->input->get('id');
 
-    if ($id_tipoContrato) {
+    $id_tipoContrato = $this->input->post('id_tipocontrato');
+    $Descripcion = $this->input->post('tipoContrato');
+    $this->Contrato_model->editar_tipo_contrato($id_tipoContrato, $Descripcion);
 
-      $contratos['datos'] = $this->Contrato_model->IdTipoContrato($id_tipoContrato);
-      $this->loadView('Contrato', '/form/contrato/nuevo_tipo_contrato', $contratos);
-    } else {
-      $accion = $this->input->post('accion');
-      if ($accion == 'Editar') {
-        try {
-          //code...
-          $id_tipoContrato = $this->input->post('id_tipoContrato');
-          $Descripcion = $this->input->post('Descripcion');
-          $this->Contrato_model->editar_tipo_contrato($id_tipoContrato, $Descripcion);
+    $respuesta = array(
+      'respuesta' => 'Exitoso',
+      'mensage' => 'Se edito correctamente'
+    );
 
-          $respuesta = array(
-            'respuesta' => 'Exitoso',
-            'mensage' => 'Se guardo correctamente'
-          );
-        } catch (\Throwable $th) {
-          //throw $th;
-          $respuesta = array(
-            'respuesta' => 'Error',
-            'mensage' => $th
-          );
-        }
-      }
 
-      echo json_encode($respuesta);
-    }
+
+    echo json_encode($respuesta);
   }
+
+
+
   public function eliminar($id_tipoContrato)
   {
-   
-      $this->Contrato_model->eliminarTipoContrato($id_tipoContrato);
-      $respuesta = array(
-        'respuesta' => 'Exitoso',
-        'mensage' => 'Se elimino correctamente'
-      );
 
-      return json_encode($respuesta);
-    
+    $this->Contrato_model->eliminarTipoContrato($id_tipoContrato);
+    $respuesta = array(
+      'respuesta' => 'Exitoso',
+      'mensage' => 'Se elimino correctamente'
+    );
+
+    echo json_encode($respuesta);
   }
 }

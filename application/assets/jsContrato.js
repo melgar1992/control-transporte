@@ -25,41 +25,87 @@ $(document).ready(function () {
 	});
 	$('#btn-cerrar').on('click', function () {
 		$('#formContatos').trigger('reset');
+		$('.modal-title').text('Formulario contrato');
+		opcion = '';
+
+	});
+	$(document).on('click', '#btn-editar', function () {
+		fila = $(this).closest('tr');
+		id_tipocontrato = parseInt(fila.find('td:eq(0)').text());
+		tipocontrato = fila.find('td:eq(1)').text();
+		$('.modal-title').text('Formulario contrato editar');
+		$('#tipoContrato').val(tipocontrato);
+		$('#modal-default').modal('show');
+		opcion = 'editar';
 
 	});
 	$('#formContatos').submit(function (e) {
 		e.preventDefault();
 		tipoContrato = $.trim($('#tipoContrato').val());
+		if (opcion != 'editar') {
+			$.ajax({
+				type: "POST",
+				url: base_url + "/Contrato/ingresar_tipo_contrato",
+				data: {
+					tipoContrato: tipoContrato,
+				},
+				dataType: "json",
+				success: function (respuesta) {
+					if (respuesta['respuesta'] === 'Exitoso') {
+						id_control = respuesta['datos']['id_tipocontrato'];
+						tipoContrato = respuesta['datos']['tipocontrato'];
+						tabla.row.add([id_control, tipoContrato]).draw();
+						$('#modal-default').modal('hide');
+						swal({
+							title: 'Guardar',
+							text: respuesta['respuesta'],
+							type: 'success'
+						});
+						$('#formContatos').trigger('reset');
+					} else {
+						swal({
+							title: 'Error',
+							text: respuesta['respuesta'],
+							type: 'error'
+						});
+					}
 
-		$.ajax({
-			type: "POST",
-			url: base_url + "/Contrato/ingresar_tipo_contrato",
-			data: {
-				tipoContrato: tipoContrato,
-			},
-			dataType: "json",
-			success: function (respuesta) {
-				if (respuesta['respuesta'] === 'Exitoso') {
-					id_control = respuesta['datos']['id_tipocontrato'];
-					tipoContrato = respuesta['datos']['tipocontrato'];
-                    tabla.row.add([id_control, tipoContrato]).draw();
-                    $('#modal-default').modal('hide');
-					swal({
-						title: 'Guardar',
-						text: respuesta['respuesta'],
-						type: 'success'
-					});
-                    $('#formContatos').trigger('reset');
-				} else {
-					swal({
-						title: 'Error',
-						text: respuesta['respuesta'],
-						type: 'error'
-					});
 				}
+			});
+		} else {
+			$.ajax({
+				type: "POST",
+				url: base_url + "/Contrato/editar_tipo_contrato",
+				data: {
+					id_tipocontrato: id_tipocontrato,
+					tipoContrato: tipoContrato,
+				},
+				dataType: "json",
+				success: function (respuesta) {
+					if (respuesta['respuesta'] === 'Exitoso') {
+						tabla.row(fila).data([id_tipocontrato, tipoContrato]).draw();
+                        $('#modal-default').modal('hide');
+                        $('.modal-title').text('Formulario contrato');
+						opcion = '';
+						$('#formContatos').trigger('reset');
+						swal({
+							title: 'Editado',
+							text: respuesta['mensage'],
+							type: 'success'
+						});
+						$('#formContatos').trigger('reset');
+					} else {
+						swal({
+							title: 'Error',
+							text: respuesta['mensage'],
+							type: 'error'
+						});
+					}
 
-			}
-		});
+				}
+			});
+		}
+
 
 	});
 	$(document).on('click', '#btn-borrar', function () {
@@ -82,17 +128,17 @@ $(document).ready(function () {
 
 				$.ajax({
 					url: base_url + "/Contrato/eliminar/" + id,
-                    type: 'POST',
-                   
+					type: 'POST',
+
 					success: function (respuesta) {
-						
-							tabla.row(fila).remove().draw();
-							swal({
-								title: 'Eliminado',
-								text: 'Se borro correctamente',
-								type: 'success'
-							});
-					
+
+						tabla.row(fila).remove().draw();
+						swal({
+							title: 'Eliminado',
+							text: 'Se borro correctamente',
+							type: 'success'
+						});
+
 
 
 

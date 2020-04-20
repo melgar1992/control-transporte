@@ -60,13 +60,6 @@
             $this->db->join('empleado','persona.ID_persona = empleado.ID_persona');
             $this->db->where('empleado.ID_empleado',$id_empleado);
             $query = $this->db->get();
-
-
-            #$query = $this->db->query(" select * 
-            #                            from persona p 
-            #                            inner join empleado e on p.ID_persona = e.ID_persona
-            #                            where e.ID_empleado = ".$id_empleado);
-            
             return $query->row();
 
         }
