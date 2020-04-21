@@ -1,4 +1,5 @@
 $(document).ready(function () {
+	opcion = '';
 	var tabla = $('#tablaTipoContrato').DataTable({
 		responsive: "true",
 		"columnDefs": [{

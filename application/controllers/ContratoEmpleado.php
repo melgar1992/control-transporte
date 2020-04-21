@@ -10,9 +10,9 @@ class ContratoEmpleado extends BaseController
   public function ContratoEmpleado()
   {
 
+    $contratos['tipocontratos'] = $this->Contrato_model->obtenerTipoContrato();
     $contratos['datos'] = $this->Contrato_model->obtenerContratoEmpleado();
     $contratos["empleados"] = $this->Empleado_model->obtenerEmpleado();
-    $contratos['Accion_pagina'] = 'NuevoContrato';
     $this->loadView('ContratoEmpleado', '/form/ContratoEmpleado/nuevo_ContratoEmpleado', $contratos);
   }
 
@@ -132,11 +132,7 @@ class ContratoEmpleado extends BaseController
 
   public function editar_contrato_empleado()
   {
-    try {
-      //code...
-    } catch (\Throwable $th) {
-      //throw $th;
-    }
+   
     $this->form_validation->set_rules('CI', 'CI', 'trim|xss_clean');
     $this->form_validation->set_rules('nombres', 'Nombres', 'trim|xss_clean');
     $this->form_validation->set_rules('tipoContrato', 'TipoContrato', 'trim|xss_clean');
@@ -213,7 +209,6 @@ class ContratoEmpleado extends BaseController
       $respuesta = array(
         'respuesta' => 'Exitoso',
         'datos' => array(
-
           'CI' => $contrato['CI'],
           'Nombres' => $contrato['Nombres'],
           'Descripcion' => $contrato['Descripcion'],
