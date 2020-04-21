@@ -169,15 +169,9 @@ class Empleado extends BaseController
     }
     public function obtenerEmpleadoId()
     {
-
         $ci = $this->input->post('id_empleado');
-
-
-
         if ($this->Persona_model->id_persona($ci) == true) {
-
             $obtenerpersona = $this->Persona_model->obtenerPersona($ci);
-
             $respuesta = array(
                 'respuesta' => 'encontrato',
                 'datos' => array(
@@ -194,5 +188,12 @@ class Empleado extends BaseController
         }
 
         echo json_encode($respuesta);
+    }
+    public function buscarEmpleadoajax()
+    {
+        $valor = $this->input->post('valor');
+        $empleados = $this->Empleado_model->BuscarEmpleadoNombre($valor);
+        echo json_encode($empleados);
+
     }
 }

@@ -103,24 +103,14 @@
         <h4 class="modal-title">Formulario contrato de empleados</h4>
       </div>
       <form action="" id="formContratoEmpleados">
-        <div class="modal-body">
-
-          <div class="error_formulario">
-          </div>
-
-          <div class="form-group">
-            <label class="control-label" for="CI">CI <span class="required">*</span>
-            </label>
-            <div class="">
-              <input type="number" id="CI" maxlength="7" minlength="7" name="CI" required="required" class="form-control col-md-7 col-xs-12" placeholder="Número de Carnet de Identidad">
-            </div>
-          </div>
-
+        <div class="modal-body ui-front">
+     
           <div class="form-group">
             <label class="control-label" for="nombres">Nombres <span class="required">*</span>
             </label>
             <div class="">
               <input type="text" id="nombres" maxlength="45" name="nombres" required="required" class="form-control col-md-7 col-xs-12">
+              <input type="number" hidden ='hidden' name='ID_empleado' id="ID_empleado">
             </div>
           </div>
 

@@ -11,6 +11,8 @@
 
         <!-- jQuery -->
         <?php script('/vendors/jquery/dist/jquery.min.js') ?>
+         <!-- jQuery UI -->
+         <?php script('/vendors/jquery-ui/jquery-ui.js') ?>
         <!-- <script src="../vendors/jquery/dist/jquery.min.js"></script> -->
         <!-- Bootstrap -->
         <?php script('/vendors/bootstrap/dist/js/bootstrap.min.js') ?>

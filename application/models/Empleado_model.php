@@ -110,5 +110,17 @@
             $listaNombres = $query->result_array();
             return $listaNombres;
         }
+        public function BuscarEmpleadoNombre($teclaPulsada)
+        {
+            $this->db->select('ID_empleado, CI, Nombres, Apellido_p, Apellido_m, Nombres as label');
+            $this->db->from('empleado');
+            $this->db->join('persona','empleado.ID_persona = persona.ID_persona');
+            $this->db->where('empleado.Estado','Activo');
+            $this->db->like('persona.Nombres',$teclaPulsada);
+
+            $query = $this->db->get();
+            $listaNombres = $query->result_array();
+            return $listaNombres;
+        }
 
     }

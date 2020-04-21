@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    opcion = '';
-    var tabla = $('#tablaContratos').DataTable({
+	opcion = '';
+	var tabla = $('#tablaContratos').DataTable({
 		responsive: "true",
 		"columnDefs": [{
 			"targets": -1,
@@ -23,11 +23,31 @@ $(document).ready(function () {
 			},
 			"sProcesing": "Procesando...",
 		}
-    });
-    $('#btn-cerrar').on('click', function () {
+	});
+	$('#btn-cerrar').on('click', function () {
 		$('#formContratoEmpleados').trigger('reset');
 		$('.modal-title').text('Formulario  de contrato empleado');
 		opcion = '';
 
+	});
+	$("#nombres").autocomplete({
+		source: function (request, response) {
+			$.ajax({
+				url: base_url + "/Empleado/buscarEmpleadoajax",
+				type: "POST",
+				dataType: "json",
+				data: { valor: request.term },
+				success: function (data) {
+					response(data);
+				}
+			});
+		},
+		minLength: 2,
+		select: function (event, ui) {
+			data = ui.item.label + " " + ui.item.Apellido_p + " " + ui.item.Apellido_m;
+			ID_empleado = ui.item.ID_empleado;
+			$('#ID_empleado').val(ID_empleado);
+			$('#nombres').val(data);
+		},
 	});
 });

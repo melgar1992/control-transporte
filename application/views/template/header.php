@@ -50,6 +50,9 @@ if (isset($this->session->userdata['logged_in'])) {
     <!-- Custom Theme Style -->
     <?php css('/build/css/custom.min.css') ?>
     <!-- <link href="../build/css/custom.min.css" rel="stylesheet"> -->
+    <!-- Estilos de migue -->
+    <?php css('/build/css/migue.css') ?>
+    <!-- <link href="../build/css/custom.min.css" rel="stylesheet"> -->
 
 
 </head>
