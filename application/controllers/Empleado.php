@@ -196,4 +196,11 @@ class Empleado extends BaseController
         echo json_encode($empleados);
 
     }
+    public function buscarEmpleadoaCIajax()
+    {
+        $ci = $this->input->post('valor');
+        $empleados = $this->Empleado_model->BuscarEmpleadoCI($ci);
+        echo json_encode($empleados);
+
+    }
 }

@@ -46,8 +46,30 @@ $(document).ready(function () {
 		select: function (event, ui) {
 			data = ui.item.label + " " + ui.item.Apellido_p + " " + ui.item.Apellido_m;
 			ID_empleado = ui.item.ID_empleado;
+			CI = ui.item.CI
 			$('#ID_empleado').val(ID_empleado);
-			$('#nombres').val(data);
+			$('#CI').val(CI);
+		},
+	});
+	$("#CI").autocomplete({
+		source: function (request, response) {
+			$.ajax({
+				url: base_url + "/Empleado/buscarEmpleadoaCIajax",
+				type: "POST",
+				dataType: "json",
+				data: { valor: request.term },
+				success: function (data) {
+					response(data);
+				}
+			});
+		},
+		minLength: 2,
+		select: function (event, ui) {
+			data = ui.item.label;
+			nombre = ui.item.Nombres+ " " + ui.item.Apellido_p + " " + ui.item.Apellido_m;
+			ID_empleado = ui.item.ID_empleado;
+			$('#ID_empleado').val(ID_empleado);
+			$('#nombres').val(nombre);
 		},
 	});
 });
