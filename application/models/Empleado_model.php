@@ -43,7 +43,6 @@
             );
             $this->db->where('ID_Empleado',$id_empleado);
             $this->db->update('empleado', $data2);
-
             $this->db->where('ID_Empleado',$id_empleado);
             $empleado = $this->db->get('empleado')->row();
             $data = array(
