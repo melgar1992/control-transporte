@@ -162,8 +162,8 @@ $(document).ready(function () {
 				dataType: "json",
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
-						nombres = parseInt(fila.find('td:eq(1)').text());
-						Apellido_p = parseInt(fila.find('td:eq(2)').text());
+						nombres = fila.find('td:eq(1)').text();
+						Apellido_p = fila.find('td:eq(2)').text();
 						tabla.row(fila).data([ID_pago, nombres, Apellido_p, FechaPago, descripcion, Monto]).draw();
 						LimpiarFormulario();
 						swal({
