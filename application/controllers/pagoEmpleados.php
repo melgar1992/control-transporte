@@ -69,48 +69,33 @@ class pagoEmpleados extends BaseController
   }
   public function editar_pago_empleado()
   {
-    $id_pago = $this->input->get('id');
 
-    if ($id_pago) {
+    try {
+      $id_pago = $this->input->post('ID_pago');
+      $fecha_pago = $this->input->post('FechaPago');
+      $descripcion = $this->input->post('descripcion');
+      $pago = $this->input->post('Monto');
+      $this->pagoEmpleado_model->editar_pago_empleado($id_pago, $fecha_pago, $descripcion, $pago);
 
-      $pagos['datos'] = $this->pagoEmpleado_model->IdPagoEmpleado($id_pago);
-      $pagos['empleados'] = $this->Empleado_model->obtenerEmpleado();
-      $pagos['Accion_pagina'] = 'EditarPago';
-      $this->loadView('PagoEmpleado', '/form/pagoEmpleado/nuevo_pago', $pagos);
-    } else {
-      $accion = $this->input->post('accion');
-      if ($accion == 'Editar') {
-        try {
-
-          $id_pago = $this->input->post('ID_pago');
-          $fecha_pago = $this->input->post('fecha_pago');
-          $mes_correspondiente = $this->input->post('mes_correspondiente');
-          $descripcion = $this->input->post('descripcion');
-          $pago = $this->input->post('pago');
-          $this->pagoEmpleado_model->editar_pago_empleado($id_pago, $fecha_pago, $mes_correspondiente, $descripcion, $pago);
-
-          $respuesta = array(
-            'respuesta' => 'Exitoso',
-            'mensage' => 'Se guardo correctamente',
-            'datos' => array(
-              'id_pago' => $id_pago,
-              'fecha_pago' => $fecha_pago,
-              'mes_correspondiente' => $mes_correspondiente,
-              'descripcion' => $descripcion,
-              'pago' => $pago
-            )
-          );
-        } catch (\Throwable $th) {
-          //throw $th;
-          $respuesta = array(
-            'respuesta' => 'Error',
-            'mensage' => $th
-          );
-        }
-      }
-
-      echo json_encode($respuesta);
+      $respuesta = array(
+        'respuesta' => 'Exitoso',
+        'mensage' => 'Se edito correctamente',
+        'datos' => array(
+          'id_pago' => $id_pago,
+          'fecha_pago' => $fecha_pago,
+          'descripcion' => $descripcion,
+          'pago' => $pago
+        )
+      );
+    } catch (\Throwable $th) {
+      //throw $th;
+      $respuesta = array(
+        'respuesta' => 'Error',
+        'mensage' => $th
+      );
     }
+
+    echo json_encode($respuesta);
   }
   public function EliminarPagoEmpleado($id_pago)
   {
@@ -120,6 +105,23 @@ class pagoEmpleados extends BaseController
       'tipo' => 'Exitoso',
       'respuesta' => 'Se elimino al empleado'
     );
+    echo json_encode($respuesta);
+  }
+  public function buscarPago()
+  {
+  
+      $ID_pago = $this->input->post('ID_pago');
+      $datos =(array)$this->pagoEmpleado_model->IdPagoEmpleado($ID_pago);
+      $respuesta = array(
+        'id_pago' => $datos['ID_pago'],
+        'CI' => $datos['CI'],
+        'Nombres' => $datos['nombres'],
+        'sueldo' => $datos['sueldo'],
+        'fecha_pago' => $datos['Fecha'],
+        'descripcion' => $datos['Descripcion'],
+        'Monto' => $datos['Monto']
+      );
+   
     echo json_encode($respuesta);
   }
 }

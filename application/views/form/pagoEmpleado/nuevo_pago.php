@@ -115,7 +115,7 @@
             <label for="sueldo" class="control-label">Sueldo base <span class="required">*</span>
             </label>
             <div class="">
-              <input id="sueldo" readonly class="form-control col-md-7 col-xs-12" type="number" min='0' name="sueldo" required="required" placeholder="">
+              <input id="sueldo" step="0.01" readonly class="form-control col-md-7 col-xs-12" type="number" min='0' name="sueldo" required="required" placeholder="">
             </div>
           </div>
 
@@ -123,7 +123,7 @@
             <label for="Monto" class="control-label">Monto a pagar <span class="required">*</span>
             </label>
             <div class="">
-              <input id="Monto" class="form-control col-md-7 col-xs-12" type="number" min='0' name="Monto" required="required" placeholder="Monto a pagar">
+              <input id="Monto" step="0.01" class="form-control col-md-7 col-xs-12" type="number" min='0' name="Monto" required="required" placeholder="Monto a pagar">
             </div>
           </div>
           <div class="form-group">

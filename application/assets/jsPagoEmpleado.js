@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    opcion = '';
+	opcion = '';
 	var tabla = $('#tablaPagos').DataTable({
 		responsive: "true",
 		"order": [
@@ -27,15 +27,10 @@ $(document).ready(function () {
 			"sProcesing": "Procesando...",
 		}
 	});
-    $('#btn-cerrar').on('click', function () {
-		$('#formpagoEmpleado').trigger('reset');
-		$('.modal-title').text('Formulario  de pago empleado');
-		$('#CI').attr('readonly', false);
-        $('#nombres').attr('readonly', false);
-        $('ID_contrato').val('');
-        opcion = '';
-    });
-    $("#nombres").autocomplete({
+	$('#btn-cerrar').on('click', function () {
+		LimpiarFormulario();
+	});
+	$("#nombres").autocomplete({
 		source: function (request, response) {
 			$.ajax({
 				url: base_url + "/ContratoEmpleado/buscarEmpleadoNombreAjax",
@@ -55,8 +50,8 @@ $(document).ready(function () {
 			ID_contrato = ui.item.ID_contrato;
 			CI = ui.item.CI
 			$('#ID_contrato').val(ID_contrato);
-            $('#CI').val(CI);
-            $("#sueldo").val(ui.item.sueldo);
+			$('#CI').val(CI);
+			$("#sueldo").val(ui.item.sueldo);
 		},
 	});
 	$("#CI").autocomplete({
@@ -79,18 +74,44 @@ $(document).ready(function () {
 			nombre = ui.item.Nombres + " " + ui.item.Apellido_p + " " + ui.item.Apellido_m;
 			ID_contrato = ui.item.ID_contrato;
 			$('#ID_contrato').val(ID_contrato);
-            $('#nombres').val(nombre);
-            $("#sueldo").val(ui.item.sueldo);
+			$('#nombres').val(nombre);
+			$("#sueldo").val(ui.item.sueldo);
 		},
-    });
-    //Aqui es donde se guarda o se elimina segun el estado de la opcion
-    $('#formpagoEmpleado').submit(function (e) {
+	});
+	$(document).on('click', '#btn-editar', function () {
+		fila = $(this).closest('tr');
+		ID_pago = parseInt(fila.find('td:eq(0)').text());
+		$('.modal-title').text('Formulario  de pago empleado Editar');
+		$('#modal-pagoEmpleado').modal('show');
+		$.ajax({
+			type: "POST",
+			url: base_url + "/pagoEmpleados/buscarPago",
+			data: {
+				ID_pago: ID_pago
+			},
+			dataType: "json",
+			success: function (respuesta) {
+				$('#CI').val(respuesta['CI']);
+				$('#nombres').val(respuesta['Nombres']);
+				$('#Monto').val(respuesta['Monto']);
+				$('#sueldo').val(respuesta['sueldo']);
+				$('#FechaPago').val(respuesta['fecha_pago']);
+				$('#descripcion').val(respuesta['descripcion']);
+				$('#CI').attr('readonly', true);
+				$('#nombres').attr('readonly', true);
+			}
+		});
+		opcion = 'editar';
+
+	});
+	//Aqui es donde se guarda o se elimina segun el estado de la opcion
+	$('#formpagoEmpleado').submit(function (e) {
 		e.preventDefault();
 		ID_contrato = $.trim($('#ID_contrato').val());
-        Monto = $.trim($('#Monto').val());
-        descripcion = $.trim($('#descripcion').val());
+		Monto = $.trim($('#Monto').val());
+		descripcion = $.trim($('#descripcion').val());
 		FechaPago = $.trim($('#FechaPago').val());
-	
+
 		if (opcion != 'editar') {
 			$.ajax({
 				type: "POST",
@@ -111,7 +132,7 @@ $(document).ready(function () {
 						Monto = respuesta['datos']['Monto'];
 						FechaPago = respuesta['datos']['FechaPago'];
 						tabla.row.add([id_pago, nombres, Apellido_p, FechaPago, descripcion, Monto]).draw();
-						$('#modal-pagoEmpleado').modal('hide');
+						LimpiarFormulario();
 						swal({
 							title: 'Guardar',
 							text: respuesta['message'],
@@ -131,33 +152,20 @@ $(document).ready(function () {
 		} else {
 			$.ajax({
 				type: "POST",
-				url: base_url + "/pagoEmpleados/IngresarPagoEmpleado",
+				url: base_url + "/pagoEmpleados/editar_pago_empleado",
 				data: {
-					ID_contrato: ID_contrato,
-					tipocontrato: tipocontrato,
+					ID_pago: ID_pago,
 					Monto: Monto,
-					FechaIngreso: FechaIngreso,
-					FechaSalida: FechaSalida,
+					FechaPago: FechaPago,
+					descripcion: descripcion,
 				},
 				dataType: "json",
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
-						id_contrato = respuesta['datos']['id_contrato'];
-						CI = respuesta['datos']['CI'];
-						nombres = respuesta['datos']['nombres'];
-						Apellido_p = respuesta['datos']['Apellido_p'];
-						Apellido_m = respuesta['datos']['Apellido_m'];
-						descripcion = respuesta['datos']['Descripcion'];
-						sueldo = respuesta['datos']['sueldo'];
-						fechain = respuesta['datos']['fechain'];
-						fechafin = respuesta['datos']['fechafin'];
-						tabla.row(fila).data([id_contrato, CI, nombres, Apellido_p, Apellido_m, descripcion, sueldo, fechain, fechafin]).draw();
-						$('#modal-pagoEmpleado').modal('hide');
-						$('.modal-title').text('Formulario  de contrato empleado');
-						$('#formpagoEmpleado').trigger('reset');
-						$('#CI').attr('readonly', false);
-						$('#nombres').attr('readonly', false);
-						opcion = '';
+						nombres = parseInt(fila.find('td:eq(1)').text());
+						Apellido_p = parseInt(fila.find('td:eq(2)').text());
+						tabla.row(fila).data([ID_pago, nombres, Apellido_p, FechaPago, descripcion, Monto]).draw();
+						LimpiarFormulario();
 						swal({
 							title: 'Editado',
 							text: respuesta['mensage'],
@@ -177,7 +185,7 @@ $(document).ready(function () {
 
 
 	});
-    $(document).on('click', '#btn-borrar', function () {
+	$(document).on('click', '#btn-borrar', function () {
 
 
 		Swal.fire({
@@ -191,10 +199,8 @@ $(document).ready(function () {
 			cancelButtonText: 'Cancelar'
 		}).then((result) => {
 			if (result.value) {
-
 				fila = $(this).closest('tr');
 				id = parseInt(fila.find('td:eq(0)').text());
-
 				$.ajax({
 					url: base_url + "/pagoEmpleados/EliminarPagoEmpleado/" + id,
 					type: 'POST',
@@ -215,3 +221,11 @@ $(document).ready(function () {
 
 	})
 });
+function LimpiarFormulario() {
+	$('#modal-pagoEmpleado').modal('hide');
+	$('.modal-title').text('Formulario  de pago empleado');
+	$('#formpagoEmpleado').trigger('reset');
+	$('#CI').attr('readonly', false);
+	$('#nombres').attr('readonly', false);
+	opcion = '';
+}

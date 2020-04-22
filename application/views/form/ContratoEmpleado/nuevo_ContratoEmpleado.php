@@ -139,7 +139,7 @@
             <label for="sueldo" class="control-label">Salario <span class="required">*</span>
             </label>
             <div class="">
-              <input id="sueldo" class="form-control col-md-7 col-xs-12" type="number" min='0' name="sueldo" required="required" placeholder="Sueldo del empleado">
+              <input id="sueldo" step="0.01" class="form-control col-md-7 col-xs-12" type="number" min='0' name="sueldo" required="required" placeholder="Sueldo del empleado">
             </div>
           </div>
           <div class="form-group">

@@ -187,6 +187,7 @@ class Contrato_model extends CI_Model
         $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');
         $this->db->join('persona p', 'p.ID_persona = e.ID_persona');
         $this->db->where('c.Estado', 'Activo');
+        $this->db->where('e.Estado', 'Activo');
         $this->db->where('c.FechaSalida >', date("Y-m-d"));
         $this->db->like('p.CI', $valor);
 
@@ -209,6 +210,7 @@ class Contrato_model extends CI_Model
         $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');
         $this->db->join('persona p', 'p.ID_persona = e.ID_persona');
         $this->db->where('c.Estado', 'Activo');
+        $this->db->where('e.Estado', 'Activo');
         $this->db->where('c.FechaSalida >', date("Y-m-d"));
         $this->db->like('p.Nombres', $valor);
 
