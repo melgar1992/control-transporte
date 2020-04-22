@@ -10,7 +10,7 @@
                       <li><a href="#">Dashboard3</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fas fa-edit"></i> Formularios <span class="fas fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> Formularios de Empleados<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 
                       <li><a href="<?php echo site_url("Empleado/index") ?>">Empleados</a></li>

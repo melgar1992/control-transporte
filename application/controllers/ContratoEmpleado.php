@@ -216,4 +216,16 @@ class ContratoEmpleado extends BaseController
     }
     echo json_encode((array) $respuesta);
   }
+  public function buscarEmpleadoNombreAjax()
+  {
+    $valor = $this->input->post('valor');
+    $contrato = $this->Contrato_model->buscarContratoxNombre($valor);
+    echo json_encode($contrato);
+  }
+  public function buscarEmpleadoCIAjax()
+  {
+    $valor = $this->input->post('valor');
+    $contrato = $this->Contrato_model->buscarContratoxCI($valor);
+    echo json_encode($contrato);
+  }
 }

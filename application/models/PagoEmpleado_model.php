@@ -19,13 +19,12 @@ class PagoEmpleado_model extends CI_Model
         
         return $datos;
     }
-    public function insertarPagoEmpleado($id_contrato, $fecha_pago, $mes_correspondiente, $descripcion, $pago)
+    public function insertarPagoEmpleado($id_contrato, $fecha_pago, $descripcion, $pago)
     {
 
         $data = array(
             'ID_contrato' => $id_contrato,
             'Fecha' => $fecha_pago,
-            'MesCorrespondiente' => $mes_correspondiente,
             'Descripcion' => $descripcion,
             'Monto' => $pago,
         );
