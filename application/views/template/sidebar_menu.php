@@ -14,40 +14,30 @@
                     <ul class="nav child_menu">
 
                       <li><a href="<?php echo site_url("Empleado/index") ?>">Empleados</a></li>
-                      <!--<ul class="nav child_menu">
-                            <li><a >Registro Empleado</a>
-                            </li>
-                            <li><a href="#level2_1">Modificar - Eliminar Empleado</a>
-                            </li>
-                            <li><a >Tipo Contrato</a>
-                            </li>                          
-                        </ul>
-                      </li>-->
+
                       <li><a href="<?php echo site_url("Contrato/tipocontrato") ?>">Tipos de Contratos Empleado</a></li>
                       <li><a href="<?php echo site_url("ContratoEmpleado/ContratoEmpleado") ?>">Contrato Empleados</a></li>
                       <li><a href="<?php echo site_url("pagoEmpleados/pagoEmpleado") ?>">Pago Empleados</a></li>
 
                     </ul>
                   </li>
-                  <!-- <li><a><i class="fas fa-desktop"></i> UI Elements <span class="fas fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> Formularios de Proveedores<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="general_elements.html">General Elements</a></li>
-                      <li><a href="media_gallery.html">Media Gallery</a></li>
-                      <li><a href="typography.html">Typography</a></li>
-                      <li><a href="icons.html">Icons</a></li>
-                      <li><a href="glyphicons.html">Glyphicons</a></li>
-                      <li><a href="widgets.html">Widgets</a></li>
-                      <li><a href="invoice.html">Invoice</a></li>
-                      <li><a href="inbox.html">Inbox</a></li>
-                      <li><a href="calendar.html">Calendar</a></li>
+
+                      <li><a href="<?php echo site_url("") ?>">Proveedores</a></li>
+
                     </ul>
                   </li>
-                  <li><a><i class="fas fa-table"></i> Tables <span class="fas fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-truck"></i>Camiones<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="tables.html">Tables</a></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+
+                      <li><a href="<?php echo site_url("") ?>">Camiones propios</a></li>
+                      <li><a href="<?php echo site_url("") ?>">Camiones proveedores</a></li>
+                      <li><a href="<?php echo site_url("") ?>">Gastos de mantenimiento</a></li>
+
                     </ul>
-                  </li> -->
+                  </li>
+
                   <li><a><i class="far fa-chart-bar"></i> Reportes <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="chartjs.html">Chart JS</a></li>
@@ -144,10 +134,10 @@
                                   if (isset($this->session->userdata['logged_in'])) {
                                     img($this->session->userdata['logged_in']['url_img']);
                                   } ?>" alt=""><?php
-                                          if (isset($this->session->userdata['logged_in'])) {
-                                            echo  $this->session->userdata['logged_in']['username'];
-                                          }
-                                          ?>
+                                                if (isset($this->session->userdata['logged_in'])) {
+                                                  echo  $this->session->userdata['logged_in']['username'];
+                                                }
+                                                ?>
                         <span class=" fa fa-angle-down"></span>
                       </a>
                       <ul class="dropdown-menu dropdown-usermenu pull-right">

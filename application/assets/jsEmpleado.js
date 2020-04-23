@@ -28,10 +28,7 @@ $(document).ready(function () {
 		}
 	});
 	$('#btn-cerrar').on('click', function () {
-		$('#formEmpleados').trigger('reset');
-		$('.modal-title').text('Formulario empleado');
-		$('#direccion').text('');
-		opcion = '';
+
 
 	});
 	$(document).on('click', '#btn-editar', function () {
@@ -82,6 +79,7 @@ $(document).ready(function () {
 		descripcion = $.trim($('#descripcion').val());
 		tipo_licencia = $.trim($('#tipo-licencia').val());
 		fecha_vencimiento_l = $.trim($('#fecha-vencimiento-l').val());
+		LimpiarFormulario();
 
 		if (opcion != 'editar') {
 			$.ajax({
@@ -115,7 +113,7 @@ $(document).ready(function () {
 						departamento = respuesta['datos']['departamento'];
 						tlicencia = respuesta['datos']['tlicencia'];
 						tabla.row.add([id_control, CI, nombres, apellidop, apellidom, fechan, telefono01, departamento, tlicencia]).draw();
-						$('#modal-empleados').modal('hide');
+	
 						swal({
 							title: 'Guardar',
 							text: respuesta['respuesta'],
@@ -165,10 +163,7 @@ $(document).ready(function () {
 						departamento = respuesta['datos']['Departamento'];
 						tlicencia = respuesta['datos']['TipoLicencia'];
 						tabla.row(fila).data([id_empleado, CI, nombres, apellidop, apellidom, fechan, telefono01, departamento, tlicencia]).draw();
-						$('#modal-empleados').modal('hide');
-						$('.modal-title').text('Formulario empleado');
-						opcion = '';
-						$('#formEmpleados').trigger('reset');
+
 						swal({
 							title: 'Editado',
 							text: respuesta['message'],
@@ -231,3 +226,10 @@ $(document).ready(function () {
 
 	})
 });
+function LimpiarFormulario() {
+	$('#modal-empleados').modal('hide');
+	$('#formEmpleados').trigger('reset');
+	$('.modal-title').text('Formulario empleado');
+	$('#direccion').text('');
+	opcion = '';
+};

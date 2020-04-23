@@ -25,9 +25,7 @@ $(document).ready(function () {
 		}
 	});
 	$('#btn-cerrar').on('click', function () {
-		$('#formContatos').trigger('reset');
-		$('.modal-title').text('Formulario contrato');
-		opcion = '';
+		LimpiarFormulario();
 
 	});
 	$(document).on('click', '#btn-editar', function () {
@@ -43,6 +41,7 @@ $(document).ready(function () {
 	$('#formContatos').submit(function (e) {
 		e.preventDefault();
 		tipoContrato = $.trim($('#tipoContrato').val());
+		LimpiarFormulario();
 		if (opcion != 'editar') {
 			$.ajax({
 				type: "POST",
@@ -56,7 +55,7 @@ $(document).ready(function () {
 						id_control = respuesta['datos']['id_tipocontrato'];
 						tipoContrato = respuesta['datos']['tipocontrato'];
 						tabla.row.add([id_control, tipoContrato]).draw();
-						$('#modal-default').modal('hide');
+
 						swal({
 							title: 'Guardar',
 							text: respuesta['respuesta'],
@@ -85,10 +84,6 @@ $(document).ready(function () {
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
 						tabla.row(fila).data([id_tipocontrato, tipoContrato]).draw();
-                        $('#modal-default').modal('hide');
-                        $('.modal-title').text('Formulario contrato');
-						opcion = '';
-						$('#formContatos').trigger('reset');
 						swal({
 							title: 'Editado',
 							text: respuesta['mensage'],
@@ -153,3 +148,10 @@ $(document).ready(function () {
 	})
 
 });
+
+function LimpiarFormulario() {
+	$('#modal-default').modal('hide');
+	$('#formContatos').trigger('reset');
+	$('.modal-title').text('Formulario contrato');
+	opcion = '';
+};
