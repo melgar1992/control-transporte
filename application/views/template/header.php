@@ -6,7 +6,7 @@ if (isset($this->session->userdata['logged_in'])) {
     $username = ($this->session->userdata['logged_in']['username']);
     $url_img = ($this->session->userdata['logged_in']['url_img']);
 } else {
-    redirect(base_url() . 'index.php/inicio/login');
+    redirect(site_url() . '/inicio/login');
 }
 
 ?>

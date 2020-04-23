@@ -28,8 +28,7 @@ $(document).ready(function () {
 		}
 	});
 	$('#btn-cerrar').on('click', function () {
-
-
+		LimpiarFormulario();
 	});
 	$(document).on('click', '#btn-editar', function () {
 		fila = $(this).closest('tr');
@@ -185,8 +184,6 @@ $(document).ready(function () {
 
 	});
 	$(document).on('click', '#btn-borrar', function () {
-
-
 		Swal.fire({
 			title: 'Esta seguro de elimar?',
 			text: "El empleado se eliminara, una vez eliminado no se recuperara!",
@@ -213,10 +210,6 @@ $(document).ready(function () {
 							text: 'Se borro correctamente',
 							type: 'success'
 						});
-
-
-
-
 					}
 				})
 

@@ -7,7 +7,6 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url("Inicio") ?>">Dashboard</a></li>
                       <li><a href=<?php echo site_url("dashboardEmpleado/index") ?>>Dashboard de empleados</a></li>
-                      <li><a href="#">Dashboard3</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fas fa-edit"></i> Formularios de Empleados<span class="fas fa-chevron-down"></span></a>
@@ -24,7 +23,7 @@
                   <li><a><i class="fas fa-edit"></i> Formularios de Proveedores<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 
-                      <li><a href="<?php echo site_url("") ?>">Proveedores</a></li>
+                      <li><a href="<?php echo site_url("Proveedor/inicio") ?>">Proveedores</a></li>
 
                     </ul>
                   </li>
@@ -153,70 +152,6 @@
                       </ul>
                     </li>
 
-                    <li role="presentation" class="dropdown">
-                      <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-envelope-o"></i>
-                        <span class="badge bg-green">6</span>
-                      </a>
-                      <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                        <li>
-                          <a>
-                            <span class="image"><img src="<?php img('images/img.jpg') ?>" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="<?php img('images/img.jpg') ?>" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="<?php img('images/img.jpg') ?>" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <a>
-                            <span class="image"><img src="<?php img('images/img.jpg') ?>" alt="Profile Image" /></span>
-                            <span>
-                              <span>John Smith</span>
-                              <span class="time">3 mins ago</span>
-                            </span>
-                            <span class="message">
-                              Film festivals used to be do-or-die moments for movie makers. They were where...
-                            </span>
-                          </a>
-                        </li>
-                        <li>
-                          <div class="text-center">
-                            <a>
-                              <strong>See All Alerts</strong>
-                              <i class="fas fa-angle-right"></i>
-                            </a>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
                   </ul>
                 </nav>
               </div>
