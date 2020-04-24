@@ -162,6 +162,16 @@ class Proveedor extends BaseController
 
         echo json_encode($respuesta);
     }
+    public function eliminarProveedor($ID_proveedor)
+    {
+        $this->Proveedor_model->eliminarProveedor($ID_proveedor);
+        $respuesta = array(
+            'tipo' => 'Exitoso',
+            'respuesta' => 'Se elimino al empleado'
+        );
+        echo json_encode($respuesta);
+        
+    }
     public function obtenerProveedorAjax()
     {
         $ID_proveedor = $this->input->post('ID_proveedor');

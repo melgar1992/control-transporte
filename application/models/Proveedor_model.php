@@ -66,4 +66,10 @@ class Proveedor_model extends CI_Model
         $this->db->where('Estado','1');
         return $this->db->get()->row_array();
     }
+    public function eliminarProveedor($ID_proveedor)
+    {
+        $datos = array('Estado' => '0');
+        $this->db->where('ID_proveedor',$ID_proveedor);
+        $this->db->update('proveedor',$datos);
+    }
 }

@@ -182,7 +182,6 @@ $(document).ready(function () {
 					url: base_url + "/Proveedor/eliminarProveedor/" + id,
 					type: 'POST',
 					success: function (respuesta) {
-
 						tabla.row(fila).remove().draw();
 						swal({
 							title: 'Eliminado',
