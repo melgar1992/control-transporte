@@ -30,6 +30,35 @@ $(document).ready(function () {
 	$('#btn-cerrar').on('click', function () {
 		LimpiarFormulario();
 	});
+	$(document).on('click', '#btn-editar', function () {
+		fila = $(this).closest('tr');
+		ID_proveedor = parseInt(fila.find('td:eq(0)').text());
+		$('.modal-title').text('Formulario Proveedor editar');
+		$('#modal-proveedor').modal('show');
+		$.ajax({
+			type: "POST",
+			url: base_url + "/Proveedor/obtenerProveedorAjax",
+			data: {
+				ID_proveedor: ID_proveedor
+			},
+			dataType: "json",
+			success: function (respuesta) {
+			
+				$('#CI').val(respuesta['CI']);
+				$('#nombres').val(respuesta['Nombres']);
+				$('#apellidos').val(respuesta['Apellidos']);
+				$('#direccion').text(respuesta['Direccion']);
+				$("#departamento option:contains(" + respuesta['Departamento'] + ")").attr("selected", true);
+				$('#telefono_01').val(respuesta['Telefono_01']);
+				$('#telefono_02').val(respuesta['Telefono_02']);
+				$('#calificacion').val(respuesta['Calificacion']);
+				$('#descripcion').val(respuesta['Descripcion']);
+
+			}
+		});
+		opcion = 'editar';
+
+	});
 	$('#formProveedor').submit(function (e) {
 		e.preventDefault();
 		CI = $.trim($('#CI').val());
@@ -90,36 +119,30 @@ $(document).ready(function () {
 		} else {
 			$.ajax({
 				type: "POST",
-				url: base_url + "/",
+				url: base_url + "/Proveedor/editarProveedor",
 				data: {
-					id: id_empleado,
+					ID_proveedor: ID_proveedor,
 					CI: CI,
 					nombres: nombres,
-					apellido_paterno: apellido_paterno,
-					apellido_materno: apellido_materno,
-					fecha_nacimiento: fecha_nacimiento,
+					Apellidos: Apellidos,
 					direccion: direccion,
 					departamento: departamento,
 					telefono_01: telefono_01,
 					telefono_02: telefono_02,
 					calificacion: calificacion,
 					descripcion: descripcion,
-					tipo_licencia: tipo_licencia,
-					fecha_vencimiento_l: fecha_vencimiento_l,
 				},
 				dataType: "json",
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
-						id_empleado = respuesta['datos']['ID_empleado'];
+						ID_proveedor = respuesta['datos']['ID_proveedor'];
 						CI = respuesta['datos']['CI'];
 						nombres = respuesta['datos']['Nombres'];
-						apellidop = respuesta['datos']['Apellido_p'];
-						apellidom = respuesta['datos']['Apellido_m'];
-						fechan = respuesta['datos']['Fecha_nacimiento'];
+						Apellidos = respuesta['datos']['Apellidos'];
 						telefono01 = respuesta['datos']['Telefono_01'];
-						departamento = respuesta['datos']['Departamento'];
-						tlicencia = respuesta['datos']['TipoLicencia'];
-						tabla.row(fila).data([id_empleado, CI, nombres, apellidop, apellidom, fechan, telefono01, departamento, tlicencia]).draw();
+						telefono_02 = respuesta['datos']['Telefono_02'];
+						departamento = respuesta['datos']['departamento'];
+						tabla.row(fila).data([ID_proveedor, CI, nombres, Apellidos, telefono01, telefono_02, calificacion, descripcion]).draw();
 
 						swal({
 							title: 'Editado',
