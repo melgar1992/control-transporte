@@ -4,7 +4,7 @@
         <div class="col-md-12 col-sm-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>Empleados <small>-</small></h2>
+                    <h2>Proveedor <small>-</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                         </li>
@@ -18,7 +18,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
-                                <button class="btn btn-success" id='btn-nuevo' type="button" data-toggle="modal" data-target='#modal-empleados'>Agregar</button>
+                                <button class="btn btn-success" id='btn-nuevo' type="button" data-toggle="modal" data-target='#modal-proveedor'>Agregar</button>
                             </div>
                         </div>
                     </div>
@@ -28,7 +28,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Tabla de <small>Empleado</small></h2>
+                                <h2>Tabla de <small>Proveedor</small></h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
@@ -43,7 +43,7 @@
                                     <table class="table table-bordered" id="tablaProveedor">
                                         <thead>
                                             <tr>
-                                                <th>ID Empleado</th>
+                                                <th>ID Proveedor</th>
                                                 <th>CI</th>
                                                 <th>Nombres</th>
                                                 <th>Apellidos </th>

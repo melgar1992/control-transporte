@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var opcion = '';
-    var tabla = $('#tablaProveedor').DataTable({
+	var opcion = '';
+	var tabla = $('#tablaProveedor').DataTable({
 		responsive: "true",
 		"order": [
 			[0, "desc"]
@@ -26,11 +26,122 @@ $(document).ready(function () {
 			},
 			"sProcesing": "Procesando...",
 		}
-    });
-    $('#btn-cerrar').on('click', function () {
+	});
+	$('#btn-cerrar').on('click', function () {
 		LimpiarFormulario();
 	});
-    $(document).on('click', '#btn-borrar', function () {
+	$('#formProveedor').submit(function (e) {
+		e.preventDefault();
+		CI = $.trim($('#CI').val());
+		nombres = $.trim($('#nombres').val());
+		Apellidos = $.trim($('#apellidos').val());
+		direccion = $.trim($('#direccion').val());
+		departamento = $.trim($('#departamento').val());
+		telefono_01 = $.trim($('#telefono_01').val());
+		telefono_02 = $.trim($('#telefono_02').val());
+		calificacion = $.trim($('#calificacion').val());
+		descripcion = $.trim($('#descripcion').val());
+		LimpiarFormulario();
+
+		if (opcion != 'editar') {
+			$.ajax({
+				type: "POST",
+				url: base_url + "/Proveedor/ingresar_proveedor",
+				data: {
+					CI: CI,
+					nombres: nombres,
+					Apellidos: Apellidos,
+					direccion: direccion,
+					departamento: departamento,
+					telefono_01: telefono_01,
+					telefono_02: telefono_02,
+					calificacion: calificacion,
+					descripcion: descripcion,
+
+				},
+				dataType: "json",
+				success: function (respuesta) {
+					if (respuesta['respuesta'] === 'Exitoso') {
+						ID_proveedor = respuesta['datos']['ID_proveedor'];
+						CI = respuesta['datos']['CI'];
+						nombres = respuesta['datos']['Nombres'];
+						Apellidos = respuesta['datos']['Apellidos'];
+						telefono01 = respuesta['datos']['Telefono_01'];
+						telefono_02 = respuesta['datos']['Telefono_02'];
+						departamento = respuesta['datos']['departamento'];
+						tabla.row.add([ID_proveedor, CI, nombres, Apellidos, telefono01, telefono_02, calificacion, descripcion]).draw();
+
+						swal({
+							title: 'Guardar',
+							text: respuesta['message'],
+							type: 'success'
+						});
+						$('#formProveedor').trigger('reset');
+					} else {
+						swal({
+							title: 'Error',
+							text: respuesta['message'],
+							type: 'error'
+						});
+					}
+
+				}
+			});
+		} else {
+			$.ajax({
+				type: "POST",
+				url: base_url + "/",
+				data: {
+					id: id_empleado,
+					CI: CI,
+					nombres: nombres,
+					apellido_paterno: apellido_paterno,
+					apellido_materno: apellido_materno,
+					fecha_nacimiento: fecha_nacimiento,
+					direccion: direccion,
+					departamento: departamento,
+					telefono_01: telefono_01,
+					telefono_02: telefono_02,
+					calificacion: calificacion,
+					descripcion: descripcion,
+					tipo_licencia: tipo_licencia,
+					fecha_vencimiento_l: fecha_vencimiento_l,
+				},
+				dataType: "json",
+				success: function (respuesta) {
+					if (respuesta['respuesta'] === 'Exitoso') {
+						id_empleado = respuesta['datos']['ID_empleado'];
+						CI = respuesta['datos']['CI'];
+						nombres = respuesta['datos']['Nombres'];
+						apellidop = respuesta['datos']['Apellido_p'];
+						apellidom = respuesta['datos']['Apellido_m'];
+						fechan = respuesta['datos']['Fecha_nacimiento'];
+						telefono01 = respuesta['datos']['Telefono_01'];
+						departamento = respuesta['datos']['Departamento'];
+						tlicencia = respuesta['datos']['TipoLicencia'];
+						tabla.row(fila).data([id_empleado, CI, nombres, apellidop, apellidom, fechan, telefono01, departamento, tlicencia]).draw();
+
+						swal({
+							title: 'Editado',
+							text: respuesta['message'],
+							type: 'success'
+						});
+						$('#formProveedor').trigger('reset');
+					} else {
+						swal({
+							title: 'Error',
+							text: respuesta['message'],
+							type: 'error'
+						});
+					}
+
+				}
+			});
+		}
+
+
+	});
+	$(document).on('click', '#btn-borrar', function () {
 		Swal.fire({
 			title: 'Esta seguro de elimar?',
 			text: "El proveedor se eliminara, una vez eliminado no se recuperara!",
@@ -68,7 +179,7 @@ $(document).ready(function () {
 
 
 function LimpiarFormulario() {
-    $('#modal-proveedor').modal('hide');
+	$('#modal-proveedor').modal('hide');
 	$('#formProveedor').trigger('reset');
 	$('.modal-title').text('Formulario proveedor');
 	$('#direccion').text('');
