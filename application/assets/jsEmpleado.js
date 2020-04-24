@@ -112,7 +112,7 @@ $(document).ready(function () {
 						departamento = respuesta['datos']['departamento'];
 						tlicencia = respuesta['datos']['tlicencia'];
 						tabla.row.add([id_control, CI, nombres, apellidop, apellidom, fechan, telefono01, departamento, tlicencia]).draw();
-	
+						LimpiarFormulario();
 						swal({
 							title: 'Guardar',
 							text: respuesta['respuesta'],
@@ -162,7 +162,7 @@ $(document).ready(function () {
 						departamento = respuesta['datos']['Departamento'];
 						tlicencia = respuesta['datos']['TipoLicencia'];
 						tabla.row(fila).data([id_empleado, CI, nombres, apellidop, apellidom, fechan, telefono01, departamento, tlicencia]).draw();
-
+						LimpiarFormulario();
 						swal({
 							title: 'Editado',
 							text: respuesta['message'],

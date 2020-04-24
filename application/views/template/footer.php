@@ -11,8 +11,8 @@
 
         <!-- jQuery -->
         <?php script('/vendors/jquery/dist/jquery.min.js') ?>
-         <!-- jQuery UI -->
-         <?php script('/vendors/jquery-ui/jquery-ui.js') ?>
+        <!-- jQuery UI -->
+        <?php script('/vendors/jquery-ui/jquery-ui.js') ?>
         <!-- <script src="../vendors/jquery/dist/jquery.min.js"></script> -->
         <!-- Bootstrap -->
         <?php script('/vendors/bootstrap/dist/js/bootstrap.min.js') ?>
@@ -100,6 +100,10 @@
         <input type="hidden" value="<?php echo site_url(); ?>" id="base_url">
         <script>
           var base_url = $("#base_url").val();
+
+          function mayus(e) {
+            e.value = e.value.toUpperCase();
+          }
         </script>
         <!-- sweetalert -->
         <?php script('sweetalert2.all.min.js') ?>
