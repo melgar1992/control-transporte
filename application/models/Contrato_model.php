@@ -190,6 +190,29 @@ class Contrato_model extends CI_Model
             return false;
         }
     }
+    public function obtenerContratoIDSinFecha($id_contrato)
+    {
+
+        $this->db->select('p.CI,c.ID_empleado, p.Nombres, p.Apellido_p, p.Apellido_m, t.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->from('contrato c');
+        $this->db->join('tipocontrato t', 't.ID_tipocontrato = c.ID_tipocontrato');
+        $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');
+        $this->db->join('persona p', 'p.ID_persona = e.ID_persona');
+        $this->db->where('c.Estado', 'Activo');
+        $this->db->where('e.Estado', 'Activo');
+        $this->db->where('ID_contrato', $id_contrato);
+
+        $query = $this->db->get();
+
+        $contrato = $query->row_array();
+
+        if (isset($contrato)) {
+
+            return  $contrato;
+        } else {
+            return false;
+        }
+    }
     public function eliminarTipoContrato($id_tipoContrato)
     {
         $this->db->where('ID_tipoContrato', $id_tipoContrato);

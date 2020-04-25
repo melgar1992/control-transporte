@@ -193,7 +193,7 @@ class ContratoEmpleado extends BaseController
   public function obtenerContratoxID()
   {
     $id_contrato = $this->input->post('ID_contrato');
-    $contrato = $this->Contrato_model->obtenerContratoxID($id_contrato);
+    $contrato = $this->Contrato_model->obtenerContratoIDSinFecha($id_contrato);
     if (isset($contrato)) {
 
       $respuesta = array(

@@ -31,7 +31,7 @@
                     <ul class="nav child_menu">
 
                       <li><a href="<?php echo site_url("Camion/camionesPropios") ?>">Camiones propios</a></li>
-                      <li><a href="<?php echo site_url("") ?>">Camiones proveedores</a></li>
+                      <li><a href="<?php echo site_url("Camion/camionesProveedor") ?>">Camiones proveedores</a></li>
                       <li><a href="<?php echo site_url("") ?>">Gastos de mantenimiento</a></li>
 
                     </ul>

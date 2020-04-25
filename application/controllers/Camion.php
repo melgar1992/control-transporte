@@ -151,7 +151,164 @@ class Camion extends BaseController
     public function eliminarCamionPropio($ID_camion)
     {
 
-        $this->Camion_model->eliminarCamionPropio($ID_camion);
+        $this->Camion_model->eliminarCamion($ID_camion);
+        $respuesta = array(
+            'respuesta' => 'Exitoso',
+            'message' => 'Se elimino correctamente',
+        );
+
+
+        echo json_encode($respuesta);
+    }
+
+    // Comieza las funciones de camiones de proveedores
+    public function camionesProveedor()
+    {
+        $datos['camionesProveedor'] = $this->Camion_model->obtenerCamionesProveedor();
+        $datos['Proveedores'] = $this->Proveedor_model->obtenerProveedores();
+        $this->loadView('CamionProveedor', '/form/camiones/nuevo_camionProveedor', $datos);
+    }
+    public function ingresarCamionProveedor()
+    {
+        $this->form_validation->set_rules('ID_proveedor', 'ID_proveedor', 'trim|xss_clean');
+        $this->form_validation->set_rules('NombresChofer', 'NombresChofer', 'trim|xss_clean');
+        $this->form_validation->set_rules('CI', 'CI', 'trim|xss_clean');
+        $this->form_validation->set_rules('Telefono', 'Telefono', 'trim|xss_clean');
+        $this->form_validation->set_rules('Placa', 'Placa', 'trim|xss_clean|is_unique[camion.N_Placa]');
+        $this->form_validation->set_rules('Marca', 'Marca', 'trim|xss_clean');
+        $this->form_validation->set_rules('Color', 'Color', 'trim|xss_clean');
+        $this->form_validation->set_rules('Capacidad', 'Capacidad', 'trim|xss_clean');
+        $this->form_validation->set_rules('N_senasag', 'N_senasag', 'trim|xss_clean');
+
+        try {
+            if ($this->form_validation->run() === false) {
+                $error = form_error('Placa');
+
+                $respuesta = array(
+                    'respuesta' => 'Error',
+                    'message' => 'Ocurrio un problema al validar los datos' . $error,
+                );
+            } else {
+                $ID_proveedor = $this->input->post('ID_proveedor');
+                $NombresChofer = $this->input->post('NombresChofer');
+                $CI = $this->input->post('CI');
+                $Telefono = $this->input->post('Telefono');
+                $Placa = $this->input->post('Placa');
+                $Marca = $this->input->post('Marca');
+                $Color = $this->input->post('Color');
+                $Capacidad = $this->input->post('Capacidad');
+                $N_senasag = $this->input->post('N_senasag');
+
+                $ID_camion = $this->Camion_model->ingresarCamionProveedor($ID_proveedor, $NombresChofer, $CI, $Telefono, $Placa, $Marca, $Color, $Capacidad, $N_senasag);
+                $camion_ingresado = $this->Camion_model->obtenerCamionProveedor($ID_camion);
+
+                $respuesta = array(
+                    'respuesta' => 'Exitoso',
+                    'datos' => array(
+                        'ID_camion' => $ID_camion,
+                        'NombreProveedor' => $camion_ingresado['NombreProveedor'] . ' ' . $camion_ingresado['ApellidosProveedor'],
+                        'NombresChofer' => $camion_ingresado['NombresChofer'],
+                        'CI' => $camion_ingresado['CI'],
+                        'Telefono' => $camion_ingresado['Telefono'],
+                        'Placa' => $Placa,
+                        'Color' => $Color,
+                        'Marca' => $Marca,
+                        'Capacidad' => $Capacidad,
+                        'N_senasag' => $camion_ingresado['N_Senasag'],
+
+                    ),
+                    'message' => 'Se guardo correctamente',
+                );
+            }
+        } catch (\Throwable $th) {
+            $respuesta = array(
+                'tipo' => 'Error',
+                'message' => $th,
+            );
+        }
+
+        echo json_encode($respuesta);
+    }
+    public function editarCamionProveedor()
+    {
+        $ID_camion = $this->input->post('ID_camion');
+        $ID_proveedor = $this->input->post('ID_proveedor');
+        $NombresChofer = $this->input->post('NombresChofer');
+        $CI = $this->input->post('CI');
+        $Telefono = $this->input->post('Telefono');
+        $Placa = $this->input->post('Placa');
+        $Marca = $this->input->post('Marca');
+        $Color = $this->input->post('Color');
+        $Capacidad = $this->input->post('Capacidad');
+        $N_senasag = $this->input->post('N_senasag');
+
+        $camion_actual = $this->Camion_model->obtenerCamionProveedor($ID_camion);
+        if ($Placa == $camion_actual['N_Placa']) {
+            $is_unique = '';
+        } else {
+            $is_unique = '|is_unique[camion.N_Placa]';
+        }
+        $this->form_validation->set_rules('ID_camion', 'ID_camion', 'trim|xss_clean');
+        $this->form_validation->set_rules('ID_proveedor', 'ID_proveedor', 'trim|xss_clean');
+        $this->form_validation->set_rules('NombresChofer', 'NombresChofer', 'trim|xss_clean');
+        $this->form_validation->set_rules('CI', 'CI', 'trim|xss_clean');
+        $this->form_validation->set_rules('Telefono', 'Telefono', 'trim|xss_clean');
+        $this->form_validation->set_rules('Placa', 'Placa', 'trim|xss_clean' . $is_unique);
+        $this->form_validation->set_rules('Marca', 'Marca', 'trim|xss_clean');
+        $this->form_validation->set_rules('Color', 'Color', 'trim|xss_clean');
+        $this->form_validation->set_rules('Capacidad', 'Capacidad', 'trim|xss_clean');
+        $this->form_validation->set_rules('N_senasag', 'N_senasag', 'trim|xss_clean');
+
+        try {
+            if ($this->form_validation->run() === false) {
+                $error = form_error('Placa');
+                $respuesta = array(
+                    'respuesta' => 'Error',
+                    'message' => 'Ocurrio un problema al validar los datos' . $error,
+                );
+            } else {
+
+
+                $this->Camion_model->editarCamionProveedor($ID_camion, $ID_proveedor, $NombresChofer, $CI, $Telefono, $Placa, $Marca, $Color, $Capacidad, $N_senasag);
+                $camion_ingresado = $this->Camion_model->obtenerCamionProveedor($ID_camion);
+
+                $respuesta = array(
+                    'respuesta' => 'Exitoso',
+                    'datos' => array(
+                        'ID_camion' => $ID_camion,
+                        'NombreProveedor' => $camion_ingresado['NombreProveedor'] . ' ' . $camion_ingresado['ApellidosProveedor'],
+                        'NombresChofer' => $camion_ingresado['NombresChofer'],
+                        'CI' => $camion_ingresado['CI'],
+                        'Telefono' => $camion_ingresado['Telefono'],
+                        'Placa' => $Placa,
+                        'Color' => $Color,
+                        'Marca' => $Marca,
+                        'Capacidad' => $Capacidad,
+                        'N_senasag' => $camion_ingresado['N_Senasag'],
+
+                    ),
+                    'message' => 'Se guardo correctamente',
+                );
+            }
+        } catch (\Throwable $th) {
+            $respuesta = array(
+                'tipo' => 'Error',
+                'message' => $th,
+            );
+        }
+
+        echo json_encode($respuesta);
+    }
+    public function obtenerCamionProveedor()
+    {
+        $ID_camion = $this->input->post('ID_camion');
+        $camion = $this->Camion_model->obtenerCamionProveedor($ID_camion);
+
+        echo json_encode($camion);
+    }
+    public function eliminarCamionProveedor($ID_camion)
+    {
+        $this->Camion_model->eliminarCamion($ID_camion);
         $respuesta = array(
             'respuesta' => 'Exitoso',
             'message' => 'Se elimino correctamente',

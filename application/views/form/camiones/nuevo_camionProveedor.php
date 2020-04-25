@@ -17,7 +17,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
-                                <button class="btn btn-success" id='btn-nuevo' type="button" data-toggle="modal" data-target='#modal-camionPropio'>Agregar</button>
+                                <button class="btn btn-success" id='btn-nuevo' type="button" data-toggle="modal" data-target='#modal-camionProveedor'>Agregar</button>
                             </div>
                         </div>
                     </div>
@@ -26,7 +26,7 @@
 
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Tabla de camiones</h2>
+                        <h2>Tabla de camiones de proveedores</h2>
                         <ul class="nav navbar-right panel_toolbox">
                             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                             </li>
@@ -37,38 +37,36 @@
                     <div class="x_content">
 
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="tablaCamionesPropio">
+                            <table class="table table-bordered" id="tablaCamionesProveedor">
                                 <thead>
                                     <tr>
                                         <th>ID camion</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
+                                        <th>Proovedor</th>
+                                        <th>Nombre chofer</th>
                                         <th>CI</th>
+                                        <th>Telefono</th>
                                         <th>Placa</th>
-                                        <th>Modelo</th>
                                         <th>Marca</th>
                                         <th>Color</th>
                                         <th>Capacidad</th>
-                                        <th>Kilometraje</th>
                                         <th>Nro Senasag</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody id="datos-camiones-propios">
                                     <?php
-                                    if (count($camionesPropios) > 0) {
-                                        foreach ($camionesPropios as $row) { ?>
+                                    if (count($camionesProveedor) > 0) {
+                                        foreach ($camionesProveedor as $row) { ?>
                                             <tr>
                                                 <td><?php echo $row->ID_camion ?></td>
-                                                <td><?php echo $row->Nombres ?></td>
-                                                <td><?php echo $row->Apellido_p . ' ' . $row->Apellido_m ?></td>
+                                                <td><?php echo $row->NombreProveedor . ' ' .  $row->ApellidosProveedor ?></td>
+                                                <td><?php echo $row->NombresChofer ?></td>
                                                 <td><?php echo $row->CI ?></td>
+                                                <td><?php echo $row->Telefono ?></td>
                                                 <td><?php echo $row->N_Placa ?></td>
-                                                <td><?php echo $row->Modelo ?></td>
                                                 <td><?php echo $row->Marca ?></td>
                                                 <td><?php echo $row->Color ?></td>
                                                 <td><?php echo $row->Capacidad ?></td>
-                                                <td><?php echo $row->Kilometraje ?></td>
                                                 <td><?php echo $row->N_Senasag ?></td>
                                                 <td>
                                                     <button class="btn btn-warning btn-sm" id="btn-editar"><i class="fas fa-pencil-alt"></i> Editar</button>
@@ -90,51 +88,65 @@
 
 </div>
 
-<div class="modal fade" id="modal-camionPropio">
+<div class="modal fade" id="modal-camionProveedor">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Formulario camiones propios</h4>
+                <h4 class="modal-title">Formulario camiones proveedores</h4>
             </div>
-            <form action="" id="formcamionPropio">
+            <form action="" id="formcamionProveedor">
                 <div class="modal-body ui-front">
                     <div class="form-group">
-                        <label for="ID_contrato" class="control-label">Chofer encargado del camion *:</label>
+                        <label for="ID_proveedor" class="control-label">Proveedor :</label>
                         <div class="">
-                            <select id="ID_contrato" name="ID_contrato" class="form-control" required='required'>
+                            <select id="ID_proveedor" name="ID_proveedor" class="form-control" required='required'>
                                 <option value=""></option>
-                                <?php foreach ($Contratos->result() as $contrato) : ?>
-                                    <option value="<?php echo $contrato->ID_contrato ?>"><?php echo $contrato->Nombres . ' ' . $contrato->Apellido_p . ' ' . $contrato->Apellido_m ?></option>
+                                <?php foreach ($Proveedores as $proveedor) : ?>
+                                    <option value="<?php echo $proveedor->ID_proveedor ?>"><?php echo $proveedor->Nombres . ' ' . $proveedor->Apellidos ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Placa">Placa <span class="required">*</span>
+                        <label class="control-label" for="NombresChofer">Nombre completo del chofer <span class="required">*</span>
                         </label>
                         <div class="">
-                            <input type="text" onkeyup="mayus(this);" maxlength="10" id="Placa" name="Placa" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" onkeyup="mayus(this);" maxlength="40" id="NombresChofer" name="NombresChofer" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Modelo">Modelo <span class="required">*</span>
+                        <label class="control-label" for="CI">CI <span class="required">*</span>
                         </label>
                         <div class="">
-                            <input type="text" maxlength="70" id="Modelo" name="Modelo" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="number" maxlength="10" id="CI" name="CI" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Marca">Marca <span class="required">*</span>
+                        <label class="control-label" for="Telefono">Telefono
                         </label>
                         <div class="">
-                            <input type="text" maxlength="70" id="Marca" name="Marca" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" onkeyup="mayus(this);" maxlength="10" id="Telefono" name="Telefono" required="required" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="Color">Color <span class="required">*</span>
+                        <label class="control-label" for="N_Placa">Placa <span class="required">*</span>
                         </label>
                         <div class="">
-                            <input type="text" maxlength="40" id="Color" name="Color" required="required" class="form-control col-md-7 col-xs-12">
+                            <input type="text" maxlength="10" required='required' id="N_Placa" name="N_Placa" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Marca">Marca
+                        </label>
+                        <div class="">
+                            <input type="text" maxlength="20" id="Marca" name="Marca" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Color">Color
+                        </label>
+                        <div class="">
+                            <input type="text" maxlength="40" id="Color" name="Color" class="form-control col-md-7 col-xs-12">
                         </div>
                     </div>
 
@@ -142,23 +154,17 @@
                         <label for="Capacidad" class="control-label">Capacidad<span class="required">*</span>
                         </label>
                         <div class="">
-                            <input id="Capacidad" class="form-control col-md-7 col-xs-12" type="number" min='0' max='80' name="Capacidad" required="required" placeholder="50, 40, 35">
+                            <input id="Capacidad" class="form-control col-md-7 col-xs-12" type="number" min='0' maxlenght='2' max='80' name="Capacidad" required="required" placeholder="50, 40, 35">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="N_senasag" class="control-label">Numero Senasag<span class="required">*</span>
+                        <label for="N_senasag" class="control-label">Numero Senasag
                         </label>
                         <div class="">
                             <input id="N_senasag" class="form-control col-md-7 col-xs-12" type="text" name="N_senasag" placeholder="">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="Kilometraje" class="control-label">Kilometraje<span class="required">*</span>
-                        </label>
-                        <div class="">
-                            <input id="Kilometraje" class="form-control col-md-7 col-xs-12" type="number" min='0' name="Kilometraje" required="required" placeholder="">
-                        </div>
-                    </div>
+
                     <hr>
                     </hr>
                 </div>
