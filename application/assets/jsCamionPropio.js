@@ -166,6 +166,41 @@ $(document).ready(function () {
 
 
 	});
+	$(document).on('click', '#btn-borrar', function () {
+		Swal.fire({
+			title: 'Esta seguro de elimar?',
+			text: "El camion se eliminara, una vez eliminado no se recuperara!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, deseo elimniar!',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.value) {
+				fila = $(this).closest('tr');
+				id = parseInt(fila.find('td:eq(0)').text());
+				$.ajax({
+					url: base_url + "/Camion/eliminarCamionPropio/" + id,
+					type: 'POST',
+					success: function (respuesta) {
+
+						tabla.row(fila).remove().draw();
+						swal({
+							title: 'Eliminado',
+							text: 'Se borro correctamente',
+							type: 'success'
+						});
+
+
+					}
+				})
+
+
+			}
+		})
+
+	})
 });
 
 function LimpiarFormulario() {

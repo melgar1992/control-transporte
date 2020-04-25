@@ -22,7 +22,7 @@ class Camion extends BaseController
         $this->form_validation->set_rules('Capacidad', 'Capacidad', 'trim|xss_clean');
         $this->form_validation->set_rules('N_senasag', 'N_senasag', 'trim|xss_clean');
         $this->form_validation->set_rules('Kilometraje', 'Kilometraje', 'trim|xss_clean');
-       try {
+        try {
             if ($this->form_validation->run() === false) {
 
                 $error = form_error('Placa');
@@ -73,7 +73,7 @@ class Camion extends BaseController
     }
     public function editarCamionPropio()
     {
-       
+
         try {
             $ID_camion = $this->input->post('ID_camion');
             $ID_contrato = $this->input->post('ID_contrato');
@@ -93,7 +93,7 @@ class Camion extends BaseController
                 $is_unique = '|is_unique[camion.N_Placa]';
             }
             $this->form_validation->set_rules('ID_contrato', 'ID_contrato', 'trim|xss_clean');
-            $this->form_validation->set_rules('Placa', 'Placa', 'trim|xss_clean'. $is_unique);
+            $this->form_validation->set_rules('Placa', 'Placa', 'trim|xss_clean' . $is_unique);
             $this->form_validation->set_rules('Modelo', 'Modelo', 'trim|xss_clean');
             $this->form_validation->set_rules('Marca', 'Marca', 'trim|xss_clean');
             $this->form_validation->set_rules('Color', 'Color', 'trim|xss_clean');
@@ -110,7 +110,7 @@ class Camion extends BaseController
                     'message' => 'Ocurrio un problema al validar los datos' . $error,
                 );
             } else {
-              
+
                 $this->Camion_model->editarCamionPropio($ID_camion, $ID_contrato, $Placa, $Modelo, $Marca, $Color, $Capacidad, $N_senasag, $Kilometraje);
                 $camion_editado = $this->Camion_model->obtenerCamionPropio($ID_camion);
 
@@ -147,5 +147,17 @@ class Camion extends BaseController
         $camion = $this->Camion_model->obtenerCamionPropio($ID_camion);
 
         echo json_encode($camion);
+    }
+    public function eliminarCamionPropio($ID_camion)
+    {
+
+        $this->Camion_model->eliminarCamionPropio($ID_camion);
+        $respuesta = array(
+            'respuesta' => 'Exitoso',
+            'message' => 'Se elimino correctamente',
+        );
+
+
+        echo json_encode($respuesta);
     }
 }

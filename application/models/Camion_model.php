@@ -57,4 +57,13 @@ class Camion_model extends CI_Model
         $this->db->where('ID_camion',$ID_camion);
         $this->db->update('camion',$datos);
     }
+    public function eliminarCamionPropio($ID_camion)
+    {
+        $datos = array(
+            'Estado' => 'Inactivo',
+            'N_Placa' => '0',
+        );
+        $this->db->where('ID_camion',$ID_camion);
+        $this->db->update('camion', $datos);
+    }
 }
