@@ -45,12 +45,12 @@ $(document).ready(function () {
 			success: function (respuesta) {
 
 				$("#ID_contrato option[value=" + respuesta['ID_contrato'] + "]").attr("selected", true);
-				$('#Placa').val(respuesta['N_placa']);
+				$('#Placa').val(respuesta['N_Placa']);
 				$('#Modelo').val(respuesta['Modelo']);
 				$('#Marca').val(respuesta['Marca']);
 				$('#Color').val(respuesta['Color']);
 				$('#Capacidad').val(respuesta['Capacidad']);
-				$('#N_senasag').val(respuesta['N_senasag']);
+				$('#N_senasag').val(respuesta['N_Senasag']);
 				$('#Kilometraje').val(respuesta['Kilometraje']);
 
 			}
@@ -68,7 +68,7 @@ $(document).ready(function () {
 		Capacidad = $.trim($('#Capacidad').val());
 		N_senasag = $.trim($('#N_senasag').val());
 		Kilometraje = $.trim($('#Kilometraje').val());
-		LimpiarFormulario();
+		$('#modal-camionPropio').modal('hide');
 
 		if (opcion != 'editar') {
 			$.ajax({
@@ -96,14 +96,16 @@ $(document).ready(function () {
 						Color = respuesta['datos']['Color'];
 						N_senasag = respuesta['datos']['N_senasag'];
 						Kilometraje = respuesta['datos']['Kilometraje'];
-						tabla.row.add([ID_camion, Nombres, Apellidos, CI, Placa, Modelo, Marca, Color, Capacidad, N_senasag]).draw();
+						tabla.row.add([ID_camion, Nombres, Apellidos, CI, Placa, Modelo, Marca, Color, Capacidad, Kilometraje, N_senasag]).draw();
+						LimpiarFormulario();
 						swal({
 							title: 'Guardar',
 							text: respuesta['message'],
 							type: 'success'
 						});
-						$('#formEmpleados').trigger('reset');
+
 					} else {
+						LimpiarFormulario();
 						swal({
 							title: 'Error',
 							text: respuesta['message'],
@@ -116,8 +118,9 @@ $(document).ready(function () {
 		} else {
 			$.ajax({
 				type: "POST",
-				url: base_url + "/Empleado/editarEmpleado",
+				url: base_url + "/Camion/editarCamionPropio",
 				data: {
+					ID_camion: ID_camion,
 					ID_contrato: ID_contrato,
 					Placa: Placa,
 					Modelo: Modelo,
@@ -130,16 +133,17 @@ $(document).ready(function () {
 				dataType: "json",
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
-						id_empleado = respuesta['datos']['ID_empleado'];
+						ID_camion = respuesta['datos']['ID_camion'];
 						CI = respuesta['datos']['CI'];
-						nombres = respuesta['datos']['Nombres'];
-						apellidop = respuesta['datos']['Apellido_p'];
-						apellidom = respuesta['datos']['Apellido_m'];
-						fechan = respuesta['datos']['Fecha_nacimiento'];
-						telefono01 = respuesta['datos']['Telefono_01'];
-						departamento = respuesta['datos']['Departamento'];
-						tlicencia = respuesta['datos']['TipoLicencia'];
-						tabla.row(fila).data([ID_camion, Nombres, Apellidos, CI, Placa, Modelo, Marca, Color, Capacidad, N_senasag]).draw();
+						Nombres = respuesta['datos']['Nombres'];
+						Apellidos = respuesta['datos']['Apellidos'];
+						Placa = respuesta['datos']['Placa'];
+						Modelo = respuesta['datos']['Modelo'];
+						Color = respuesta['datos']['Color'];
+						N_senasag = respuesta['datos']['N_senasag'];
+						Kilometraje = respuesta['datos']['Kilometraje'];
+						LimpiarFormulario();
+						tabla.row(fila).data([ID_camion, Nombres, Apellidos, CI, Placa, Modelo, Marca, Color, Capacidad, Kilometraje, N_senasag]).draw();
 
 						swal({
 							title: 'Editado',
@@ -148,6 +152,7 @@ $(document).ready(function () {
 						});
 						$('#formEmpleados').trigger('reset');
 					} else {
+						LimpiarFormulario();
 						swal({
 							title: 'Error',
 							text: respuesta['message'],
@@ -167,5 +172,7 @@ function LimpiarFormulario() {
 	$('#modal-camionPropio').modal('hide');
 	$('#formcamionPropio').trigger('reset');
 	$('.modal-title').text('Formulario camiones propios');
+	$("#ID_contrato option[value='']").attr("selected", true);
+
 	opcion = '';
 };

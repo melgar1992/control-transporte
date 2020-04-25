@@ -81,6 +81,23 @@ class Contrato_model extends CI_Model
         $this->db->join('persona', 'empleado.ID_persona = persona.ID_persona');
         $this->db->where('contrato.Estado', 'Activo');
         $this->db->where('empleado.Estado', 'Activo');
+      
+
+        $datos = $this->db->get();
+
+        return $datos;
+    }
+
+    public function obtenerContratosEmpleadosActivos()
+    {
+        $this->db->select('ID_contrato, contrato.ID_empleado, CI, Nombres, Apellido_p, Apellido_m, tipocontrato.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->from('contrato');
+        $this->db->join('tipocontrato', 'contrato.ID_tipoContrato = tipocontrato.ID_tipoContrato');
+        $this->db->join('empleado', 'empleado.ID_empleado = contrato.ID_empleado');
+        $this->db->join('persona', 'empleado.ID_persona = persona.ID_persona');
+        $this->db->where('contrato.Estado', 'Activo');
+        $this->db->where('empleado.Estado', 'Activo');
+        $this->db->where('FechaSalida >', date("Y-m-d"));
 
         $datos = $this->db->get();
 

@@ -63,13 +63,13 @@
                                                 <td><?php echo $row->Nombres ?></td>
                                                 <td><?php echo $row->Apellido_p . ' ' . $row->Apellido_m ?></td>
                                                 <td><?php echo $row->CI ?></td>
-                                                <td><?php echo $row->N_placa ?></td>
+                                                <td><?php echo $row->N_Placa ?></td>
                                                 <td><?php echo $row->Modelo ?></td>
                                                 <td><?php echo $row->Marca ?></td>
                                                 <td><?php echo $row->Color ?></td>
                                                 <td><?php echo $row->Capacidad ?></td>
                                                 <td><?php echo $row->Kilometraje ?></td>
-                                                <td><?php echo $row->N_senasag ?></td>
+                                                <td><?php echo $row->N_Senasag ?></td>
                                                 <td>
                                                     <button class="btn btn-warning btn-sm" id="btn-editar"><i class="fas fa-pencil-alt"></i> Editar</button>
                                                     <button class="btn btn-danger btn-sm" id="btn-borrar"><i class="fas fa-trash-alt"></i> Borrar</button>
