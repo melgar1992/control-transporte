@@ -28,7 +28,7 @@
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="x_panel">
                             <div class="x_title">
-                                <h2>Tabla de <small>Clientes</small></h2>
+                                <h2>Tabla de Clientes</h2>
                                 <ul class="nav navbar-right panel_toolbox">
                                     <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                                     </li>
@@ -59,6 +59,7 @@
                                                 foreach ($clientes as $row) { ?>
                                                     <tr>
                                                         <td><?php echo $row->ID_Cliente ?></td>
+                                                        <td><?php echo $row->CI ?></td>
                                                         <td><?php echo $row->Nombre ?></td>
                                                         <td><?php echo $row->Apellidos ?></td>
                                                         <td><?php echo $row->Direccion ?></td>
@@ -98,6 +99,20 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label" for="Nombre">Nombre <span class="required">*</span>
+                        </label>
+                        <div class="">
+                            <input type="text" id="Nombre" maxlength="60" name="Nombre" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="Apellidos">Apellidos <span class="required">*</span>
+                        </label>
+                        <div class="">
+                            <input type="text" maxlength="60" id="Apellidos" name="Apellidos" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="control-label" for="CI">CI <span class="required">*</span>
                         </label>
                         <div class="">
@@ -106,122 +121,29 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="nombres">Nombres <span class="required">*</span>
+                        <label for="Direccion" class="control-label">Dirección <span class="required">*</span>
                         </label>
                         <div class="">
-                            <input type="text" id="nombres" maxlength="45" name="nombres" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="apellido-paterno">Apellido Paterno <span class="required">*</span>
-                        </label>
-                        <div class="">
-                            <input type="text" maxlength="45" id="apellido-paterno" name="apellido-paterno" required="required" class="form-control col-md-7 col-xs-12">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label" for="apellido-materno">Apellido Materno <span class="required">*</span>
-                        </label>
-                        <div class="">
-                            <input type="text" maxlength="45" id="apellido-materno" name="apellido-materno" required="required" class="form-control col-md-7 col-xs-12">
+                            <textarea name="Direccion" maxlength="200" id="Direccion" class="form-control" rows="3" placeholder="Dirección" required="required"></textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="fecha-nacimiento">Fecha de Nacimiento <span class="required">*</span>
+                        <label for="Telefono_01" class="control-label">Telefono 01 <span class="required">*</span>
                         </label>
                         <div class="">
-                            <div class='input-group date' id='myDatepicker2'>
-                                <input type='date' class="form-control" id="fecha-nacimiento" name="fecha-nacimiento" />
-                            </div>
+                            <input id="Telefono_01" class="form-control col-md-7 col-xs-12" type="number" name="Telefono_01" required="required" placeholder="77800975-34622503">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="direccion" class="control-label">Dirección <span class="required">*</span>
+                        <label for="Telefono_02" class="control-label">Telefono 02
                         </label>
                         <div class="">
-                            <textarea name="direccion" id="direccion" class="form-control" rows="3" placeholder="Dirección" required="required"></textarea>
+                            <input id="Telefono_02" class="form-control col-md-7 col-xs-12" type="number" name="Telefono_02" placeholder="77800975-34622503">
                         </div>
                     </div>
-
-
-                    <div class="form-group">
-                        <label for="departamento" class="control-label">Departamento *:</label>
-                        <div class="">
-                            <select id="departamento" name="departamento" class="form-control" required>
-                                <option value=""></option>
-                                <option value="Pando">Pando</option>
-                                <option value="Beni">Beni</option>
-                                <option value="Santa Cruz">Santa Cruz</option>
-                                <option value="Cochabamba">Cochabamba</option>
-                                <option value="La Paz">La Paz</option>
-                                <option value="Sucre">Sucre</option>
-                                <option value="Potosi">Potosi</option>
-                                <option value="Tarija">Tarija</option>
-                                <option value="Oruro">Oruro</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono_01" class="control-label">Telefono 01 <span class="required">*</span>
-                        </label>
-                        <div class="">
-                            <input id="telefono_01" class="form-control col-md-7 col-xs-12" type="number" name="telefono_01" required="required" placeholder="77800975-34622503">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="telefono_02" class="control-label">Telefono 02
-                        </label>
-                        <div class="">
-                            <input id="telefono_02" class="form-control col-md-7 col-xs-12" type="number" name="telefono_02" placeholder="77800975-34622503">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="calificacion" class="control-label">Calificación <span class="required">*</span>
-                        </label>
-                        <div class="">
-                            <input id="calificacion" class="form-control col-md-7 col-xs-12 chofer" type="number" name="calificacion" placeholder="Calificación del personal" min="1" max="10">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="descripcion" class="control-label">Descripción
-                        </label>
-                        <div class="">
-                            <textarea name="descripcion" id="descripcion" class="form-control chofer" rows="3" placeholder="Una brever descripción del personal"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="tipo-licencia" class="control-label">Tipo de licencia <span class="required">*</span>
-                        </label>
-                        <div class="">
-                            <select id="tipo-licencia" name="tipo-licencia" class="form-control chofer">
-                                <option value=""></option>
-                                <option value="Motociclista">Motociclista</option>
-                                <option value="Particular">Particular</option>
-                                <option value="Profecional A">Profecional A</option>
-                                <option value="Profecional B">Profecional B</option>
-                                <option value="Profecional C">Profecional C</option>
-                                <option value="Motorista T">Motorista T</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="fecha-vencimiento-l">Fecha de Vencimiento Licencia <span class="required">*</span>
-                        </label>
-                        <div class="">
-                            <div class='input-group date' id='myDatepicker2'>
-                                <input type='date' class="form-control chofer" id="fecha-vencimiento-l" name="fecha-vencimiento-l" />
-                            </div>
-                        </div>
-                    </div>
-
+                    <br> </br>
 
 
                 </div>
