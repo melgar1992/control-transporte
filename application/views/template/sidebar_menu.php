@@ -5,7 +5,7 @@
                 <ul class="nav side-menu">
                   <li><a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url("Inicio") ?>">Dashboard</a></li>
+                      <li><a href="<?php echo site_url("Inicio") ?>"> Dashboard</a></li>
                       <li><a href=<?php echo site_url("dashboardEmpleado/index") ?>>Dashboard de empleados</a></li>
                     </ul>
                   </li>
@@ -13,7 +13,6 @@
                     <ul class="nav child_menu">
 
                       <li><a href="<?php echo site_url("Empleado/index") ?>">Empleados</a></li>
-
                       <li><a href="<?php echo site_url("Contrato/tipocontrato") ?>">Tipos de Contratos Empleado</a></li>
                       <li><a href="<?php echo site_url("ContratoEmpleado/ContratoEmpleado") ?>">Contrato Empleados</a></li>
                       <li><a href="<?php echo site_url("pagoEmpleados/pagoEmpleado") ?>">Pago Empleados</a></li>
@@ -32,11 +31,17 @@
 
                       <li><a href="<?php echo site_url("Camion/camionesPropios") ?>">Camiones propios</a></li>
                       <li><a href="<?php echo site_url("Camion/camionesProveedor") ?>">Camiones proveedores</a></li>
-                      <li><a href="<?php echo site_url("") ?>">Gastos de mantenimiento</a></li>
 
                     </ul>
                   </li>
-                  <li><a><i class="fas fa-group"></i>Clientes<span class="fas fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-wrench"></i> Mantenimiento camiones<span class="fas fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo site_url("Taller/talleres") ?>">Taller o ferreteria</a></li>
+                      <li><a href="<?php echo site_url("") ?>">Mantenimiento</a></li>
+
+                    </ul>
+                  </li>
+                  <li><a><i class="fas fa-group"></i> Clientes<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 
                       <li><a href="<?php echo site_url("Cliente/clientes") ?>">Clientes</a></li>
@@ -54,55 +59,6 @@
                       <li><a href="other_charts.html">Other Charts</a></li>
                     </ul>
                   </li>
-                  <!-- <li><a><i class="fas fa-clone"></i>Layouts <span class="fas fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              <div class="menu_section">
-                <h3>Live On</h3>
-                <ul class="nav side-menu">
-                  <li><a><i class="fas fa-bug"></i> Additional Pages <span class="fas fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fab fa-windows"></i> Extras <span class="fas fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fas fa-sitemap"></i> Multilevel Menu <span class="fas fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a href="#level1_1">Level One</a>
-                        <li><a>Level One<span class="fas fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="level2.html">Level Two</a>
-                            </li>
-                            <li><a href="#level2_1">Level Two</a>
-                            </li>
-                            <li><a href="#level2_2">Level Two</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a href="#level1_2">Level One</a>
-                        </li>
-                    </ul>
-                  </li>                  
-                  <li><a href="javascript:void(0)"><i class="fas fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
-                </ul> -->
               </div>
 
             </div>
