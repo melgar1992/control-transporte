@@ -56,7 +56,7 @@
                                                 foreach ($Talleres as $row) { ?>
                                                     <tr>
                                                         <td><?php echo $row->ID_taller ?></td>
-                                                        <td><?php echo $row->Nombre ?></td>
+                                                        <td><?php echo $row->NombreTaller ?></td>
                                                         <td><?php echo $row->Departamento ?></td>
                                                         <td><?php echo $row->Direccion ?></td>
                                                         <td>
