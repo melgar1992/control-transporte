@@ -4,7 +4,7 @@
           <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
               <div class="navbar nav_title" style="border: 0;">
-                <a href="index.html" class="site_title"><i class="fas fa-truck-moving"></i> <span>El Oso!</span></a>
+                <a href="<?php echo site_url() ?>" class="site_title"><i class="fas fa-truck-moving"></i> <span>El Oso!</span></a>
               </div>
   
               <div class="clearfix"></div>

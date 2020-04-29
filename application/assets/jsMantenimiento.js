@@ -31,10 +31,31 @@ $(document).ready(function () {
 		agregarProducto();
 
 	});
+	$(document).on('change','#tbmantenimiento input.Cantidad', function () {
+		cantidad = $(this).val();
+		precioUnitario = $(this).closest('tr').find('td:eq(6)').children('input').val()
+		ImporteTotal = cantidad * precioUnitario;
+		$(this).closest('tr').find('td:eq(8)').children('input').val(ImporteTotal);
+		$(this).closest('tr').find('td:eq(8)').children('p').text(ImporteTotal.toFixed(2));
+		sumar();
+	});
+	$(document).on('change','#tbmantenimiento input.PrecioUnitario', function () {
+		precioUnitario = $(this).val();
+		cantidad = $(this).closest('tr').find('td:eq(7)').children('input').val()
+		ImporteTotal = cantidad * precioUnitario;
+		$(this).closest('tr').find('td:eq(8)').children('input').val(ImporteTotal);
+		$(this).closest('tr').find('td:eq(8)').children('p').text(ImporteTotal.toFixed(2));
+		sumar();
+	});
+	
 });
 
 function sumar() {
-
+	total = 0;
+	$("#tbmantenimiento  tbody tr").each(function () {
+		total = total + Number($(this).find("td:eq(8)").text());
+	});
+	$("input[name=total]").val(total.toFixed(2));
 }
 
 function agregarProducto() {
@@ -54,9 +75,9 @@ function agregarProducto() {
 		html += "<td><input type='hidden' name = 'ID_categoria_mantenimiento[]' value ='" + ID_categoria_mantenimiento[3] + "'>" + mantenimiento + "</td>";
 		html += "<td><input type='hidden' name = 'ID_categoria_mantenimiento[]' value ='" + ID_camion + "'>" + placa + "</td>";
 		html += "<td><input type='hidden' name = 'Porpagar[]' value ='" + PorPagar + "'>" + Textopargar + "</td>";
-		html += "<td><input type='text' maxlength='20' name = 'Descripcion[]' value =''></td>";
-		html += "<td><input type = 'number' class='cantidades' min = '0'  name = 'PrecioUnitario[]' value = '0'></td>";
-		html += "<td><input type = 'number' class='cantidades' min = '0'  name = 'Cantidad[]' value = '1'></td>";
+		html += "<td><input type='text' maxlength='30' name = 'Descripcion[]' value =''></td>";
+		html += "<td><input type = 'number' class='PrecioUnitario' min = '0'  name = 'PrecioUnitario[]' value = '0'></td>";
+		html += "<td><input type = 'number' class='Cantidad' min = '0'  name = 'Cantidad[]' value = '1'></td>";
 		html += "<td><input type ='hidden' name = 'ImporteTotal[]' value ='0'><p>0</p></td>";
 		html += "<td><button type='button' class='btn btn-danger btn-remove-producto'><span class='fa fa-remove'></span></button></td>";
 		html += "</tr>";

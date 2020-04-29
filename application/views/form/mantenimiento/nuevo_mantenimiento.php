@@ -58,47 +58,47 @@
 
                                       </div>
 
-                                      <label for="Productos" class="col-md-12">Ingresar un dasto de mantenimiento </label>
+                                      <label for="Productos" class="col-md-12">Ingresar un dato de mantenimiento </label>
                                       <br></br>
                                       <div class="form-group">
                                           <div class="col-md-2">
-                                          <label for="">Fecha:</label>
-                                              <input type="date" value="<?php echo date("Y-m-d") ?>" class="form-control"  id="fecha" required>
+                                              <label for="">Fecha:</label>
+                                              <input type="date" value="<?php echo date("Y-m-d") ?>" class="form-control" id="fecha" required>
                                           </div>
                                           <div class="col-md-2">
-                                          <label for="">Taller o ferreteria de servicio:</label>
+                                              <label for="">Taller o ferreteria:</label>
                                               <select id="ID_taller" class="form-control" required>
                                                   <option value="">Seleccione...</option>
                                                   <?php foreach ($talleres as $taller) : ?>
                                                       <option value="<?php echo $taller->ID_taller; ?>">
-                                                          <?php echo $taller->NombreTaller?></option>
+                                                          <?php echo $taller->NombreTaller ?></option>
                                                   <?php endforeach; ?>
                                               </select>
                                           </div>
                                           <div class="col-md-2">
-                                          <label for="">Camion:</label>
-                                              <select id="ID_camion" class="form-control" >
+                                              <label for="">Camion:</label>
+                                              <select id="ID_camion" class="form-control">
                                                   <option value="">Ninguo</option>
                                                   <?php foreach ($camiones as $camion) : ?>
                                                       <option value="<?php echo $camion->ID_camion; ?>">
-                                                          <?php echo $camion->N_Placa?></option>
+                                                          <?php echo $camion->N_Placa ?></option>
                                                   <?php endforeach; ?>
                                               </select>
                                           </div>
                                           <div class="col-md-2">
-                                          <label for="">Categoria de mantenimiento:</label>
-                                              <select id="ID_categoria_mantenimiento" class="form-control" >
+                                              <label for="">Categoria de gasto:</label>
+                                              <select id="ID_categoria_mantenimiento" class="form-control">
                                                   <option value="">Ninguo</option>
                                                   <?php foreach ($categorias_mantenimientos as $categoria_mantenimiento) : ?>
                                                       <option value="<?php echo $categoria_mantenimiento->ID_categoria_mantenimiento; ?>">
-                                                          <?php echo $categoria_mantenimiento->Nombre?></option>
+                                                          <?php echo $categoria_mantenimiento->Nombre ?></option>
                                                   <?php endforeach; ?>
                                               </select>
                                           </div>
                                           <div class="col-md-2">
-                                          <label for="">Por pagar:</label>
-                                              <select id="PorPagar" class="form-control" >
-                                                  <option value="">Al contado</option>
+                                              <label for="">Tipo pago:</label>
+                                              <select id="PorPagar" class="form-control">
+                                                  <option value="">Contado</option>
                                                   <option value="1">Por pagar</option>
                                               </select>
                                           </div>
@@ -116,7 +116,7 @@
                                                   <th>Categoria de mantenimiento</th>
                                                   <th>Camion</th>
                                                   <th>Por pagar</th>
-                                                  <th>Descripcion</th>           
+                                                  <th>Descripcion</th>
                                                   <th>Precio unitario.</th>
                                                   <th>Cantidad</th>
                                                   <th>Importe</th>
