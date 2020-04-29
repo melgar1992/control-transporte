@@ -37,7 +37,7 @@
                   <li><a><i class="fas fa-wrench"></i> Mantenimiento camiones<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url("Taller/talleres") ?>">Taller o ferreteria</a></li>
-                      <li><a href="<?php echo site_url("") ?>">Mantenimiento</a></li>
+                      <li><a href="<?php echo site_url("Mantenimiento/mantenimientos") ?>">Mantenimiento</a></li>
 
                     </ul>
                   </li>
