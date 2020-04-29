@@ -87,7 +87,7 @@
                                           </div>
                                           <div class="col-md-2">
                                           <label for="">Categoria de mantenimiento:</label>
-                                              <select id="ID_camion" class="form-control" >
+                                              <select id="ID_categoria_mantenimiento" class="form-control" >
                                                   <option value="">Ninguo</option>
                                                   <?php foreach ($categorias_mantenimientos as $categoria_mantenimiento) : ?>
                                                       <option value="<?php echo $categoria_mantenimiento->ID_categoria_mantenimiento; ?>">
@@ -108,14 +108,15 @@
                                           </div>
                                       </div>
                                       <br></br>
-                                      <table id="tbventas" class="table table-bordered table-striped table-hover">
+                                      <table id="tbmantenimiento" class="table table-bordered table-striped table-hover">
                                           <thead>
                                               <tr>
                                                   <th>Fecha</th>
                                                   <th>Taller o ferreteria</th>
                                                   <th>Categoria de mantenimiento</th>
-                                                  <th>Descripcion</th>
+                                                  <th>Camion</th>
                                                   <th>Por pagar</th>
+                                                  <th>Descripcion</th>           
                                                   <th>Precio unitario.</th>
                                                   <th>Cantidad</th>
                                                   <th>Importe</th>
