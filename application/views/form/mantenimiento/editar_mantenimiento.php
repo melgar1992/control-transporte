@@ -43,14 +43,19 @@
                                               <select name="ID_empleado" id="ID_empleado" class="form-control" required>
                                                   <option value="">Seleccione...</option>
                                                   <?php foreach ($empleados->result() as $empleado) : ?>
-                                                      <option value="<?php echo $empleado->ID_empleado; ?>">
-                                                          <?php echo $empleado->Nombres . ' ' . $empleado->Apellido_p . ' ' . $empleado->Apellido_m ?></option>
+                                                      <?php if ($mantenimiento['ID_empleado'] == $empleado->ID_empleado) : ?>
+                                                          <option selected="selected" value="<?php echo $empleado->ID_empleado; ?>">
+                                                              <?php echo $empleado->Nombres . ' ' . $empleado->Apellido_p . ' ' . $empleado->Apellido_m ?></option>
+                                                      <?php else : ?>
+                                                          <option value="<?php echo $empleado->ID_empleado; ?>">
+                                                              <?php echo $empleado->Nombres . ' ' . $empleado->Apellido_p . ' ' . $empleado->Apellido_m ?></option>
+                                                      <?php endif ?>
                                                   <?php endforeach; ?>
                                               </select>
                                           </div>
                                           <div class="col-md-3">
                                               <label for="">Fecha:</label>
-                                              <input type="date" value="<?php echo date("Y-m-d") ?>" class="form-control" name="Fecha_mantenimiento" id="Fecha_mantenimiento" required>
+                                              <input type="date" value="<?php echo $mantenimiento['Fecha_mantenimiento'] ?>" class="form-control" name="Fecha_mantenimiento" id="Fecha_mantenimiento" required>
                                           </div>
 
                                       </div>
@@ -59,7 +64,7 @@
                                           <div class="col-md-6">
                                               <label for="Descripcion_mantenimiento" class="control-label">Descripcion general del mantenimiento: <span class="required">*</span>
                                               </label>
-                                              <textarea name="Descripcion_mantenimiento" maxlength="200" id="Descripcion_mantenimiento" class="form-control" rows="3" placeholder="" required="required"></textarea>
+                                              <textarea name="Descripcion_mantenimiento" maxlength="200" id="Descripcion_mantenimiento" class="form-control" rows="3" placeholder="" required="required"><?php echo $mantenimiento['Descripcion'] ?></textarea>
 
                                           </div>
 
@@ -131,6 +136,26 @@
                                               </tr>
                                           </thead>
                                           <tbody>
+                                              <?php
+                                                if (count($detalle_mantenimientos) > 0) {
+                                                    foreach ($detalle_mantenimientos as $row) { ?>
+                                                      <tr>
+                                                          <td><input type='hidden' name='Fecha[]' value='<?php echo $row->Fecha ?>'><?php echo $row->Fecha ?></td>
+                                                          <td><input type='hidden' name='ID_taller[]' value='<?php echo $row->ID_taller ?>'><?php echo $row->NombreTaller ?></td>
+                                                          <td><input type='hidden' name='ID_categoria_mantenimiento[]' value='<?php echo $row->ID_categoria_mantenimiento ?>'><?php echo $row->NombreCategoria ?></td>
+                                                          <td><input type='hidden' name='ID_camion[]' value='<?php echo $row->ID_camion ?>'><?php echo $row->N_Placa ?></td>
+                                                          <td><input type='hidden' name='Porpagar[]' value='<?php echo $row->Porpagar ?>'><?php echo $row->Porpagar ?></td>
+                                                          <td><input type='text' maxlength='30' name='Descripcion[]' value='<?php echo $row->Descripcion ?>'><?php echo $row->Descripcion ?></td>
+                                                          <td><input type='number' class='PrecioUnitario' min='0' name='PrecioUnitario[]' value='<?php echo $row->PrecioUnitario ?>'></td>
+                                                          <td><input type='number' class='Cantidad' min='0' name='Cantidad[]' value='<?php echo $row->Cantidad ?>'></td>
+                                                          <td><input type='hidden' name='ImporteTotal[]' value='<?php echo $row->ImporteTotal ?>'>
+                                                              <p><?php echo $row->ImporteTotal ?></p>
+                                                          </td>
+                                                          <td><button type='button' class='btn btn-danger btn-remove-mantenimiento'><span class='fa fa-remove'></span></button></td>
+                                                      </tr>
+                                              <?php }
+                                                }
+                                                ?>
 
                                           </tbody>
                                       </table>
@@ -147,7 +172,7 @@
                                       <div class="form-group">
                                           <div class="col-md-12">
                                               <a class="btn btn-primary btn-flat" href="<?php echo site_url("Mantenimiento/mantenimientos") ?>" type="button">Volver</a>
-                                              <button type="submit" class="btn btn-success btn-flat">Guardar</button>
+                                              <button type="submit" class="btn btn-warning btn-flat">Editar</button>
                                           </div>
 
                                       </div>

@@ -79,6 +79,7 @@ class BaseController extends CI_Controller {
 				if ($result != false) {
 					$session_data = array(
 						'username' => $result[0]->username,
+						'ID_user' => $result[0]->ID_user,
 						'url_img' => $result[0]->url_img,
 						'privilegios' => $result[0]->privilegios
 					);
