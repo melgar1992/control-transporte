@@ -105,7 +105,6 @@ class Mantenimiento extends BaseController
                     'ID_mantenimiento' => $ID_mantenimiento,
                     'ID_taller' => $ID_taller[$i],
                     'ID_categoria_mantenimiento' => $ID_categoria_mantenimiento[$i],
-                    'ID_camion' => $ID_camion[$i],
                     'Porpagar' => $Porpagar[$i],
                     'Fecha' => $Fecha[$i],
                     'Descripcion' => $Descripcion[$i],
