@@ -30,6 +30,12 @@ $(document).ready(function () {
 	$("#btn-agregar").on("click", function () {
 		agregarProducto();
 	});
+	$(document).on('click', '#btn-editar', function () {
+		fila = $(this).closest('tr');
+		ID_mantenimiento = parseInt(fila.find('td:eq(0)').text());
+		window.open((base_url + '/Mantenimiento/editarMantenimiento/' + ID_mantenimiento), '_self');
+
+	});
 	// Al cambiar la canditad del mantenimiento se realiza los calculos para el mantenimiento
 	$(document).on('change', '#tbmantenimiento input.Cantidad', function () {
 		cantidad = $(this).val();

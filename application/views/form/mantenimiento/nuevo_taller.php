@@ -40,7 +40,7 @@
                             <div class="x_content">
 
                                 <div class="table-responsive">
-                                    <table class="table table-bordered" id=" ">
+                                    <table class="table table-bordered" id="tablaTalleres">
                                         <thead>
                                             <tr>
                                                 <th>ID Taller</th>

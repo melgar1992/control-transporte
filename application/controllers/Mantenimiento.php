@@ -79,6 +79,55 @@ class Mantenimiento extends BaseController
             redirect(site_url() . '/Mantenimiento/nuevoMantenimiento');
         }
     }
+    public function actualizarMantenimiento()
+    {
+        //input para la tabla de mantenimiento
+        $ID_mantenimiento = $this->input->post('ID_mantenimiento');
+        $ID_empleado = $this->input->post('ID_empleado');
+        $Fecha_mantenimiento = $this->input->post('Fecha_mantenimiento');
+        $Descripcion_mantenimiento = $this->input->post('Descripcion_mantenimiento');
+        $MontoTotal = $this->input->post('total');
+        $ID_user = $this->session->userdata['logged_in']['ID_user'];
+
+        //Datos para el detalle de mantenimiento
+        $Fecha = $this->input->post('Fecha');
+        $ID_taller = $this->input->post('ID_taller');
+        $ID_categoria_mantenimiento = $this->input->post('ID_categoria_mantenimiento');
+        $ID_camion = $this->input->post('ID_camion');
+        $Porpagar = $this->input->post('Porpagar');
+        $Descripcion = $this->input->post('Descripcion');
+        $PrecioUnitario = $this->input->post('PrecioUnitario');
+        $Cantidad = $this->input->post('Cantidad');
+        $ImporteTotal = $this->input->post('ImporteTotal');
+
+
+        $this->form_validation->set_rules('Fecha_mantenimiento', 'Fecha de ingreso del mantenimiento', 'required');
+        $this->form_validation->set_rules('ID_empleado', 'ID_empleado del empleado responsable de los gastos', 'required');
+        $this->form_validation->set_rules('Descripcion_mantenimiento', 'Descripcion del mantenimiento', 'required');
+        if ($this->form_validation->run()) {
+            // se preparan los datos
+            $datos_mantenimiento = array(
+                'ID_user' => $ID_user,
+                'ID_empleado' => $ID_empleado,
+                'Fecha_mantenimiento' => $Fecha_mantenimiento,
+                'Descripcion' => $Descripcion_mantenimiento,
+                'MontoTotal' => $MontoTotal,
+                'Estado' => 'Activo',
+            );
+            $this->Mantenimiento_model->actualizarMantenimiento($ID_mantenimiento, $datos_mantenimiento);
+            if (isset($ID_mantenimiento)) {
+                $this->Mantenimiento_model->eliminarDetalleMantenimiento($ID_mantenimiento);
+                $this->guardarDetalleMantenimiento($ID_mantenimiento, $ID_taller, $ID_categoria_mantenimiento, $ID_camion, $Porpagar, $Fecha, $Descripcion, $PrecioUnitario, $Cantidad, $ImporteTotal);
+                redirect(site_url() . '/Mantenimiento/mantenimientos');
+            } else {
+                $this->session->set_flashdata('error', 'Ocurrio un error al ingresar los datos del mantenimiento!');
+                redirect(site_url() . '/Mantenimiento/nuevoMantenimiento');
+            }
+        } else {
+            $this->session->set_flashdata('error', 'Tiene que llenar los datos correctamente');
+            redirect(site_url() . '/Mantenimiento/nuevoMantenimiento');
+        }
+    }
     public function guardarDetalleMantenimiento($ID_mantenimiento, $ID_taller, $ID_categoria_mantenimiento, $ID_camion, $Porpagar, $Fecha, $Descripcion, $PrecioUnitario, $Cantidad, $ImporteTotal)
     {
         for ($i = 0; $i < count($ID_categoria_mantenimiento); $i++) {
@@ -99,7 +148,6 @@ class Mantenimiento extends BaseController
                     'Placa' => $camion_actual['N_Placa'],
                 );
                 $this->Mantenimiento_model->guardarDetalleMantenimiento($data);
-               
             } else {
                 $data = array(
                     'ID_mantenimiento' => $ID_mantenimiento,
@@ -115,7 +163,6 @@ class Mantenimiento extends BaseController
                     'Placa' => '',
                 );
                 $this->Mantenimiento_model->guardarDetalleMantenimiento($data);
-               
             }
         }
     }

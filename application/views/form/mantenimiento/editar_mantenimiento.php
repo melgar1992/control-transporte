@@ -36,7 +36,8 @@
                           <div class="row">
                               <div class="col-md-12">
 
-                                  <form action="<?php echo site_url(); ?>/mantenimiento/guardarMantenimiento" method="POST" class="form-horizontal">
+                                  <form action="<?php echo site_url(); ?>/mantenimiento/actualizarMantenimiento" method="POST" class="form-horizontal">
+                                  <input type="text" hidden='hidden' id="ID_mantenimiento" name="ID_mantenimiento" value="<?php echo $mantenimiento['ID_Mantenimiento'] ?>">
                                       <div class="form-group">
                                           <div class="col-md-3">
                                               <label for="">Empleado a cargo:</label>
@@ -143,9 +144,9 @@
                                                           <td><input type='hidden' name='Fecha[]' value='<?php echo $row->Fecha ?>'><?php echo $row->Fecha ?></td>
                                                           <td><input type='hidden' name='ID_taller[]' value='<?php echo $row->ID_taller ?>'><?php echo $row->NombreTaller ?></td>
                                                           <td><input type='hidden' name='ID_categoria_mantenimiento[]' value='<?php echo $row->ID_categoria_mantenimiento ?>'><?php echo $row->NombreCategoria ?></td>
-                                                          <td><input type='hidden' name='ID_camion[]' value='<?php echo $row->ID_camion ?>'><?php echo $row->N_Placa ?></td>
-                                                          <td><input type='hidden' name='Porpagar[]' value='<?php echo $row->Porpagar ?>'><?php echo $row->Porpagar ?></td>
-                                                          <td><input type='text' maxlength='30' name='Descripcion[]' value='<?php echo $row->Descripcion ?>'><?php echo $row->Descripcion ?></td>
+                                                          <td><input type='hidden' name='ID_camion[]' value='<?php echo $row->ID_camion ?>'><?php echo $row->Placa ?></td>
+                                                          <td><input type='hidden' name='Porpagar[]' value='<?php echo $row->Porpagar ?>'><?php echo ($row->Porpagar == 0) ? 'Contado' : 'Por pagar'; ?></td>
+                                                          <td><input type='text' maxlength='30' name='Descripcion[]' value='<?php echo $row->Descripcion ?>'></td>
                                                           <td><input type='number' class='PrecioUnitario' min='0' name='PrecioUnitario[]' value='<?php echo $row->PrecioUnitario ?>'></td>
                                                           <td><input type='number' class='Cantidad' min='0' name='Cantidad[]' value='<?php echo $row->Cantidad ?>'></td>
                                                           <td><input type='hidden' name='ImporteTotal[]' value='<?php echo $row->ImporteTotal ?>'>
@@ -164,7 +165,7 @@
                                           <div class="col-md-2 col-md-offset-10">
                                               <div class="input-group">
                                                   <span class="input-group-addon">Total:</span>
-                                                  <input type="text" class="form-control" placeholder="" value="0.00" name="total" readonly="readonly">
+                                                  <input type="text" class="form-control" placeholder="" value="<?php echo $mantenimiento['MontoTotal'] ?>" name="total" readonly="readonly">
                                               </div>
                                           </div>
                                       </div>
