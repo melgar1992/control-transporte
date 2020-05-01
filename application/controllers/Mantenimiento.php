@@ -130,40 +130,56 @@ class Mantenimiento extends BaseController
     }
     public function guardarDetalleMantenimiento($ID_mantenimiento, $ID_taller, $ID_categoria_mantenimiento, $ID_camion, $Porpagar, $Fecha, $Descripcion, $PrecioUnitario, $Cantidad, $ImporteTotal)
     {
-        for ($i = 0; $i < count($ID_categoria_mantenimiento); $i++) {
-            $camion_actual = $this->Camion_model->obtenerCamionPropio($ID_camion[$i]);
-            if (isset($camion_actual)) {
-                $data = array(
-                    'ID_mantenimiento' => $ID_mantenimiento,
-                    'ID_taller' => $ID_taller[$i],
-                    'ID_categoria_mantenimiento' => $ID_categoria_mantenimiento[$i],
-                    'ID_camion' => $ID_camion[$i],
-                    'Porpagar' => $Porpagar[$i],
-                    'Fecha' => $Fecha[$i],
-                    'Descripcion' => $Descripcion[$i],
-                    'PrecioUnitario' => $PrecioUnitario[$i],
-                    'Cantidad' => $Cantidad[$i],
-                    'ImporteTotal' => $ImporteTotal[$i],
-                    'Kilometraje' => $camion_actual['Kilometraje'],
-                    'Placa' => $camion_actual['N_Placa'],
-                );
-                $this->Mantenimiento_model->guardarDetalleMantenimiento($data);
-            } else {
-                $data = array(
-                    'ID_mantenimiento' => $ID_mantenimiento,
-                    'ID_taller' => $ID_taller[$i],
-                    'ID_categoria_mantenimiento' => $ID_categoria_mantenimiento[$i],
-                    'Porpagar' => $Porpagar[$i],
-                    'Fecha' => $Fecha[$i],
-                    'Descripcion' => $Descripcion[$i],
-                    'PrecioUnitario' => $PrecioUnitario[$i],
-                    'Cantidad' => $Cantidad[$i],
-                    'ImporteTotal' => $ImporteTotal[$i],
-                    'Kilometraje' => '0',
-                    'Placa' => '',
-                );
-                $this->Mantenimiento_model->guardarDetalleMantenimiento($data);
+        if (isset($ID_categoria_mantenimiento)) {
+            for ($i = 0; $i < count($ID_categoria_mantenimiento); $i++) {
+                $camion_actual = $this->Camion_model->obtenerCamionPropio($ID_camion[$i]);
+                if (isset($camion_actual)) {
+                    $data = array(
+                        'ID_mantenimiento' => $ID_mantenimiento,
+                        'ID_taller' => $ID_taller[$i],
+                        'ID_categoria_mantenimiento' => $ID_categoria_mantenimiento[$i],
+                        'ID_camion' => $ID_camion[$i],
+                        'Porpagar' => $Porpagar[$i],
+                        'Fecha' => $Fecha[$i],
+                        'Descripcion' => $Descripcion[$i],
+                        'PrecioUnitario' => $PrecioUnitario[$i],
+                        'Cantidad' => $Cantidad[$i],
+                        'ImporteTotal' => $ImporteTotal[$i],
+                        'Kilometraje' => $camion_actual['Kilometraje'],
+                        'Placa' => $camion_actual['N_Placa'],
+                    );
+                    $this->Mantenimiento_model->guardarDetalleMantenimiento($data);
+                } else {
+                    $data = array(
+                        'ID_mantenimiento' => $ID_mantenimiento,
+                        'ID_taller' => $ID_taller[$i],
+                        'ID_categoria_mantenimiento' => $ID_categoria_mantenimiento[$i],
+                        'Porpagar' => $Porpagar[$i],
+                        'Fecha' => $Fecha[$i],
+                        'Descripcion' => $Descripcion[$i],
+                        'PrecioUnitario' => $PrecioUnitario[$i],
+                        'Cantidad' => $Cantidad[$i],
+                        'ImporteTotal' => $ImporteTotal[$i],
+                        'Kilometraje' => '0',
+                        'Placa' => '',
+                    );
+                    $this->Mantenimiento_model->guardarDetalleMantenimiento($data);
+                }
             }
         }
+        
+    }
+    public function eliminarMantenimiento($ID_mantenimiento)
+    {
+        $datos = array(
+            'Estado' => 'Inactivo',
+        );
+        $this->Mantenimiento_model->eliminarDetalleMantenimiento($ID_mantenimiento);
+        $this->Mantenimiento_model->actualizarMantenimiento($ID_mantenimiento, $datos);
+        $respuesta = array(
+            'tipo' => 'Exitoso',
+            'message' => 'Se elimino',
+        );
+        echo json_encode($respuesta);
     }
 }
