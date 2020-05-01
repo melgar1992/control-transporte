@@ -61,6 +61,7 @@
                                                     <tr>
                                                         <td><?php echo $row->ID_predio ?></td>
                                                         <td><?php echo $row->NombrePredio ?></td>
+                                                        <td><?php echo $row->Direccion ?></td>
                                                         <td><?php echo $row->Departamento ?></td>
                                                         <td><?php echo $row->Provincia ?></td>
                                                         <td><?php echo $row->Municipio ?></td>

@@ -1,6 +1,6 @@
 $(document).ready(function () {
-    var opcion = '';
-    var tabla = $('#tablaPredio').DataTable({
+	var opcion = '';
+	var tabla = $('#tablaPredio').DataTable({
 		responsive: "true",
 		"order": [
 			[0, "desc"]
@@ -26,8 +26,8 @@ $(document).ready(function () {
 			},
 			"sProcesing": "Procesando...",
 		}
-    });
-    $('#btn-cerrar').on('click', function () {
+	});
+	$('#btn-cerrar').on('click', function () {
 		LimpiarFormulario();
 	});
 	$(document).on('click', '#btn-editar', function () {
@@ -44,8 +44,13 @@ $(document).ready(function () {
 			dataType: "json",
 			success: function (respuesta) {
 
-				$('#NombreTaller').val(respuesta['NombreTaller']);
+				$('#NombrePredio').val(respuesta['NombrePredio']);
+				$('#Provincia').val(respuesta['Provincia']);
+				$('#Municipio').val(respuesta['Municipio']);
+				$('#NombrePropietario').val(respuesta['NombrePropietario']);
+				$('#ApellidoPropietario').val(respuesta['ApellidoPropietario']);
 				$("#Departamento option:contains(" + respuesta['Departamento'] + ")").attr("selected", true);
+				$("#TipoPredio option:contains(" + respuesta['TipoPredio'] + ")").attr("selected", true);
 				$('#Direccion').text(respuesta['Direccion']);
 			}
 		});
@@ -54,12 +59,12 @@ $(document).ready(function () {
 	});
 	$('#formpredio').submit(function (e) {
 		e.preventDefault();
-        NombrePredio = $.trim($('#NombrePredio').val());
-        Departamento = $.trim($('#Departamento').val());
-        Provincia = $.trim($('#Provincia').val());
-        Municipio = $.trim($('#Municipio').val());
-        NombrePropietario = $.trim($('#NombrePropietario').val());
-        ApellidoPropietario = $.trim($('#ApellidoPropietario').val());
+		NombrePredio = $.trim($('#NombrePredio').val());
+		Departamento = $.trim($('#Departamento').val());
+		Provincia = $.trim($('#Provincia').val());
+		Municipio = $.trim($('#Municipio').val());
+		NombrePropietario = $.trim($('#NombrePropietario').val());
+		ApellidoPropietario = $.trim($('#ApellidoPropietario').val());
 		TipoPredio = $.trim($('#TipoPredio').val());
 		Direccion = $.trim($('#Direccion').val());
 
@@ -70,28 +75,28 @@ $(document).ready(function () {
 				type: "POST",
 				url: base_url + "/Predio/ingresarPredio",
 				data: {
-                    NombrePredio: NombrePredio,
-                    Departamento: Departamento,
-                    Provincia: Provincia,
-                    Municipio: Municipio,
-                    NombrePropietario: NombrePropietario,
+					NombrePredio: NombrePredio,
+					Departamento: Departamento,
+					Provincia: Provincia,
+					Municipio: Municipio,
+					NombrePropietario: NombrePropietario,
 					ApellidoPropietario: ApellidoPropietario,
-                    TipoPredio: TipoPredio,
-                    Direccion: Direccion,
-			
+					TipoPredio: TipoPredio,
+					Direccion: Direccion,
+
 				},
 				dataType: "json",
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
 						ID_predio = respuesta['datos']['ID_predio'];
-                        NombrePredio = respuesta['datos']['NombrePredio'];
-                        Direccion = respuesta['datos']['Direccion'];
-                        Departamento = respuesta['datos']['Departamento'];
-                        Provincia = respuesta['datos']['Provincia'];
-                        Municipio = respuesta['datos']['Municipio'];
-                        NombrePropietario = respuesta['datos']['NombrePropietario'] + ' ' + respuesta['datos']['ApellidoPropietario'];
+						NombrePredio = respuesta['datos']['NombrePredio'];
+						Direccion = respuesta['datos']['Direccion'];
+						Departamento = respuesta['datos']['Departamento'];
+						Provincia = respuesta['datos']['Provincia'];
+						Municipio = respuesta['datos']['Municipio'];
+						NombrePropietario = respuesta['datos']['NombrePropietario'] + ' ' + respuesta['datos']['ApellidoPropietario'];
 						TipoPredio = respuesta['datos']['TipoPredio'];
-						tabla.row.add([ID_predio, NombrePredio,Direccion, Departamento,Provincia, Municipio, NombrePropietario,TipoPredio]).draw();
+						tabla.row.add([ID_predio, NombrePredio, Direccion, Departamento, Provincia, Municipio, NombrePropietario, TipoPredio]).draw();
 						LimpiarFormulario();
 						swal({
 							title: 'Guardar',
@@ -115,20 +120,29 @@ $(document).ready(function () {
 				type: "POST",
 				url: base_url + "/Predio/editarPredio",
 				data: {
-					ID_taller: ID_taller,
-					NombreTaller: NombreTaller,
+					ID_predio: ID_predio,
+					NombrePredio: NombrePredio,
 					Departamento: Departamento,
+					Provincia: Provincia,
+					Municipio: Municipio,
+					NombrePropietario: NombrePropietario,
+					ApellidoPropietario: ApellidoPropietario,
+					TipoPredio: TipoPredio,
 					Direccion: Direccion,
 				},
 				dataType: "json",
 				success: function (respuesta) {
 					if (respuesta['respuesta'] === 'Exitoso') {
-						ID_taller = respuesta['datos']['ID_taller'];
-						NombreTaller = respuesta['datos']['NombreTaller'];
-						Departamento = respuesta['datos']['Departamento'];
+
+						NombrePredio = respuesta['datos']['NombrePredio'];
 						Direccion = respuesta['datos']['Direccion'];
+						Departamento = respuesta['datos']['Departamento'];
+						Provincia = respuesta['datos']['Provincia'];
+						Municipio = respuesta['datos']['Municipio'];
+						NombrePropietario = respuesta['datos']['NombrePropietario'] + ' ' + respuesta['datos']['ApellidoPropietario'];
+						TipoPredio = respuesta['datos']['TipoPredio'];
 						LimpiarFormulario();
-						tabla.row(fila).data([ID_taller, NombreTaller, Departamento, Direccion]).draw();
+						tabla.row(fila).data([ID_predio, NombrePredio, Direccion, Departamento, Provincia, Municipio, NombrePropietario, TipoPredio]).draw();
 
 						swal({
 							title: 'Editado',
@@ -150,7 +164,7 @@ $(document).ready(function () {
 		}
 
 
-    });
+	});
 	$(document).on('click', '#btn-borrar', function () {
 		Swal.fire({
 			title: 'Esta seguro de elimar?',
