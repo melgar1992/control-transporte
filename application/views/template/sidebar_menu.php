@@ -45,7 +45,7 @@
                     <ul class="nav child_menu">
 
                       <li><a href="<?php echo site_url("Cliente/clientes") ?>">Clientes</a></li>
-                      <li><a href="<?php echo site_url("") ?>">Predios</a></li>
+                      <li><a href="<?php echo site_url("Predio/predio") ?>">Predios</a></li>
 
                     </ul>
                   </li>
