@@ -49,6 +49,14 @@
 
                     </ul>
                   </li>
+                  <li><a><i class="fas fa-money"></i> Transporte<span class="fas fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+
+                      <li><a href="<?php echo site_url("Transporte/transporte") ?>">Movimientos</a></li>
+
+
+                    </ul>
+                  </li>
 
                   <li><a><i class="far fa-chart-bar"></i> Reportes <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">

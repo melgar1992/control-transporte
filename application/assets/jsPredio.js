@@ -59,6 +59,7 @@ $(document).ready(function () {
 	});
 	$('#formpredio').submit(function (e) {
 		e.preventDefault();
+
 		NombrePredio = $.trim($('#NombrePredio').val());
 		Departamento = $.trim($('#Departamento').val());
 		Provincia = $.trim($('#Provincia').val());
