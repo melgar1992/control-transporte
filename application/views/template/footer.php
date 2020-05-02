@@ -104,6 +104,7 @@
           function mayus(e) {
             e.value = e.value.toUpperCase();
           }
+         
         </script>
         <!-- sweetalert -->
         <?php script('sweetalert2.all.min.js') ?>
