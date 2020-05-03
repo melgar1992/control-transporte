@@ -220,25 +220,20 @@ $(document).ready(function () {
 	});
 	// Al cambiar el precio transporte se realiza los calculos para el transporte
 	$(document).on('change', '#tablaDetalleTransporte input.Precio', function () {
-
 		sumar();
 
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.PrecioProveedor', function () {
-		
+	$(document).on('change', '#tablaDetalleTransporte input.PrecioProveedor', function () {	
 		sumar();
 
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.Cantidad', function () {
-		
+	$(document).on('change', '#tablaDetalleTransporte input.Cantidad', function () {		
 		sumar();
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.Comision', function () {
-		
+	$(document).on('change', '#tablaDetalleTransporte input.Comision', function () {		
 		sumar();
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.Descuento', function () {
-		
+	$(document).on('change', '#tablaDetalleTransporte input.Descuento', function () {		
 		sumar();
 	});
 
