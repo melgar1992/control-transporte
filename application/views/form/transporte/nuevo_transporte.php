@@ -73,11 +73,11 @@
                                       <div class="form-group">
                                           <div class="col-md-3">
                                               <label for="">Fecha:</label>
-                                              <input type="date" value="<?php echo date("Y-m-d") ?>" class="form-control" name="fecha" required>
+                                              <input type="date" value="<?php echo date("Y-m-d") ?>" class="form-control" name="Fecha" required>
                                           </div>
                                           <div class="col-md-3 has-feedback">
                                               <label for="Distancia">Distancia</label>
-                                              <input type="text" name="Distancia" id="Distancia" class="form-control">
+                                              <input type="number" min="0" name="Distancia" id="Distancia" class="form-control">
                                               <span class="form-control-feedback right" aria-hidden="true"><strong>Km</strong></span>
                                           </div>
 
@@ -94,82 +94,80 @@
                                       <label for="Productos" class="col-md-12">Buscar y agregar camiones para el servicio</label>
                                       <br></br>
                                       <div class="form-group">
-                                          <<div class="col-md-2">
+                                          <div class="col-md-2">
 
                                               <button class="btn btn-success btn-flat btn-block" type="button" data-toggle="modal" data-target="#modal-CamionesProveedores"><span class="fa fa-search"></span> Agregar camion proveedor</button>
-                                      </div>
-                                      <div class="col-md-2">
+                                          </div>
+                                          <div class="col-md-2">
 
-                                          <button class="btn btn-success btn-flat btn-block" type="button" data-toggle="modal" data-target="#modal-CamionesPropios"><span class="fa fa-search"></span> Agregar camion propio</button>
+                                              <button class="btn btn-success btn-flat btn-block" type="button" data-toggle="modal" data-target="#modal-CamionesPropios"><span class="fa fa-search"></span> Agregar camion propio</button>
+                                          </div>
                                       </div>
+                                      <br></br>
+                                      <table id="tablaDetalleTransporte" class="table table-bordered table-striped table-hover">
+                                          <thead>
+                                              <tr>
+                                                  <th>Nombre chofer</th>
+                                                  <th>CI</th>
+                                                  <th>Placa</th>
+                                                  <th>Act viaje</th>
+                                                  <th>Diesel Bs</th>
+                                                  <th>Precio proveedor</th>
+                                                  <th>Precio cliente</th>
+                                                  <th>Cantidad</th>
+                                                  <th>Comision</th>
+                                                  <th>Descuento</th>
+                                                  <th>Total</th>
+                                                  <th>Opciones</th>
+                                              </tr>
+                                          </thead>
+                                          <tbody>
+
+                                          </tbody>
+                                      </table>
+
+                                      <div class="form-group">
+                                          <div class="col-md-3">
+                                              <div class="input-group">
+                                                  <span class="input-group-addon">Subtotal:</span>
+                                                  <input type="text" class="form-control" placeholder="" value="0.00" name="SubTotal" readonly="readonly">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="input-group">
+                                                  <span class="input-group-addon">Comision:</span>
+                                                  <input type="text" class="form-control" placeholder="" value="0.00" name="ComisionTotal" readonly="readonly">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="input-group">
+                                                  <span class="input-group-addon">Descuento:</span>
+                                                  <input type="text" class="form-control" placeholder="" value="0.00" name="DescuentoTotal" value="0.00" readonly="readonly">
+                                              </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                              <div class="input-group">
+                                                  <span class="input-group-addon">Total cliente:</span>
+                                                  <input type="text" class="form-control" placeholder="" value="0.00" name="Total" readonly="readonly">
+                                              </div>
+                                          </div>
+                                      </div>
+
+                                      <div class="form-group">
+                                          <div class="col-md-12">
+                                              <a class="btn btn-primary btn-flat" href="<?php echo site_url("Movimientos/Ventas") ?>" type="button">Volver</a>
+                                              <button type="submit" class="btn btn-success btn-flat">Guardar</button>
+                                          </div>
+
+                                      </div>
+                                  </form>
                               </div>
-                              <br></br>
-                              <table id="tbventas" class="table table-bordered table-striped table-hover">
-                                  <thead>
-                                      <tr>
-                                          <th>Nombre</th>
-                                          <th>CI</th>
-                                          <th>Placa</th>
-                                          <th>Act viaje</th>
-                                          <th>Diesel Bs</th>
-                                          <th>Descripcion</th>
-                                          <th>Precio proveedor</th>
-                                          <th>Precio cliente</th>
-                                          <th>Cantidad</th>
-                                          <th>Comision</th>
-                                          <th>Descuento</th>
-                                          <th>Cantidad</th>
-                                          <th>Importe</th>
-                                          <th>Opciones</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-
-                                  </tbody>
-                              </table>
-
-                              <div class="form-group">
-                                  <div class="col-md-3">
-                                      <div class="input-group">
-                                          <span class="input-group-addon">Subtotal:</span>
-                                          <input type="text" class="form-control" placeholder="" value="0.00" name="subtotal" readonly="readonly">
-                                      </div>
-                                  </div>
-                                  <div class="col-md-3">
-                                      <div class="input-group">
-                                          <span class="input-group-addon">Comision:</span>
-                                          <input type="text" class="form-control" placeholder="" value="0.00" name="igv" readonly="readonly">
-                                      </div>
-                                  </div>
-                                  <div class="col-md-3">
-                                      <div class="input-group">
-                                          <span class="input-group-addon">Descuento:</span>
-                                          <input type="text" class="form-control" placeholder="" value="0.00" name="descuento" value="0.00" readonly="readonly">
-                                      </div>
-                                  </div>
-                                  <div class="col-md-3">
-                                      <div class="input-group">
-                                          <span class="input-group-addon">Total cliente:</span>
-                                          <input type="text" class="form-control" placeholder="" value="0.00" name="total" readonly="readonly">
-                                      </div>
-                                  </div>
-                              </div>
-
-                              <div class="form-group">
-                                  <div class="col-md-12">
-                                      <a class="btn btn-primary btn-flat" href="<?php echo site_url("Movimientos/Ventas") ?>" type="button">Volver</a>
-                                      <button type="submit" class="btn btn-success btn-flat">Guardar</button>
-                                  </div>
-
-                              </div>
-                              </form>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
       </div>
-  </div>
   </div>
   <!-- /page content -->
 
@@ -212,7 +210,7 @@
                                       <?php $dataPredioOrigen = $row->ID_predio . "*" . $row->NombrePredio . "*" . $row->Direccion . "*" . $row->Departamento . "*" . $row->Provincia . "*" . $row->Municipio . "*" . $row->NombrePropietario . "*" . $row->ApellidoPropietario . '*' . $row->TipoPredio; ?>
 
                                       <td>
-                                          <button type="button" class="btn btn-success btn-check" value="<?php echo $dataPredioOrigen ?>"><span class="fa fa-check"></span></button>
+                                          <button type="button" class="btn btn-success btn-check-predioOrigen" value="<?php echo $dataPredioOrigen ?>"><span class="fa fa-check"></span></button>
                                       </td>
                                   </tr>
                               <?php endforeach; ?>
@@ -270,7 +268,7 @@
                                       <?php $dataPredioOrigen = $row->ID_predio . "*" . $row->NombrePredio . "*" . $row->Direccion . "*" . $row->Departamento . "*" . $row->Provincia . "*" . $row->Municipio . "*" . $row->NombrePropietario . "*" . $row->ApellidoPropietario . '*' . $row->TipoPredio; ?>
 
                                       <td>
-                                          <button type="button" class="btn btn-success btn-check" value="<?php echo $dataPredioOrigen ?>"><span class="fa fa-check"></span></button>
+                                          <button type="button" class="btn btn-success btn-check-predioDestino" value="<?php echo $dataPredioOrigen ?>"><span class="fa fa-check"></span></button>
                                       </td>
                                   </tr>
                               <?php endforeach; ?>
@@ -326,7 +324,7 @@
                                       <?php $dataCliente = $row->ID_Cliente . "*" . $row->CI . "*" . $row->Nombre . "*" . $row->Apellidos . "*" . $row->Direccion . "*" . $row->Telefono_01 . "*" . $row->Telefono_02; ?>
 
                                       <td>
-                                          <button type="button" class="btn btn-success btn-check" value="<?php echo $dataCliente ?>"><span class="fa fa-check"></span></button>
+                                          <button type="button" class="btn btn-success btn-check-cliente" value="<?php echo $dataCliente ?>"><span class="fa fa-check"></span></button>
                                       </td>
                                   </tr>
                               <?php endforeach; ?>
@@ -383,7 +381,7 @@
                                       <?php $dataCamionesProveedor = $row->ID_camion . "*" . $row->NombreProveedor . "*" . $row->ApellidosProveedor . "*" . $row->NombresChofer . "*" . $row->CI . "*" . $row->Telefono . "*" . $row->N_Placa . "*" . $row->Marca . "*" . $row->Color . "*" . $row->Capacidad . "*" . $row->N_Senasag; ?>
 
                                       <td>
-                                          <button type="button" class="btn btn-success btn-check" value="<?php echo $dataCamionesProveedor ?>"><span class="fa fa-check"></span></button>
+                                          <button type="button" class="btn btn-success btn-check-camionesProveedores" value="<?php echo $dataCamionesProveedor ?>"><span class="fa fa-check"></span></button>
                                       </td>
                                   </tr>
                               <?php endforeach; ?>
@@ -440,7 +438,7 @@
                                       <?php $dataCamionesPropios = $row->ID_camion . "*" . $row->Nombres . "*" . $row->Apellido_p . "*" . $row->Apellido_m . "*" . $row->CI . "*" . $row->N_Placa . "*" . $row->Modelo . "*" . $row->Marca . "*" . $row->Color . "*" . $row->Capacidad . "*" . $row->Kilometraje . "*" . $row->N_Senasag; ?>
 
                                       <td>
-                                          <button type="button" class="btn btn-success btn-check" value="<?php echo $dataCamionesPropios ?>"><span class="fa fa-check"></span></button>
+                                          <button type="button" class="btn btn-success btn-check-camionesPropios" value="<?php echo $dataCamionesPropios ?>"><span class="fa fa-check"></span></button>
                                       </td>
                                   </tr>
                               <?php endforeach; ?>
