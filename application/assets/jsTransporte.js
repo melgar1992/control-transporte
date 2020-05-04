@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	var opcion = '';
+	sumar();
 	var tabla = $('#tablaTransporte').DataTable({
 		responsive: "true",
 		"order": [
@@ -187,7 +188,7 @@ $(document).ready(function () {
 			sumar();
 
 		} else {
-			alert("Taller o ferreteria y categoria de mantenimiento son obligatorios");
+			alert("Seleccionar un camion es obligatorios");
 		}
 
 	});
@@ -214,7 +215,7 @@ $(document).ready(function () {
 			sumar();
 
 		} else {
-			alert("Taller o ferreteria y categoria de mantenimiento son obligatorios");
+			alert("Seleccionar un camion es obligatorios");
 		}
 
 	});
@@ -253,16 +254,18 @@ function sumar() {
 	comisionTotal = 0;
 	descuento = 0;
 	$("#tablaDetalleTransporte  tbody tr").each(function () {
+		//Se calcula y se actualiza el monto a  pagar por el cliente por camion
+		TotalporCamion = Number($(this).find("td:eq(6)").children('input').val()) * Number($(this).find("td:eq(7)").children('input').val());
+		$(this).find("td:eq(10)").children('input').val(TotalporCamion);
+		$(this).find("td:eq(10)").children('p').text(TotalporCamion.toFixed(2));
+		//Se calcula el acumulado de la fila
 		subTotal = subTotal + Number($(this).find("td:eq(10)").text());
 		descuento = descuento + Number($(this).find("td:eq(9)").children('input').val())
 		comision = Number($(this).find("td:eq(8)").children('input').val());
 		cantidad = Number($(this).find("td:eq(7)").children('input').val());
 		difPrecio = Number($(this).find("td:eq(6)").children('input').val()) - Number($(this).find("td:eq(5)").children('input').val());
 		comisionTotal = comisionTotal + (difPrecio * cantidad) + comision;
-		//Se calcula y se actualiza el monto a  pagar por el cliente
-		TotalDetalle = Number($(this).find("td:eq(6)").children('input').val()) * Number($(this).find("td:eq(7)").children('input').val());
-		$(this).find("td:eq(10)").children('input').val(TotalDetalle);
-		$(this).find("td:eq(10)").children('p').text(TotalDetalle.toFixed(2));
+		
 	});
 	$("input[name=SubTotal]").val(subTotal.toFixed(2));
 	$("input[name=ComisionTotal]").val(comisionTotal.toFixed(2));

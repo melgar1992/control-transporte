@@ -36,7 +36,7 @@
                           <div class="row">
                               <div class="col-md-12">
 
-                                  <form action="<?php echo base_url(); ?>movimientos/ventas/guardar" method="POST" class="form-horizontal">
+                                  <form action="<?php echo site_url(); ?>Transporte/guardarTransporte" method="POST" class="form-horizontal">
 
                                       <div class="form-group">
                                           <div class="col-md-3">
@@ -155,7 +155,7 @@
 
                                       <div class="form-group">
                                           <div class="col-md-12">
-                                              <a class="btn btn-primary btn-flat" href="<?php echo site_url("Movimientos/Ventas") ?>" type="button">Volver</a>
+                                              <a class="btn btn-primary btn-flat" href="<?php echo site_url("Transporte/transporte") ?>" type="button">Volver</a>
                                               <button type="submit" class="btn btn-success btn-flat">Guardar</button>
                                           </div>
 

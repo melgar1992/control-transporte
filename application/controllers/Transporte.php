@@ -18,4 +18,8 @@ class Transporte extends BaseController
         $datos['camionesPropios'] = $this->Camion_model->obtenerCamionesPropios();
         $this->loadView('Transporte', '/form/transporte/nuevo_transporte',$datos);
     }
+    public function guardarTransporte()
+    {
+        # code...
+    }
 }
