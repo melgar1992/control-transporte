@@ -37,13 +37,13 @@
                               <div class="col-md-12">
 
                                   <form action="<?php echo site_url(); ?>/Transporte/guardarTransporte" method="POST" class="form-horizontal">
-
+                                      <input type="number" hidden='hidden' id='ID_transporte' name="ID_transporte" value="<?php echo  $transporte['ID_transporte'] ?>">
                                       <div class="form-group">
                                           <div class="col-md-3">
                                               <label for="">Predio Origen:</label>
                                               <div class="input-group">
-                                                  <input type="hidden" name="ID_predio_origen" id="ID_predio_origen">
-                                                  <input type="text" class="form-control" readonly="readonly" required id="predioOrigen">
+                                                  <input type="hidden" name="ID_predio_origen" id="ID_predio_origen" value="<?php echo $transporte['ID_predio_origen'] ?>">
+                                                  <input type="text" class="form-control" readonly="readonly" value="<?php echo $transporte['NombrePredioOringen'] ?>" required id="predioOrigen">
                                                   <span class="input-group-btn">
                                                       <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-predioOrigen"><span class="fa fa-search"></span> Buscar</button>
                                                   </span>
@@ -52,8 +52,8 @@
                                           <div class="col-md-3">
                                               <label for="">Predio Destino:</label>
                                               <div class="input-group">
-                                                  <input type="hidden" name="ID_predio_destino" id="ID_predio_destino">
-                                                  <input type="text" class="form-control" readonly="readonly" required id="PredioDestino">
+                                                  <input type="hidden" name="ID_predio_destino" value="<?php echo $transporte['ID_predio_destino'] ?>" id="ID_predio_destino">
+                                                  <input type="text" class="form-control" readonly="readonly" value="<?php echo $transporte['NombrePredioDestino'] ?>" required id="PredioDestino">
                                                   <span class="input-group-btn">
                                                       <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-predioDestino"><span class="fa fa-search"></span> Buscar</button>
                                                   </span>
@@ -62,8 +62,8 @@
                                           <div class="col-md-3">
                                               <label for="">Cliente:</label>
                                               <div class="input-group">
-                                                  <input type="hidden" name="ID_Cliente" id="ID_Cliente">
-                                                  <input type="text" class="form-control" readonly="readonly" required id="cliente">
+                                                  <input type="hidden" name="ID_Cliente" value="<?php echo $transporte['ID_Cliente'] ?>" id="ID_Cliente">
+                                                  <input type="text" class="form-control" readonly="readonly" value="<?php echo $transporte['NombreCliente'] . ' ' . $transporte['ApellidosCliente'] ?>" required id="cliente">
                                                   <span class="input-group-btn">
                                                       <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#modal-Cliente"><span class="fa fa-search"></span> Buscar</button>
                                                   </span>
@@ -73,11 +73,11 @@
                                       <div class="form-group">
                                           <div class="col-md-3">
                                               <label for="">Fecha:</label>
-                                              <input type="date" value="<?php echo date("Y-m-d") ?>" class="form-control" name="Fecha" required>
+                                              <input type="date" value="<?php echo $transporte['Fecha'] ?>" class="form-control" name="Fecha" required>
                                           </div>
                                           <div class="col-md-3 has-feedback">
                                               <label for="Distancia">Distancia</label>
-                                              <input type="number" min="0" name="Distancia" id="Distancia" class="form-control">
+                                              <input type="number" min="0" name="Distancia" value="<?php echo $transporte['Distancia'] ?>" id="Distancia" class="form-control">
                                               <span class="form-control-feedback right" aria-hidden="true"><strong>Km</strong></span>
                                           </div>
 
@@ -86,7 +86,7 @@
                                           <div class="col-md-6">
                                               <label for="Descripcion_transporte" class="control-label">Descripcion general del transporte: <span class="required">*</span>
                                               </label>
-                                              <textarea name="Descripcion_transporte" maxlength="150" id="Descripcion_transporte" class="form-control" rows="3" placeholder="" required="required"></textarea>
+                                              <textarea name="Descripcion_transporte" maxlength="150" id="Descripcion_transporte" class="form-control" rows="3" placeholder="" required="required"><?php echo $transporte['Descripcion'] ?></textarea>
                                           </div>
 
                                       </div>
@@ -122,7 +122,28 @@
                                               </tr>
                                           </thead>
                                           <tbody>
-
+                                              <?php
+                                                if (count($detalle_transporte) > 0) {
+                                                    foreach ($detalle_transporte as $row) { ?>
+                                                      <tr>
+                                                          <td><?php echo (isset($row->NombresChofer)) ? $row->NombresChofer : $row->nombreChoferPropio; ?></td>
+                                                          <td><?php echo (isset($row->CI)) ? $row->CI : $row->CIcamionPropio; ?></td>
+                                                          <td><input type='hidden' name='ID_camion[]' value='<?php echo $row->ID_camion ?>'><?php echo $row->N_Placa ?></td>
+                                                          <td><input type='number' class='form-control' name='ActViaje[]' value='<?php echo $row->ActViaje ?>'></td>
+                                                          <td><input type='number' class='form-control' <?php echo (isset($row->ID_proveedor)) ? 'readonly' : '' ?> name='Diesel[]' value='<?php echo $row->Diesel ?>'></td>
+                                                          <td><input type='number' class='form-control PrecioProveedor' name='PrecioProveedor[]' value='<?php echo $row->PrecioProveedor ?>'></td>
+                                                          <td><input type='number' class='form-control Precio' name='Precio[]' value='<?php echo $row->Precio ?>'></td>
+                                                          <td><input type='number' class='form-control Cantidad' name='Cantidad[]' value='<?php echo $row->Cantidad ?>'></td>
+                                                          <td><input type='number' class='form-control Comision' name='Comision[]' value='<?php echo $row->Comision ?>'></td>
+                                                          <td><input type='number' class='form-control Descuento' name='Descuento[]' value='<?php echo $row->Descuento ?>'></td>
+                                                          <td><input type='hidden' name='TotalDetalle[]' value='<?php echo $row->Total ?>'>
+                                                              <p><?php echo $row->Total ?></p>
+                                                          </td>
+                                                          <td><button type='button' class='btn btn-danger btn-remove-mantenimiento'><span class='fa fa-remove'></span></button></td>
+                                                      </tr>
+                                              <?php }
+                                                }
+                                                ?>
                                           </tbody>
                                       </table>
 

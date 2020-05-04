@@ -28,6 +28,12 @@ $(document).ready(function () {
 			"sProcesing": "Procesando...",
 		}
 	});
+	$(document).on('click', '#btn-editar', function () {
+		fila = $(this).closest('tr');
+		ID_transporte = parseInt(fila.find('td:eq(0)').text());
+		window.open((base_url + '/Transporte/editarTransporte/' + ID_transporte), '_self');
+
+	});
 	$('#tablaPredioDestino').DataTable({
 		responsive: "true",
 		"order": [
@@ -208,7 +214,7 @@ $(document).ready(function () {
 			html += "<td><input type='number' class='form-control Cantidad' min='0' name = 'Cantidad[]' value ='" + camionesProveedores[9] + "'></td>";
 			html += "<td><input type='number' class='form-control Comision' min='0' name = 'Comision[]' value ='0'></td>";
 			html += "<td><input type='number' class='form-control Descuento' min='0' name = 'Descuento[]' value ='0'></td>";
-			html += "<td><input type ='hidden' name = 'Total[]' value ='0'><p>0</p></td>";
+			html += "<td><input type ='hidden' name = 'TotalDetalle[]' value ='0'><p>0</p></td>";
 			html += "<td><button type='button' class='btn btn-danger btn-remove-mantenimiento'><span class='fa fa-remove'></span></button></td>";
 			html += "</tr>";
 			$("#tablaDetalleTransporte tbody").append(html);

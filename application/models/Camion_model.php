@@ -32,7 +32,7 @@ class Camion_model extends CI_Model
     }
     public function obtenerCamionPropio($ID_camion)
     {
-        $this->db->select('c.N_Placa,c.Modelo, c.Marca,c.Color, c.Capacidad, c.N_Senasag,c.Kilometraje,c.ID_contrato, contrato.ID_empleado, persona.CI, Nombres, Apellido_p, Apellido_m, tipocontrato.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->select('c.ID_camion, c.N_Placa,c.Modelo, c.Marca,c.Color, c.Capacidad, c.N_Senasag,c.Kilometraje,c.ID_contrato, contrato.ID_empleado, persona.CI, Nombres, Apellido_p, Apellido_m, tipocontrato.Descripcion, sueldo, FechaIngreso, FechaSalida');
         $this->db->from('camion c');
         $this->db->join('contrato', 'contrato.ID_contrato = c.ID_contrato');
         $this->db->join('tipocontrato', 'contrato.ID_tipoContrato = tipocontrato.ID_tipoContrato');

@@ -51,7 +51,6 @@
                                                 <th>Destino</th>
                                                 <th>Cliente</th>
                                                 <th>Descripcion</th>
-                                                <th>Cantidad Transporte</th>
                                                 <th>SubTotal</th>
                                                 <th>Comision</th>
                                                 <th>Descuento</th>
@@ -70,12 +69,10 @@
                                                         <td><?php echo $row->NombrePredioDestino ?></td>
                                                         <td><?php echo $row->NombreCliente . ' ' . $row->ApellidosCliente?></td>
                                                         <td><?php echo $row->Descripcion ?></td>
-                                                        <td><?php echo $row->CantidadTransporte ?></td>
                                                         <td><?php echo $row->SubTotal ?></td>
                                                         <td><?php echo $row->comisionTotal ?></td>
                                                         <td><?php echo $row->DescuentoTotal ?></td>
                                                         <td><?php echo $row->Total ?></td>
-                                                        <td><?php echo $row->MontoTotal ?></td>
                                                         <td>
                                                             <button class="btn btn-warning btn-sm" value="" id="btn-editar"><i class="fas fa-pencil-alt"></i> Editar</button>
                                                             <button class="btn btn-danger btn-sm" id="btn-borrar"><i class="fas fa-trash-alt"></i> Borrar</button>
