@@ -108,11 +108,10 @@ class Camion_model extends CI_Model
             'Color' => $Color,
             'Capacidad' => $Capacidad,
             'N_senasag' => $N_senasag,
- 
+
         );
         $this->db->where('ID_camion', $ID_camion);
         $this->db->update('camion', $datos);
-
     }
     public function obtenerCamionProveedor($ID_camion)
     {
@@ -122,5 +121,13 @@ class Camion_model extends CI_Model
         $this->db->where('c.Estado', 'Activo');
         $this->db->where('c.ID_camion', $ID_camion);
         return $this->db->get()->row_array();
+    }
+    public function actualizarKilometraje($ID_camion, $Kilometraje)
+    {
+        $datos = array(
+            'Kilometraje' => $Kilometraje,
+        );
+        $this->db->where('ID_camion',$ID_camion);
+        $this->db->update('camion', $datos);
     }
 }

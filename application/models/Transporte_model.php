@@ -11,8 +11,17 @@ class Transporte_model extends CI_Model
         $this->db->join('predio pd', 'pd.ID_predio = t.ID_predio_destino');
         $this->db->join('cliente c', 'c.ID_cliente = t.ID_cliente');
         $this->db->join('user u', 'u.ID_user = t.ID_user');
-        $this->db->limit(1000);
+        $this->db->limit(500);
         $this->db->where('t.Estado', 'Activo');
         return $this->db->get()->result();
+    }
+    public function guardarTransporte($datos)
+    {
+        $this->db->insert('Transporte',$datos);
+        return $this->db->insert_id();
+    }
+    public function guardarDetalleTransporte($datos)
+    {
+        $this->db->insert('detalle_transporte_ganado',$datos);
     }
 }
