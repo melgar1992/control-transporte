@@ -173,13 +173,13 @@ $(document).ready(function () {
 			html += "<td>" + camionesPropios[1] + ' ' + camionesPropios[2] + ' ' + camionesPropios[3] + "</td>";
 			html += "<td>" + camionesPropios[4] + "</td>";
 			html += "<td><input type='hidden' name = 'ID_camion[]' value ='" + camionesPropios[0] + "'>" + camionesPropios[5] + "</td>";
-			html += "<td><input type='number' min='0' name = 'ActViaje[]' value ='0'></td>";
-			html += "<td><input type='number' min='0' name = 'Diesel[]' value ='0'></td>";
-			html += "<td><input type='number' class='PrecioProveedor' min='0' name = 'PrecioProveedor[]' value ='0'></td>";
-			html += "<td><input type='number' class='Precio' min='0' name = 'Precio[]' value ='0'></td>";
-			html += "<td><input type='number' class='Cantidad' min='0' name = 'Cantidad[]' value ='" + camionesPropios[9] + "'></td>";
-			html += "<td><input type='number' class='Comision' min='0' name = 'Comision[]' value ='0'></td>";
-			html += "<td><input type='number' class='Descuento' min='0' name = 'Descuento[]' value ='0'></td>";
+			html += "<td><input type='number'class = 'form-control' min='0' name = 'ActViaje[]' value ='0'></td>";
+			html += "<td><input type='number' class = 'form-control' min='0' name = 'Diesel[]' value ='0'></td>";
+			html += "<td><input type='number' class='PrecioProveedor form-control' min='0' name = 'PrecioProveedor[]' value ='0'></td>";
+			html += "<td><input type='number' class='Precio form-control' min='0' name = 'Precio[]' value ='0'></td>";
+			html += "<td><input type='number' class='Cantidad form-control' min='0' name = 'Cantidad[]' value ='" + camionesPropios[9] + "'></td>";
+			html += "<td><input type='number' class='Comision form-control' min='0' name = 'Comision[]' value ='0'></td>";
+			html += "<td><input type='number' class='Descuento form-control' min='0' name = 'Descuento[]' value ='0'></td>";
 			html += "<td><input type ='hidden' name = 'Total[]' value ='0'><p>0</p></td>";
 			html += "<td><button type='button' class='btn btn-danger btn-remove-mantenimiento'><span class='fa fa-remove'></span></button></td>";
 			html += "</tr>";
@@ -200,13 +200,13 @@ $(document).ready(function () {
 			html += "<td>" + camionesProveedores[3] + "</td>";
 			html += "<td>" + camionesProveedores[4] + "</td>";
 			html += "<td><input type='hidden' name = 'ID_camion[]' value ='" + camionesProveedores[0] + "'>" + camionesProveedores[6] + "</td>";
-			html += "<td><input type='number' min='0' name = 'ActViaje[]' value ='0'></td>";
-			html += "<td><input type='number' readonly='readonly' min='0' name = 'Diesel[]' value ='0'></td>";
-			html += "<td><input type='number' class='PrecioProveedor' min='0' name = 'PrecioProveedor[]' value ='0'></td>";
-			html += "<td><input type='number' class='Precio' min='0' name = 'Precio[]' value ='0'></td>";
-			html += "<td><input type='number' class='Cantidad' min='0' name = 'Cantidad[]' value ='" + camionesProveedores[9] + "'></td>";
-			html += "<td><input type='number' class='Comision' min='0' name = 'Comision[]' value ='0'></td>";
-			html += "<td><input type='number' class='Descuento' min='0' name = 'Descuento[]' value ='0'></td>";
+			html += "<td><input type='number' class = 'form-control' min='0' name = 'ActViaje[]' value ='0'></td>";
+			html += "<td><input type='number' class ='form-control' readonly='readonly' min='0' name = 'Diesel[]' value ='0'></td>";
+			html += "<td><input type='number' class='form-control PrecioProveedor' min='0' name = 'PrecioProveedor[]' value ='0'></td>";
+			html += "<td><input type='number' class='form-control Precio' min='0' name = 'Precio[]' value ='0'></td>";
+			html += "<td><input type='number' class='form-control Cantidad' min='0' name = 'Cantidad[]' value ='" + camionesProveedores[9] + "'></td>";
+			html += "<td><input type='number' class='form-control Comision' min='0' name = 'Comision[]' value ='0'></td>";
+			html += "<td><input type='number' class='form-control Descuento' min='0' name = 'Descuento[]' value ='0'></td>";
 			html += "<td><input type ='hidden' name = 'Total[]' value ='0'><p>0</p></td>";
 			html += "<td><button type='button' class='btn btn-danger btn-remove-mantenimiento'><span class='fa fa-remove'></span></button></td>";
 			html += "</tr>";
@@ -223,17 +223,23 @@ $(document).ready(function () {
 		sumar();
 
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.PrecioProveedor', function () {	
+	$(document).on('change', '#tablaDetalleTransporte input.PrecioProveedor', function () {
 		sumar();
 
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.Cantidad', function () {		
+	$(document).on('change', '#tablaDetalleTransporte input.Cantidad', function () {
 		sumar();
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.Comision', function () {		
+	$(document).on('change', '#tablaDetalleTransporte input.Comision', function () {
 		sumar();
 	});
-	$(document).on('change', '#tablaDetalleTransporte input.Descuento', function () {		
+	$(document).on('change', '#tablaDetalleTransporte input.Descuento', function () {
+		sumar();
+	});
+	//Remueve la fila seleccionada
+	$(document).on("click", ".btn-remove-mantenimiento", function () {
+
+		$(this).closest("tr").remove();
 		sumar();
 	});
 
