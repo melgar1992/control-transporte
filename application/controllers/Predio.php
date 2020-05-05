@@ -13,8 +13,8 @@ class Predio extends BaseController
     }
     public function ingresarPredio()
     {
-        $this->form_validation->set_rules('NombrePredio', 'NombrePredio', 'trim|xss_clean');
-        $this->form_validation->set_rules('Departamento', 'Departamento', 'trim|xss_clean');
+        $this->form_validation->set_rules('NombrePredio', 'NombrePredio', 'trim|xss_clean|required');
+        $this->form_validation->set_rules('Departamento', 'Departamento', 'trim|xss_clean|required');
         $this->form_validation->set_rules('Direccion', 'Direccion', 'trim|xss_clean');
         $this->form_validation->set_rules('TipoPredio', 'TipoPredio', 'trim|xss_clean');
 

@@ -51,10 +51,14 @@
                   </li>
                   <li><a><i class="fas fa-money"></i> Transporte<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-
                       <li><a href="<?php echo site_url("Transporte/transporte") ?>">Movimientos</a></li>
-
-
+                    </ul>
+                  </li>
+                  <li><a><i class="fas fa-money"></i> Pagos<span class="fas fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo site_url("Pago_cuentas/pagoClientes") ?>">Clientes</a></li>
+                      <li><a href="<?php echo site_url("") ?>">Talleres o ferreterias</a></li>
+                      <li><a href="<?php echo site_url("") ?>">Proveedores camiones</a></li>
                     </ul>
                   </li>
 
