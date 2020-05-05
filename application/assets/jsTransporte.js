@@ -34,6 +34,40 @@ $(document).ready(function () {
 		window.open((base_url + '/Transporte/editarTransporte/' + ID_transporte), '_self');
 
 	});
+	$(document).on('click', '#btn-borrar', function () {
+		Swal.fire({
+			title: 'Esta seguro de elimar?',
+			text: "El detalle del Transporte se eliminara, una vez eliminado no se recuperara!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, deseo elimniar!',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.value) {
+				fila = $(this).closest('tr');
+				id = parseInt(fila.find('td:eq(0)').text());
+				$.ajax({
+					url: base_url + "/Transporte/eliminarTransporte/" + id,
+					type: 'POST',
+					success: function (respuesta) {
+						tabla.row(fila).remove().draw();
+						swal({
+							title: 'Eliminado',
+							text: 'Se borro correctamente',
+							type: 'success'
+						});
+
+
+					}
+				})
+
+
+			}
+		})
+
+	})
 	$('#tablaPredioDestino').DataTable({
 		responsive: "true",
 		"order": [
