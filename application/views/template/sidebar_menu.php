@@ -58,7 +58,7 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url("Pago_cuentas/pagoClientes") ?>">Clientes</a></li>
                       <li><a href="<?php echo site_url("Pago_cuentas/pagoTalleres") ?>">Talleres o ferreterias</a></li>
-                      <li><a href="<?php echo site_url("") ?>">Proveedores camiones</a></li>
+                      <li><a href="<?php echo site_url("Pago_cuentas/pagoProveedores") ?>">Proveedores camiones</a></li>
                     </ul>
                   </li>
 

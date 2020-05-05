@@ -195,6 +195,6 @@ function LimpiarFormulario() {
 	$('#formPagoCliente').trigger('reset');
 	$('.modal-title').text('Formulario transacciones de cliente');
 	$('#Descripcion').text('');
-	$("#ID_Cliente option:selected").removeAttr("selected");
+	$("#ID_proveedor option:selected").removeAttr("selected");
 	opcion = '';
 };

@@ -224,7 +224,7 @@ class Pago_cuentas extends BaseController
                 $Haber = $this->input->post('Haber');
 
 
-                $this->Pagos_cuentas_model->editarPagoCliente($ID_pago_cuentas, $ID_taller, $Fecha, $Descripcion, $Debe, $Haber);
+                $this->Pagos_cuentas_model->editarPagoTaller($ID_pago_cuentas, $ID_taller, $Fecha, $Descripcion, $Debe, $Haber);
                 $Pago_editado = $this->Pagos_cuentas_model->obtenerPagoTaller($ID_pago_cuentas);
 
                 $respuesta = array(
@@ -251,6 +251,127 @@ class Pago_cuentas extends BaseController
 
         echo json_encode($respuesta);
     }
-  
+
+
+    //Funciones de pagos de Proveedores.
+
+
+    public function pagoProveedores()
+    {
+        $datos['pagos_proveedores'] = $this->Pagos_cuentas_model->obtenerPagosProveedor();
+        $datos['proveedores'] = $this->Proveedor_model->obtenerProveedores();
+        $this->loadView('PagoProveedor', '/form/pagos/pago_proveedores', $datos);
+    }
+    public function ingresarPagoProveedor()
+    {
+        $this->form_validation->set_rules('ID_proveedor', 'ID_proveedor', 'trim|xss_clean|required');
+        $this->form_validation->set_rules('Fecha', 'Fecha', 'trim|xss_clean|required');
+        $this->form_validation->set_rules('Descripcion', 'Descripcion', 'trim|xss_clean');
+        $this->form_validation->set_rules('Debe', 'Debe', 'trim|xss_clean');
+        $this->form_validation->set_rules('Haber', 'Haber', 'trim|xss_clean');
+
+        try {
+            if ($this->form_validation->run() === false) {
+
+                $respuesta = array(
+                    'respuesta' => 'Error',
+                    'message' => 'Ocurrio un problema al validar los datos',
+                );
+            } else {
+
+                $ID_proveedor = $this->input->post('ID_proveedor');
+                $Fecha = $this->input->post('Fecha');
+                $Descripcion = $this->input->post('Descripcion');
+                $Debe = $this->input->post('Debe');
+                $Haber = $this->input->post('Haber');
+
+
+                $ID_pago_cuentas = $this->Pagos_cuentas_model->ingresarPagoProveedor($ID_proveedor, $Fecha, $Descripcion, $Debe, $Haber);
+                $Pago_ingresado = $this->Pagos_cuentas_model->obtenerPagoProveedor($ID_pago_cuentas);
+
+                $respuesta = array(
+                    'respuesta' => 'Exitoso',
+                    'datos' => array(
+                        'ID_pago_cuentas' => $ID_pago_cuentas,
+                        'Fecha' => $Pago_ingresado['fecha'],
+                        'Nombre' => $Pago_ingresado['Nombres'] . ' ' . $Pago_ingresado['Apellidos'],
+                        'CI' => $Pago_ingresado['CI'],
+                        'Telefono_01' => $Pago_ingresado['Telefono_01'],
+                        'Descripcion' => $Pago_ingresado['Descripcion'],
+                        'Debe' => $Pago_ingresado['Debe'],
+                        'Haber' => $Pago_ingresado['Haber'],
+                    ),
+                    'message' => 'Se guardo correctamente',
+                );
+            }
+        } catch (\Throwable $th) {
+            $respuesta = array(
+                'tipo' => 'Error',
+                'message' => $th,
+            );
+        }
+
+        echo json_encode($respuesta);
+    }
+    public function obtenerPagoProveedor()
+    {
+        $ID_pago_cuentas = $this->input->post('ID_pago_cuentas');
+        $Pago_Cliente = $this->Pagos_cuentas_model->obtenerPagoProveedor($ID_pago_cuentas);
+        echo json_encode($Pago_Cliente);
+    }
+    public function editarPagoProveedor()
+    {
+        $this->form_validation->set_rules('ID_pago_cuentas', 'ID_pago_cuentas', 'trim|xss_clean|required');
+        $this->form_validation->set_rules('ID_proveedor', 'ID_proveedor', 'trim|xss_clean|required');
+        $this->form_validation->set_rules('Fecha', 'Fecha', 'trim|xss_clean|required');
+        $this->form_validation->set_rules('Descripcion', 'Descripcion', 'trim|xss_clean');
+        $this->form_validation->set_rules('Debe', 'Debe', 'trim|xss_clean');
+        $this->form_validation->set_rules('Haber', 'Haber', 'trim|xss_clean');
+
+        try {
+            if ($this->form_validation->run() === false) {
+
+                $respuesta = array(
+                    'respuesta' => 'Error',
+                    'message' => 'Ocurrio un problema al validar los datos',
+                );
+            } else {
+
+                $ID_pago_cuentas = $this->input->post('ID_pago_cuentas');
+                $ID_proveedor = $this->input->post('ID_proveedor');
+                $Fecha = $this->input->post('Fecha');
+                $Descripcion = $this->input->post('Descripcion');
+                $Debe = $this->input->post('Debe');
+                $Haber = $this->input->post('Haber');
+
+
+                $this->Pagos_cuentas_model->editarPagoProveedor($ID_pago_cuentas, $ID_proveedor, $Fecha, $Descripcion, $Debe, $Haber);
+                $Pago_editado = $this->Pagos_cuentas_model->obtenerPagoProveedor($ID_pago_cuentas);
+
+                $respuesta = array(
+                    'respuesta' => 'Exitoso',
+                    'datos' => array(
+                        'ID_pago_cuentas' => $ID_pago_cuentas,
+                        'Fecha' => $Pago_editado['fecha'],
+                        'Nombre' => $Pago_editado['Nombres'] . ' ' . $Pago_editado['Apellidos'],
+                        'CI' => $Pago_editado['CI'],
+                        'Telefono_01' => $Pago_editado['Telefono_01'],
+                        'Descripcion' => $Pago_editado['Descripcion'],
+                        'Debe' => $Pago_editado['Debe'],
+                        'Haber' => $Pago_editado['Haber'],
+                    ),
+                    'message' => 'Se guardo correctamente',
+                );
+            }
+        } catch (\Throwable $th) {
+            $respuesta = array(
+                'tipo' => 'Error',
+                'message' => $th,
+            );
+        }
+
+        echo json_encode($respuesta);
+    }
+   
 
 }

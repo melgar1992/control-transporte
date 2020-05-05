@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	opcion = '';
-	var tabla = $('#tablaPagoTaller').DataTable({
+	var tabla = $('#tablaPagoProveedor').DataTable({
 		responsive: "true",
 		"order": [
 			[0, "desc"]
@@ -33,17 +33,17 @@ $(document).ready(function () {
 	$(document).on('click', '#btn-editar', function () {
 		fila = $(this).closest('tr');
 		ID_pago_cuentas = parseInt(fila.find('td:eq(0)').text());
-		$('.modal-title').text('Formulario transacciones de Taller EDITAR');
-		$('#modal-PagoTaller').modal('show');
+		$('.modal-title').text('Formulario transacciones de cliente EDITAR');
+		$('#modal-Pagoproveedor').modal('show');
 		$.ajax({
 			type: "POST",
-			url: base_url + "/Pago_cuentas/obtenerPagoTaller",
+			url: base_url + "/Pago_cuentas/obtenerPagoProveedor",
 			data: {
 				ID_pago_cuentas: ID_pago_cuentas
 			},
 			dataType: "json",
 			success: function (respuesta) {
-				$("#ID_taller option[value=" + respuesta['ID_taller'] + "]").attr("selected", true);
+				$("#ID_proveedor option[value=" + respuesta['ID_proveedor'] + "]").attr("selected", true);
 				$('#Fecha').val(respuesta['fecha']);
 				$('#Descripcion').text(respuesta['Descripcion']);
 				$('#Debe').val(respuesta['Debe']);
@@ -53,22 +53,24 @@ $(document).ready(function () {
 		});
 		opcion = 'editar';
 	});
-	$('#formPagoTaller').submit(function (e) {
+	$('#formPagoproveedor').submit(function (e) {
 		e.preventDefault();
 
-		ID_taller = $.trim($('#ID_taller').val());
+		ID_proveedor = $.trim($('#ID_proveedor').val());
 		Fecha = $.trim($('#Fecha').val());
 		Descripcion = $.trim($('#Descripcion').val());
 		Debe = $.trim($('#Debe').val());
 		Haber = $.trim($('#Haber').val());
-		$('#modal-PagoTaller').modal('hide');
+
+
+		$('#modal-Pagoproveedor').modal('hide');
 
 		if (opcion != 'editar') {
 			$.ajax({
 				type: "POST",
-				url: base_url + "/Pago_cuentas/ingresarPagoTaller",
+				url: base_url + "/Pago_cuentas/ingresarPagoProveedor",
 				data: {
-					ID_taller: ID_taller,
+					ID_proveedor: ID_proveedor,
 					Fecha: Fecha,
 					Descripcion: Descripcion,
 					Debe: Debe,
@@ -79,13 +81,13 @@ $(document).ready(function () {
 					if (respuesta['respuesta'] === 'Exitoso') {
 						ID_pago_cuentas = respuesta['datos']['ID_pago_cuentas'];
 						Fecha = respuesta['datos']['Fecha'];
-						Nombre = respuesta['datos']['NombreTaller'];
-						Departamento = respuesta['datos']['Departamento'];
-						Direccion = respuesta['datos']['Direccion'];
+						Nombre = respuesta['datos']['Nombre'];
+						CI = respuesta['datos']['CI'];
+						Telefono = respuesta['datos']['Telefono_01'];
 						Descripcion = respuesta['datos']['Descripcion'];
 						Debe = respuesta['datos']['Debe'];
 						Haber = respuesta['datos']['Haber'];
-						tabla.row.add([ID_pago_cuentas, Fecha, Nombre, Departamento, Direccion, Descripcion, Debe, Haber]).draw();
+						tabla.row.add([ID_pago_cuentas, Fecha, Nombre, CI, Telefono, Descripcion, Debe, Haber]).draw();
 						LimpiarFormulario();
 						swal({
 							title: 'Guardar',
@@ -107,10 +109,10 @@ $(document).ready(function () {
 		} else {
 			$.ajax({
 				type: "POST",
-				url: base_url + "/Pago_cuentas/editarPagoTaller",
+				url: base_url + "/Pago_cuentas/editarPagoProveedor",
 				data: {
 					ID_pago_cuentas: ID_pago_cuentas,
-					ID_taller: ID_taller,
+					ID_proveedor: ID_proveedor,
 					Fecha: Fecha,
 					Descripcion: Descripcion,
 					Debe: Debe,
@@ -121,14 +123,14 @@ $(document).ready(function () {
 					if (respuesta['respuesta'] === 'Exitoso') {
 
 						Fecha = respuesta['datos']['Fecha'];
-						Nombre = respuesta['datos']['NombreTaller'];
-						Departamento = respuesta['datos']['Departamento'];
-						Direccion = respuesta['datos']['Direccion'];
+						Nombre = respuesta['datos']['Nombre'];
+						CI = respuesta['datos']['CI'];
+						Telefono = respuesta['datos']['Telefono_01'];
 						Descripcion = respuesta['datos']['Descripcion'];
 						Debe = respuesta['datos']['Debe'];
 						Haber = respuesta['datos']['Haber'];
 						LimpiarFormulario();
-						tabla.row(fila).data([ID_pago_cuentas, Fecha, Nombre, Departamento, Direccion, Descripcion, Debe, Haber]).draw();
+						tabla.row(fila).data([ID_pago_cuentas, Fecha, Nombre, CI, Telefono, Descripcion, Debe, Haber]).draw();
 
 						swal({
 							title: 'Editado',
@@ -189,10 +191,10 @@ $(document).ready(function () {
 });
 
 function LimpiarFormulario() {
-	$('#modal-PagoTaller').modal('hide');
-	$('#formPagoTaller').trigger('reset');
-	$('.modal-title').text('Formulario transacciones de Taller');
+	$('#modal-Pagoproveedor').modal('hide');
+	$('#formPagoproveedor').trigger('reset');
+	$('.modal-title').text('Formulario transacciones de Proveedores');
 	$('#Descripcion').text('');
-	$("#ID_taller option:selected").removeAttr("selected");
+	$("#ID_proveedor option:selected").removeAttr("selected");
 	opcion = '';
 };
