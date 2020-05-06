@@ -213,6 +213,7 @@ function LimpiarFormulario() {
 	$('#modal-camionProveedor').modal('hide');
 	$('#formcamionProveedor').trigger('reset');
 	$('.modal-title').text('Formulario camiones proveedores');
-	$("#ID_proveedor option[value='']").attr("selected", true);
+	$("#ID_proveedor option:selected").removeAttr("selected");
+
 	opcion = '';
 };

@@ -28,12 +28,7 @@ $(document).ready(function () {
 		}
 	});
 	$('#btn-cerrar').on('click', function () {
-		$('#formContratoEmpleados').trigger('reset');
-		$('.modal-title').text('Formulario  de contrato empleado');
-		opcion = '';
-		$('#CI').attr('readonly', false);
-		$('#nombres').attr('readonly', false);
-
+		LimpiarFormulario();
 	});
 	$("#nombres").autocomplete({
 		source: function (request, response) {
@@ -139,6 +134,7 @@ $(document).ready(function () {
 						fechafin = respuesta['datos']['fechafin'];
 						tabla.row.add([id_contrato, CI, nombres, Apellido_p, Apellido_m, descripcion, sueldo, fechain, fechafin]).draw();
 						$('#modal-contratoEmpleado').modal('hide');
+						LimpiarFormulario();
 						swal({
 							title: 'Guardar',
 							text: respuesta['message'],
@@ -179,11 +175,7 @@ $(document).ready(function () {
 						fechain = respuesta['datos']['fechain'];
 						fechafin = respuesta['datos']['fechafin'];
 						tabla.row(fila).data([id_contrato, CI, nombres, Apellido_p, Apellido_m, descripcion, sueldo, fechain, fechafin]).draw();
-						$('#modal-contratoEmpleado').modal('hide');
-						$('.modal-title').text('Formulario  de contrato empleado');
-						$('#formContratoEmpleados').trigger('reset');
-						$('#CI').attr('readonly', false);
-						$('#nombres').attr('readonly', false);
+						LimpiarFormulario();
 						opcion = '';
 						swal({
 							title: 'Editado',
@@ -243,3 +235,14 @@ $(document).ready(function () {
 
 	})
 });
+
+function LimpiarFormulario() {
+	$('#modal-contratoEmpleado').modal('hide');
+	$('#formContratoEmpleados').trigger('reset');
+	$('.modal-title').text('Formulario  de contrato empleado');
+	$("#tipocontrato option:selected").removeAttr("selected");
+	$('#CI').attr('readonly', false);
+	$('#nombres').attr('readonly', false);
+	opcion = '';
+
+}

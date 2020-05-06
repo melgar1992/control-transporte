@@ -206,6 +206,8 @@ function LimpiarFormulario() {
 	$('#modal-predio').modal('hide');
 	$('#formpredio').trigger('reset');
 	$('.modal-title').text('Formulario predio ');
+	$("#Departamento option:selected").removeAttr("selected");
+	$("#TipoPredio option:selected").removeAttr("selected");
 	$('#Direccion').text('');
 	opcion = '';
 };

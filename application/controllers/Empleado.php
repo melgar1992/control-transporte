@@ -160,7 +160,7 @@ class Empleado extends BaseController
                 $datos['message'] = 'Los datos se editaron correctamente.';
             }
         } catch (\Throwable $th) {
-            //throw $th;
+
             $datos['respuesta'] = 'Error';
             $datos['message'] = $th->getMessage();
         }

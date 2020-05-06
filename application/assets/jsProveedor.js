@@ -204,6 +204,7 @@ function LimpiarFormulario() {
 	$('#modal-proveedor').modal('hide');
 	$('#formProveedor').trigger('reset');
 	$('.modal-title').text('Formulario proveedor');
+	$("#departamento option:selected").removeAttr("selected");
 	$('#direccion').text('');
 	opcion = '';
 }

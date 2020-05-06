@@ -147,7 +147,7 @@ class ContratoEmpleado extends BaseController
         $fechafin = $this->input->post('FechaSalida');
 
         if ($this->Contrato_model->updateContrato($id_contrato, $id_tipoContrato, $sueldo, $fechain, $fechafin)) {
-          $nuevoContrato = $this->Contrato_model->obtenerContratoxID($id_contrato);
+          $nuevoContrato = $this->Contrato_model->obtenerContratoIDSinFecha($id_contrato);
           $respuesta = array(
             'respuesta' => 'Exitoso',
             'datos' => array(

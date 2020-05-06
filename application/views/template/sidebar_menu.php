@@ -9,13 +9,12 @@
                       <li><a href=<?php echo site_url("dashboardEmpleado/index") ?>>Dashboard de empleados</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fas fa-edit"></i> Formularios de Empleados<span class="fas fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-edit"></i> Formularios de Empresa<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 
-                      <li><a href="<?php echo site_url("Empleado/index") ?>">Empleados</a></li>
                       <li><a href="<?php echo site_url("Contrato/tipocontrato") ?>">Tipos de Contratos Empleado</a></li>
+                      <li><a href="<?php echo site_url("Empleado/index") ?>">Empleados</a></li>
                       <li><a href="<?php echo site_url("ContratoEmpleado/ContratoEmpleado") ?>">Contrato Empleados</a></li>
-                      <li><a href="<?php echo site_url("pagoEmpleados/pagoEmpleado") ?>">Pago Empleados</a></li>
 
                     </ul>
                   </li>
@@ -59,6 +58,7 @@
                       <li><a href="<?php echo site_url("Pago_cuentas/pagoClientes") ?>">Clientes</a></li>
                       <li><a href="<?php echo site_url("Pago_cuentas/pagoTalleres") ?>">Talleres o ferreterias</a></li>
                       <li><a href="<?php echo site_url("Pago_cuentas/pagoProveedores") ?>">Proveedores camiones</a></li>
+                      <li><a href="<?php echo site_url("pagoEmpleados/pagoEmpleado") ?>">Pago Empleados</a></li>
                     </ul>
                   </li>
 

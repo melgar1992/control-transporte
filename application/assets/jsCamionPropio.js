@@ -207,7 +207,7 @@ function LimpiarFormulario() {
 	$('#modal-camionPropio').modal('hide');
 	$('#formcamionPropio').trigger('reset');
 	$('.modal-title').text('Formulario camiones propios');
-	$("#ID_contrato option[value='']").attr("selected", true);
+	$("#ID_contrato option:selected").removeAttr("selected");
 
 	opcion = '';
 };

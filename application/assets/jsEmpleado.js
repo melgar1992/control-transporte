@@ -78,7 +78,7 @@ $(document).ready(function () {
 		descripcion = $.trim($('#descripcion').val());
 		tipo_licencia = $.trim($('#tipo-licencia').val());
 		fecha_vencimiento_l = $.trim($('#fecha-vencimiento-l').val());
-		LimpiarFormulario();
+		$('#modal-empleados').modal('hide');
 
 		if (opcion != 'editar') {
 			$.ajax({
@@ -223,6 +223,8 @@ function LimpiarFormulario() {
 	$('#modal-empleados').modal('hide');
 	$('#formEmpleados').trigger('reset');
 	$('.modal-title').text('Formulario empleado');
+	$("#departamento option:selected").removeAttr("selected");
+	$("#tipo-licencia option:selected").removeAttr("selected");
 	$('#direccion').text('');
 	opcion = '';
 };
