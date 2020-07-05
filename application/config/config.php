@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('America/La_Paz'); 
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ $config['base_url'] = 'http://localhost/control-transporte/';
 | Index File
 |--------------------------------------------------------------------------
 |
-| Typically this will be your index.php file, unless you've renamed it to
+| Typically this will be your index.php file, unless you've renamed it tbaso
 | something else. If you are using mod_rewrite to remove the page set this
 | variable so that it is blank.
 |
@@ -379,7 +380,7 @@ $config['encryption_key'] = 'ControlDeTransporteGanadero';
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'ci_session';
-$config['sess_expiration'] = 7200;
+$config['sess_expiration'] = 3600;
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;

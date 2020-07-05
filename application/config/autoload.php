@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('session','SesionMagica','database','form_validation');
+$autoload['libraries'] = array('session', 'SesionMagica', 'database', 'form_validation', 'Empleado_funciones','encryption');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('User_model','Empleado_model', 'Persona_model', 'Contrato_model','pagoEmpleado_model');
+$autoload['model'] = array('User_model', 'Empleado_model', 'Persona_model', 'Contrato_model', 'pagoEmpleado_model', 'Proveedor_model', 'Camion_model', 'Cliente_model', 'Mantenimiento_model', 'Taller_model', 'Predio_model', 'Transporte_model', 'Pagos_cuentas_model','Reportes_model','Cuenta_empresa_model');

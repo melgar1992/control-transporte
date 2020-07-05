@@ -1,271 +1,231 @@
-const formularioNuevoPago = document.querySelector('#nuevo_pago');
-formularioEditarPagoEmpleado = document.querySelector('#EditarPago');
-ListadoPagos = document.querySelector('#tablaPagos tbody');
-
-
-
-
-
-
-addEventListener();
-
-var table = $('#tablaPagos').DataTable();
-function addEventListener() {
-
-    if (formularioNuevoPago) {
-        formularioNuevoPago.addEventListener('submit', ingresarNuevoPagoEmpleado);
-    }
-    if (formularioEditarPagoEmpleado) {
-        formularioEditarPagoEmpleado.addEventListener('submit', EditarPagoEmpleado);
-    }
-    if (ListadoPagos) {
-        ListadoPagos.addEventListener('click', BorrarPagoEmpleado);
-    }
-
-}
-
-function ingresarNuevoPagoEmpleado(e) {
-    e.preventDefault();
-
-    const ci = document.querySelector('#CI').value;
-    fecha_Pago = document.querySelector('#fecha_pago').value;
-    mes_correspondiente = document.querySelector('#mes_correspondiente').value;
-    descripcion = document.querySelector('#Descripcion').value;
-    pago = document.querySelector('#pago').value;
-    tipo = document.querySelector('#tipo').value;
-    var datos = new FormData();
-
-    // datos que se enviaran al servidor
-    datos.append('CI', ci);
-    datos.append('fecha_pago', fecha_Pago);
-    datos.append('mes_correspondiente', mes_correspondiente);
-    datos.append('descripcion', descripcion);
-    datos.append('pago', pago);
-
-
-    console.log(...datos);
-    // creando una llamada ajax
-    var xhr = new XMLHttpRequest();
-    //Abrir la conexion
-    xhr.open('POST', tipo, true);
-    //Retorno de datos
-    xhr.onload = function () {
-        if (this.status === 200) {
-            var respuesta = JSON.parse(xhr.responseText);
-
-            console.log(respuesta.datos);
-
-            if (respuesta.respuesta === 'Exitoso') {
-
-                //Insertar un nuevo elemento en la tabla
-
-                const nuevoPago_Empleado = document.createElement('tr');
-
-                nuevoPago_Empleado.innerHTML = `
-                <td>${respuesta.datos.id_pago}</td>
-                <td>${respuesta.datos.nombres}</td>
-                <td>${respuesta.datos.Apellido_p}</td>
-                <td>${respuesta.datos.fecha_pago}</td>
-                <td>${respuesta.datos.mes_correspondiente}</td>
-                <td>${respuesta.datos.descripcion}</td>
-                <td>${respuesta.datos.pago}</td>
-                `;
-                //Crear el contenedor para los botones
-                const contenedorAcciones = document.createElement('td');
-
-                //crear el icono de editar
-                const iconoEditar = document.createElement('i');
-                iconoEditar.classList.add('fas', 'fa-pencil-alt');
-                //crea el enlace para editar
-
-                const btnEditar = document.createElement('a');
-                btnEditar.setAttribute("data-id", respuesta.datos.id_pago);
-                btnEditar.setAttribute("href", respuesta.datos.hrefEditar);
-                btnEditar.setAttribute("data-acction", "editar");
-                btnEditar.classList.add('btn', 'btn-info', 'btn-xs');
-                btnEditar.appendChild(iconoEditar);
-                btnEditar.textContent = " Editar ";
-                
-
-                // agregando el editar al padre
-                contenedorAcciones.appendChild(btnEditar);
-
-                //Crear el boton eliminar
-                const iconoEliminar = document.createElement('i');
-                iconoEliminar.classList.add('far', 'fa-trash-alt');
-
-                // Crea el enlace para eliminar
-                const btnEliminar = document.createElement('a');
-                btnEliminar.setAttribute("data-id", respuesta.datos.id_contrato);
-                btnEliminar.setAttribute("value", '');
-                btnEliminar.setAttribute("data-acction", "borrar");
-                btnEliminar.classList.add('btn', 'btn-danger', 'btn-xs');
-                btnEliminar.appendChild(iconoEliminar);
-                btnEliminar.textContent = " Borrar ";
-                
-
-                //Agregarlo al padre
-
-                contenedorAcciones.appendChild(btnEliminar);
-
-                //Agregando al tr
-
-                nuevoPago_Empleado.appendChild(contenedorAcciones);
-
-                //Agregando con los contratos existentes
-
-                //ListadoPagos.appendChild(nuevoPago_Empleado);
-                tabla.row.add(nuevoPago_Empleado).draw(false);
-
-
-
-                swal({
-                    title: 'Nuevo contrato',
-                    text: 'El contrato fue ingresado correctamente',
-                    type: 'success'
-                });
-
-            } else {
-
-                if (respuesta.tipo === 'Formulario') {
-                    error_formulario = document.querySelector('.error_formulario');
-                    error_formulario.innerHTML = respuesta.respuesta;
-
-
-                    swal({
-                        title: 'Nuevo Conductor',
-                        text: 'Error en el formulario',
-                        type: 'error'
-                    });
-                } else {
-                    if (respuesta.tipo === 'No Existe') {
-
-                        swal({
-                            title: 'Error',
-                            text: respuesta.respuesta,
-                            type: 'error'
-                        });
-                    }
-
-                }
-
-            }
-
-
-        }
-
-    }
-    // se lee la respuesta
-    // se envian los datos
-    xhr.send(datos);
-}
-
-function EditarPagoEmpleado(e) {
-    e.preventDefault();
-
-    Boton = document.querySelector('#tipo');
-    const id_pago = Boton.getAttribute('id_data');
-    fecha_Pago = document.querySelector('#fecha_pago').value;
-    mes_correspondiente = document.querySelector('#mes_correspondiente').value;
-    descripcion = document.querySelector('#Descripcion').value;
-    pago = document.querySelector('#pago').value;
-    tipo = document.querySelector('#tipo').value;
-    accion = 'Editar';
-    var datos = new FormData();
-
-    // datos que se enviaran al servidor
-    datos.append('ID_pago', id_pago);
-    datos.append('fecha_pago', fecha_Pago);
-    datos.append('mes_correspondiente', mes_correspondiente);
-    datos.append('descripcion', descripcion);
-    datos.append('pago', pago);
-    datos.append('accion', accion);
-
-    console.log(...datos);
-    // creando una llamada ajax
-    var xhr = new XMLHttpRequest();
-    //Abrir la conexion
-    xhr.open('POST', tipo, true);
-    //Retorno de datos
-    xhr.onload = function () {
-        if (this.status === 200) {
-
-            var respuesta = JSON.parse(xhr.responseText);
-
-            console.log(respuesta.datos);
-
-            if (respuesta.respuesta === 'Exitoso') {
-                swal({
-                    title: 'Editar Pago',
-                    text: 'El pago fue editado correctamente',
-                    type: 'success'
-                });
-
-
-            }
-
-
-        }
-    }
-    xhr.send(datos);
-
-
-}
-
-function BorrarPagoEmpleado(e) {
-
-    if (e.target.getAttribute('data-acction') === 'borrar') {
-        const tipo = e.target.getAttribute('value');
-
-        var datos = new FormData();
-
-        datos.append('ID_pago', e.target.getAttribute('data-id'));
-
-        // Creando un llamado Ajax  
-
-        var xhr = new XMLHttpRequest();
-        // Abrir la conexion
-
-        xhr.open('POST', tipo, true);
-        // Retorno de datos
-        xhr.onload = function () {
-            if (this.status === 200) {
-                // Leemos la respuesta php
-                var respuesta = JSON.parse(xhr.responseText);
-                if (respuesta.tipo === 'Exitoso') {
-
-                    var i = e.target.parentNode.parentNode.rowIndex;
-                    i = i - 1;
-                    ListadoPagos.deleteRow(i);
-
-                    swal({
-                        title: 'Eliminar',
-                        text: 'Se elimino al empleado satisfactoriamente',
-                        type: 'success'
-                    });
-
-                } else {
-                    error_formulario = document.querySelector('.error_formulario');
-                    error_formulario.innerHTML = respuesta.respuesta;
-                    swal({
-                        title: 'Eliminar',
-                        text: 'Error al enviar la información',
-                        type: 'error'
-                    });
-                }
-
-            } else {
-
-                swal({
-                    title: 'Eliminar',
-                    text: 'Error al enviar la información',
-                    type: 'error'
-                });
-            }
-        }
-
-        // Envio de datos
-        xhr.send(datos);
-
-    }
+$(document).ready(function () {
+	opcion = '';
+	var tabla = $('#tablaPagos').DataTable({
+		responsive: "true",
+		"order": [
+			[3, "desc"]
+		],
+		"columnDefs": [{
+			"targets": -1,
+			"data": null,
+			"defaultContent": "<div class='text-right'> <div class='btn-group'><button class='btn btn-warning btn-sm' id='btn-editar'><i class='fas fa-pencil-alt'></i> Editar</button><button class='btn btn-danger btn-sm' id='btn-borrar'><i class='fas fa-trash-alt'></i> Borrar</button></div></div>",
+		}],
+		"language": {
+			'lengthMenu': "Mostrar _MENU_ registros",
+			"zeroRecords": "No se encontraron resultados",
+			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registro",
+			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sSearch": "Buscar",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sLast": "Ultimo",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior",
+
+			},
+			"sProcesing": "Procesando...",
+		}
+	});
+	$('#btn-cerrar').on('click', function () {
+		LimpiarFormulario();
+	});
+	$("#nombres").autocomplete({
+		source: function (request, response) {
+			$.ajax({
+				url: base_url + "/ContratoEmpleado/buscarEmpleadoNombreAjax",
+				type: "POST",
+				dataType: "json",
+				data: {
+					valor: request.term
+				},
+				success: function (data) {
+					response(data);
+				}
+			});
+		},
+		minLength: 2,
+		select: function (event, ui) {
+			data = ui.item.label + " " + ui.item.Apellido_p + " " + ui.item.Apellido_m;
+			ID_contrato = ui.item.ID_contrato;
+			CI = ui.item.CI
+			$('#ID_contrato').val(ID_contrato);
+			$('#CI').val(CI);
+			$("#sueldo").val(ui.item.sueldo);
+		},
+	});
+	$("#CI").autocomplete({
+		source: function (request, response) {
+			$.ajax({
+				url: base_url + "/ContratoEmpleado/buscarEmpleadoCIAjax",
+				type: "POST",
+				dataType: "json",
+				data: {
+					valor: request.term
+				},
+				success: function (data) {
+					response(data);
+				}
+			});
+		},
+		minLength: 2,
+		select: function (event, ui) {
+			data = ui.item.label;
+			nombre = ui.item.Nombres + " " + ui.item.Apellido_p + " " + ui.item.Apellido_m;
+			ID_contrato = ui.item.ID_contrato;
+			$('#ID_contrato').val(ID_contrato);
+			$('#nombres').val(nombre);
+			$("#sueldo").val(ui.item.sueldo);
+		},
+	});
+	$(document).on('click', '#btn-editar', function () {
+		fila = $(this).closest('tr');
+		ID_pago = parseInt(fila.find('td:eq(0)').text());
+		$('.modal-title').text('Formulario  de pago empleado Editar');
+		$('#modal-pagoEmpleado').modal('show');
+		$.ajax({
+			type: "POST",
+			url: base_url + "/pagoEmpleados/buscarPago",
+			data: {
+				ID_pago: ID_pago
+			},
+			dataType: "json",
+			success: function (respuesta) {
+				$('#CI').val(respuesta['CI']);
+				$('#nombres').val(respuesta['Nombres']);
+				$('#Monto').val(respuesta['Monto']);
+				$('#sueldo').val(respuesta['sueldo']);
+				$('#FechaPago').val(respuesta['fecha_pago']);
+				$('#descripcion').val(respuesta['descripcion']);
+				$('#CI').attr('readonly', true);
+				$('#nombres').attr('readonly', true);
+			}
+		});
+		opcion = 'editar';
+
+	});
+	//Aqui es donde se guarda o se elimina segun el estado de la opcion
+	$('#formpagoEmpleado').submit(function (e) {
+		e.preventDefault();
+		ID_contrato = $.trim($('#ID_contrato').val());
+		Monto = $.trim($('#Monto').val());
+		descripcion = $.trim($('#descripcion').val());
+		FechaPago = $.trim($('#FechaPago').val());
+		$('#modal-pagoEmpleado').modal('hide');
+		if (opcion != 'editar') {
+			$.ajax({
+				type: "POST",
+				url: base_url + "/pagoEmpleados/IngresarPagoEmpleado",
+				data: {
+					ID_contrato: ID_contrato,
+					Monto: Monto,
+					FechaPago: FechaPago,
+					descripcion: descripcion,
+				},
+				dataType: "json",
+				success: function (respuesta) {
+					if (respuesta['respuesta'] === 'Exitoso') {
+						id_pago = respuesta['datos']['id_pago'];
+						nombres = respuesta['datos']['nombres'];
+						Apellido_p = respuesta['datos']['Apellido_p'];
+						descripcion = respuesta['datos']['descripcion'];
+						Monto = respuesta['datos']['Monto'];
+						FechaPago = respuesta['datos']['FechaPago'];
+						tabla.row.add([id_pago, nombres, Apellido_p, FechaPago, descripcion, Monto]).draw();
+						LimpiarFormulario();
+						swal({
+							title: 'Guardar',
+							text: respuesta['message'],
+							type: 'success'
+						});
+						$('#formContatos').trigger('reset');
+					} else {
+						swal({
+							title: 'Error',
+							text: respuesta['message'],
+							type: 'error'
+						});
+					}
+
+				}
+			});
+		} else {
+			$.ajax({
+				type: "POST",
+				url: base_url + "/pagoEmpleados/editar_pago_empleado",
+				data: {
+					ID_pago: ID_pago,
+					Monto: Monto,
+					FechaPago: FechaPago,
+					descripcion: descripcion,
+				},
+				dataType: "json",
+				success: function (respuesta) {
+					if (respuesta['respuesta'] === 'Exitoso') {
+						nombres = fila.find('td:eq(1)').text();
+						Apellido_p = fila.find('td:eq(2)').text();
+						tabla.row(fila).data([ID_pago, nombres, Apellido_p, FechaPago, descripcion, Monto]).draw();
+						LimpiarFormulario();
+						swal({
+							title: 'Editado',
+							text: respuesta['mensage'],
+							type: 'success'
+						});
+					} else {
+						swal({
+							title: 'Error',
+							text: respuesta['mensage'],
+							type: 'error'
+						});
+					}
+
+				}
+			});
+		}
+
+
+	});
+	$(document).on('click', '#btn-borrar', function () {
+
+
+		Swal.fire({
+			title: 'Esta seguro de elimar?',
+			text: "El pago se eliminara, una vez eliminado no se recuperara!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Si, deseo elimniar!',
+			cancelButtonText: 'Cancelar'
+		}).then((result) => {
+			if (result.value) {
+				fila = $(this).closest('tr');
+				id = parseInt(fila.find('td:eq(0)').text());
+				$.ajax({
+					url: base_url + "/pagoEmpleados/EliminarPagoEmpleado/" + id,
+					type: 'POST',
+					success: function (respuesta) {
+						tabla.row(fila).remove().draw();
+						swal({
+							title: 'Eliminado',
+							text: 'Se borro correctamente',
+							type: 'success'
+						});
+
+					}
+				})
+
+
+			}
+		})
+
+	})
+});
+function LimpiarFormulario() {
+	$('#modal-pagoEmpleado').modal('hide');
+	$('.modal-title').text('Formulario  de pago empleado');
+	$('#formpagoEmpleado').trigger('reset');
+	$('#CI').attr('readonly', false);
+	$('#nombres').attr('readonly', false);
+	opcion = '';
 }

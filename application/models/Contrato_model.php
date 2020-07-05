@@ -57,7 +57,24 @@ class Contrato_model extends CI_Model
 
         return $row['ID_tipoContrato'];
     }
+    public function ObtenerTipoContratoxID($ID_tipoContrato)
+    {
+        $this->db->select('*');
+        $this->db->from('tipocontrato');
+        $this->db->where('ID_tipoContrato', $ID_tipoContrato);
+        $id_tipoContrato = $this->db->get();
+        $row = $id_tipoContrato->row_array();
+        return $row;
+    }
 
+    public function PlanillaMensual()
+    {
+        $this->db->select_sum('c.sueldo','Planilla_mensual');
+        $this->db->from('contrato c');
+        $this->db->where('c.Estado','Activo');
+        $this->db->where('FechaSalida >', date("Y-m-d"));
+        return $this->db->get()->row_array();
+    }
 
     // Funciones de Contratos Empleados
 
@@ -67,16 +84,32 @@ class Contrato_model extends CI_Model
 
         $this->db->select('ID_contrato, contrato.ID_empleado, CI, Nombres, Apellido_p, Apellido_m, tipocontrato.Descripcion, sueldo, FechaIngreso, FechaSalida');
         $this->db->from('contrato');
-        $this->db->join('tipocontrato','contrato.ID_tipoContrato = tipocontrato.ID_tipoContrato');
-        $this->db->join('empleado','empleado.ID_empleado = contrato.ID_empleado');
-        $this->db->join('persona','empleado.ID_persona = persona.ID_persona');
-        $this->db->where('contrato.Estado','Activo');
-        $this->db->where('empleado.Estado','Activo');
+        $this->db->join('tipocontrato', 'contrato.ID_tipoContrato = tipocontrato.ID_tipoContrato');
+        $this->db->join('empleado', 'empleado.ID_empleado = contrato.ID_empleado');
+        $this->db->join('persona', 'empleado.ID_persona = persona.ID_persona');
+        $this->db->where('contrato.Estado', 'Activo');
+        $this->db->where('empleado.Estado', 'Activo');
+      
 
         $datos = $this->db->get();
-        
-        return $datos;
 
+        return $datos;
+    }
+
+    public function obtenerContratosEmpleadosActivos()
+    {
+        $this->db->select('ID_contrato, contrato.ID_empleado, CI, Nombres, Apellido_p, Apellido_m, tipocontrato.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->from('contrato');
+        $this->db->join('tipocontrato', 'contrato.ID_tipoContrato = tipocontrato.ID_tipoContrato');
+        $this->db->join('empleado', 'empleado.ID_empleado = contrato.ID_empleado');
+        $this->db->join('persona', 'empleado.ID_persona = persona.ID_persona');
+        $this->db->where('contrato.Estado', 'Activo');
+        $this->db->where('empleado.Estado', 'Activo');
+        $this->db->where('FechaSalida >', date("Y-m-d"));
+
+        $datos = $this->db->get();
+
+        return $datos;
     }
 
     public function insertarContratoEmpleado($id_Empleado, $id_tipoContrato, $sueldo, $fechain, $fechafin)
@@ -106,7 +139,7 @@ class Contrato_model extends CI_Model
             'FechaSalida' => $fechafin,
         );
         $this->db->where('ID_contrato', $ID_contrato);
-        $this->db->update('contrato', $data);
+        return $this->db->update('contrato', $data);
     }
 
 
@@ -119,16 +152,14 @@ class Contrato_model extends CI_Model
     }
 
 
-    public function ExisteContrato($ci)
+    public function ExisteContrato($id_Empleado)
     {
-        //   Valida tambien que exista el empleado
-        $empleado = $this->Empleado_model->ObtenerEmpleadoxCI($ci);
-        $id_Empleado = $empleado['ID_empleado'];
+
         $this->db->select('*');
         $this->db->from('contrato');
         $this->db->where('ID_empleado', $id_Empleado);
         $this->db->where('Estado', 'Activo');
-        $this->db->where('FechaSalida >',date("Y-m-d"));
+        $this->db->where('FechaSalida >', date("Y-m-d"));
 
         $contrato = $this->db->get();
 
@@ -146,7 +177,31 @@ class Contrato_model extends CI_Model
     public function obtenerContratoxID($id_contrato)
     {
 
-        $this->db->select('p.CI, p.Nombres, t.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->select('p.CI,c.ID_empleado, p.Nombres, p.Apellido_p, p.Apellido_m, t.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->from('contrato c');
+        $this->db->join('tipocontrato t', 't.ID_tipocontrato = c.ID_tipocontrato');
+        $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');
+        $this->db->join('persona p', 'p.ID_persona = e.ID_persona');
+        $this->db->where('c.Estado', 'Activo');
+        $this->db->where('c.FechaSalida >', date("Y-m-d"));
+        $this->db->where('e.Estado', 'Activo');
+        $this->db->where('ID_contrato', $id_contrato);
+
+        $query = $this->db->get();
+
+        $contrato = $query->row_array();
+
+        if (isset($contrato)) {
+
+            return  $contrato;
+        } else {
+            return false;
+        }
+    }
+    public function obtenerContratoIDSinFecha($id_contrato)
+    {
+
+        $this->db->select('p.CI,c.ID_empleado, p.Nombres, p.Apellido_p, p.Apellido_m, t.Descripcion, sueldo, FechaIngreso, FechaSalida');
         $this->db->from('contrato c');
         $this->db->join('tipocontrato t', 't.ID_tipocontrato = c.ID_tipocontrato');
         $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');
@@ -165,5 +220,56 @@ class Contrato_model extends CI_Model
         } else {
             return false;
         }
+    }
+    public function eliminarTipoContrato($id_tipoContrato)
+    {
+        $this->db->where('ID_tipoContrato', $id_tipoContrato);
+        return $this->db->delete('tipocontrato');
+    }
+    public function buscarContratoxCI($valor)
+    {
+        //Busca los contractos acativos de los empleados por numero de carnet de identidad
+        $this->db->select('p.CI as label, c.ID_contrato, c.ID_empleado, p.Nombres, p.Apellido_p, p.Apellido_m, tc.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->from('contrato c');
+        $this->db->join('tipocontrato tc', 'tc.ID_tipocontrato = c.ID_tipocontrato');
+        $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');
+        $this->db->join('persona p', 'p.ID_persona = e.ID_persona');
+        $this->db->where('c.Estado', 'Activo');
+        $this->db->where('e.Estado', 'Activo');
+        $this->db->where('c.FechaSalida >', date("Y-m-d"));
+        $this->db->like('p.CI', $valor);
+
+        $query = $this->db->get();
+        $listaNombres = $query->result_array();
+        if (isset($listaNombres)) {
+            return $listaNombres;
+        } else {
+            return false;
+        }
+        
+        
+    }
+    public function buscarContratoxNombre($valor)
+    {
+        //Busca los contractos acativos de los empleados por nombres
+        $this->db->select('p.CI, c.ID_contrato, c.ID_empleado, p.Nombres as label, p.Apellido_p, p.Apellido_m, tc.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->from('contrato c');
+        $this->db->join('tipocontrato tc', 'tc.ID_tipocontrato = c.ID_tipocontrato');
+        $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');
+        $this->db->join('persona p', 'p.ID_persona = e.ID_persona');
+        $this->db->where('c.Estado', 'Activo');
+        $this->db->where('e.Estado', 'Activo');
+        $this->db->where('c.FechaSalida >', date("Y-m-d"));
+        $this->db->like('p.Nombres', $valor);
+
+        $query = $this->db->get();
+        $listaNombres = $query->result_array();
+        if (isset($listaNombres)) {
+            return $listaNombres;
+        } else {
+            return false;
+        }
+        
+        
     }
 }
