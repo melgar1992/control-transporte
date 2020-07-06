@@ -301,7 +301,7 @@ $(document).ready(function () {
 						tablaDetalleCamion.row.add([
 							detalleCamionEmpresa[i]['Placa'],
 							detalleCamionEmpresa[i]['Fecha'],
-							detalleCamionEmpresa[i]['Descripcion'],
+							(detalleCamionEmpresa[i]['Descripcion'] != null) ? detalleCamionEmpresa[i]['Descripcion'] : detalleCamionEmpresa[i]['TransporteDescripcion'],
 							detalleCamionEmpresa[i]['Precio'],
 							detalleCamionEmpresa[i]['Cantidad'],
 							detalleCamionEmpresa[i]['Descuento'],

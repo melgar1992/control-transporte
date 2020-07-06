@@ -90,4 +90,9 @@ class User_model extends CI_Model
         $this->db->where('ID_user', $id_user);
         $this->db->update('user', $data);
     }
+    public function eliminarUsuario(int $id_user)
+    {
+        $this->db->where('ID_user', $id_user);
+        $this->db->delete('user');
+    }
 }

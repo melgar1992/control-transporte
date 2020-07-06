@@ -177,7 +177,7 @@ $(document).ready(function () {
 				fila = $(this).closest('tr');
 				id = parseInt(fila.find('td:eq(0)').text());
 				$.ajax({
-					url: base_url + "/Pago_cuentas/eliminarPago/" + id,
+					url: base_url + "/Usuario/eliminarUsuario/" + id,
 					type: 'POST',
 					success: function (respuesta) {
 

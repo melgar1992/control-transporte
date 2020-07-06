@@ -156,4 +156,13 @@ class Usuario extends BaseController
         $usuario = $this->User_model->obtenerUsuario($ID_user);
         echo json_encode($usuario);
     }
+    public function eliminarUsuario($ID_user)
+    {
+        $this->User_model->eliminarUsuario($ID_user);
+        $respuesta = array(
+            'tipo' => 'Exitoso',
+            'message' => 'Se elimino',
+        );
+        echo json_encode($respuesta);
+    }
 }
