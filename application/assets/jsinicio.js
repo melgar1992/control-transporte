@@ -1,6 +1,7 @@
 $(document).ready(function () {
 	var year = new Date();
 	var year = year.getFullYear();
+	// Tablas inicializadas con data tables
 	var tablaCliente = $('#tablaDetalleCliente').DataTable({
 		responsive: "true",
 		"order": [
@@ -232,6 +233,7 @@ $(document).ready(function () {
 		},
 
 	});
+	// Funciones de la paginas
 	GenerarGraficoMovimiento(year);
 	$(document).on('click', '.btn-reporte-cliente', function () {
 		fila = $(this).closest('tr');

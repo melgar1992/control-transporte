@@ -117,7 +117,7 @@
                               <td><?php echo $row['balance'] ?></td>
                               <td>
                                 <div class='text-center'>
-                                  <button type="button" title="Reporte cliente" class="btn btn-info btn-reporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-search"></span></button>
+                                  <button type="button" title="Reporte cliente" class="btn btn-info btn-reporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
                                 </div>
                               </td>
                             </tr>
@@ -160,7 +160,7 @@
                               <td><?php echo $row['balance'] ?></td>
                               <td>
                                 <div class='text-center'>
-                                  <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-proveedor" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-search"></span></button>
+                                  <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-proveedor" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
                                 </div>
                               </td>
                             </tr>
@@ -203,7 +203,7 @@
                               <td><?php echo $row['balance'] ?></td>
                               <td>
                                 <div class='text-center'>
-                                  <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-taller" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-search"></span></button>
+                                  <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-taller" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
                                 </div>
                               </td>
                             </tr>

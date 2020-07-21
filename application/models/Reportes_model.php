@@ -160,9 +160,14 @@ class Reportes_model extends CI_Model
     }
     public function obtenerDetalleCliente($ID_Cliente)
     {
-        $this->db->select('*');
-        $this->db->from('detallecliente');
-        $this->db->where('ID_Cliente', $ID_Cliente);
+        $this->db->select('dc.ID_transporte, dc.fecha,
+        (select NombrePredio  from transporte t join predio p on p.ID_predio = t.ID_predio_origen where t.ID_transporte = dc.ID_transporte ) as Origen,
+        (select NombrePredio from transporte t join predio p on p.ID_predio = t.ID_predio_destino where t.ID_transporte = dc.ID_transporte ) as Destino,
+        (select count(Cantidad) from transporte t join detalle_transporte_ganado dt on dt.ID_transporte = t.ID_transporte where t.ID_transporte = dc.ID_transporte ) as Camiones,
+        (select sum(Descuento) from transporte t join detalle_transporte_ganado dt on dt.ID_transporte = t.ID_transporte where t.ID_transporte = dc.ID_transporte  ) as Descuento,
+         dc.Descripcion, dc.Debe, dc.Haber');
+        $this->db->from('detallecliente dc');
+        $this->db->where('dc.ID_Cliente', $ID_Cliente);
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
     }
@@ -195,7 +200,7 @@ class Reportes_model extends CI_Model
     }
     public function obtenerTop5GastosCamionEmpresa($ID_camion, $fechaIni, $fechaFin)
     {
-   
+
         $this->db->select('coalesce(c.nombre, "Gastos de transporte" ) as Categoria  ,sum(egreso) as Egreso');
         $this->db->from('detalle_camiones_propio dc');
         $this->db->join('categoria_mantenimiento c', 'dc.ID_categoria_mantenimiento = c.ID_categoria_mantenimiento', 'left');
@@ -203,7 +208,7 @@ class Reportes_model extends CI_Model
         $this->db->where('dc.Fecha <=', $fechaFin);
         $this->db->where('dc.ID_camion', $ID_camion);
         $this->db->group_by('c.nombre');
-        $this->db->order_by('Egreso','DESC');
+        $this->db->order_by('Egreso', 'DESC');
         $this->db->limit(4);
         $datos = $this->db->get()->result_array();
 
@@ -223,6 +228,5 @@ class Reportes_model extends CI_Model
 
         );
         return $datos;
-
     }
 }
