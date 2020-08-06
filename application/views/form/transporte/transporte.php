@@ -74,8 +74,8 @@
                                                         <td><?php echo $row->DescuentoTotal ?></td>
                                                         <td><?php echo $row->Total ?></td>
                                                         <td>
-                                                            <button class="btn btn-warning btn-sm" value="" id="btn-editar"><i class="fas fa-pencil-alt"></i> Editar</button>
-                                                            <button class="btn btn-danger btn-sm" id="btn-borrar"><i class="fas fa-trash-alt"></i> Borrar</button>
+                                                            <button class="btn btn-warning btn-sm" title="Editar"  value="" id="btn-editar"><i class="fas fa-pencil-alt"></i></button>
+                                                            <button class="btn btn-danger btn-sm"  title="Borrar" id="btn-borrar"><i class="fas fa-trash-alt"></i></button>
                                                         </td>
                                                     </tr>
                                             <?php }
@@ -94,3 +94,25 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal-vista">
+         <div class="modal-dialog modal-lg">
+             <div class="modal-content">
+                 <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                         <span aria-hidden="true">&times;</span></button>
+                     <h4 class="modal-title">Vista</h4>
+                 </div>
+                 <div class="modal-body">
+
+
+                 </div>
+                 <div class="modal-footer">
+                     <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
+                     <button type="button" class="btn btn-primary btn-print"><span class="fa fa-print">Imprimir</span></button>
+                 </div>
+             </div>
+             <!-- /.modal-content -->
+         </div>
+         <!-- /.modal-dialog -->
+     </div>

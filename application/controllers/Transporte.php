@@ -225,4 +225,10 @@ class Transporte extends BaseController
         );
         echo json_encode($respuesta);
     }
+    public function vistaCompleta($ID_transporte)
+    {
+        $datos['transporte'] = $this->Transporte_model->obtenerTransporte($ID_transporte);
+        $datos['detalle_transporte'] = $this->Transporte_model->obtenerDetalleTransporte($ID_transporte);
+        $this->load->view('form/transporte/view_transporte', $datos);
+    }
 }

@@ -9,7 +9,7 @@ $(document).ready(function () {
 		"columnDefs": [{
 			"targets": -1,
 			"data": null,
-			"defaultContent": "<div class='text-right'> <div class='btn-group'><button class='btn btn-warning btn-sm' id='btn-editar'><i class='fas fa-pencil-alt'></i> Editar</button><button class='btn btn-danger btn-sm' id='btn-borrar'><i class='fas fa-trash-alt'></i> Borrar</button></div></div>",
+			"defaultContent": "<div class='text-right'> <div class='btn-group'><button class='btn btn-info btn-sm' title = 'Vista completa' id='btn-vista-completa'><i class='fas fa-file-text'></i></button><button class='btn btn-warning btn-sm' title = 'Editar' id='btn-editar'><i class='fas fa-pencil-alt'></i></button><button class='btn btn-danger btn-sm' title = 'Borrar' id='btn-borrar'><i class='fas fa-trash-alt'></i></button></div></div>",
 		}],
 		"language": {
 			'lengthMenu': "Mostrar _MENU_ registros",
@@ -282,6 +282,26 @@ $(document).ready(function () {
 
 		$(this).closest("tr").remove();
 		sumar();
+	});
+	// Vista de los transportes
+	$(document).on('click', '.btn-print', function () {
+
+		$("#modal-vista .modal-body").print({
+			title: 'Vista',
+		});
+	});
+	$(document).on('click', '#btn-vista-completa', function () {
+		fila = $(this).closest('tr');
+		ID_transporte = parseInt(fila.find('td:eq(0)').text());
+		$('#modal-vista').modal('show');
+		$.ajax({
+			type: "POST",
+			url: base_url + '/Transporte/vistaCompleta/' + ID_transporte,
+			dataType: "html",
+			success: function (response) {
+				$('#modal-vista .modal-body').html(response);
+			}
+		});
 	});
 
 });
