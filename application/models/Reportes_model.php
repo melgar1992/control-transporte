@@ -17,7 +17,22 @@ class Reportes_model extends CI_Model
         $this->db->where('Fecha >=', date('Y') . '-01-01');
         $egreso_camion = $this->db->get()->row_array();
 
-        $balance = (float) $ingreso_camion['ingreso'] - (float) $egreso_camion['ImporteTotal'];
+        if (date('Y') == 2020) {
+            $this->db->select_sum('Monto', 'PagoSueldos');
+            $this->db->from('contrato c');
+            $this->db->join('pago p', 'p.ID_contrato = c.ID_contrato');
+            $this->db->where('c.ID_camion !=', 'NULL');
+            $this->db->where('p.Fecha >=', '2020-05-01');
+            $egreso_sueldo = $this->db->get()->row_array();
+        } else {
+            $this->db->select_sum('Monto', 'PagoSueldos');
+            $this->db->from('contrato c');
+            $this->db->join('pago p', 'p.ID_contrato = c.ID_contrato');
+            $this->db->where('c.ID_camion !=', 'NULL');
+            $this->db->where('p.Fecha >=', date('Y') . '-01-01');
+            $egreso_sueldo = $this->db->get()->row_array();
+        }
+        $balance = (float) $ingreso_camion['ingreso'] - (float) $egreso_camion['ImporteTotal'] - (float)$egreso_sueldo['PagoSueldos'];
         return $balance;
     }
     public function ingreso_comisiones_gestion_actual()
@@ -201,13 +216,12 @@ class Reportes_model extends CI_Model
     public function obtenerTop5GastosCamionEmpresa($ID_camion, $fechaIni, $fechaFin)
     {
 
-        $this->db->select('coalesce(c.nombre, "Gastos de transporte" ) as Categoria  ,sum(egreso) as Egreso');
+        $this->db->select('dc.Nombre_categoria as Categoria,sum(egreso) as Egreso');
         $this->db->from('detalle_camiones_propio dc');
-        $this->db->join('categoria_mantenimiento c', 'dc.ID_categoria_mantenimiento = c.ID_categoria_mantenimiento', 'left');
         $this->db->where('dc.Fecha >=', $fechaIni);
         $this->db->where('dc.Fecha <=', $fechaFin);
         $this->db->where('dc.ID_camion', $ID_camion);
-        $this->db->group_by('c.nombre');
+        $this->db->group_by('dc.Nombre_categoria');
         $this->db->order_by('Egreso', 'DESC');
         $this->db->limit(4);
         $datos = $this->db->get()->result_array();

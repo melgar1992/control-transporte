@@ -112,12 +112,13 @@ class Contrato_model extends CI_Model
         return $datos;
     }
 
-    public function insertarContratoEmpleado($id_Empleado, $id_tipoContrato, $sueldo, $fechain, $fechafin)
+    public function insertarContratoEmpleado($id_Empleado, $id_tipoContrato,$ID_camion, $sueldo, $fechain, $fechafin)
     {
 
         $data3 = array(
             'ID_empleado' => $id_Empleado,
             'ID_tipoContrato' => $id_tipoContrato,
+            'ID_camion' => $ID_camion,
             'sueldo' => $sueldo,
             'FechaIngreso' => $fechain,
             'FechaSalida' => $fechafin,
@@ -129,11 +130,12 @@ class Contrato_model extends CI_Model
 
         return $id_contrato;
     }
-    public function updateContrato($ID_contrato, $tipocontrato, $sueldo, $fechain, $fechafin)
+    public function updateContrato($ID_contrato, $tipocontrato, $ID_camion, $sueldo, $fechain, $fechafin)
     {
 
         $data = array(
             'ID_tipoContrato' => $tipocontrato,
+            'ID_camion' => $ID_camion,
             'sueldo' => $sueldo,
             'FechaIngreso' => $fechain,
             'FechaSalida' => $fechafin,
@@ -201,7 +203,7 @@ class Contrato_model extends CI_Model
     public function obtenerContratoIDSinFecha($id_contrato)
     {
 
-        $this->db->select('p.CI,c.ID_empleado, p.Nombres, p.Apellido_p, p.Apellido_m, t.Descripcion, sueldo, FechaIngreso, FechaSalida');
+        $this->db->select('p.CI,c.ID_empleado, c.ID_camion, p.Nombres, p.Apellido_p, p.Apellido_m, t.Descripcion, sueldo, FechaIngreso, FechaSalida');
         $this->db->from('contrato c');
         $this->db->join('tipocontrato t', 't.ID_tipocontrato = c.ID_tipocontrato');
         $this->db->join('empleado e', 'e.ID_empleado = c.ID_empleado');

@@ -94,6 +94,7 @@ $(document).ready(function () {
 				$('#sueldo').val(respuesta['datos']['sueldo']);
 				$('#FechaIngreso').val(respuesta['datos']['fechain']);
 				$('#FechaSalida').val(respuesta['datos']['fechafin']);
+				$("#ID_camion option[value=" + respuesta['datos']['ID_camion'] + "]").attr("selected", true);
 				$("#tipocontrato option:contains(" + respuesta['datos']['Descripcion'] + ")").attr("selected", true);
 				$('#CI').attr('readonly', true);
 				$('#nombres').attr('readonly', true);
@@ -106,6 +107,7 @@ $(document).ready(function () {
 		e.preventDefault();
 		ID_empleado = $.trim($('#ID_empleado').val());
 		tipocontrato = $.trim($('#tipocontrato').val());
+		ID_camion = $.trim($('#ID_camion').val());
 		sueldo = $.trim($('#sueldo').val());
 		FechaIngreso = $.trim($('#FechaIngreso').val());
 		FechaSalida = $.trim($('#FechaSalida').val());
@@ -116,6 +118,7 @@ $(document).ready(function () {
 				url: base_url + "/ContratoEmpleado/ingresar_contrato_empleado",
 				data: {
 					ID_empleado: ID_empleado,
+					ID_camion: ID_camion,
 					tipocontrato: tipocontrato,
 					sueldo: sueldo,
 					FechaIngreso: FechaIngreso,
@@ -134,7 +137,7 @@ $(document).ready(function () {
 						fechain = respuesta['datos']['fechain'];
 						fechafin = respuesta['datos']['fechafin'];
 						d = new Date();
-						fechaActual =(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+						fechaActual = (d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
 						estado = respuesta['datos']['fechafin'] > fechaActual ? 'Vigente' : 'Vencido';
 						tabla.row.add([id_contrato, CI, nombres, Apellido_p, Apellido_m, descripcion, sueldo, fechain, fechafin, estado]).draw();
 						$('#modal-contratoEmpleado').modal('hide');
@@ -162,6 +165,7 @@ $(document).ready(function () {
 				data: {
 					ID_contrato: ID_contrato,
 					tipocontrato: tipocontrato,
+					ID_camion: ID_camion,
 					sueldo: sueldo,
 					FechaIngreso: FechaIngreso,
 					FechaSalida: FechaSalida,
@@ -179,7 +183,7 @@ $(document).ready(function () {
 						fechain = respuesta['datos']['fechain'];
 						fechafin = respuesta['datos']['fechafin'];
 						d = new Date();
-						fechaActual =(d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
+						fechaActual = (d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate());
 						estado = respuesta['datos']['fechafin'] > fechaActual ? 'Vigente' : 'Vencido';
 						tabla.row(fila).data([id_contrato, CI, nombres, Apellido_p, Apellido_m, descripcion, sueldo, fechain, fechafin, estado]).draw();
 						LimpiarFormulario();
@@ -246,6 +250,7 @@ $(document).ready(function () {
 function LimpiarFormulario() {
 	$('#modal-contratoEmpleado').modal('hide');
 	$('.modal-title').text('Formulario  de contrato empleado');
+	$("#ID_camion option:selected").removeAttr("selected");
 	$("#tipocontrato option:selected").removeAttr("selected");
 	$('#CI').attr('readonly', false);
 	$('#nombres').attr('readonly', false);

@@ -122,7 +122,17 @@
               <input type="number" hidden='hidden' name='ID_empleado' id="ID_empleado">
             </div>
           </div>
-
+          <div class="form-group">
+            <label for="ID_camion" class="control-label">Camion: </label>
+            <div class="">
+              <select id="ID_camion" name="ID_camion" class="form-control">
+                <option value=""></option>
+                <?php foreach ($camiones as $row) : ?>
+                  <option value="<?php echo $row->ID_camion ?>"><?php echo $row->N_Placa ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+          </div>
 
           <div class="form-group">
             <label for="tipocontrato" class="control-label">tipo contrato *:</label>

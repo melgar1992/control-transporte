@@ -13,6 +13,7 @@ class ContratoEmpleado extends BaseController
     $contratos['tipocontratos'] = $this->Contrato_model->obtenerTipoContrato();
     $contratos['datos'] = $this->Contrato_model->obtenerContratoEmpleado();
     $contratos["empleados"] = $this->Empleado_model->obtenerEmpleado();
+    $contratos['camiones'] = $this->Camion_model->obtenerCamionesPropios();
     $this->loadView('ContratoEmpleado', '/form/ContratoEmpleado/nuevo_ContratoEmpleado', $contratos);
   }
 
@@ -70,6 +71,7 @@ class ContratoEmpleado extends BaseController
 
         $ID_empleado = $this->input->post('ID_empleado');
         $id_tipoContrato = $this->input->post('tipocontrato');
+        $ID_camion = $this->input->post('ID_camion');
         $sueldo = $this->input->post('sueldo');
         $fechain = $this->input->post('FechaIngreso');
         $fechafin = $this->input->post('FechaSalida');
@@ -79,7 +81,7 @@ class ContratoEmpleado extends BaseController
           if ($this->Empleado_model->idempleado($ID_empleado) == true) {
 
             $empleado = (array) $this->Empleado_model->idempleado($ID_empleado);
-            $idContrato = $this->Contrato_model->insertarContratoEmpleado($ID_empleado, $id_tipoContrato, $sueldo, $fechain, $fechafin);
+            $idContrato = $this->Contrato_model->insertarContratoEmpleado($ID_empleado, $id_tipoContrato,$ID_camion , $sueldo, $fechain, $fechafin);
             $tipoContrato = $this->Contrato_model->ObtenerTipoContratoxID($id_tipoContrato);
             $respuesta = array(
               'respuesta' => 'Exitoso',
@@ -87,6 +89,7 @@ class ContratoEmpleado extends BaseController
                 'id_contrato' => $idContrato,
                 'id_empleado' => $ID_empleado,
                 'id_tipocontrato' => $id_tipoContrato,
+                'ID_camion' => $ID_camion,
                 'CI' => $empleado['CI'],
                 'nombres' => $empleado['Nombres'],
                 'Apellido_p' => $empleado['Apellido_p'],
@@ -142,11 +145,12 @@ class ContratoEmpleado extends BaseController
 
         $id_contrato = $this->input->post('ID_contrato');
         $id_tipoContrato = $this->input->post('tipocontrato');
+        $ID_camion = $this->input->post('ID_camion');
         $sueldo = $this->input->post('sueldo');
         $fechain = $this->input->post('FechaIngreso');
         $fechafin = $this->input->post('FechaSalida');
 
-        if ($this->Contrato_model->updateContrato($id_contrato, $id_tipoContrato, $sueldo, $fechain, $fechafin)) {
+        if ($this->Contrato_model->updateContrato($id_contrato, $id_tipoContrato, $ID_camion, $sueldo, $fechain, $fechafin)) {
           $nuevoContrato = $this->Contrato_model->obtenerContratoIDSinFecha($id_contrato);
           $respuesta = array(
             'respuesta' => 'Exitoso',
@@ -200,6 +204,7 @@ class ContratoEmpleado extends BaseController
         'respuesta' => 'Exitoso',
         'datos' => array(
           'CI' => $contrato['CI'],
+          'ID_camion' => $contrato['ID_camion'],
           'Nombres' => $contrato['Nombres'],
           'Descripcion' => $contrato['Descripcion'],
           'sueldo' => $contrato['sueldo'],
