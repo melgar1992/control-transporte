@@ -81,7 +81,7 @@ class ContratoEmpleado extends BaseController
           if ($this->Empleado_model->idempleado($ID_empleado) == true) {
 
             $empleado = (array) $this->Empleado_model->idempleado($ID_empleado);
-            $idContrato = $this->Contrato_model->insertarContratoEmpleado($ID_empleado, $id_tipoContrato,$ID_camion , $sueldo, $fechain, $fechafin);
+            $idContrato = $this->Contrato_model->insertarContratoEmpleado($ID_empleado, $id_tipoContrato, $ID_camion, $sueldo, $fechain, $fechafin);
             $tipoContrato = $this->Contrato_model->ObtenerTipoContratoxID($id_tipoContrato);
             $respuesta = array(
               'respuesta' => 'Exitoso',

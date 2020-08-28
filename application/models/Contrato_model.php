@@ -69,9 +69,9 @@ class Contrato_model extends CI_Model
 
     public function PlanillaMensual()
     {
-        $this->db->select_sum('c.sueldo','Planilla_mensual');
+        $this->db->select_sum('c.sueldo', 'Planilla_mensual');
         $this->db->from('contrato c');
-        $this->db->where('c.Estado','Activo');
+        $this->db->where('c.Estado', 'Activo');
         $this->db->where('FechaSalida >', date("Y-m-d"));
         return $this->db->get()->row_array();
     }
@@ -89,7 +89,7 @@ class Contrato_model extends CI_Model
         $this->db->join('persona', 'empleado.ID_persona = persona.ID_persona');
         $this->db->where('contrato.Estado', 'Activo');
         $this->db->where('empleado.Estado', 'Activo');
-      
+
 
         $datos = $this->db->get();
 
@@ -112,18 +112,30 @@ class Contrato_model extends CI_Model
         return $datos;
     }
 
-    public function insertarContratoEmpleado($id_Empleado, $id_tipoContrato,$ID_camion, $sueldo, $fechain, $fechafin)
+    public function insertarContratoEmpleado($id_Empleado, $id_tipoContrato, $ID_camion, $sueldo, $fechain, $fechafin)
     {
+        if ($ID_camion != '') {
+            $data3 = array(
+                'ID_empleado' => $id_Empleado,
+                'ID_tipoContrato' => $id_tipoContrato,
+                'ID_camion' => $ID_camion,
+                'sueldo' => $sueldo,
+                'FechaIngreso' => $fechain,
+                'FechaSalida' => $fechafin,
+                'Estado' => 'Activo'
+            );
+        } else {
+            $data3 = array(
+                'ID_empleado' => $id_Empleado,
+                'ID_tipoContrato' => $id_tipoContrato,
+                'sueldo' => $sueldo,
+                'FechaIngreso' => $fechain,
+                'FechaSalida' => $fechafin,
+                'Estado' => 'Activo'
+            );
+        }
 
-        $data3 = array(
-            'ID_empleado' => $id_Empleado,
-            'ID_tipoContrato' => $id_tipoContrato,
-            'ID_camion' => $ID_camion,
-            'sueldo' => $sueldo,
-            'FechaIngreso' => $fechain,
-            'FechaSalida' => $fechafin,
-            'Estado' => 'Activo'
-        );
+
         $this->db->insert('contrato', $data3);
 
         $id_contrato = $this->db->insert_id();
@@ -133,13 +145,24 @@ class Contrato_model extends CI_Model
     public function updateContrato($ID_contrato, $tipocontrato, $ID_camion, $sueldo, $fechain, $fechafin)
     {
 
-        $data = array(
-            'ID_tipoContrato' => $tipocontrato,
-            'ID_camion' => $ID_camion,
-            'sueldo' => $sueldo,
-            'FechaIngreso' => $fechain,
-            'FechaSalida' => $fechafin,
-        );
+        if ($ID_camion != '') {
+            $data = array(
+                'ID_tipoContrato' => $tipocontrato,
+                'ID_camion' => $ID_camion,
+                'sueldo' => $sueldo,
+                'FechaIngreso' => $fechain,
+                'FechaSalida' => $fechafin,
+            );
+        } else {
+            $data = array(
+                'ID_tipoContrato' => $tipocontrato,
+                'sueldo' => $sueldo,
+                'FechaIngreso' => $fechain,
+                'FechaSalida' => $fechafin,
+            );
+        }
+
+
         $this->db->where('ID_contrato', $ID_contrato);
         return $this->db->update('contrato', $data);
     }
@@ -248,8 +271,6 @@ class Contrato_model extends CI_Model
         } else {
             return false;
         }
-        
-        
     }
     public function buscarContratoxNombre($valor)
     {
@@ -271,7 +292,5 @@ class Contrato_model extends CI_Model
         } else {
             return false;
         }
-        
-        
     }
 }
