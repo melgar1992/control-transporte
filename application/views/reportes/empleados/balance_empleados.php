@@ -26,9 +26,11 @@
                 <?php
 
                 if (count($pago_empleado) > 0) {
-                    foreach ($pago_empleado as $row) { ?>
+                    foreach ($pago_empleado as $row) { 
+                        $fecha = new DateTime($row['Fecha']);
+                        ?>
                         <tr>
-                            <td><?php echo $row['Fecha'] ?></td>
+                            <td><?php echo date_format($fecha,'Y-M-d') ?></td>
                             <td><?php echo $row['Descripcion'] ?></td>
                             <td ALIGN="center"><?php echo number_format($row['Monto'], 2) ?></td>
 

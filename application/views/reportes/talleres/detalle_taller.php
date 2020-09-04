@@ -31,9 +31,10 @@
                 if (count($detalleTaller) > 0) {
                     foreach ($detalleTaller as $row) { 
                         $balance = $balance + (float)$row['Debe'] - (float)$row['Haber'];
+                        $fecha = new DateTime($row['Fecha']); 
                         ?>
                         <tr>
-                            <td><?php echo $row['Fecha'] ?></td>
+                            <td><?php echo date_format($fecha,'Y-M-d') ?></td>
                             <td><?php echo $row['N_Placa'] ?></td>
                             <td><?php echo $row['Descripcion'] ?></td>
                             <td><?php echo $row['PrecioUnitario'] ?></td>

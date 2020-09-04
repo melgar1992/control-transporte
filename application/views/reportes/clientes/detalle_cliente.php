@@ -30,9 +30,10 @@
                 if (count($detalleCliente) > 0) {
                     foreach ($detalleCliente as $row) { 
                         $balance = $balance + (float)$row['Debe'] - (float)$row['Haber'];
+                        $fecha = new DateTime($row['fecha']); 
                         ?>
                         <tr>
-                            <td><?php echo $row['fecha'] ?></td>
+                            <td><?php echo date_format($fecha,'Y-M-d') ?></td>
                             <td><?php echo $row['Descripcion'] ?></td>
                             <td><?php echo $row['Origen'] ?></td>
                             <td><?php echo $row['Destino'] ?></td>
