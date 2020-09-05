@@ -317,7 +317,7 @@
                       <table id="tabla_detalle_camion" class="table table-bordered jambo_table">
                         <thead>
                           <tr>
-                            <th>Placa</th>
+                            <th>Categoria</th>
                             <th>Fecha </th>
                             <th>Descripcion</th>
                             <th>Precio</th>

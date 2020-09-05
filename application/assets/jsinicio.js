@@ -301,7 +301,7 @@ $(document).ready(function () {
 					for (let i = 0; i < detalleCamionEmpresa.length; i++) {
 						balance = balance + Number(detalleCamionEmpresa[i]['Ingreso']) - Number(detalleCamionEmpresa[i]['Egreso']);
 						tablaDetalleCamion.row.add([
-							detalleCamionEmpresa[i]['Placa'],
+							detalleCamionEmpresa[i]['Nombre_categoria'],
 							detalleCamionEmpresa[i]['Fecha'],
 							(detalleCamionEmpresa[i]['Descripcion'] != null) ? detalleCamionEmpresa[i]['Descripcion'] : detalleCamionEmpresa[i]['TransporteDescripcion'],
 							detalleCamionEmpresa[i]['Precio'],
