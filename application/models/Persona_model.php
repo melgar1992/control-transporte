@@ -1,11 +1,5 @@
 <?php
-    class datos_Persona {
-        
-        function __construct(){
-            parent::__construct();
-            
-        }
-    }
+    
 
     class Persona_model extends CI_Model {
         
