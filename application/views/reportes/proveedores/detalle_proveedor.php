@@ -14,8 +14,8 @@
             <thead>
                 <tr>
                     <th >Fecha</th>
-                    <th >Descripcion</th>
-                    <th >Origen</th>
+                    <th >Placa</th>
+                    <th >Tramo</th>
                     <th >Destino</th>
                     <th >Precio</th>
                     <th >Comision</th>
@@ -38,8 +38,8 @@
                         <tr>
                             <td><?php echo date_format($fecha,'Y-M-d') ?></td>
                             <td><?php echo $row['Descripcion'] ?></td>
-                            <td><?php echo $row['Origen'] ?></td>
-                            <td><?php echo $row['Destino'] ?></td>
+                            <td><?php echo $row['N_Placa'] ?></td>
+                            <td><?php echo ($row['Origen']) ? $row['Origen'] . " -> " . $row['Destino'] : ""; ?></td>
                             <td><?php echo $row['Precio'] ?></td>
                             <td><?php echo $row['Comision'] ?></td>
                             <td><?php echo $row['Cantidad'] ?></td>

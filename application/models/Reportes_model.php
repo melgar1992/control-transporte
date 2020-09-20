@@ -188,9 +188,10 @@ class Reportes_model extends CI_Model
     }
     public function obtenerDetalleProveedor($ID_proveedor)
     {
-        $this->db->select('*');
-        $this->db->from('detalleproveedor');
-        $this->db->where('ID_proveedor', $ID_proveedor);
+        $this->db->select('dp.*, c.N_Placa');
+        $this->db->from('detalleproveedor dp');
+        $this->db->join('camion c','c.ID_camion = dp.ID_camion', 'left');
+        $this->db->where('dp.ID_proveedor', $ID_proveedor);
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
     }
