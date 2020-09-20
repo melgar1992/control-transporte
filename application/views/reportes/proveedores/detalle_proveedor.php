@@ -14,9 +14,9 @@
             <thead>
                 <tr>
                     <th >Fecha</th>
+                    <th >Descripcion</th>
                     <th >Placa</th>
                     <th >Tramo</th>
-                    <th >Destino</th>
                     <th >Precio</th>
                     <th >Comision</th>
                     <th >Cantidad</th>

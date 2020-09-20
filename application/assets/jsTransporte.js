@@ -4,7 +4,7 @@ $(document).ready(function () {
 	var tabla = $('#tablaTransporte').DataTable({
 		responsive: "true",
 		"order": [
-			[1, "desc"]
+			[2, "desc"]
 		],
 		"columnDefs": [{
 			"targets": -1,
