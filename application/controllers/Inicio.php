@@ -44,6 +44,13 @@ class Inicio extends BaseController
 		$datos['Cliente'] = $this->Cliente_model->obtenerCliente($ID_Cliente);
 		$this->load->view('reportes/clientes/detalle_cliente',$datos);
 	}
+	public function detalleTransporteCliente($ID_Cliente)
+	{
+		$datos['Cliente'] = $this->Cliente_model->obtenerCliente($ID_Cliente);
+		$datos['TransporteCliente'] = $this->Reportes_model->obtenerTransporteCliente($ID_Cliente);
+		$this->load->view('reportes/clientes/detalle_transporte_cliente',$datos);
+		
+	}
 	public function detalleProveedor($ID_proveedor)
 	{
 		$datos['detalleProveedor'] = $this->Reportes_model->obtenerDetalleProveedor($ID_proveedor);

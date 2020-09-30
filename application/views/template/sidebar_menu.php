@@ -3,7 +3,7 @@
               <div class="menu_section">
                 <h3>General</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fas fa-home"></i> Home <span class="fas fa-chevron-down"></span></a>
+                  <li><a><i class="fas fa-bar-chart-o"></i> Presentacion de datos <span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url("Inicio") ?>"> Dashboard</a></li>
                       <li><a href=<?php echo site_url("DashboardEmpleado/index") ?>>Dashboard de empleados</a></li>

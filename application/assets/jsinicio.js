@@ -247,6 +247,18 @@ $(document).ready(function () {
 			}
 		});
 	});
+	$(document).on('click', '.btn-reporte-transporte-cliente', function () {
+		fila = $(this).closest('tr');
+		ID_Cliente = parseInt(fila.find('td:eq(0)').text());
+		$.ajax({
+			type: "POST",
+			url: base_url + "/Inicio/detalleTransporteCliente/" + ID_Cliente,
+			dataType: "html",
+			success: function (response) {
+				$('#modal-detalle .modal-body').html(response);
+			}
+		});
+	});
 	$(document).on('click', '.btn-reporte-proveedor', function () {
 		fila = $(this).closest('tr');
 		ID_proveedor = parseInt(fila.find('td:eq(0)').text());
