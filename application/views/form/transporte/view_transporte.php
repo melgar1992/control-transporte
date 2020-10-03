@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-xs-12 text-right">
         Fecha: <?php echo $transporte['Fecha'] ?><br>
-
     </div>
 </div> <br>
 <div class="row">
