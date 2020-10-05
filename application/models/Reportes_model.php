@@ -193,6 +193,7 @@ class Reportes_model extends CI_Model
         $this->db->from('detallecliente dc');
         $this->db->where('dc.ID_cliente', $ID_Cliente);
         $this->db->where('ID_transporte !=','NULL');
+        $this->db->order_by('fecha','DESC');
         $detalleTrasportes = $this->db->get()->result_array();
 
         for ($i=0; $i < count($detalleTrasportes); $i++) { 
