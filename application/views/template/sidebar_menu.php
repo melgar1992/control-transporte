@@ -64,11 +64,11 @@
                     </ul>
                   </li>
                   <?php if ($this->session->userdata['logged_in']['privilegios'] == 'Administrador') : ?>
-                  <li><a><i class="fas fa-gears"></i> Configuracion de sistema<span class="fas fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="<?php echo site_url("Usuario/usuario") ?>">Administracion de usuarios</a></li>
-                    </ul>
-                  </li>
+                    <li><a><i class="fas fa-gears"></i> Configuracion de sistema<span class="fas fa-chevron-down"></span></a>
+                      <ul class="nav child_menu">
+                        <li><a href="<?php echo site_url("Usuario/usuario") ?>">Administracion de usuarios</a></li>
+                      </ul>
+                    </li>
                   <?php endif; ?>
               </div>
 
@@ -104,14 +104,11 @@
                   <ul class="nav navbar-nav navbar-right">
                     <li class="">
                       <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                        <img src="<?php
-                                  if (isset($this->session->userdata['logged_in'])) {
-                                    img($this->session->userdata['logged_in']['url_img']);
-                                  } ?>" alt=""><?php
-                                                if (isset($this->session->userdata['logged_in'])) {
-                                                  echo  $this->session->userdata['logged_in']['username'];
-                                                }
-                                                ?>
+                        <?php
+                        if (isset($this->session->userdata['logged_in'])) {
+                          echo  $this->session->userdata['logged_in']['username'];
+                        }
+                        ?>
                         <span class=" fa fa-angle-down"></span>
                       </a>
                       <ul class="dropdown-menu dropdown-usermenu pull-right">
