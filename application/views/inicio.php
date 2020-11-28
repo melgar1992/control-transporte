@@ -117,7 +117,7 @@
                               <td><?php echo $row['balance'] ?></td>
                               <td>
                                 <div class='text-center'>
-                                <button type="button" title="Reporte de transporte del cliente" class="btn btn-info btn-reporte-transporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
+                                  <button type="button" title="Reporte de transporte del cliente" class="btn btn-info btn-reporte-transporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
                                   <button type="button" title="Reporte balance cliente" class="btn btn-info btn-reporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
                                 </div>
                               </td>
@@ -274,7 +274,8 @@
             </div>
             <br></br>
           </form>
-          <hr style="border:2px;"></hr>
+          <hr style="border:2px;">
+          </hr>
           <div class="Reporte-camion hidden">
             <div class="row">
               <div class="col-lg-4 col-md-5 col-sm-6 col-xs-12" id="GraficoDCamionesEmpresa">
@@ -298,7 +299,8 @@
                 </table>
               </div>
             </div>
-            <hr style="border:2px;"></hr>
+            <hr style="border:2px;">
+            </hr>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
@@ -319,7 +321,7 @@
                         <thead>
                           <tr>
                             <th>Categoria</th>
-                            <th>Fecha </th>
+                            <th>Fecha</th>
                             <th>Descripcion</th>
                             <th>Precio</th>
                             <th>Cantidad</th>
@@ -327,6 +329,7 @@
                             <th>Ingreso</th>
                             <th>Egreso</th>
                             <th>Balance</th>
+                            <th>Opciones</th>
                           </tr>
                         </thead>
                         <tbody>

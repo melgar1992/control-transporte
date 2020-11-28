@@ -1,7 +1,7 @@
   <body class="nav-md">
       <div class="container body">
         <div class="main_container">
-          <div class="col-md-3 left_col menu_fixed">
+          <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
               <div class="navbar nav_title" style="border: 0;">
                 <a href="<?php echo site_url() ?>" class="site_title"><i class="fas fa-truck-moving"></i> <span>Trans Melgar!</span></a>

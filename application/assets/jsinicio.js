@@ -289,6 +289,14 @@ $(document).ready(function () {
 			title: 'Balance',
 		});
 	});
+	$(document).on('click', '.btn-editar-detalle_camion', function () {
+		id = $(this).val();
+		window.open(base_url + "/Mantenimiento/editarMantenimiento/" + id);
+	});
+	$(document).on('click', '.btn-editar-transporte_camion', function () {
+		id = $(this).val();
+		window.open(base_url + "/Transporte/editarTransporte/" + id);
+	});
 	$(document).on('submit', '#reporte-camion', function (e) {
 		e.preventDefault();
 		ID_camion = $.trim($('#camion').val());
@@ -322,6 +330,11 @@ $(document).ready(function () {
 							detalleCamionEmpresa[i]['Ingreso'],
 							detalleCamionEmpresa[i]['Egreso'],
 							balance,
+							(detalleCamionEmpresa[i]['ID_mantenimiento'] > 0) ?
+							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+							(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
+							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+							null,
 						]).draw();
 					}
 				}
@@ -409,6 +422,7 @@ function resumenGastosCamion(datos) {
 	tablaGastosCategoriaCamion(datos);
 	GraficoDoughnutsCamionesEmpresa(datos);
 }
+
 function tablaGastosCategoriaCamion(datos) {
 
 	// se obtiene el total de los gastos para poder sacar el % de los mismos.
@@ -417,18 +431,19 @@ function tablaGastosCategoriaCamion(datos) {
 		total = total + parseFloat(datos[i].Egreso);
 	}
 	for (let i = 0; i < datos.length; i++) {
-		
+
 		porcentaje = (parseFloat(datos[i].Egreso) * 100) / total;
 		html = '<tr>';
-		html += '<th>'+ datos[i].Categoria +'</th>';
-		html += '<th>% '+ porcentaje.toFixed(2) +'</th>'
-		html +='</tr>';
+		html += '<th>' + datos[i].Categoria + '</th>';
+		html += '<th>% ' + porcentaje.toFixed(2) + '</th>'
+		html += '</tr>';
 
 		$('.tabla-gastos-categoria-camion tbody').append(html);
-		
+
 	}
 
 }
+
 function GraficoDoughnutsCamionesEmpresa(datos) {
 	labels = Object.keys(datos).map(function (key) {
 		return datos[key].Categoria;
