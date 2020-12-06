@@ -31,9 +31,19 @@ class Transporte_model extends CI_Model
     }
     public function obtenerDetalleTransporte($ID_transporte)
     {
-        $this->db->select("dt.*, c.*, concat( p.Nombres, ' ' , p.Apellido_p , ' ' ,p.Apellido_m) as nombreChoferPropio, p.CI as CIcamionPropio");
+        $this->db->select("dt.*,
+        c.*,
+        CONCAT(p.Nombres,
+                ' ',
+                p.Apellido_p,
+                ' ',
+                p.Apellido_m) AS nombreChoferPropio,
+        COALESCE(CONCAT(pr.Nombres, ' ', pr.Apellidos),
+                'De la empresa') AS nombreProveedor,
+        p.CI AS CIcamionPropio");
         $this->db->from('detalle_transporte_ganado dt');
         $this->db->join('camion c', 'c.ID_camion = dt.ID_camion');
+        $this->db->join('proveedor pr', ' pr.ID_proveedor = c.ID_proveedor ','left');
         $this->db->join('contrato co', 'co.ID_contrato = c.ID_contrato', 'left');
         $this->db->join('empleado e', 'co.ID_empleado = e.ID_empleado', 'left');
         $this->db->join('persona p', 'p.ID_persona = e.ID_persona', 'left');
@@ -56,7 +66,7 @@ class Transporte_model extends CI_Model
     }
     public function eliminarDetalleTransporte($ID_transporte)
     {
-        $this->db->where('ID_transporte',$ID_transporte);
+        $this->db->where('ID_transporte', $ID_transporte);
         $this->db->delete('detalle_transporte_ganado');
     }
 }

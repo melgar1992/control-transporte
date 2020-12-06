@@ -24,6 +24,7 @@
             <table id='tablaDetalleTransporte' class='table jambo_table table-hover'>
                 <thead>
                     <tr>
+                        <th>Proveedor</th>
                         <th>Nombre chofer</th>
                         <th>CI</th>
                         <th>Placa</th>
@@ -45,6 +46,7 @@
                     <?php if (!empty($detalle_transporte)) : ?>
                         <?php foreach ($detalle_transporte as $row) : ?>
                             <tr>
+                                <td><?php echo $row->nombreProveedor; ?></td>
                                 <td><?php echo (isset($row->NombresChofer)) ? $row->NombresChofer : $row->nombreChoferPropio; ?></td>
                                 <td><?php echo (isset($row->CI)) ? $row->CI : $row->CIcamionPropio; ?></td>
                                 <td><?php echo $row->N_Placa ?></td>
