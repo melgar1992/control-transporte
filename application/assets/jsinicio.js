@@ -293,7 +293,7 @@ $(document).ready(function () {
 		id = $(this).val();
 		window.open(base_url + "/Mantenimiento/editarMantenimiento/" + id);
 	});
-	$(document).on('click', '.btn-editar-transporte_camion', function () {
+	$(document).on('click', '.btn-editar-transporte_camion,  .btn-editar-transporte-cliente', function () {
 		id = $(this).val();
 		window.open(base_url + "/Transporte/editarTransporte/" + id);
 	});

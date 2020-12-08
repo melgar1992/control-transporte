@@ -22,18 +22,19 @@
                     <th>Debe</th>
                     <th>Haber</th>
                     <th>Balance</th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
                 <?php
                 $balance = 0;
                 if (count($detalleCliente) > 0) {
-                    foreach ($detalleCliente as $row) { 
+                    foreach ($detalleCliente as $row) {
                         $balance = $balance + (float)$row['Debe'] - (float)$row['Haber'];
-                        $fecha = new DateTime($row['fecha']); 
-                        ?>
+                        $fecha = new DateTime($row['fecha']);
+                ?>
                         <tr>
-                            <td><?php echo date_format($fecha,'Y-M-d') ?></td>
+                            <td><?php echo date_format($fecha, 'Y-M-d') ?></td>
                             <td><?php echo $row['Descripcion'] ?></td>
                             <td><?php echo $row['Origen'] ?></td>
                             <td><?php echo $row['Destino'] ?></td>
@@ -42,6 +43,13 @@
                             <td ALIGN="center"><?php echo number_format($row['Debe'], 2) ?></td>
                             <td ALIGN="center"><?php echo number_format($row['Haber'], 2) ?></td>
                             <td ALIGN="center"><?php echo number_format($balance, 2) ?></td>
+                            <td>
+                                <?php if ($row['ID_transporte'] > 0 ) { ?>
+                                <button type="button" value="<?php echo $row['ID_transporte'] ?>" class="btn btn-warning btn-editar-transporte-cliente"><span class='fas fa-pencil-alt'></span></button>
+                                <?php } else{
+
+                                } ?>
+                            </td>
                         </tr>
                 <?php }
                 }
@@ -54,6 +62,6 @@
                     <td><?php echo number_format($balance, 2); ?> Bs</td>
                 </tr>
             </tfoot>
-      
+
     </div>
 </div>
