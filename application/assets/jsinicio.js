@@ -235,6 +235,11 @@ $(document).ready(function () {
 	});
 	// Funciones de la paginas
 	GenerarGraficoMovimiento(year);
+	//Resetea la grafica de movimiento de transporte
+	$('#year').on('change', function () {
+		yearselected = $(this).val();
+		GenerarGraficoMovimiento(yearselected);
+	});
 	$(document).on('click', '.btn-reporte-cliente', function () {
 		fila = $(this).closest('tr');
 		ID_Cliente = parseInt(fila.find('td:eq(0)').text());
