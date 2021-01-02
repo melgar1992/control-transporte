@@ -240,6 +240,7 @@ $(document).ready(function () {
 		yearselected = $(this).val();
 		GenerarGraficoMovimiento(yearselected);
 	});
+	//Funciones de clientes
 	$(document).on('click', '.btn-reporte-cliente', function () {
 		fila = $(this).closest('tr');
 		ID_Cliente = parseInt(fila.find('td:eq(0)').text());
@@ -264,6 +265,7 @@ $(document).ready(function () {
 			}
 		});
 	});
+	//Funciones de proveedores
 	$(document).on('click', '.btn-reporte-proveedor', function () {
 		fila = $(this).closest('tr');
 		ID_proveedor = parseInt(fila.find('td:eq(0)').text());

@@ -192,11 +192,11 @@ class Reportes_model extends CI_Model
         $this->db->select('dc.*');
         $this->db->from('detallecliente dc');
         $this->db->where('dc.ID_cliente', $ID_Cliente);
-        $this->db->where('ID_transporte !=','NULL');
-        $this->db->order_by('fecha','DESC');
+        $this->db->where('ID_transporte !=', 'NULL');
+        $this->db->order_by('fecha', 'DESC');
         $detalleTrasportes = $this->db->get()->result_array();
 
-        for ($i=0; $i < count($detalleTrasportes); $i++) { 
+        for ($i = 0; $i < count($detalleTrasportes); $i++) {
             $detalleTrasportes[$i]['transporte'] = $this->Transporte_model->obtenerTransporte($detalleTrasportes[$i]['ID_transporte']);
             $detalleTrasportes[$i]['detalle_transporte'] = $this->Transporte_model->obtenerDetalleTransporte($detalleTrasportes[$i]['ID_transporte']);
         }
@@ -206,7 +206,7 @@ class Reportes_model extends CI_Model
     {
         $this->db->select('dp.*, c.N_Placa');
         $this->db->from('detalleproveedor dp');
-        $this->db->join('camion c','c.ID_camion = dp.ID_camion', 'left');
+        $this->db->join('camion c', 'c.ID_camion = dp.ID_camion', 'left');
         $this->db->where('dp.ID_proveedor', $ID_proveedor);
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
@@ -259,5 +259,18 @@ class Reportes_model extends CI_Model
 
         );
         return $datos;
+    }
+    public function obtenerServiciosCliente($ID_Cliente)
+    {
+        $this->db->select('dc.fecha, dc.Descripcion, dc.Debe, dc.Haber,
+        (select NombrePredio  from transporte t join predio p on p.ID_predio = t.ID_predio_origen where t.ID_transporte = dc.ID_transporte ) as Origen,
+        (select NombrePredio from transporte t join predio p on p.ID_predio = t.ID_predio_destino where t.ID_transporte = dc.ID_transporte ) as Destino,
+        (select count(Cantidad) from transporte t join detalle_transporte_ganado dt on dt.ID_transporte = t.ID_transporte where t.ID_transporte = dc.ID_transporte ) as Camiones,
+        (select sum(Descuento) from transporte t join detalle_transporte_ganado dt on dt.ID_transporte = t.ID_transporte where t.ID_transporte = dc.ID_transporte  ) as Descuento');
+        $this->db->from('detallecliente dc');
+        $this->db->where('dc.ID_Cliente', $ID_Cliente);
+        $this->db->where('dc.Debe >', 0);
+        $this->db->order_by('fecha');
+        return $this->db->get()->result_array();
     }
 }

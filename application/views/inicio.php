@@ -117,7 +117,7 @@
                               <td><?php echo $row['balance'] ?></td>
                               <td>
                                 <div class='text-center'>
-                                  <button type="button" title="Reporte de transporte del cliente" class="btn btn-info btn-reporte-transporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
+                                  <button type="button" title="Reporte de transporte del cliente" class="btn btn-primary btn-reporte-transporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-list-alt"></span></button>
                                   <button type="button" title="Reporte balance cliente" class="btn btn-info btn-reporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
                                 </div>
                               </td>
