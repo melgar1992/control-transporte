@@ -7,6 +7,7 @@
                     <ul class="nav child_menu">
                       <li><a href="<?php echo site_url("Inicio") ?>"> Dashboard</a></li>
                       <li><a href=<?php echo site_url("DashboardEmpleado/index") ?>>Dashboard de empleados</a></li>
+                      <li><a href=<?php echo site_url("") ?>>Dashboard de Clientes</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fas fa-edit"></i> Formularios de Empresa<span class="fas fa-chevron-down"></span></a>

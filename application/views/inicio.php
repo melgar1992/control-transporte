@@ -302,6 +302,12 @@
             <hr style="border:2px;">
             </hr>
             <div class="row">
+              <div class="col-xs-12 text-center">
+                <b>Kilometraje acumulado de cambio aceite: </b>
+                <p class="KilometrosAcumulados"></p>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">

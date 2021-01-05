@@ -69,6 +69,7 @@ class Inicio extends BaseController
 		$fechaFin = $this->input->post('fechaFin');
 		$datos['detalleCamionEmpresa'] = $this->Reportes_model->obtenerDetalleCamion($ID_camion, $fechaIni, $fechaFin);
 		$datos['top5Gastos'] = $this->Reportes_model->obtenerTop5GastosCamionEmpresa($ID_camion, $fechaIni, $fechaFin);
+		$datos['KilometrosAcumulados'] = $this->Reportes_model->obtenerKilometrajeUltimoCambioAceite($ID_camion, $fechaIni, $fechaFin);
 		echo json_encode($datos);
 	}
 	public function serviciosCliente($ID_Cliente)

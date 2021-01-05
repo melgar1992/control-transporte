@@ -273,4 +273,44 @@ class Reportes_model extends CI_Model
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
     }
+    public function obtenerKilometrajeUltimoCambioAceite($ID_camion, $fechaIni, $fechaFin)
+    {
+
+        $this->db->select('t.Fecha, t.Distancia');
+        $this->db->from('transporte t');
+        $this->db->join('detalle_transporte_ganado dt', 't.ID_transporte = dt.ID_transporte');
+        $this->db->join('camion c', 'dt.ID_camion = c.ID_camion');
+        $this->db->where('dt.ID_camion', $ID_camion);
+        $this->db->where('t.Fecha >=', $fechaIni);
+        $this->db->where('t.Fecha <=', $fechaFin);
+        $this->db->where('c.Propio', 1);
+        $this->db->order_by('t.Fecha', 'DESC');
+
+        $ViajesCamion = $this->db->get()->result_array();
+
+        $this->db->select('Fecha, kilometraje');
+        $this->db->from('detalle_camiones_propio');
+        $this->db->where('ID_camion', $ID_camion);
+        $this->db->where('Nombre_categoria', 'Cambio aceite');
+        $this->db->where('Fecha >=', $fechaIni);
+        $this->db->where('Fecha <=', $fechaFin);
+        $this->db->order_by('Fecha', 'DESC');
+        $this->db->limit(1);
+
+        $ultimoCambioAceite = $this->db->get()->row_array();
+
+        $i = 0;
+        $kilometrajeAcumulado = 0;
+        if (isset($ultimoCambioAceite['Fecha'])) {
+            while ($ViajesCamion[$i]['Fecha'] > $ultimoCambioAceite['Fecha']) {
+                $kilometrajeAcumulado = $kilometrajeAcumulado + $ViajesCamion[$i]['Distancia'];
+                $i++;
+            }
+        }
+        else {
+            $kilometrajeAcumulado = 'No se encontro cambio de aceite dentro de las fechas';
+        }
+        
+        return $kilometrajeAcumulado;
+    }
 }

@@ -304,6 +304,7 @@ $(document).ready(function () {
 		id = $(this).val();
 		window.open(base_url + "/Transporte/editarTransporte/" + id);
 	});
+	//Reporte de Camiones de la empresa
 	$(document).on('submit', '#reporte-camion', function (e) {
 		e.preventDefault();
 		ID_camion = $.trim($('#camion').val());
@@ -323,6 +324,7 @@ $(document).ready(function () {
 					$('.Reporte-camion').removeClass('hidden');
 					detalleCamionEmpresa = respuesta['detalleCamionEmpresa'];
 					resumenGastosCamion(respuesta['top5Gastos']);
+					$('.KilometrosAcumulados').text(respuesta['KilometrosAcumulados'])
 					balance = 0;
 					tablaDetalleCamion.clear();
 					for (let i = 0; i < detalleCamionEmpresa.length; i++) {
