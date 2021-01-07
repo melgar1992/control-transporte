@@ -324,7 +324,7 @@ $(document).ready(function () {
 					$('.Reporte-camion').removeClass('hidden');
 					detalleCamionEmpresa = respuesta['detalleCamionEmpresa'];
 					resumenGastosCamion(respuesta['top5Gastos']);
-					$('.KilometrosAcumulados').text(respuesta['KilometrosAcumulados'])
+					$('.KilometrosAcumulados').text(respuesta['KilometrosAcumulados']);
 					balance = 0;
 					tablaDetalleCamion.clear();
 					for (let i = 0; i < detalleCamionEmpresa.length; i++) {
