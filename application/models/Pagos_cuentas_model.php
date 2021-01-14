@@ -138,7 +138,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->from('pago_cuentas p');
         $this->db->join('cuenta_empresa ce', 'ce.ID_cuenta_empresa = p.ID_cuenta_empresa');
         $this->db->limit(500);
-        $this->db->order_by('p.Fecha');
+        $this->db->order_by('p.Fecha', 'DESC');
         return $this->db->get()->result();
     }
     public function ingresarMovimientoEmpresa($ID_cuenta_empresa, $Fecha, $Descripcion, $Debe, $Haber)
