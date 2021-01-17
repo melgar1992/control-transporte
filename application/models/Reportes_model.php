@@ -301,16 +301,19 @@ class Reportes_model extends CI_Model
 
         $i = 0;
         $kilometrajeAcumulado = 0;
+        $count = count($ViajesCamion) - 1;
         if (isset($ultimoCambioAceite['Fecha'])) {
             while ($ViajesCamion[$i]['Fecha'] > $ultimoCambioAceite['Fecha']) {
                 $kilometrajeAcumulado = $kilometrajeAcumulado + $ViajesCamion[$i]['Distancia'];
                 $i++;
+                if ($i > $count) {
+                    break;
+                }
             }
-        }
-        else {
+        } else {
             $kilometrajeAcumulado = 'No se encontro cambio de aceite dentro de las fechas';
         }
-        
+
         return $kilometrajeAcumulado;
     }
 }
