@@ -6,6 +6,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->select('p.*, c.Nombre, c.Apellidos, c.CI, c.Direccion, c.Telefono_01, c.Telefono_02');
         $this->db->from('pago_cuentas p');
         $this->db->join('cliente c', 'c.ID_Cliente = p.ID_Cliente');
+        $this->db->order_by('p.fecha','DESC');
         $this->db->limit(500);
         return $this->db->get()->result();
     }
