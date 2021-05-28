@@ -9,7 +9,14 @@ class DashboardClientes extends BaseController
 
     public function index()
     {
-        $datos = [];
+        $datos['clientes'] = $this->Cliente_model->obtenerClientes();
         $this->loadView('DashboardClientes', '/form/cliente/dashboard_clientes', $datos);
+    }
+    public function reporteCliente()
+    {
+        $ID_Cliente = $this->input->post('ID_Cliente');
+        $fechaIni = $this->input->post('fechaIni');
+        $fechaFin = $this->input->post('fechaFin');
+
     }
 }
