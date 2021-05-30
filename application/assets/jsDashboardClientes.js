@@ -4,11 +4,10 @@ $(document).ready(function () {
         ID_Cliente = $.trim($('#ID_Cliente').val());
         fechaIni = $.trim($('#fechaIni').val());
         fechaFin = $.trim($('#fechaFin').val());
-        console.log(ID_Cliente,fechaFin,fechaIni);
         if (fechaIni < fechaFin) {
             $.ajax({
                 type: "POST",
-                url: "/DashboardClientes/reporteCliente",
+                url: base_url + "/DashboardClientes/reporteCliente",
                 data: {
                     ID_Cliente: ID_Cliente,
                     fechaIni: fechaIni,

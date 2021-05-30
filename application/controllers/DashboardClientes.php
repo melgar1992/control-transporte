@@ -17,6 +17,7 @@ class DashboardClientes extends BaseController
         $ID_Cliente = $this->input->post('ID_Cliente');
         $fechaIni = $this->input->post('fechaIni');
         $fechaFin = $this->input->post('fechaFin');
-
+        $datos['clienteBalanceEntreFecha'] = $this->Reportes_model->balanceClienteEntreFechas($ID_Cliente,$fechaIni,$fechaFin);
+        echo json_encode($datos);
     }
 }
