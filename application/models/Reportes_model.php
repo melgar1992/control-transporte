@@ -333,4 +333,34 @@ class Reportes_model extends CI_Model
 
         return $balanceClienteEntreFecha;
     }
+    public function clienteServiciosEntreFecha($ID_Cliente, $fechaIni, $fechaFin)
+    {
+        $this->db->select('dc.ID_transporte, dc.fecha,
+        (select NombrePredio  from transporte t join predio p on p.ID_predio = t.ID_predio_origen where t.ID_transporte = dc.ID_transporte ) as Origen,
+        (select NombrePredio from transporte t join predio p on p.ID_predio = t.ID_predio_destino where t.ID_transporte = dc.ID_transporte ) as Destino,
+        (select count(Cantidad) from transporte t join detalle_transporte_ganado dt on dt.ID_transporte = t.ID_transporte where t.ID_transporte = dc.ID_transporte ) as Camiones,
+        (select sum(Descuento) from transporte t join detalle_transporte_ganado dt on dt.ID_transporte = t.ID_transporte where t.ID_transporte = dc.ID_transporte  ) as Descuento,
+         dc.Descripcion, dc.Debe, dc.Haber');
+        $this->db->from('detallecliente dc');
+        $this->db->where('dc.Debe >', 0);
+        $this->db->where('dc.ID_Cliente', $ID_Cliente);
+        $this->db->where('Fecha >=', $fechaIni);
+        $this->db->where('Fecha <=', $fechaFin);
+        $this->db->order_by('fecha');
+        return $this->db->get()->result_array();
+
+    }
+    public function clientePagosEntreFecha($ID_Cliente, $fechaIni, $fechaFin)
+    {
+        $this->db->select('dc.fecha, dc.Descripcion, dc.Debe, dc.Haber');
+        $this->db->from('detallecliente dc');
+        $this->db->where('dc.ID_pago_cuentas !=', 'null');
+        $this->db->where('dc.Debe =', 0);
+        $this->db->where('dc.ID_Cliente', $ID_Cliente);
+        $this->db->where('Fecha >=', $fechaIni);
+        $this->db->where('Fecha <=', $fechaFin);
+        $this->db->order_by('fecha');
+        return $this->db->get()->result_array();
+    }
+
 }
