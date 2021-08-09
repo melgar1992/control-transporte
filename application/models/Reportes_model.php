@@ -364,9 +364,16 @@ class Reportes_model extends CI_Model
     public function obtenerKilometrajeUltimoCambioAceiteCamiones()
     {
         $this->db->select("c.ID_camion, c.N_placa , 
-        (c.Kilometraje - (select max(dc.kilometraje) from detalle_camiones_propio dc where Nombre_categoria = 'Cambio aceite' and dc.ID_camion = c.ID_camion)) as KmAcumulado");
+        (select max(dc.Fecha) from detalle_camiones_propio dc where Nombre_categoria = 'Cambio aceite' and dc.ID_camion = c.ID_camion) as Fecha");
         $this->db->where('propio', '1');
         $this->db->from('camion c');
-        return $this->db->get()->result_array();
+        $FechasCambioAceite = $this->db->get()->result_array();
+        $fechaHoy = date('Y-m-d H:i:s');
+        foreach ($FechasCambioAceite as $i => $FechaCambioAceite) {
+            $kilometrajeAcumulado = $this->obtenerKilometrajeUltimoCambioAceite($FechaCambioAceite['ID_camion'],$FechaCambioAceite['Fecha'],$fechaHoy);
+            $FechasCambioAceite[$i]['KmAcumulado'] = $kilometrajeAcumulado;
+        }
+        return $FechasCambioAceite;
+     
     }
 }
