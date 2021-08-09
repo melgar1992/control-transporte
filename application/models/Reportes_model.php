@@ -348,7 +348,6 @@ class Reportes_model extends CI_Model
         $this->db->where('Fecha <=', $fechaFin);
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
-
     }
     public function clientePagosEntreFecha($ID_Cliente, $fechaIni, $fechaFin)
     {
@@ -362,5 +361,12 @@ class Reportes_model extends CI_Model
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
     }
-
+    public function obtenerKilometrajeUltimoCambioAceiteCamiones()
+    {
+        $this->db->select("c.ID_camion, c.N_placa , 
+        (c.Kilometraje - (select max(dc.kilometraje) from detalle_camiones_propio dc where Nombre_categoria = 'Cambio aceite' and dc.ID_camion = c.ID_camion)) as KmAcumulado");
+        $this->db->where('propio', '1');
+        $this->db->from('camion c');
+        return $this->db->get()->result_array();
+    }
 }

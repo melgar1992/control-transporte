@@ -20,7 +20,7 @@
         <!-- FastClick -->
         <?php script('/vendors/fastclick/lib/fastclick.js') ?>
         <!-- <script src="../vendors/fastclick/lib/fastclick.js"></script> -->
-      
+
         <!-- Chart.js -->
         <?php script('/vendors/Chart.js/dist/Chart.min.js') ?>
         <!-- <script src="../vendors/Chart.js/dist/Chart.min.js"></script> -->
@@ -31,12 +31,12 @@
         <!-- iCheck -->
         <?php script('/vendors/iCheck/icheck.min.js') ?>
         <!-- <script src="../vendors/iCheck/icheck.min.js"></script> -->
-     
-   
+
+
         <!-- DateJS -->
         <?php script('/vendors/DateJS/build/date.js') ?>
         <!-- <script src="../vendors/DateJS/build/date.js"></script> -->
-     
+
         <!-- bootstrap-daterangepicker -->
         <?php script('/vendors/moment/min/moment.min.js') ?>
         <!-- <script src="../vendors/moment/min/moment.min.js"></script> -->
@@ -55,6 +55,10 @@
         <?php script('/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>
         <!-- Jquery Print, sirve para imprimir -->
         <?php script('/vendors/jquery-print/jquery.print.js') ?>
+        <!-- PNotify -->
+        <?php script('/vendors/pnotify/dist/pnotify.js') ?>
+        <?php script('/vendors/pnotify/dist/pnotify.buttons.js') ?>
+        <?php script('/vendors/pnotify/dist/pnotify.nonblock.js') ?>
 
 
         <!-- Custom Theme Scripts -->

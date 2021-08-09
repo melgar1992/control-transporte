@@ -44,6 +44,11 @@ if (isset($this->session->userdata['logged_in'])) {
     <!-- Estilos de migue -->
     <?php css('/build/css/migue.css') ?>
     <!-- <link href="../build/css/custom.min.css" rel="stylesheet"> -->
+    <!-- PNotify -->
+    <?php css('/vendors/pnotify/dist/pnotify.css') ?>
+    <?php css('/vendors/pnotify/dist/pnotify.buttons.css') ?>
+    <?php css('/vendors/pnotify/dist/pnotify.nonblock.css') ?>
+
 
 
 </head>

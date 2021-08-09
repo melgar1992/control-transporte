@@ -32,7 +32,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -89,7 +89,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -146,7 +146,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -203,7 +203,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -240,6 +240,8 @@ $(document).ready(function () {
 		yearselected = $(this).val();
 		GenerarGraficoMovimiento(yearselected);
 	});
+	//Funcion para ver Km de cambio de aceite camiones
+	verificarCambioAceite();
 	//Funciones de clientes
 	$(document).on('click', '.btn-reporte-cliente', function () {
 		fila = $(this).closest('tr');
@@ -340,10 +342,10 @@ $(document).ready(function () {
 							detalleCamionEmpresa[i]['Egreso'],
 							balance,
 							(detalleCamionEmpresa[i]['ID_mantenimiento'] > 0) ?
-							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-							(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
-							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-							null,
+								"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+								(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
+									"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+									null,
 						]).draw();
 					}
 				}
@@ -485,4 +487,28 @@ function GraficoDoughnutsCamionesEmpresa(datos) {
 		},
 
 	})
+}
+function verificarCambioAceite() {
+
+	$.ajax({
+		type: "POST",
+		url: base_url + "/Camion/oobtenerKilometrajeUltimoCambioAceiteCamionesAjax",
+		dataType: "json",
+		success: function (datos) {
+			if (datos.length > 0) {
+				datos.forEach(dato => {
+					if (dato['KmAcumulado'] > 6500) {
+						"undefined" != typeof PNotify, new PNotify({
+							title: "Cambio de aceite!",
+							type: "error",
+							text: 'El camion  ' + dato['N_placa'] + ' tiene ' + dato['KmAcumulado'] + ' Km desde su ultimo cambion',
+							styling: "bootstrap3",
+							hide: !1,
+						});
+					}
+				});
+			}
+		}
+	});
+
 }

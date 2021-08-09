@@ -312,4 +312,9 @@ class Camion extends BaseController
 
         echo json_encode($respuesta);
     }
+    public function oobtenerKilometrajeUltimoCambioAceiteCamionesAjax()
+    {
+        $datos = $this->Reportes_model->obtenerKilometrajeUltimoCambioAceiteCamiones();
+        echo json_encode($datos);
+    }
 }
