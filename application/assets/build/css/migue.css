@@ -46,6 +46,9 @@
     -moz-border-radius: 0px;
     background-image: none;
 }
+.saltoPagina {
+    PAGE-BREAK-AFTER: always;
+}
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
   -webkit-appearance: none; 
