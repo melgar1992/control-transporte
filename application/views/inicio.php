@@ -9,35 +9,35 @@
         <div class="count green"><?php echo number_format($balance_camiones, 2)  ?>
           <small>Bs</small>
         </div>
-        <span class="count_bottom">Balance de los camiones del año actual</span>
+        <span class="count_bottom">Balance anual</span>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Ingreso por comisión</span>
         <div class="count green"><?php echo number_format($comision['comision'], 2)  ?>
           <small>Bs</small>
         </div>
-        <span class="count_bottom"> Ingreso por comision del año actual</span>
+        <span class="count_bottom">Comision anual</span>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Liquidez</span>
-        <div class="count green"><?php echo number_format($BalanceCuentas, 2)  ?>
+        <div class="count <?php echo ($BalanceCuentas >= 0) ? 'green' : 'red' ?>"><?php echo number_format($BalanceCuentas, 2)  ?>
           <small>Bs</small>
         </div>
-        <span class="count_bottom">Liquides de las cuentas de la empresa</span>
+        <span class="count_bottom">Liquides de la empresa</span>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Cuentas por cobrar</span>
         <div class="count <?php echo ($CuentasPorCobrar >= 0) ? 'green' : 'red' ?>"><?php echo number_format($CuentasPorCobrar, 2)  ?>
           <small>Bs</small>
         </div>
-        <span class="count_bottom"> Balance de las cuentas de los clientes</span>
+        <span class="count_bottom"> Balance por cobrar</span>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Cuentas por pagar</span>
         <div class="count red"><?php echo number_format($CuentasPorPagar, 2) ?>
           <small>Bs</small>
         </div>
-        <span class="count_bottom"> Balance de las cuentas por pagar</span>
+        <span class="count_bottom"> Balance por pagar</span>
       </div>
       <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Balance</span>
@@ -67,7 +67,144 @@
             </div>
           </div>
         </div>
-
+      </div>
+    </div>
+    <!-- Paneles de informacion! -->
+    <div class="row">
+      <div class="col-md-6 col-sm-6 ">
+        <div class="x_panel tile fixed_height_320">
+          <div class="x_title">
+            <h2>Ingresos </h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <select name="yearClientes" id="yearClientes" class="form-control">
+                <?php foreach ($year as $row) : ?>
+                  <option value="<?php echo $row['year'] ?>"><?php echo $row['year'] ?></option>
+                <?php endforeach; ?>
+              </select>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <h4>Ingresos por cliente</h4>
+            <table class="table table-hover jambo_table" id="">
+              <thead>
+                <tr>
+                  <th style="width: 100px;" >Nombre</th>
+                  <th>Porcentaje</th>
+                  <th style="width: 100px;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Miguel andres</th>
+                  <th>
+                    <div class="progress">
+                      <div class="progress bg-green" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                  </th>
+                  <th> <span>123k</span></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 ">
+        <div class="x_panel tile fixed_height_320">
+          <div class="x_title">
+            <h2>Proveedores</h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <select name="yearProveedores" id="yearProveedores" class="form-control">
+                <?php foreach ($year as $row) : ?>
+                  <option value="<?php echo $row['year'] ?>"><?php echo $row['year'] ?></option>
+                <?php endforeach; ?>
+              </select>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            <h4>App Usage across versions</h4>
+            <div class="widget_summary">
+              <div class="w_left w_25">
+                <span>0.1.5.2</span>
+              </div>
+              <div class="w_center w_55">
+                <div class="progress">
+                  c
+                </div>
+              </div>
+              <div class="w_right w_20">
+                <span>123k</span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="widget_summary">
+              <div class="w_left w_25">
+                <span>0.1.5.3</span>
+              </div>
+              <div class="w_center w_55">
+                <div class="progress">
+                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
+                    <span class="sr-only">60% Complete</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w_right w_20">
+                <span>53k</span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="widget_summary">
+              <div class="w_left w_25">
+                <span>0.1.5.4</span>
+              </div>
+              <div class="w_center w_55">
+                <div class="progress">
+                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
+                    <span class="sr-only">60% Complete</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w_right w_20">
+                <span>23k</span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="widget_summary">
+              <div class="w_left w_25">
+                <span>0.1.5.5</span>
+              </div>
+              <div class="w_center w_55">
+                <div class="progress">
+                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
+                    <span class="sr-only">60% Complete</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w_right w_20">
+                <span>3k</span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+            <div class="widget_summary">
+              <div class="w_left w_25">
+                <span>0.1.5.6</span>
+              </div>
+              <div class="w_center w_55">
+                <div class="progress">
+                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
+                    <span class="sr-only">60% Complete</span>
+                  </div>
+                </div>
+              </div>
+              <div class="w_right w_20">
+                <span>1k</span>
+              </div>
+              <div class="clearfix"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="row">
