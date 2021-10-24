@@ -72,9 +72,9 @@
     <!-- Paneles de informacion! -->
     <div class="row">
       <div class="col-md-6 col-sm-6 ">
-        <div class="x_panel tile fixed_height_320">
+        <div class="x_panel tile">
           <div class="x_title">
-            <h2>Ingresos </h2>
+            <h2>Ingresos por cliente </h2>
             <ul class="nav navbar-right panel_toolbox">
               <select name="yearClientes" id="yearClientes" class="form-control">
                 <?php foreach ($year as $row) : ?>
@@ -85,27 +85,43 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <h4>Ingresos por cliente</h4>
-            <table class="table table-hover jambo_table" id="">
+            <?php $TotalServicios = array_sum(array_column($rankingClientes, 'servicios')); ?>
+            <table class="table table-hover jambo_table" id="rankingClientes">
               <thead>
                 <tr>
-                  <th style="width: 100px;" >Nombre</th>
+                  <th style="width: 100px;">Nombre</th>
                   <th>Porcentaje</th>
-                  <th style="width: 100px;">Total</th>
+                  <th style="width: 70px;">Total</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th>Miguel andres</th>
-                  <th>
-                    <div class="progress">
-                      <div class="progress bg-green" role="progressbar" style="width: 60%;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100">
-                      </div>
-                    </div>
-                  </th>
-                  <th> <span>123k</span></th>
-                </tr>
+                <?php
+                if (isset($rankingClientes)) {
+                  foreach ($rankingClientes as $row) {
+                    $porcentaje = ($row['servicios'] * 100) / $TotalServicios; ?>
+                    <tr>
+                      <td><?php echo $row['Nombre'] . ' ' . $row['Apellidos'];?></td>
+                      <td>
+                        <div class="progress">
+                          <div class="progress bg-green" role="progressbar" style="width: <?php echo $porcentaje; ?>%;" aria-valuenow="<?php echo number_format($porcentaje,2);?>" aria-valuemin="0" aria-valuemax="100">
+                          </div>
+                        </div>
+                      </td>
+                      <td><?php echo $row['servicios'] ?></td>
+                      </td>
+                    </tr>
+                <?php
+                  }
+                }
+                ?>
               </tbody>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2" style="text-align:right">Total servicios</th>
+                  <th style="text-align: left"></th>
+                </tr>
+              </tfoot>
             </table>
           </div>
         </div>

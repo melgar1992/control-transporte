@@ -32,7 +32,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -89,7 +89,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -146,7 +146,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -203,7 +203,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -233,12 +233,99 @@ $(document).ready(function () {
 		},
 
 	});
+	var tablaRankingClientes = $('#rankingClientes').DataTable({
+		responsive: "true",
+		dom: 'frtp',
+		pageLength: 5,
+		"order": [
+			[2, "desc"]
+		],
+		"language": {
+			'lengthMenu': "Mostrar _MENU_ registros",
+			"zeroRecords": "No se encontraron resultados",
+			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registro",
+			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sSearch": "Buscar",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sLast": "Ultimo",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior",
+
+			},
+			"sProcesing": "Procesando...",
+		},
+		"footerCallback": function (row, data, start, end, display, tfoot) {
+			var api = this.api(),
+				data;
+
+			// Remove the formatting to get integer data for summation
+			var intVal = function (i) {
+				return typeof i === 'string' ?
+					i.replace(/[\$,]/g, '') * 1 :
+					typeof i === 'number' ?
+					i : 0;
+			};
+
+			// Total over all pages
+			total = api
+				.column(2)
+				.data()
+				.reduce(function (a, b) {
+					return intVal(a) + intVal(b);
+				}, 0);
+
+			// Total over this page
+			pageTotal = api
+				.column(2, {
+					page: 'current'
+				})
+				.data()
+				.reduce(function (a, b) {
+					return intVal(a) + intVal(b);
+				}, 0);
+
+			// Update footer
+			$(api.column(2).footer()).html(
+				total
+			);
+		},
+	});
 	// Funciones de la paginas
 	GenerarGraficoMovimiento(year);
 	//Resetea la grafica de movimiento de transporte
 	$('#year').on('change', function () {
 		yearselected = $(this).val();
 		GenerarGraficoMovimiento(yearselected);
+	});
+	//Resetea el ranking de clientes
+	$('#yearClientes').on('change', function () {
+		yearselected = $(this).val();
+		$.ajax({
+			type: "POST",
+			url: base_url + "/Inicio/rankingClientes",
+			data: {
+				yearselected: yearselected
+			},
+			dataType: "json",
+			success: function (respuesta) {
+				tablaRankingClientes.clear();
+				rankingClientes = respuesta['rankingClientes'];
+				totalServicios = respuesta['totalServicios'];
+				for (let i = 0; i < rankingClientes.length; i++) {
+					porcentaje = (Number(rankingClientes[i]['servicios']) * 100) / Number(totalServicios);
+					tablaRankingClientes.row.add([
+						rankingClientes[i]['Nombre'] + ' ' + rankingClientes[i]['Apellidos'],
+						"<div class='progress'>" +
+						"<div class='progress bg-green' role='progressbar' style='width: " + porcentaje + "%;' aria-valuenow=' " + porcentaje.toFixed(2) + "' aria-valuemin='0' aria-valuemax='100'></div>" +
+						"</div>",
+						rankingClientes[i]['servicios'],
+					]).draw();
+				}
+
+			}
+		});
 	});
 	//Funcion para ver Km de cambio de aceite camiones
 	verificarCambioAceite();
@@ -342,10 +429,10 @@ $(document).ready(function () {
 							detalleCamionEmpresa[i]['Egreso'],
 							balance,
 							(detalleCamionEmpresa[i]['ID_mantenimiento'] > 0) ?
-								"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-								(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
-									"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-									null,
+							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+							(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
+							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+							null,
 						]).draw();
 					}
 				}
@@ -488,6 +575,7 @@ function GraficoDoughnutsCamionesEmpresa(datos) {
 
 	})
 }
+
 function verificarCambioAceite() {
 
 	$.ajax({
@@ -497,7 +585,7 @@ function verificarCambioAceite() {
 		success: function (datos) {
 			if (datos.length > 0) {
 				datos.forEach(dato => {
-					if (dato['KmAcumulado'] > 6500) {
+					if (dato['KmAcumulado'] > 5500) {
 						"undefined" != typeof PNotify, new PNotify({
 							title: "Cambio de aceite!",
 							type: "error",

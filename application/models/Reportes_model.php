@@ -333,6 +333,22 @@ class Reportes_model extends CI_Model
 
         return $balanceClienteEntreFecha;
     }
+    public function clientesRanking($year)
+    {
+        $this->db->select("dc.ID_cliente, c.Nombre, c.Apellidos, c.CI, c.Direccion, 
+        c.Telefono_01, c.Telefono_02, sum(dc.Debe) as servicios");
+        $this->db->from("detallecliente dc");
+        $this->db->join("cliente c", "dc.ID_cliente = c.ID_Cliente");
+        $this->db->where("c.Estado", "Activo");
+        $this->db->where('Fecha >=',  $year . '-01-01');
+        $this->db->where('Fecha <=',  $year . '-12-31');
+        $this->db->group_by('dc.ID_cliente');
+        $this->db->order_by('servicios', 'DESC');
+
+        $rankingClientes = $this->db->get()->result_array();
+
+        return $rankingClientes;
+    }
     public function clienteServiciosEntreFecha($ID_Cliente, $fechaIni, $fechaFin)
     {
         $this->db->select('dc.ID_transporte, dc.fecha,
@@ -370,10 +386,9 @@ class Reportes_model extends CI_Model
         $FechasCambioAceite = $this->db->get()->result_array();
         $fechaHoy = date('Y-m-d H:i:s');
         foreach ($FechasCambioAceite as $i => $FechaCambioAceite) {
-            $kilometrajeAcumulado = $this->obtenerKilometrajeUltimoCambioAceite($FechaCambioAceite['ID_camion'],$FechaCambioAceite['Fecha'],$fechaHoy);
+            $kilometrajeAcumulado = $this->obtenerKilometrajeUltimoCambioAceite($FechaCambioAceite['ID_camion'], $FechaCambioAceite['Fecha'], $fechaHoy);
             $FechasCambioAceite[$i]['KmAcumulado'] = $kilometrajeAcumulado;
         }
         return $FechasCambioAceite;
-     
     }
 }

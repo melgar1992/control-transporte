@@ -28,6 +28,7 @@ class Inicio extends BaseController
 		$datos['DetalleBalanceTaller'] = $this->Reportes_model->obtenerDetalleBalanceTaller();
 		$datos['year'] = $this->Reportes_model->obtenerAnosTrasnporte();
 		$datos['camiones'] = $this->Camion_model->obtenerCamionesPropios();
+		$datos['rankingClientes'] = $this->Reportes_model->clientesRanking(date("Y"));
 		$this->loadView('inicio', 'inicio', $datos);
 	}
 	public function graficoMovimiento()
@@ -77,5 +78,16 @@ class Inicio extends BaseController
 		$datos['serviciosCliente'] = $this->Reportes_model->obtenerServiciosCliente($ID_Cliente);
 		$datos['Cliente'] = $this->Cliente_model->obtenerCliente($ID_Cliente);
 		$this->load->view('reportes/clientes/ingresos_cliente', $datos);
+	}
+	public function rankingClientes()
+	{
+		$year = $this->input->post('yearselected');
+		$datos['rankingClientes'] = $this->Reportes_model->clientesRanking($year);
+		$rankingClientes = $datos['rankingClientes'];
+		$totalServicios = array_sum(array_column($rankingClientes, 'servicios'));
+		$datos['totalServicios'] = $totalServicios;
+
+		echo json_encode($datos);
+
 	}
 }
