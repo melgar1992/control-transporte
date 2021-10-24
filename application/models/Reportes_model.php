@@ -215,7 +215,7 @@ class Reportes_model extends CI_Model
     {
         $this->db->select("dp.ID_proveedor,p.Nombres, p.Apellidos, p.Telefono_01, 
         sum(dp.Ingreso) as servicios");
-        $this->db->from("detalleProveedor dp");
+        $this->db->from("detalleproveedor dp");
         $this->db->join("proveedor p", "dp.ID_proveedor = p.ID_proveedor");
         $this->db->where("dp.ID_transporte !=", "NULL");
         $this->db->where('Fecha >=',  $year . '-01-01');
