@@ -72,7 +72,7 @@
     <!-- Paneles de informacion! -->
     <div class="row">
       <!-- Ranking Clientes -->
-      <div class="col-md-6 col-sm-12">
+      <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="x_panel tile">
           <div class="x_title">
             <h2>Ingresos por cliente </h2>
@@ -128,7 +128,7 @@
         </div>
       </div>
       <!-- Ranking Proveedores -->
-      <div class="col-md-6 col-sm-12">
+      <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="x_panel tile">
           <div class="x_title">
             <h2>Proveedores</h2>
