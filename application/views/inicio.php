@@ -71,6 +71,7 @@
     </div>
     <!-- Paneles de informacion! -->
     <div class="row">
+      <!-- Ranking Clientes -->
       <div class="col-md-6 col-sm-6 ">
         <div class="x_panel tile">
           <div class="x_title">
@@ -126,8 +127,9 @@
           </div>
         </div>
       </div>
+      <!-- Ranking Proveedores -->
       <div class="col-md-6 col-sm-6 ">
-        <div class="x_panel tile fixed_height_320">
+        <div class="x_panel tile">
           <div class="x_title">
             <h2>Proveedores</h2>
             <ul class="nav navbar-right panel_toolbox">
@@ -140,83 +142,44 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <h4>App Usage across versions</h4>
-            <div class="widget_summary">
-              <div class="w_left w_25">
-                <span>0.1.5.2</span>
-              </div>
-              <div class="w_center w_55">
-                <div class="progress">
-                  c
-                </div>
-              </div>
-              <div class="w_right w_20">
-                <span>123k</span>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="widget_summary">
-              <div class="w_left w_25">
-                <span>0.1.5.3</span>
-              </div>
-              <div class="w_center w_55">
-                <div class="progress">
-                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 45%;">
-                    <span class="sr-only">60% Complete</span>
-                  </div>
-                </div>
-              </div>
-              <div class="w_right w_20">
-                <span>53k</span>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="widget_summary">
-              <div class="w_left w_25">
-                <span>0.1.5.4</span>
-              </div>
-              <div class="w_center w_55">
-                <div class="progress">
-                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 25%;">
-                    <span class="sr-only">60% Complete</span>
-                  </div>
-                </div>
-              </div>
-              <div class="w_right w_20">
-                <span>23k</span>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="widget_summary">
-              <div class="w_left w_25">
-                <span>0.1.5.5</span>
-              </div>
-              <div class="w_center w_55">
-                <div class="progress">
-                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 5%;">
-                    <span class="sr-only">60% Complete</span>
-                  </div>
-                </div>
-              </div>
-              <div class="w_right w_20">
-                <span>3k</span>
-              </div>
-              <div class="clearfix"></div>
-            </div>
-            <div class="widget_summary">
-              <div class="w_left w_25">
-                <span>0.1.5.6</span>
-              </div>
-              <div class="w_center w_55">
-                <div class="progress">
-                  <div class="progress-bar bg-green" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 2%;">
-                    <span class="sr-only">60% Complete</span>
-                  </div>
-                </div>
-              </div>
-              <div class="w_right w_20">
-                <span>1k</span>
-              </div>
+           <?php $TotalServicios = array_sum(array_column($rankingProveedores, 'servicios')); ?>
+            <table class="table table-hover jambo_table" id="rankingProveedores">
+              <thead>
+                <tr>
+                  <th style="width: 100px;">Nombre</th>
+                  <th>Porcentaje</th>
+                  <th style="width: 70px;">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <?php
+                if (isset($rankingProveedores)) {
+                  foreach ($rankingProveedores as $row) {
+                    $porcentaje = ($row['servicios'] * 100) / $TotalServicios; ?>
+                    <tr>
+                      <td><?php echo $row['Nombres'] . ' ' . $row['Apellidos'];?></td>
+                      <td>
+                        <div class="progress">
+                          <div class="progress bg-green" role="progressbar" style="width: <?php echo $porcentaje; ?>%;" aria-valuenow="<?php echo number_format($porcentaje,2);?>" aria-valuemin="0" aria-valuemax="100">
+                          </div>
+                        </div>
+                      </td>
+                      <td><?php echo $row['servicios'] ?></td>
+                      </td>
+                    </tr>
+                <?php
+                  }
+                }
+                ?>
+              </tbody>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th colspan="2" style="text-align:right">Total servicios</th>
+                  <th style="text-align: left"></th>
+                </tr>
+              </tfoot>
+            </table>
               <div class="clearfix"></div>
             </div>
           </div>

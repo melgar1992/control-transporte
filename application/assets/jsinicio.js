@@ -292,6 +292,65 @@ $(document).ready(function () {
 			);
 		},
 	});
+	var tablaRankingProveedores = $('#rankingProveedores').DataTable({
+		responsive: "true",
+		dom: 'frtp',
+		pageLength: 5,
+		"order": [
+			[2, "desc"]
+		],
+		"language": {
+			'lengthMenu': "Mostrar _MENU_ registros",
+			"zeroRecords": "No se encontraron resultados",
+			"info": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registro",
+			"infoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+			"infoFiltered": "(filtrado de un total de _MAX_ registros)",
+			"sSearch": "Buscar",
+			"oPaginate": {
+				"sFirst": "Primero",
+				"sLast": "Ultimo",
+				"sNext": "Siguiente",
+				"sPrevious": "Anterior",
+
+			},
+			"sProcesing": "Procesando...",
+		},
+		"footerCallback": function (row, data, start, end, display, tfoot) {
+			var api = this.api(),
+				data;
+
+			// Remove the formatting to get integer data for summation
+			var intVal = function (i) {
+				return typeof i === 'string' ?
+					i.replace(/[\$,]/g, '') * 1 :
+					typeof i === 'number' ?
+					i : 0;
+			};
+
+			// Total over all pages
+			total = api
+				.column(2)
+				.data()
+				.reduce(function (a, b) {
+					return intVal(a) + intVal(b);
+				}, 0);
+
+			// Total over this page
+			pageTotal = api
+				.column(2, {
+					page: 'current'
+				})
+				.data()
+				.reduce(function (a, b) {
+					return intVal(a) + intVal(b);
+				}, 0);
+
+			// Update footer
+			$(api.column(2).footer()).html(
+				total
+			);
+		},
+	});
 	// Funciones de la paginas
 	GenerarGraficoMovimiento(year);
 	//Resetea la grafica de movimiento de transporte
@@ -321,6 +380,34 @@ $(document).ready(function () {
 						"<div class='progress bg-green' role='progressbar' style='width: " + porcentaje + "%;' aria-valuenow=' " + porcentaje.toFixed(2) + "' aria-valuemin='0' aria-valuemax='100'></div>" +
 						"</div>",
 						rankingClientes[i]['servicios'],
+					]).draw();
+				}
+
+			}
+		});
+	});
+	//Resetea el ranking de los proveedores
+	$('#yearProveedores').on('change', function () {
+		yearselected = $(this).val();
+		$.ajax({
+			type: "POST",
+			url: base_url + "/Inicio/rankingProveedores",
+			data: {
+				yearselected: yearselected
+			},
+			dataType: "json",
+			success: function (respuesta) {
+				tablaRankingProveedores.clear();
+				rankingProveedores = respuesta['rankingProveedores'];
+				totalServicios = respuesta['totalServicios'];
+				for (let i = 0; i < rankingProveedores.length; i++) {
+					porcentaje = (Number(rankingProveedores[i]['servicios']) * 100) / Number(totalServicios);
+					tablaRankingProveedores.row.add([
+						rankingProveedores[i]['Nombres'] + ' ' + rankingProveedores[i]['Apellidos'],
+						"<div class='progress'>" +
+						"<div class='progress bg-green' role='progressbar' style='width: " + porcentaje + "%;' aria-valuenow=' " + porcentaje.toFixed(2) + "' aria-valuemin='0' aria-valuemax='100'></div>" +
+						"</div>",
+						rankingProveedores[i]['servicios'],
 					]).draw();
 				}
 

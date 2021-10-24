@@ -211,6 +211,22 @@ class Reportes_model extends CI_Model
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
     }
+    public function rankingProveedores($year)
+    {
+        $this->db->select("dp.ID_proveedor,p.Nombres, p.Apellidos, p.Telefono_01, 
+        sum(dp.Ingreso) as servicios");
+        $this->db->from("detalleProveedor dp");
+        $this->db->join("proveedor p", "dp.ID_proveedor = p.ID_proveedor");
+        $this->db->where("dp.ID_transporte !=", "NULL");
+        $this->db->where('Fecha >=',  $year . '-01-01');
+        $this->db->where('Fecha <=',  $year . '-12-31');
+        $this->db->group_by('dp.ID_proveedor');
+        $this->db->order_by('servicios', 'DESC');
+
+        $rankingProveedores = $this->db->get()->result_array();
+
+        return $rankingProveedores;
+    }
     public function obtenerDetalleTaller($ID_taller)
     {
         $this->db->select('*');

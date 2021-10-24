@@ -29,6 +29,7 @@ class Inicio extends BaseController
 		$datos['year'] = $this->Reportes_model->obtenerAnosTrasnporte();
 		$datos['camiones'] = $this->Camion_model->obtenerCamionesPropios();
 		$datos['rankingClientes'] = $this->Reportes_model->clientesRanking(date("Y"));
+		$datos['rankingProveedores'] = $this->Reportes_model->rankingProveedores(date("Y"));
 		$this->loadView('inicio', 'inicio', $datos);
 	}
 	public function graficoMovimiento()
@@ -85,6 +86,17 @@ class Inicio extends BaseController
 		$datos['rankingClientes'] = $this->Reportes_model->clientesRanking($year);
 		$rankingClientes = $datos['rankingClientes'];
 		$totalServicios = array_sum(array_column($rankingClientes, 'servicios'));
+		$datos['totalServicios'] = $totalServicios;
+
+		echo json_encode($datos);
+
+	}
+	public function rankingProveedores()
+	{
+		$year = $this->input->post('yearselected');
+		$datos['rankingProveedores'] = $this->Reportes_model->rankingProveedores($year);
+		$rankingProveedores = $datos['rankingProveedores'];
+		$totalServicios = array_sum(array_column($rankingProveedores, 'servicios'));
 		$datos['totalServicios'] = $totalServicios;
 
 		echo json_encode($datos);
