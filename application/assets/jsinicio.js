@@ -55,7 +55,7 @@ $(document).ready(function () {
 
 			// Update footer
 			$(api.column(3).footer()).html(
-				total
+				total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' Bs'
 			);
 		},
 	});
@@ -112,7 +112,7 @@ $(document).ready(function () {
 
 			// Update footer
 			$(api.column(3).footer()).html(
-				total
+				total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' Bs'
 			);
 		},
 	});
@@ -169,7 +169,7 @@ $(document).ready(function () {
 
 			// Update footer
 			$(api.column(3).footer()).html(
-				total
+				total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' Bs'
 			);
 		},
 	});
@@ -263,7 +263,7 @@ $(document).ready(function () {
 			// Remove the formatting to get integer data for summation
 			var intVal = function (i) {
 				return typeof i === 'string' ?
-					i.replace(/[\$,]/g, '') * 1 :
+					i.replace(/[\Bs,]/g, '') * 1 :
 					typeof i === 'number' ?
 					i : 0;
 			};
@@ -288,7 +288,7 @@ $(document).ready(function () {
 
 			// Update footer
 			$(api.column(2).footer()).html(
-				total
+				total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' Bs'
 			);
 		},
 	});
@@ -347,7 +347,7 @@ $(document).ready(function () {
 
 			// Update footer
 			$(api.column(2).footer()).html(
-				total
+				total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + ' Bs'
 			);
 		},
 	});
@@ -379,7 +379,7 @@ $(document).ready(function () {
 						"<div class='progress'>" +
 						"<div class='progress bg-green' role='progressbar' style='width: " + porcentaje + "%;' aria-valuenow=' " + porcentaje.toFixed(2) + "' aria-valuemin='0' aria-valuemax='100'></div>" +
 						"</div>",
-						rankingClientes[i]['servicios'],
+						Number(rankingClientes[i]['servicios']).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'),
 					]).draw();
 				}
 
@@ -407,7 +407,7 @@ $(document).ready(function () {
 						"<div class='progress'>" +
 						"<div class='progress bg-green' role='progressbar' style='width: " + porcentaje + "%;' aria-valuenow=' " + porcentaje.toFixed(2) + "' aria-valuemin='0' aria-valuemax='100'></div>" +
 						"</div>",
-						rankingProveedores[i]['servicios'],
+						Number(rankingProveedores[i]['servicios']).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'),
 					]).draw();
 				}
 

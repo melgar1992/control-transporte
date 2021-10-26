@@ -92,7 +92,7 @@
                 <tr>
                   <th style="width: 100px;">Nombre</th>
                   <th>Porcentaje</th>
-                  <th style="width: 70px;">Total</th>
+                  <th style="width: 70px;">Total Bs</th>
                 </tr>
               </thead>
               <tbody>
@@ -108,7 +108,7 @@
                           </div>
                         </div>
                       </td>
-                      <td><?php echo $row['servicios'] ?></td>
+                      <td><?php echo number_format($row['servicios'],2)?></td>
                       </td>
                     </tr>
                 <?php
@@ -148,7 +148,7 @@
                 <tr>
                   <th style="width: 100px;">Nombre</th>
                   <th>Porcentaje</th>
-                  <th style="width: 70px;">Total</th>
+                  <th style="width: 70px;">Total Bs</th>
                 </tr>
               </thead>
               <tbody>
@@ -164,7 +164,7 @@
                           </div>
                         </div>
                       </td>
-                      <td><?php echo $row['servicios'] ?></td>
+                      <td><?php echo number_format($row['servicios'],2) ?></td>
                       </td>
                     </tr>
                 <?php
@@ -229,7 +229,7 @@
                               <td><?php echo $row['ID_cliente'] ?></td>
                               <td><?php echo $row['Nombre'] ?></td>
                               <td><?php echo $row['Apellidos'] ?></td>
-                              <td><?php echo $row['balance'] ?></td>
+                              <td><?php echo number_format($row['balance'],2)?></td>
                               <td>
                                 <div class='text-center'>
                                   <button type="button" title="Reporte de transporte del cliente" class="btn btn-primary btn-reporte-transporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-list-alt"></span></button>
@@ -273,7 +273,7 @@
                               <td><?php echo $row['ID_proveedor'] ?></td>
                               <td><?php echo $row['Nombres'] ?></td>
                               <td><?php echo $row['Apellidos'] ?></td>
-                              <td><?php echo $row['balance'] ?></td>
+                              <td><?php echo number_format($row['balance'],2) ?></td>
                               <td>
                                 <div class='text-center'>
                                   <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-proveedor" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
@@ -316,7 +316,7 @@
                               <td><?php echo $row['ID_taller'] ?></td>
                               <td><?php echo $row['NombreTaller'] ?></td>
                               <td><?php echo $row['Departamento'] ?></td>
-                              <td><?php echo $row['balance'] ?></td>
+                              <td><?php echo number_format($row['balance'],2) ?></td>
                               <td>
                                 <div class='text-center'>
                                   <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-taller" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
