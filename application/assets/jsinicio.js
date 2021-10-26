@@ -502,9 +502,13 @@ $(document).ready(function () {
 					resumenGastosCamion(respuesta['top5Gastos']);
 					$('.KilometrosAcumulados').text(respuesta['KilometrosAcumulados']);
 					balance = 0;
+					sumIngresos = 0;
+					sumEgresos = 0;
 					tablaDetalleCamion.clear();
 					for (let i = 0; i < detalleCamionEmpresa.length; i++) {
 						balance = balance + Number(detalleCamionEmpresa[i]['Ingreso']) - Number(detalleCamionEmpresa[i]['Egreso']);
+						sumIngresos = sumIngresos + Number(detalleCamionEmpresa[i]['Ingreso']);
+						sumEgresos = sumEgresos + Number(detalleCamionEmpresa[i]['Egreso']);
 						tablaDetalleCamion.row.add([
 							detalleCamionEmpresa[i]['Nombre_categoria'],
 							detalleCamionEmpresa[i]['Fecha'],
@@ -522,6 +526,12 @@ $(document).ready(function () {
 							null,
 						]).draw();
 					}
+					$(".ingreso_camion").text(Number(sumIngresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
+					$(".egreso_camion").text(Number(sumEgresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
+					eficiancia = ((sumIngresos - sumEgresos) * 100) / sumIngresos;
+					(sumIngresos - sumEgresos) > 0 ? $(".color_balance_camion").addClass("green") : $(".color_balance_camion").addClass("red");
+					$(".balance_camion").text((sumIngresos - sumEgresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
+					$(".eficiencia").text(eficiancia.toFixed(2) + "%");
 				}
 			});
 		} else {

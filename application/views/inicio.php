@@ -101,14 +101,14 @@
                   foreach ($rankingClientes as $row) {
                     $porcentaje = ($row['servicios'] * 100) / $TotalServicios; ?>
                     <tr>
-                      <td><?php echo $row['Nombre'] . ' ' . $row['Apellidos'];?></td>
+                      <td><?php echo $row['Nombre'] . ' ' . $row['Apellidos']; ?></td>
                       <td>
                         <div class="progress">
-                          <div class="progress bg-green" role="progressbar" style="width: <?php echo $porcentaje; ?>%;" aria-valuenow="<?php echo number_format($porcentaje,2);?>" aria-valuemin="0" aria-valuemax="100">
+                          <div class="progress bg-green" role="progressbar" style="width: <?php echo $porcentaje; ?>%;" aria-valuenow="<?php echo number_format($porcentaje, 2); ?>" aria-valuemin="0" aria-valuemax="100">
                           </div>
                         </div>
                       </td>
-                      <td><?php echo number_format($row['servicios'],2)?></td>
+                      <td><?php echo number_format($row['servicios'], 2) ?></td>
                       </td>
                     </tr>
                 <?php
@@ -142,7 +142,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-           <?php $TotalServicios = array_sum(array_column($rankingProveedores, 'servicios')); ?>
+            <?php $TotalServicios = array_sum(array_column($rankingProveedores, 'servicios')); ?>
             <table class="table table-hover jambo_table" id="rankingProveedores">
               <thead>
                 <tr>
@@ -157,14 +157,14 @@
                   foreach ($rankingProveedores as $row) {
                     $porcentaje = ($row['servicios'] * 100) / $TotalServicios; ?>
                     <tr>
-                      <td><?php echo $row['Nombres'] . ' ' . $row['Apellidos'];?></td>
+                      <td><?php echo $row['Nombres'] . ' ' . $row['Apellidos']; ?></td>
                       <td>
                         <div class="progress">
-                          <div class="progress bg-green" role="progressbar" style="width: <?php echo $porcentaje; ?>%;" aria-valuenow="<?php echo number_format($porcentaje,2);?>" aria-valuemin="0" aria-valuemax="100">
+                          <div class="progress bg-green" role="progressbar" style="width: <?php echo $porcentaje; ?>%;" aria-valuenow="<?php echo number_format($porcentaje, 2); ?>" aria-valuemin="0" aria-valuemax="100">
                           </div>
                         </div>
                       </td>
-                      <td><?php echo number_format($row['servicios'],2) ?></td>
+                      <td><?php echo number_format($row['servicios'], 2) ?></td>
                       </td>
                     </tr>
                 <?php
@@ -180,11 +180,11 @@
                 </tr>
               </tfoot>
             </table>
-              <div class="clearfix"></div>
-            </div>
+            <div class="clearfix"></div>
           </div>
         </div>
       </div>
+    </div>
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -229,7 +229,7 @@
                               <td><?php echo $row['ID_cliente'] ?></td>
                               <td><?php echo $row['Nombre'] ?></td>
                               <td><?php echo $row['Apellidos'] ?></td>
-                              <td><?php echo number_format($row['balance'],2)?></td>
+                              <td><?php echo number_format($row['balance'], 2) ?></td>
                               <td>
                                 <div class='text-center'>
                                   <button type="button" title="Reporte de transporte del cliente" class="btn btn-primary btn-reporte-transporte-cliente" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-list-alt"></span></button>
@@ -273,7 +273,7 @@
                               <td><?php echo $row['ID_proveedor'] ?></td>
                               <td><?php echo $row['Nombres'] ?></td>
                               <td><?php echo $row['Apellidos'] ?></td>
-                              <td><?php echo number_format($row['balance'],2) ?></td>
+                              <td><?php echo number_format($row['balance'], 2) ?></td>
                               <td>
                                 <div class='text-center'>
                                   <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-proveedor" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
@@ -316,7 +316,7 @@
                               <td><?php echo $row['ID_taller'] ?></td>
                               <td><?php echo $row['NombreTaller'] ?></td>
                               <td><?php echo $row['Departamento'] ?></td>
-                              <td><?php echo number_format($row['balance'],2) ?></td>
+                              <td><?php echo number_format($row['balance'], 2) ?></td>
                               <td>
                                 <div class='text-center'>
                                   <button type="button" title="Reporte completo" class="btn btn-info btn-reporte-taller" data-toggle="modal" data-target="#modal-detalle" value=""><span class="fa fa-file-text-o"></span></button>
@@ -356,11 +356,7 @@
           <h2>Reportes de camiones empresa </h2>
           <ul class="nav navbar-right panel_toolbox">
             <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-            </li>
-
-            </li>
           </ul>
-
           <div class="clearfix"></div>
         </div>
         <div class="x_content">
@@ -416,6 +412,32 @@
             </div>
             <hr style="border:2px;">
             </hr>
+            <div class="row tile_count">
+              <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-money"></i> Ingreso</span>
+                <div class="count green">
+                  <p class="ingreso_camion"></p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-money"></i> Egreso</span>
+                <div class="count red">
+                  <p class="egreso_camion"></p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-money"></i> Balance</span>
+                <div class="count color_balance_camion">
+                  <p class="balance_camion"></p>
+                </div>
+              </div>
+              <div class="col-md-3 col-sm-3 col-xs-6 tile_stats_count">
+                <span class="count_top"><i class="fa fa-check-square"></i> Eficiencia</span>
+                <div class="count">
+                  <p class="eficiencia"></p>
+                </div>
+              </div>
+            </div>
             <div class="row">
               <div class="col-xs-12 text-center">
                 <b>Kilometraje acumulado de cambio aceite: </b>
@@ -429,14 +451,10 @@
                     <h2>Detalle de reporte </h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                      </li>
-
-                      </li>
                     </ul>
-
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content">
+                  <div class="x_content" style="display: none;">
                     <div>
                       <table id="tabla_detalle_camion" class="table table-bordered jambo_table">
                         <thead>
