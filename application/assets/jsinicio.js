@@ -529,6 +529,7 @@ $(document).ready(function () {
 					$(".ingreso_camion").text(Number(sumIngresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
 					$(".egreso_camion").text(Number(sumEgresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
 					eficiancia = ((sumIngresos - sumEgresos) * 100) / sumIngresos;
+					$('.color_balance_camion').removeClass('green red');
 					(sumIngresos - sumEgresos) > 0 ? $(".color_balance_camion").addClass("green") : $(".color_balance_camion").addClass("red");
 					$(".balance_camion").text((sumIngresos - sumEgresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
 					$(".eficiencia").text(eficiancia.toFixed(2) + "%");
