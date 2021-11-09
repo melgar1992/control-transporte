@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <?php
 if (isset($this->session->userdata['logged_in'])) {

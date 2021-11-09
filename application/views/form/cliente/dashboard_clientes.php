@@ -41,30 +41,29 @@
                         </div>
                         <hr>
                     </div>
-                    <div class="reporteCliente">
+                    <div class="reporteCliente hidden">
                         <div class="row">
                             <div class="col-xs-12 text-left">
                                 <b>Reporte de cliente</b><br>
-                                Nombre : Marcle haab <br>
-                                CI : 5597940 Bn<br>
+                                Nombre : <b id="nombre_cliente"></b> <br>
+                                CI : <b id="CI"></b><br>
                                 Fecha : <?php echo date('Y-m-d'); ?><br>
+                                Saldo anterior : <b class="" id="balance_anterior"></b> Bs<br>
+                                Balance Actual : <b class="" id="balance_actual"></b> Bs<br>
                             </div>
                         </div>
                         <hr>
                         <div class="row">
+                            <b>Pagos realizados</b>
+                        </div>
+                        <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <table id="tabla" class="table table-bordered jambo_table">
+                                <table id="tabla_pagos" class="table table-bordered jambo_table">
                                     <thead>
                                         <tr>
                                             <th>Fecha</th>
                                             <th>Descripcion</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
-                                            <th>Descuento</th>
-                                            <th>Ingreso</th>
-                                            <th>Egreso</th>
-                                            <th>Balance</th>
-                                            <th>Opciones</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -72,41 +71,39 @@
                                     </tbody>
                                     <tfoot>
                                         <tr>
-                                            <th colspan="5">Total</th>
+                                            <th colspan="2">Total</th>
                                             <th></th>
-                                            <th></th>
-                                            <th></th>
+
                                         </tr>
                                     </tfoot>
                                 </table>
                             </div>
                         </div>
                         <hr>
+                        <p class="saltoPagina"></p>
+                        <div class="row">
+                            <b>Servicios realizados</b>
+                        </div>
                         <div class="row">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <table id="tabla" class="table table-bordered jambo_table">
+                                <table id="tabla_servicios" class="table table-bordered jambo_table">
                                     <thead>
                                         <tr>
                                             <th>Fecha</th>
                                             <th>Descripcion</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
+                                            <th>Tramo</th>
+                                            <th>Camiones</th>
                                             <th>Descuento</th>
-                                            <th>Ingreso</th>
-                                            <th>Egreso</th>
-                                            <th>Balance</th>
-                                            <th>Opciones</th>
+                                            <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
                                             <th></th>
-                                            <th></th>
-                                            <th></th>
+                                            
                                         </tr>
                                     </tfoot>
                                 </table>
