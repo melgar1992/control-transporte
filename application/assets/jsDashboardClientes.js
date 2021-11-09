@@ -139,8 +139,8 @@ $(document).ready(function () {
                 },
                 dataType: "json",
                 success: function (respuesta) {
-                    tabla_pagos.clear();
-                    tabla_servicios.clear();
+                    tabla_pagos.clear().draw();;
+                    tabla_servicios.clear().draw();;
                     suma_pagos = 0;
                     suma_servicios = 0;
                     saldoAnterior = respuesta['saldoAnterior'];
