@@ -211,6 +211,27 @@ class Reportes_model extends CI_Model
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
     }
+    public function saldoAnteriorProveedor($ID_proveedor, $fechaIni)
+    {
+        $this->db->select('sum(Ingreso) as Ingreso, sum(Egreso) as Egreso ,(sum(Ingreso)- sum(Egreso)) as Balance,
+         p.Nombres, p.Apellidos, p.Telefono_01');
+         $this->db->from('detalleproveedor dp');
+         $this->db->join('proveedor p','dp.ID_proveedor = p.ID_proveedor');
+         $this->db->where('dp.ID_proveedor', $ID_proveedor);
+         $this->db->where('dp.Fecha <', $fechaIni);
+         return $this->db->get()->row_array();
+    }
+    public function obtenerDetalleProveedorEntreFechas($ID_proveedor, $fechaIni, $fechaFin)
+    {
+        $this->db->select('dp.*, c.N_Placa');
+        $this->db->from('detalleproveedor dp');
+        $this->db->join('camion c', 'c.ID_camion = dp.ID_camion', 'left');
+        $this->db->where('dp.ID_proveedor', $ID_proveedor);
+        $this->db->where('dp.Fecha >=', $fechaIni);
+        $this->db->where('dp.Fecha <=', $fechaFin);
+        $this->db->order_by('fecha');
+        return $this->db->get()->result_array();
+    }
     public function rankingProveedores($year)
     {
         $this->db->select("dp.ID_proveedor,p.Nombres, p.Apellidos, p.Telefono_01, 
