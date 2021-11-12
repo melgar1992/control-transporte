@@ -69,6 +69,7 @@
                     <li><a><i class="fas fa-gears"></i> Configuracion de sistema<span class="fas fa-chevron-down"></span></a>
                       <ul class="nav child_menu">
                         <li><a href="<?php echo site_url("Usuario/usuario") ?>">Administracion de usuarios</a></li>
+                        <li><a href="<?php echo site_url("BaseDatos/backupPage") ?>">BackUp basedatos</a></li>
                       </ul>
                     </li>
                   <?php endif; ?>
