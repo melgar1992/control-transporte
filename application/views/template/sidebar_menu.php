@@ -11,6 +11,11 @@
                       <li><a href=<?php echo site_url("DashboardProveedores/index") ?>>Dashboard de Proveedores</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fas fa-calendar"></i> Calendario<span class="fas fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="<?php echo site_url("Calendario") ?>">Calendario</a></li>
+                    </ul>
+                  </li>
                   <li><a><i class="fas fa-edit"></i> Formularios de Empresa<span class="fas fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
 

@@ -20,19 +20,15 @@
         <!-- FastClick -->
         <?php script('/vendors/fastclick/lib/fastclick.js') ?>
         <!-- <script src="../vendors/fastclick/lib/fastclick.js"></script> -->
-
         <!-- Chart.js -->
         <?php script('/vendors/Chart.js/dist/Chart.min.js') ?>
         <!-- <script src="../vendors/Chart.js/dist/Chart.min.js"></script> -->
-
         <!-- bootstrap-progressbar -->
         <?php script('/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') ?>
         <!-- <script src="../vendors/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> -->
         <!-- iCheck -->
         <?php script('/vendors/iCheck/icheck.min.js') ?>
         <!-- <script src="../vendors/iCheck/icheck.min.js"></script> -->
-
-
         <!-- DateJS -->
         <?php script('/vendors/DateJS/build/date.js') ?>
         <!-- <script src="../vendors/DateJS/build/date.js"></script> -->
@@ -64,6 +60,8 @@
         <!-- Custom Theme Scripts -->
         <?php script('/build/js/custom.min.js') ?>
         <!-- <script src="../build/js/custom.min.js"></script> -->
+        <!-- Calendario -->
+        <?php script('/vendors/fullcalendar/dist/fullcalendar.min.js') ?>
 
         <!-- formulario -->
         <?php

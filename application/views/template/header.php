@@ -40,9 +40,15 @@ if (isset($this->session->userdata['logged_in'])) {
     <!-- <link href="../vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet"> -->
     <!-- Custom Theme Style -->
     <?php css('/build/css/custom.min.css') ?>
+    
     <!-- <link href="../build/css/custom.min.css" rel="stylesheet"> -->
     <!-- Estilos de migue -->
     <?php css('/build/css/migue.css') ?>
+    <!-- Calendario -->
+    <?php css('/vendors/fullcalendar/dist/fullcalendar.print.css') ?>
+    <?php css('/vendors/fullcalendar/dist/fullcalendar.css') ?>
+
+
     <!-- <link href="../build/css/custom.min.css" rel="stylesheet"> -->
     <!-- PNotify -->
     <?php css('/vendors/pnotify/dist/pnotify.css') ?>
