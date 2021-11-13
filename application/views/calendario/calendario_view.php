@@ -6,20 +6,35 @@
                 <div class="x_title">
                     <h2>Back up <small>-</small></h2>
                     <ul class="nav navbar-right panel_toolbox">
-                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                        </li>
-
-                        </li>
                     </ul>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <div class="row">
-                      <div id="calendario"></div>
-                    </div>
+
+                    <div id="calendario"></div>
+
                 </div>
             </div>
 
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="modal">
+  <div class="modal-dialog modal-xs">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Detalle de transporte</h4>
+      </div>
+      <div class="modal-body ui-front">
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+</div>
+<!-- /.modal -->

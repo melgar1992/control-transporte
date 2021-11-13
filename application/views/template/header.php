@@ -45,7 +45,6 @@ if (isset($this->session->userdata['logged_in'])) {
     <!-- Estilos de migue -->
     <?php css('/build/css/migue.css') ?>
     <!-- Calendario -->
-    <?php css('/vendors/fullcalendar/dist/fullcalendar.print.css') ?>
     <?php css('/vendors/fullcalendar/dist/fullcalendar.css') ?>
 
 
