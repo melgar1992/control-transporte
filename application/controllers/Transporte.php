@@ -231,4 +231,9 @@ class Transporte extends BaseController
         $datos['detalle_transporte'] = $this->Transporte_model->obtenerDetalleTransporte($ID_transporte);
         $this->load->view('form/transporte/view_transporte', $datos);
     }
+    public function obtenerTransportes()
+    {
+        $transportes = $this->Transporte_model->obtenerTransportes();
+        echo json_encode($transportes);
+    }
 }

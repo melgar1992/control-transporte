@@ -24,12 +24,13 @@
   <div class="modal-dialog modal-xs">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Detalle de transporte</h4>
+        <h4 class="modal-title" id="titulo"></h4>
       </div>
       <div class="modal-body ui-front">
-
+        <div id=""></div>
       </div>
       <div class="modal-footer">
+        <button type="button" id="editar" class="btn btn-warning" >Editar</button>
         <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
       </div>
       <!-- /.modal-content -->
