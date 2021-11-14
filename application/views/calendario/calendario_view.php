@@ -21,21 +21,30 @@
 </div>
 
 <div class="modal fade" id="modal">
-  <div class="modal-dialog modal-xs">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title" id="titulo"></h4>
-      </div>
-      <div class="modal-body ui-front">
-        <div id=""></div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" id="editar" class="btn btn-warning" >Editar</button>
-        <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
-      </div>
-      <!-- /.modal-content -->
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titulo"></h4>
+            </div>
+            <div class="modal-body ui-front">
+
+                <b>Descripcion</b>
+                <h5 id="descripcion"></h5>
+                <b>Origen</b>
+                <h5 id="origen"></h5>
+                <b>Destino</b>
+                <h5 id="destino"></h5>
+                <b>Balance</b>
+                <h5 id="total"></h5>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-editar-transporte-cliente" class="btn btn-warning">Editar</button>
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal-dialog -->
-  </div>
 </div>
 <!-- /.modal -->
