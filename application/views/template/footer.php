@@ -56,11 +56,12 @@
         <?php script('/vendors/pnotify/dist/pnotify.buttons.js') ?>
         <?php script('/vendors/pnotify/dist/pnotify.nonblock.js') ?>
 
+        <?php script('/vendors/fullcalendar/dist/lang/es.js') ?>
 
         <!-- Custom Theme Scripts -->
-        <?php script('/build/js/custom.min.js') ?>
         <!-- <script src="../build/js/custom.min.js"></script> -->
         <!-- Calendario -->
+        <?php script('/build/js/custom.min.js') ?>
         <?php script('/vendors/fullcalendar/dist/fullcalendar.min.js') ?>
 
         <!-- formulario -->
