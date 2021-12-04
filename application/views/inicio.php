@@ -4,42 +4,42 @@
 
   <div class="" role="main">
     <div class="row tile_count">
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-truck"></i>Balance de camiones</span>
         <div class="count green"><?php echo number_format($balance_camiones, 2)  ?>
           <small>Bs</small>
         </div>
         <span class="count_bottom">Balance anual</span>
       </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Ingreso por comisión</span>
         <div class="count green"><?php echo number_format($comision['comision'], 2)  ?>
           <small>Bs</small>
         </div>
         <span class="count_bottom">Comision anual</span>
       </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Liquidez</span>
         <div class="count <?php echo ($BalanceCuentas >= 0) ? 'green' : 'red' ?>"><?php echo number_format($BalanceCuentas, 2)  ?>
           <small>Bs</small>
         </div>
         <span class="count_bottom">Liquides de la empresa</span>
       </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Cuentas por cobrar</span>
         <div class="count <?php echo ($CuentasPorCobrar >= 0) ? 'green' : 'red' ?>"><?php echo number_format($CuentasPorCobrar, 2)  ?>
           <small>Bs</small>
         </div>
         <span class="count_bottom"> Balance por cobrar</span>
       </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Cuentas por pagar</span>
         <div class="count red"><?php echo number_format($CuentasPorPagar, 2) ?>
           <small>Bs</small>
         </div>
         <span class="count_bottom"> Balance por pagar</span>
       </div>
-      <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+      <div class="col-lg-2 col-md-4 col-sm-4 col-xs-6 tile_stats_count">
         <span class="count_top"><i class="fa fa-money"></i> Balance</span>
         <div class="count <?php echo ($Balance >= 0) ? 'green' : 'red' ?>"><?php echo number_format(abs($Balance), 2) ?>
           <small>Bs</small>
