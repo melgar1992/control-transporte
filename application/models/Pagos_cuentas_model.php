@@ -55,6 +55,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->from('pago_cuentas p');
         $this->db->join('taller t', 't.ID_taller = p.ID_taller');
         $this->db->limit(500);
+        $this->db->order_by('p.fecha','DESC');
         return $this->db->get()->result();
     }
     public function ingresarPagoTaller($ID_taller, $Fecha, $Descripcion, $Debe, $Haber)
@@ -97,6 +98,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->from('pago_cuentas p');
         $this->db->join('proveedor po', 'po.ID_proveedor = p.ID_proveedor');
         $this->db->limit(500);
+        $this->db->order_by('p.fecha','DESC');
         return $this->db->get()->result();
     }
     public function ingresarPagoProveedor($ID_proveedor, $Fecha, $Descripcion, $Debe, $Haber)
