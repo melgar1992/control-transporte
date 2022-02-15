@@ -171,7 +171,7 @@ $(document).ready(function () {
 							Number(servicioDespuesDescuento).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'),
 						]).draw();
 					}
-					IngresarDellateCliente(ID_Cliente, fechaIni ,fechaFin);
+					IngresarDellateCliente(ID_Cliente, fechaIni, fechaFin);
 					$("#balance_actual").text((Number(saldoAnterior['balance']) + Number(suma_servicios - suma_pagos)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 					$('.reporteCliente').removeClass('hidden');
 				}
@@ -187,7 +187,7 @@ $(document).ready(function () {
 	});
 });
 
-function IngresarDellateCliente(ID_Cliente, fechaIni ,fechaFin) {
+function IngresarDellateCliente(ID_Cliente, fechaIni, fechaFin) {
 
 	$.ajax({
 		type: "POST",
@@ -200,6 +200,24 @@ function IngresarDellateCliente(ID_Cliente, fechaIni ,fechaFin) {
 		dataType: "json",
 		success: function (respuesta) {
 			console.log(respuesta);
+			transporteCliente = respuesta['TransporteCliente'];
+			console.log(transporteCliente);
+			transporteCliente.forEach(transporteCliente => {
+				html = '<div class="row">';
+				html += '<div class="col-xs-6">';
+				html += '<b>TRAMO: ' + transporteCliente['transporte']['NombrePredioOringen'] + ' => ' + transporteCliente['transporte']['NombrePredioDestino'] + '</b><br>';
+				html += '<b>Distancia:</b> ' + transporteCliente['transporte']['Distancia'] + ' Km <br>';
+				html += '</div>';
+				html += '<div class="col-xs-6">';
+				html += '<b>Descripcion</b><br>';
+				html += ' ' + transporteCliente['transporte']['Descripcion'] + ' <br>';
+				html += '<b>Fecha: ' + transporteCliente['transporte']['Fecha'] +' <br>';
+				html += '</div>';
+				html += '</div>';
+				$('#DetalleCliente').append(html);
+			});
+
+
 		}
 	});
 

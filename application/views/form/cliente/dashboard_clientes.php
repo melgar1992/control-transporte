@@ -26,11 +26,11 @@
                                     </select>
                                 </div>
                                 <label for="fechaIni" class="col-md-1 col-xs-12 control-label text-right">Desde: </label>
-                                <div class="col-md-2 col-xs-12">
+                                <div class="col-md-3 col-xs-12">
                                     <input type="date" name="fechaIni" id="fechaIni" class="form-control" required>
                                 </div>
                                 <label for="fechaFin" class="col-md-1 col-xs-12 control-label text-right">Hasta: </label>
-                                <div class="col-md-2 col-xs-12">
+                                <div class="col-md-3 col-xs-12">
                                     <input type="date" name="fechaFin" id="fechaFin" class="form-control" required>
                                 </div>
                                 &nbsp;
@@ -114,7 +114,7 @@
                             <b>Detalle de los servicios realizados</b>
                         </div>
                         <div class="row">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div id="DetalleCliente" class="col-md-12 col-sm-12 col-xs-12">
 
                             </div>
                         </div>
