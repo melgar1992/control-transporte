@@ -202,6 +202,24 @@ class Reportes_model extends CI_Model
         }
         return $detalleTrasportes;
     }
+    public function obtenerTransporteClienteEntreFecha($ID_Cliente, $fechaIni, $fechaFin)
+    {
+        $detalleTrasportes = [];
+        $this->db->select('dc.*');
+        $this->db->from('detallecliente dc');
+        $this->db->where('dc.ID_cliente', $ID_Cliente);
+        $this->db->where('ID_transporte !=', 'NULL');
+        $this->db->where('dc.fecha >=', $fechaIni);
+        $this->db->where('dc.fecha <=', $fechaFin);
+        $this->db->order_by('fecha', 'DESC');
+        $detalleTrasportes = $this->db->get()->result_array();
+
+        for ($i = 0; $i < count($detalleTrasportes); $i++) {
+            $detalleTrasportes[$i]['transporte'] = $this->Transporte_model->obtenerTransporte($detalleTrasportes[$i]['ID_transporte']);
+            $detalleTrasportes[$i]['detalle_transporte'] = $this->Transporte_model->obtenerDetalleTransporte($detalleTrasportes[$i]['ID_transporte']);
+        }
+        return $detalleTrasportes;
+    }
     public function obtenerDetalleProveedor($ID_proveedor)
     {
         $this->db->select('dp.*, c.N_Placa');
@@ -310,6 +328,7 @@ class Reportes_model extends CI_Model
         $this->db->order_by('fecha');
         return $this->db->get()->result_array();
     }
+
     public function obtenerKilometrajeUltimoCambioAceite($ID_camion, $fechaIni, $fechaFin)
     {
 

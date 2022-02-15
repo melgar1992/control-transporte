@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	var tabla_pagos = $('#tabla_pagos').DataTable({
+		dom: "Brtip",
 		"paging": false,
 		"ordering": false,
 		"info": false,
@@ -59,6 +60,7 @@ $(document).ready(function () {
 		},
 	});
 	var tabla_servicios = $('#tabla_servicios').DataTable({
+		dom: "Brtip",
 		"paging": false,
 		"ordering": false,
 		"info": false,
@@ -169,6 +171,7 @@ $(document).ready(function () {
 							Number(servicioDespuesDescuento).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'),
 						]).draw();
 					}
+					IngresarDellateCliente(ID_Cliente, fechaIni ,fechaFin);
 					$("#balance_actual").text((Number(saldoAnterior['balance']) + Number(suma_servicios - suma_pagos)).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 					$('.reporteCliente').removeClass('hidden');
 				}
@@ -183,3 +186,21 @@ $(document).ready(function () {
 
 	});
 });
+
+function IngresarDellateCliente(ID_Cliente, fechaIni ,fechaFin) {
+
+	$.ajax({
+		type: "POST",
+		url: base_url + "/DashboardClientes/detalleTransporteCliente",
+		data: {
+			ID_Cliente: ID_Cliente,
+			fechaIni: fechaIni,
+			fechaFin: fechaFin,
+		},
+		dataType: "json",
+		success: function (respuesta) {
+			console.log(respuesta);
+		}
+	});
+
+}

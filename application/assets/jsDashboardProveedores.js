@@ -1,5 +1,6 @@
 $(document).ready(function () {
     var tabla_pagos = $('#detalle_cuenta').DataTable({
+		dom: "Brtip",
         "paging": false,
         "ordering": false,
         "info": false,

@@ -22,4 +22,12 @@ class DashboardClientes extends BaseController
         $datos['clientePagosEntreFecha']= $this->Reportes_model->clientePagosEntreFecha($ID_Cliente,$fechaIni,$fechaFin);
         echo json_encode($datos);
     }
+    public function detalleTransporteCliente()
+    {
+        $ID_Cliente = $this->input->post('ID_Cliente');
+        $fechaIni = $this->input->post('fechaIni');
+        $fechaFin = $this->input->post('fechaFin');
+		$datos['TransporteCliente'] = $this->Reportes_model->obtenerTransporteClienteEntreFecha($ID_Cliente, $fechaIni, $fechaFin);
+        echo json_encode($datos);
+    }
 }

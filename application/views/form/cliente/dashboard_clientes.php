@@ -110,7 +110,15 @@
                             </div>
                         </div>
                         <hr>
+                        <div class="row">
+                            <b>Detalle de los servicios realizados</b>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
 
+                            </div>
+                        </div>
+                        <hr>
                     </div>
                     <div class="row">
                         <button type="button" class="btn btn-primary btn-print"><span class="fa fa-print">Imprimir</span></button>
