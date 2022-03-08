@@ -109,7 +109,9 @@
                                 </table>
                             </div>
                         </div>
+                        <br>
                         <hr>
+                        <p class="saltoPagina"></p>
                         <div class="row">
                             <b>Detalle de los servicios realizados</b>
                         </div>

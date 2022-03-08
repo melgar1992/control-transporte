@@ -32,7 +32,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -92,7 +92,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -199,9 +199,7 @@ function IngresarDellateCliente(ID_Cliente, fechaIni, fechaFin) {
 		},
 		dataType: "json",
 		success: function (respuesta) {
-			console.log(respuesta);
 			transporteCliente = respuesta['TransporteCliente'];
-			console.log(transporteCliente);
 			transporteCliente.forEach(transporteCliente => {
 				html = '<div class="row">';
 				html += '<div class="col-xs-6">';
@@ -211,9 +209,68 @@ function IngresarDellateCliente(ID_Cliente, fechaIni, fechaFin) {
 				html += '<div class="col-xs-6">';
 				html += '<b>Descripcion</b><br>';
 				html += ' ' + transporteCliente['transporte']['Descripcion'] + ' <br>';
-				html += '<b>Fecha: ' + transporteCliente['transporte']['Fecha'] +' <br>';
-				html += '</div>';
-				html += '</div>';
+				html += '<b>Fecha: ' + transporteCliente['transporte']['Fecha'] + ' <br>';
+				html += '</div>'; // div del detalle
+				html += '</div>'; // div del titulo
+				html += '<br>';
+				html += '</br>';
+				html += '<div class="row">';
+				html += '<div class="col-xs-12">';
+				html += '<div>';
+				html += "<table id='' class='table jambo_table table-hover'>";
+				html += "<thead>";
+				html += "<tr>";
+				html += "<th>Nombre chofer</th>";
+				html += "<th>CI</th>";
+				html += "<th>Placa</th>";
+				html += "<th>Precio </th>";
+				html += "<th>Cantidad</th>";
+				html += "<th>Descuento</th>";
+				html += "<th>Total</th>";
+				html += "</tr>";
+				html += "</thead>";
+				html += "<tbody>";
+				transporteCliente['detalle_transporte'].forEach(detalle_transporte => {
+					html += "<tr>";
+					html += "<td>";
+					detalle_transporte['NombresChofer'] ? html += detalle_transporte['NombresChofer']: html += detalle_transporte['nombreChoferPropio'] ;
+					html += "</td>";
+					html += " <td> ";
+					detalle_transporte['CI'] ? html += detalle_transporte['CI']: html += detalle_transporte['CIcamionPropio'];
+					html += "</td>";
+					html += "<td>" + detalle_transporte['N_Placa'] + "</td>";
+					html += "<td>" + detalle_transporte['Precio'] + "</td>";
+					html += "<td>" + detalle_transporte['Cantidad'] + "</td>";
+					html += "<td>" + detalle_transporte['Descuento'] + "</td>";
+					html += "<td>" + detalle_transporte['Total'] + "</td>";
+					html += "</tr>";
+				});
+				html += "</tbody>";
+				html += "<tfoot>";
+				html += "<tr>";
+				html += "<td>SubTotal</td>";
+				html += "<td colspan='5'></td>";
+				html += "<td><strong class='strong'>" + transporteCliente['transporte']['SubTotal'] + "</strong></td>";
+				html += "</tr>";
+				html += "<tr>";
+				html += "<td>Descuento</td>";
+				html += "<td colspan='5'></td>";
+				html += "<td><strong class='strong'>" + transporteCliente['transporte']['DescuentoTotal'] + "</strong></td>";
+				html += "</tr>";
+				html += "<tr>";
+				html += "<td>Total</td>";
+				html += "<td colspan='5'></td>";
+				html += "<td><strong class='strong'>" + transporteCliente['transporte']['Total'] + "</strong></td>";
+				html += "</tr>";
+				html += "</tfoot>";
+				html += "<hr>";
+				html += "</table>";
+				html += '</div>'; // div de la tabla
+				html += '</div>'; //div tabla col-xs-12
+				html += '</div>'; //div row
+				html += '<br>';
+				html += '<hr>';
+				html += '<p class="saltoPagina"></p>';
 				$('#DetalleCliente').append(html);
 			});
 

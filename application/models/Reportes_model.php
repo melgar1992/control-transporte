@@ -211,7 +211,7 @@ class Reportes_model extends CI_Model
         $this->db->where('ID_transporte !=', 'NULL');
         $this->db->where('dc.fecha >=', $fechaIni);
         $this->db->where('dc.fecha <=', $fechaFin);
-        $this->db->order_by('fecha', 'DESC');
+        $this->db->order_by('dc.fecha', 'asc');
         $detalleTrasportes = $this->db->get()->result_array();
 
         for ($i = 0; $i < count($detalleTrasportes); $i++) {
