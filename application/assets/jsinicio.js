@@ -480,6 +480,10 @@ $(document).ready(function () {
 		id = $(this).val();
 		window.open(base_url + "/Transporte/editarTransporte/" + id);
 	});
+	$(document).on('click', '.btn-editar-pago', function () {
+		id = $(this).val();
+		window.open(base_url + "/Pago_cuentas/editarPago/" + id);
+	});
 	//Reporte de Camiones de la empresa
 	$(document).on('submit', '#reporte-camion', function (e) {
 		e.preventDefault();

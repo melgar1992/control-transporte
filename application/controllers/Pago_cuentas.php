@@ -13,6 +13,22 @@ class Pago_cuentas extends BaseController
         $datos['Clientes'] = $this->Cliente_model->obtenerClientes();
         $this->loadView('PagoCliente', '/form/pagos/pago_cliente', $datos);
     }
+    public function editarPago($ID_pago_cuenta)
+    {
+        $datos['pago_cuenta'] = $this->Pagos_cuentas_model->obetnerPagoCuenta($ID_pago_cuenta);
+        switch ($datos['pago_cuenta']) {
+            case isset($datos['pago_cuenta']['ID_Cliente']):
+                $datos['cliente'] = true;
+                $this->loadView('', '/form/pagos/editar_pago', $datos);
+                break;
+            case isset($datos['pago_cuenta']['ID_proveedor']):
+                $datos['proveedor'] = true;
+                $this->loadView('', '/form/pagos/editar_pago', $datos);
+                break;
+            default:
+                break;
+        }
+    }
     public function ingresarPagoCliente()
     {
         $this->form_validation->set_rules('ID_Cliente', 'ID_Cliente', 'trim|xss_clean|required');
@@ -462,7 +478,7 @@ class Pago_cuentas extends BaseController
                 $Haber = $this->input->post('Haber');
 
 
-                $this->Pagos_cuentas_model->editarMovimientoEmpresa($ID_pago_cuentas,$ID_cuenta_empresa, $Fecha, $Descripcion, $Debe, $Haber);
+                $this->Pagos_cuentas_model->editarMovimientoEmpresa($ID_pago_cuentas, $ID_cuenta_empresa, $Fecha, $Descripcion, $Debe, $Haber);
                 $Pago_ingresado = $this->Pagos_cuentas_model->obtenerMovimientoEmpresa($ID_pago_cuentas);
 
                 $respuesta = array(

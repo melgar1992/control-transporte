@@ -1,6 +1,13 @@
 <?php
 class Pagos_cuentas_model extends CI_Model
 {
+    public function obetnerPagoCuenta($ID_pago_cuentas)
+    {
+        $this->db->select('*');
+        $this->db->from('pago_cuentas');
+        $this->db->where('ID_pago_cuentas', $ID_pago_cuentas);
+        return $this->db->get()->row_array();
+    }
     public function obtenerPagosClientes()
     {
         $this->db->select('p.*, c.Nombre, c.Apellidos, c.CI, c.Direccion, c.Telefono_01, c.Telefono_02');

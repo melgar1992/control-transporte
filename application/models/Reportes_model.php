@@ -175,7 +175,7 @@ class Reportes_model extends CI_Model
     }
     public function obtenerDetalleCliente($ID_Cliente)
     {
-        $this->db->select('dc.ID_transporte, dc.fecha,
+        $this->db->select('dc.ID_transporte, dc.fecha, dc.ID_pago_cuentas,
         (select NombrePredio  from transporte t join predio p on p.ID_predio = t.ID_predio_origen where t.ID_transporte = dc.ID_transporte ) as Origen,
         (select NombrePredio from transporte t join predio p on p.ID_predio = t.ID_predio_destino where t.ID_transporte = dc.ID_transporte ) as Destino,
         (select count(Cantidad) from transporte t join detalle_transporte_ganado dt on dt.ID_transporte = t.ID_transporte where t.ID_transporte = dc.ID_transporte ) as Camiones,
