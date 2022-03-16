@@ -18,13 +18,19 @@ class Pago_cuentas extends BaseController
         $datos['pago_cuenta'] = $this->Pagos_cuentas_model->obetnerPagoCuenta($ID_pago_cuenta);
         switch ($datos['pago_cuenta']) {
             case isset($datos['pago_cuenta']['ID_Cliente']):
-                $datos['cliente'] = true;
-                $this->loadView('', '/form/pagos/editar_pago', $datos);
+                $datosenviar['cliente'] = true;
+                $datosenviar['Clientes'] = $this->Cliente_model->obtenerClientes();
+                $datosenviar['Pago_Cliente'] = $this->Pagos_cuentas_model->obtenerPagoCliente($ID_pago_cuenta);
+                $this->loadView('Editar_pago', '/form/pagos/editar_pago', $datosenviar);
                 break;
             case isset($datos['pago_cuenta']['ID_proveedor']):
-                $datos['proveedor'] = true;
-                $this->loadView('', '/form/pagos/editar_pago', $datos);
+                $datosenviar['proveedor'] = true;
+                $this->loadView('Editar_pago', '/form/pagos/editar_pago', $datosenviar);
                 break;
+                case isset($datosenviar['pago_cuenta']['ID_taller']):
+                    $datosenviar['taller'] = true;
+                    $this->loadView('Editar_pago', '/form/pagos/editar_pago', $datosenviar);
+                    break;
             default:
                 break;
         }
