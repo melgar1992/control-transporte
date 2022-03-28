@@ -77,7 +77,7 @@
                                 <div class="error_formulario">
                                 </div>
                                 <div class="form-group">
-                                    <label for="ID_proveedor" class="control-label">Cliente *:</label>
+                                    <label for="ID_proveedor" class="control-label">Proveedor *:</label>
                                     <div class="">
                                         <select id="ID_proveedor" name="ID_proveedor" class="form-control" required='required'>
                                             <option value=""></option>
