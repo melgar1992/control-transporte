@@ -52,8 +52,9 @@
                             <td>
                                 <?php if ($row['ID_transporte'] > 0) { ?>
                                     <button type="button" value="<?php echo $row['ID_transporte'] ?>" class="btn btn-warning btn-editar-transporte_camion"><span class='fas fa-pencil-alt'></span></button>
-                                <?php } else {
-                                } ?>
+                                <?php } else { ?>
+                                    <button type="button" value="<?php echo $row['ID_pago_cuentas'] ?>" class="btn btn-warning .btn-editar-pago"><span class='fas fa-pencil-alt'></span></button>
+                                <?php } ?>
                             </td>
                         </tr>
                 <?php }

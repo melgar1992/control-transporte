@@ -484,6 +484,11 @@ $(document).ready(function () {
 		id = $(this).val();
 		window.open(base_url + "/Pago_cuentas/editarPago/" + id);
 	});
+	$(document).on('click', '.btn-editar-mantenimiento', function () {
+		id = $(this).val();
+		window.open(base_url + '/Mantenimiento/editarMantenimiento/' + id);
+
+	});
 	//Reporte de Camiones de la empresa
 	$(document).on('submit', '#reporte-camion', function (e) {
 		e.preventDefault();

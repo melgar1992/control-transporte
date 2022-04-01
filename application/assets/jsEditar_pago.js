@@ -18,6 +18,10 @@ $(document).ready(function () {
 				break;
 		}
 	});
+	$("#btn-cerrar").click(function (e) { 
+		e.preventDefault();
+		window.close();
+	});
 
 });
 

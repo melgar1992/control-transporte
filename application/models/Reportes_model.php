@@ -268,10 +268,12 @@ class Reportes_model extends CI_Model
     }
     public function obtenerDetalleTaller($ID_taller)
     {
-        $this->db->select('*');
-        $this->db->from('detalletaller');
-        $this->db->where('ID_taller', $ID_taller);
-        $this->db->order_by('Fecha');
+        $this->db->select('dt.*, m.ID_Mantenimiento');
+        $this->db->from('detalletaller dt');
+        $this->db->join('detalle_mantenimiento dm', 'dm.ID_detalle_mantenimiento = dt.ID_detalle_mantenimiento','left');
+        $this->db->join('mantenimiento m', 'dm.ID_mantenimiento = m.ID_Mantenimiento', 'left');
+        $this->db->where('dt.ID_taller', $ID_taller);
+        $this->db->order_by('dt.Fecha');
         return $this->db->get()->result_array();
     }
     public function obtenerDetalleCamion($ID_camion, $fechaIni, $fechaFin)
