@@ -13,7 +13,8 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    <?php if (isset($cliente)) { ?>
+                    <input type="hidden" id="cuenta_editar" value="<?php echo $cuenta_editar; ?>">
+                    <?php if ($cuenta_editar == 'cliente') { ?>
                         <form action="" id="formPagoCliente">
                             <div class="modal-body">
                                 <div class="error_formulario">
@@ -71,7 +72,7 @@
                             </div>
                         </form>
                     <?php } ?>
-                    <?php if (isset($proveedor)) { ?>
+                    <?php if ($cuenta_editar == 'proveedor') { ?>
                         <form action="" id="formPagoProveedor">
                             <div class="modal-body">
                                 <div class="error_formulario">
@@ -129,7 +130,7 @@
                             </div>
                         </form>
                     <?php } ?>
-                    <?php if (isset($taller)) { ?>
+                    <?php if ($cuenta_editar == 'taller') { ?>
                         <form action="" id="formPagoTaller">
                             <div class="modal-body">
                                 <div class="error_formulario">
