@@ -19,6 +19,7 @@
                             <div class="modal-body">
                                 <div class="error_formulario">
                                 </div>
+                                <input type="hidden" id="ID_pago_cuentas" value="<?php echo $Pago_Cliente['ID_pago_cuentas']; ?>">
                                 <div class="form-group">
                                     <label for="ID_Cliente" class="control-label">Cliente *:</label>
                                     <div class="">
@@ -67,7 +68,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger pull-left" id="btn-cerrar" data-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-primary pull-right" type="reset">Borrar</button>
                                 <button type="submit" class="btn btn-warning pull-right" id="btn-editar">Editar</button>
                             </div>
                         </form>
@@ -77,6 +77,7 @@
                             <div class="modal-body">
                                 <div class="error_formulario">
                                 </div>
+                                <input type="hidden" id="ID_pago_cuentas" value="<?php echo $Pago_proveedor['ID_pago_cuentas']; ?>">
                                 <div class="form-group">
                                     <label for="ID_proveedor" class="control-label">Proveedor *:</label>
                                     <div class="">
@@ -125,7 +126,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger pull-left" id="btn-cerrar" data-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-primary pull-right" type="reset">Borrar</button>
                                 <button type="submit" class="btn btn-warning pull-right" id="btn-editar">Editar</button>
                             </div>
                         </form>
@@ -135,6 +135,7 @@
                             <div class="modal-body">
                                 <div class="error_formulario">
                                 </div>
+                                <input type="hidden" id="ID_pago_cuentas" value="<?php echo $Pago_taller['ID_pago_cuentas'];; ?>">
                                 <div class="form-group">
                                     <label for="ID_taller" class="control-label">Taller o ferreteria *:</label>
                                     <div class="">
@@ -142,7 +143,7 @@
                                             <option value=""></option>
                                             <?php foreach ($talleres as $row) : ?>
                                                 <?php if ($row->ID_taller == $Pago_taller['ID_taller']) { ?>
-                                                    <option value="<?php echo $row->ID_taller;?>" selected><?php echo $row->NombreTaller; ?></option>
+                                                    <option value="<?php echo $row->ID_taller; ?>" selected><?php echo $row->NombreTaller; ?></option>
                                                 <?php } else { ?>
                                                     <option value="<?php echo $row->ID_taller; ?>"><?php echo $row->NombreTaller; ?></option>
                                                 <?php } ?>
@@ -183,7 +184,6 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger pull-left" id="btn-cerrar" data-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-primary pull-right" type="reset">Borrar</button>
                                 <button type="submit" class="btn btn-warning pull-right" id="btn-editar">Editar</button>
                             </div>
                         </form>
