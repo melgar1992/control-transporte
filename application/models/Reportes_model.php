@@ -173,6 +173,48 @@ class Reportes_model extends CI_Model
 
         return $TrasnporteTotal;
     }
+    public function balanceMensuales($year)
+    {
+        $balanceMensual = array(
+            0 => 0,
+            1 => 0,
+            2 => 0,
+            3 => 0,
+            4 => 0,
+            5 => 0,
+            6 => 0,
+            7 => 0,
+            8 => 0,
+            9 => 0,
+            10 => 0,
+            11 => 0,
+        );
+        $fechaIni = $year . '-01-01';
+        $fechaFin = $year . '-12-31';
+
+        //Ingresos de los transportes netos x mes
+
+        $IngresoTrasnporte = $this->transportesNetosXMes($year);
+
+        //egreso a los proveedores por servicios x mes
+
+        //egreso pago sueldos y salarios x mes
+
+        //egreso x las cuenta de los camiones de la empresa
+
+
+
+    }
+    public function transportesNetosXMes($year)
+    {
+        $this->db->select('sum(Total) as Total, month(Fecha) as mes');
+        $this->db->from('transporte');
+        $this->db->where('Fecha >=', $year . '-01-01');
+        $this->db->where('Fecha <=', $year . '-12-31');
+        $this->db->where('Estado', 'Activo');
+        $this->db->group_by('mes');
+        return $this->db->get()->result_array();
+    }
     public function obtenerDetalleCliente($ID_Cliente)
     {
         $this->db->select('dc.ID_transporte, dc.fecha, dc.ID_pago_cuentas,

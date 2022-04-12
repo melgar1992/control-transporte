@@ -40,6 +40,11 @@ class Inicio extends BaseController
 
 		echo json_encode($datos);
 	}
+	public function graficoBalanceMensual()
+	{
+		$year = $this->input->post('year');
+		$datos['balanceMensual'] = $this->Reportes_model->balanceMensuales($year);
+	}
 	public function detalleCliente($ID_Cliente)
 	{
 		$datos['detalleCliente'] = $this->Reportes_model->obtenerDetalleCliente($ID_Cliente);

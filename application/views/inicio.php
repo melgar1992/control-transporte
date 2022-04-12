@@ -47,6 +47,8 @@
         <span class="count_bottom"> Balance de la empresa</span>
       </div>
     </div>
+    
+    <!-- Grafica de transporte! -->
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -69,7 +71,43 @@
         </div>
       </div>
     </div>
-    <!-- Paneles de informacion! -->
+
+    <div class="row">
+      <!-- Paneles de informacion! -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Grafico balance mensual empresa </h2>
+            <ul class="nav navbar-right panel_toolbox">
+              <select name="year" id="year" class="form-control">
+                <?php foreach ($year as $row) : ?>
+                  <option value="<?php echo $row['year'] ?>"><?php echo $row['year'] ?></option>
+                <?php endforeach; ?>
+              </select>
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+            
+          </div>
+        </div>
+      </div>
+      <!-- Paneles reportes! -->
+      <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Reportes generales </h2>
+            <ul class="nav navbar-right panel_toolbox">
+            </ul>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
     <div class="row">
       <!-- Ranking Clientes -->
       <div class="col-md-6 col-sm-12 col-xs-12">
