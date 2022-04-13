@@ -194,24 +194,66 @@ class Reportes_model extends CI_Model
 
         //Ingresos de los transportes netos x mes
 
-        $IngresoTrasnporte = $this->transportesNetosXMes($year);
+        $IngresoTrasnporte = $this->transportesNetosXMes($fechaIni, $fechaFin);
 
         //egreso a los proveedores por servicios x mes
+        $egresoProveedores = $this->proveedoresServiciosXMes($fechaIni, $fechaFin);
 
         //egreso pago sueldos y salarios x mes
+        $egreso_sueldo = $this->egresoSueldosXMes($fechaIni, $fechaFin);
 
-        //egreso x las cuenta de los camiones de la empresa
+        //egreso x las cuenta de los camiones y gastos de la empresa
+        $egreso_talleres = $this->egresoCamionesTallerXMes($fechaIni, $fechaFin);
 
-
+        //Egreso de diesel y viaje camiones de la empresa
+        $egreso_viaje_camiones_propios = $this->egresoCamionesPropiesViajesXMes($fechaIni, $fechaFin);
 
     }
-    public function transportesNetosXMes($year)
+    public function transportesNetosXMes($fechaIni, $fechaFin)
     {
         $this->db->select('sum(Total) as Total, month(Fecha) as mes');
         $this->db->from('transporte');
-        $this->db->where('Fecha >=', $year . '-01-01');
-        $this->db->where('Fecha <=', $year . '-12-31');
+        $this->db->where('Fecha >=', $fechaIni);
+        $this->db->where('Fecha <=', $fechaFin);
         $this->db->where('Estado', 'Activo');
+        $this->db->group_by('mes');
+        return $this->db->get()->result_array();
+    }
+    public function proveedoresServiciosXMes($fechaIni, $fechaFin)
+    {
+        $this->db->select('sum(ingreso - comision - descuento) as egreso_proveedor, 
+        month(fecha) as mes');
+        $this->db->from('detalleproveedor');
+        $this->db->where('fecha >=', $fechaIni);
+        $this->db->where('fecha <=', $fechaFin);
+        $this->db->group_by('mes');
+        return $this->db->get()->result_array();
+    }
+    public function egresoSueldosXMes($fechaIni, $fechaFin)
+    {
+        $this->db->select('sum(monto) , month(fecha) as mes');
+        $this->db->from('pago');
+        $this->db->where('fecha >=', $fechaIni);
+        $this->db->where('fecha <=', $fechaFin);
+        $this->db->group_by('mes');
+        return $this->db->get()->result_array();
+    }
+    public function egresoCamionesTallerXMes($fechaIni, $fechaFin)
+    {
+        $this->db->select('sum(Debe) , month(fecha) as mes');
+        $this->db->from('detalletaller');
+        $this->db->where('fecha >=', $fechaIni);
+        $this->db->where('fecha <=', $fechaFin);
+        $this->db->group_by('mes');
+        return $this->db->get()->result_array();
+    }
+    public function egresoCamionesPropiesViajesXMes($fechaIni, $fechaFin)
+    {
+        $this->db->select('sum(ActViaje + Diesel + descuento) as egreso, month(fecha) as mes');
+        $this->db->from('detalle_camiones_propio');
+        $this->db->where('ID_transporte !=','null');
+        $this->db->where('fecha >=', $fechaIni);
+        $this->db->where('fecha <=', $fechaFin);
         $this->db->group_by('mes');
         return $this->db->get()->result_array();
     }
@@ -275,11 +317,11 @@ class Reportes_model extends CI_Model
     {
         $this->db->select('sum(Ingreso) as Ingreso, sum(Egreso) as Egreso ,(sum(Ingreso)- sum(Egreso)) as Balance,
          p.Nombres, p.Apellidos, p.Telefono_01');
-         $this->db->from('detalleproveedor dp');
-         $this->db->join('proveedor p','dp.ID_proveedor = p.ID_proveedor');
-         $this->db->where('dp.ID_proveedor', $ID_proveedor);
-         $this->db->where('dp.Fecha <', $fechaIni);
-         return $this->db->get()->row_array();
+        $this->db->from('detalleproveedor dp');
+        $this->db->join('proveedor p', 'dp.ID_proveedor = p.ID_proveedor');
+        $this->db->where('dp.ID_proveedor', $ID_proveedor);
+        $this->db->where('dp.Fecha <', $fechaIni);
+        return $this->db->get()->row_array();
     }
     public function obtenerDetalleProveedorEntreFechas($ID_proveedor, $fechaIni, $fechaFin)
     {
@@ -312,7 +354,7 @@ class Reportes_model extends CI_Model
     {
         $this->db->select('dt.*, m.ID_Mantenimiento');
         $this->db->from('detalletaller dt');
-        $this->db->join('detalle_mantenimiento dm', 'dm.ID_detalle_mantenimiento = dt.ID_detalle_mantenimiento','left');
+        $this->db->join('detalle_mantenimiento dm', 'dm.ID_detalle_mantenimiento = dt.ID_detalle_mantenimiento', 'left');
         $this->db->join('mantenimiento m', 'dm.ID_mantenimiento = m.ID_Mantenimiento', 'left');
         $this->db->where('dt.ID_taller', $ID_taller);
         $this->db->order_by('dt.Fecha');
@@ -446,7 +488,6 @@ class Reportes_model extends CI_Model
         $this->db->where('Fecha <', $fechaIni);
 
         return $this->db->get()->row_array();
-
     }
     public function clientesRanking($year)
     {
