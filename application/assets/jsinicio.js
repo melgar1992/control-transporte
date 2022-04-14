@@ -32,7 +32,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -89,7 +89,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -146,7 +146,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -203,7 +203,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -265,7 +265,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\Bs,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -324,7 +324,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-					i : 0;
+						i : 0;
 			};
 
 			// Total over all pages
@@ -358,6 +358,10 @@ $(document).ready(function () {
 	$('#year').on('change', function () {
 		yearselected = $(this).val();
 		GenerarGraficoMovimiento(yearselected);
+	});
+	$('#yearBalanceMensual').on('change', function () {
+		yearselected = $(this).val();
+		generarGraficoBalanceMensual(yearselected);
 	});
 	//Resetea el ranking de clientes
 	$('#yearClientes').on('change', function () {
@@ -530,10 +534,10 @@ $(document).ready(function () {
 							detalleCamionEmpresa[i]['Egreso'],
 							balance,
 							(detalleCamionEmpresa[i]['ID_mantenimiento'] > 0) ?
-							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-							(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
-							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-							null,
+								"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+								(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
+									"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+									null,
 						]).draw();
 					}
 					$(".ingreso_camion").text(Number(sumIngresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
@@ -590,8 +594,21 @@ function generarGraficoBalanceMensual(year) {
 			year: year
 		},
 		dataType: "json",
-		success: function (response) {
-			console.log(response);
+		success: function (datos) {
+			resetGraficoBalanceMensual();
+			console.log(datos);
+			balance = new Array;
+			for (let i = 0; i < datos['balanceMensual'].length; i++) {
+				if (typeof datos['balanceMensual'][i]['ingresoTransporte'] != 'undefined') {
+					balance.push(datos['balanceMensual'][i]['ingresoTransporte'] - datos['balanceMensual'][i]['egresoProveedores']
+						- datos['balanceMensual'][i]['egreso_sueldo']
+						- datos['balanceMensual'][i]['egreso_talleres'] - datos['balanceMensual'][i]['egreso_viaje_camiones_propios']);
+				} else {
+					balance.push(0);
+				}
+			}
+		
+			graficoBalanceMensual(balance);
 		}
 	});
 }
@@ -637,7 +654,28 @@ function GraficoMovimiento(Datos) {
 
 	});
 }
+function graficoBalanceMensual(datos) {
+	var f = document.getElementById("balanceMensual");
+	var f = document.getElementById("balanceMensual").getContext('2d');
+	new Chart(f, {
+		type: "bar",
+		data: {
+			labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+			datasets: [{
+				label: "Movimiento total de transporte",
+				backgroundColor: "#26B99A",
+				data: datos,
+			}]
+		},
+		options: {
+			legend: {
+				display: false,
+			},
+			maintainAspectRatio: false,
+		}
 
+	});
+}
 function resumenGastosCamion(datos) {
 	resetGraficoGastosCamion();
 	$('.tabla-gastos-categoria-camion tbody').empty();

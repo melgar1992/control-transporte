@@ -77,9 +77,9 @@
       <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Grafico balance mensual empresa </h2>
+            <h2>Balance </h2>
             <ul class="nav navbar-right panel_toolbox">
-              <select name="year" id="year" class="form-control">
+              <select name="yearBalanceMensual" id="yearBalanceMensual" class="form-control">
                 <?php foreach ($year as $row) : ?>
                   <option value="<?php echo $row['year'] ?>"><?php echo $row['year'] ?></option>
                 <?php endforeach; ?>
@@ -245,7 +245,7 @@
                 </li>
                 <li role="tablaProdcutos" class=""><a href="#tab_content2" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">Proveedores</a>
                 </li>
-                <li role="tablaProdcutos" class=""><a href="#tab_content3" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">Cuentas camiones</a>
+                <li role="tablaProdcutos" class=""><a href="#tab_content3" id="home-tab" role="tab" data-toggle="tab" aria-expanded="false">Otros</a>
                 </li>
               </ul>
               <div id="myTabContent" class="tab-content">
