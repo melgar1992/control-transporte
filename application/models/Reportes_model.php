@@ -206,8 +206,29 @@ class Reportes_model extends CI_Model
         $egreso_talleres = $this->egresoCamionesTallerXMes($fechaIni, $fechaFin);
 
         //Egreso de diesel y viaje camiones de la empresa
+
         $egreso_viaje_camiones_propios = $this->egresoCamionesPropiesViajesXMes($fechaIni, $fechaFin);
 
+        //Ingresar todos los datos al arrays
+
+        for ($i = 0; $i < count($IngresoTrasnporte); $i++) {
+            $balanceMensual[$i]['ingresoTransporte'] = $IngresoTrasnporte[$i]['Total'];
+        }
+        for ($i = 0; $i < count($egresoProveedores); $i++) {
+            $balanceMensual[$i]['egresoProveedores'] = $egresoProveedores[$i]['egreso_proveedor'];
+        }
+        for ($i = 0; $i < count($egreso_sueldo); $i++) {
+            $balanceMensual[$i]['egreso_sueldo'] = $egreso_sueldo[$i]['sueldo'];
+        }
+        for ($i=0; $i  < count($egreso_talleres) ; $i++) { 
+            $balanceMensual[$i]['egreso_talleres'] = $egreso_talleres[$i]['egresoTaller'];
+        }
+        for ($i=0; $i < count($egreso_viaje_camiones_propios) ; $i++) { 
+            $balanceMensual[$i]['egreso_viaje_camiones_propios'] = $egreso_viaje_camiones_propios[$i]['egreso'];
+            
+        }
+
+        return $balanceMensual;
     }
     public function transportesNetosXMes($fechaIni, $fechaFin)
     {
@@ -231,7 +252,7 @@ class Reportes_model extends CI_Model
     }
     public function egresoSueldosXMes($fechaIni, $fechaFin)
     {
-        $this->db->select('sum(monto) , month(fecha) as mes');
+        $this->db->select('sum(monto) as sueldo , month(fecha) as mes');
         $this->db->from('pago');
         $this->db->where('fecha >=', $fechaIni);
         $this->db->where('fecha <=', $fechaFin);
@@ -240,7 +261,7 @@ class Reportes_model extends CI_Model
     }
     public function egresoCamionesTallerXMes($fechaIni, $fechaFin)
     {
-        $this->db->select('sum(Debe) , month(fecha) as mes');
+        $this->db->select('sum(Debe) as egresoTaller , month(fecha) as mes');
         $this->db->from('detalletaller');
         $this->db->where('fecha >=', $fechaIni);
         $this->db->where('fecha <=', $fechaFin);
@@ -249,9 +270,9 @@ class Reportes_model extends CI_Model
     }
     public function egresoCamionesPropiesViajesXMes($fechaIni, $fechaFin)
     {
-        $this->db->select('sum(ActViaje + Diesel + descuento) as egreso, month(fecha) as mes');
+        $this->db->select('sum(ActViaje + Diesel) as egreso, month(fecha) as mes');
         $this->db->from('detalle_camiones_propio');
-        $this->db->where('ID_transporte !=','null');
+        $this->db->where('ID_transporte !=', 'null');
         $this->db->where('fecha >=', $fechaIni);
         $this->db->where('fecha <=', $fechaFin);
         $this->db->group_by('mes');
