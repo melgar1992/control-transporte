@@ -88,7 +88,7 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <div class="graficoBalanceMensual" id="graficoBalanceMensual">
+            <div class="graficoBalanceMensual" id="graficoBalanceMensual" style="position: relative; height: 250px;">
                   <canvas id="balanceMensual"></canvas>
             </div>
           </div>
