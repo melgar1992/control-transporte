@@ -176,18 +176,18 @@ class Reportes_model extends CI_Model
     public function balanceMensuales($year)
     {
         $balanceMensual = array(
-            0 => 0,
-            1 => 0,
-            2 => 0,
-            3 => 0,
-            4 => 0,
-            5 => 0,
-            6 => 0,
-            7 => 0,
-            8 => 0,
-            9 => 0,
-            10 => 0,
-            11 => 0,
+            0 => array(),
+            1 => array(),
+            2 => array(),
+            3 => array(),
+            4 => array(),
+            5 => array(),
+            6 => array(),
+            7 => array(),
+            8 => array(),
+            9 => array(),
+            10 => array(),
+            11 => array(),
         );
         $fechaIni = $year . '-01-01';
         $fechaFin = $year . '-12-31';
@@ -220,12 +220,11 @@ class Reportes_model extends CI_Model
         for ($i = 0; $i < count($egreso_sueldo); $i++) {
             $balanceMensual[$i]['egreso_sueldo'] = $egreso_sueldo[$i]['sueldo'];
         }
-        for ($i=0; $i  < count($egreso_talleres) ; $i++) { 
+        for ($i = 0; $i  < count($egreso_talleres); $i++) {
             $balanceMensual[$i]['egreso_talleres'] = $egreso_talleres[$i]['egresoTaller'];
         }
-        for ($i=0; $i < count($egreso_viaje_camiones_propios) ; $i++) { 
+        for ($i = 0; $i < count($egreso_viaje_camiones_propios); $i++) {
             $balanceMensual[$i]['egreso_viaje_camiones_propios'] = $egreso_viaje_camiones_propios[$i]['egreso'];
-            
         }
 
         return $balanceMensual;

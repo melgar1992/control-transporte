@@ -44,6 +44,7 @@ class Inicio extends BaseController
 	{
 		$year = $this->input->post('year');
 		$datos['balanceMensual'] = $this->Reportes_model->balanceMensuales($year);
+		echo json_encode($datos);
 	}
 	public function detalleCliente($ID_Cliente)
 	{

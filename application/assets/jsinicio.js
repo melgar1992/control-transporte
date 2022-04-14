@@ -353,6 +353,7 @@ $(document).ready(function () {
 	});
 	// Funciones de la paginas
 	GenerarGraficoMovimiento(year);
+	generarGraficoBalanceMensual(year);
 	//Resetea la grafica de movimiento de transporte
 	$('#year').on('change', function () {
 		yearselected = $(this).val();
@@ -558,7 +559,10 @@ function resetGrafico() {
 	$('#GraficoM').remove(); // this is my <canvas> element
 	$('#GraficoMovimiento').append('<canvas id="GraficoM" ></canvas>');
 }
-
+function resetGraficoBalanceMensual() {
+	$('#balanceMensual').remove();
+	$('#graficoBalanceMensual').append('<canvas id="balanceMensual"></canvas>');
+}
 function resetGraficoGastosCamion() {
 	$('#GraficoDoughnutsCamionesEmpresa').remove(); // this is my <canvas> element
 	$('#GraficoDCamionesEmpresa').append('<canvas id="GraficoDoughnutsCamionesEmpresa"></canvas>');
@@ -575,6 +579,19 @@ function GenerarGraficoMovimiento(year) {
 		success: function (response) {
 			resetGrafico();
 			GraficoMovimiento(response);
+		}
+	});
+}
+function generarGraficoBalanceMensual(year) {
+	$.ajax({
+		type: "POST",
+		url: base_url + "/inicio/graficoBalanceMensual",
+		data: {
+			year: year
+		},
+		dataType: "json",
+		success: function (response) {
+			console.log(response);
 		}
 	});
 }
