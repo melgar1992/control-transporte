@@ -210,21 +210,31 @@ class Reportes_model extends CI_Model
         $egreso_viaje_camiones_propios = $this->egresoCamionesPropiesViajesXMes($fechaIni, $fechaFin);
 
         //Ingresar todos los datos al arrays
-
         for ($i = 0; $i < count($IngresoTrasnporte); $i++) {
-            $balanceMensual[$i]['ingresoTransporte'] = $IngresoTrasnporte[$i]['Total'];
+            $mes = (int) $IngresoTrasnporte[$i]['mes'] - 1; 
+            $balanceMensual[$mes]['ingresoTransporte'] = $IngresoTrasnporte[$i]['Total'];
         }
+        $mes = 0;
         for ($i = 0; $i < count($egresoProveedores); $i++) {
-            $balanceMensual[$i]['egresoProveedores'] = $egresoProveedores[$i]['egreso_proveedor'];
+            $mes = (int) $egresoProveedores[$i]['mes'] - 1; 
+            $balanceMensual[$mes]['egresoProveedores'] = $egresoProveedores[$i]['egreso_proveedor'];
         }
+        $mes = 0;
+        
         for ($i = 0; $i < count($egreso_sueldo); $i++) {
-            $balanceMensual[$i]['egreso_sueldo'] = $egreso_sueldo[$i]['sueldo'];
+            $mes = (int) $egreso_sueldo[$i]['mes'] - 1; 
+            $balanceMensual[$mes]['egreso_sueldo'] = $egreso_sueldo[$i]['sueldo'];
         }
+        $mes = 0;
+
         for ($i = 0; $i  < count($egreso_talleres); $i++) {
-            $balanceMensual[$i]['egreso_talleres'] = $egreso_talleres[$i]['egresoTaller'];
+            $mes = (int) $egreso_talleres[$i]['mes'] - 1; 
+            $balanceMensual[$mes]['egreso_talleres'] = $egreso_talleres[$i]['egresoTaller'];
         }
+        $mes = 0;
         for ($i = 0; $i < count($egreso_viaje_camiones_propios); $i++) {
-            $balanceMensual[$i]['egreso_viaje_camiones_propios'] = $egreso_viaje_camiones_propios[$i]['egreso'];
+            $mes = (int) $egreso_viaje_camiones_propios[$i]['mes'] - 1; 
+            $balanceMensual[$mes]['egreso_viaje_camiones_propios'] = $egreso_viaje_camiones_propios[$i]['egreso'];
         }
 
         return $balanceMensual;
@@ -260,8 +270,8 @@ class Reportes_model extends CI_Model
     }
     public function egresoCamionesTallerXMes($fechaIni, $fechaFin)
     {
-        $this->db->select('sum(Debe) as egresoTaller , month(fecha) as mes');
-        $this->db->from('detalletaller');
+        $this->db->select('sum(ImporteTotal) as egresoTaller , month(fecha) as mes');
+        $this->db->from('detalle_mantenimiento');
         $this->db->where('fecha >=', $fechaIni);
         $this->db->where('fecha <=', $fechaFin);
         $this->db->group_by('mes');
