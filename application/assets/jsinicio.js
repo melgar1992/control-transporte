@@ -663,7 +663,9 @@ function graficoBalanceMensual(datos) {
 			labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
 			datasets: [{
 				label: "Movimiento total de transporte",
-				backgroundColor: "#26B99A",
+				backgroundColor: function(data){
+					return data < 0 ? "#E74C3C": "#26B99A";
+				},
 				data: datos,
 			}]
 		},
