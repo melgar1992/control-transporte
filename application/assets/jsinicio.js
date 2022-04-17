@@ -32,7 +32,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -89,7 +89,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -146,7 +146,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -203,7 +203,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -265,7 +265,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\Bs,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -324,7 +324,7 @@ $(document).ready(function () {
 				return typeof i === 'string' ?
 					i.replace(/[\$,]/g, '') * 1 :
 					typeof i === 'number' ?
-						i : 0;
+					i : 0;
 			};
 
 			// Total over all pages
@@ -534,10 +534,10 @@ $(document).ready(function () {
 							detalleCamionEmpresa[i]['Egreso'],
 							balance,
 							(detalleCamionEmpresa[i]['ID_mantenimiento'] > 0) ?
-								"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-								(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
-									"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
-									null,
+							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_mantenimiento'] + "' class='btn btn-warning btn-editar-detalle_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+							(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
+							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
+							null,
 						]).draw();
 					}
 					$(".ingreso_camion").text(Number(sumIngresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
@@ -563,10 +563,12 @@ function resetGrafico() {
 	$('#GraficoM').remove(); // this is my <canvas> element
 	$('#GraficoMovimiento').append('<canvas id="GraficoM" ></canvas>');
 }
+
 function resetGraficoBalanceMensual() {
 	$('#balanceMensual').remove();
 	$('#graficoBalanceMensual').append('<canvas id="balanceMensual"></canvas>');
 }
+
 function resetGraficoGastosCamion() {
 	$('#GraficoDoughnutsCamionesEmpresa').remove(); // this is my <canvas> element
 	$('#GraficoDCamionesEmpresa').append('<canvas id="GraficoDoughnutsCamionesEmpresa"></canvas>');
@@ -586,6 +588,7 @@ function GenerarGraficoMovimiento(year) {
 		}
 	});
 }
+
 function generarGraficoBalanceMensual(year) {
 	$.ajax({
 		type: "POST",
@@ -600,14 +603,14 @@ function generarGraficoBalanceMensual(year) {
 			balance = new Array;
 			for (let i = 0; i < datos['balanceMensual'].length; i++) {
 				if (typeof datos['balanceMensual'][i]['ingresoTransporte'] != 'undefined') {
-					balance.push(datos['balanceMensual'][i]['ingresoTransporte'] - datos['balanceMensual'][i]['egresoProveedores']
-						- datos['balanceMensual'][i]['egreso_sueldo']
-						- datos['balanceMensual'][i]['egreso_talleres'] - datos['balanceMensual'][i]['egreso_viaje_camiones_propios']);
+					balance.push(datos['balanceMensual'][i]['ingresoTransporte'] - datos['balanceMensual'][i]['egresoProveedores'] -
+						datos['balanceMensual'][i]['egreso_sueldo'] -
+						datos['balanceMensual'][i]['egreso_talleres'] - datos['balanceMensual'][i]['egreso_viaje_camiones_propios']);
 				} else {
 					balance.push(0);
 				}
 			}
-		
+
 			graficoBalanceMensual(balance);
 		}
 	});
@@ -654,18 +657,27 @@ function GraficoMovimiento(Datos) {
 
 	});
 }
+
 function graficoBalanceMensual(datos) {
 	var f = document.getElementById("balanceMensual");
 	var f = document.getElementById("balanceMensual").getContext('2d');
+	const color = [];
+	for (let i = 0; i < datos.length; i++) {
+		if (datos[i] < 0) {
+			//Color rojo
+			color.push('#E74C3C');
+		} else {
+			//color verde
+			color.push('#26B99A');
+		}
+	}
 	new Chart(f, {
 		type: "bar",
 		data: {
 			labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
 			datasets: [{
-				label: "Movimiento total de transporte",
-				backgroundColor: function(data){
-					return data < 0 ? "#E74C3C": "#26B99A";
-				},
+				label: "Balance del mes",
+				backgroundColor: color,
 				data: datos,
 			}]
 		},
@@ -678,6 +690,7 @@ function graficoBalanceMensual(datos) {
 
 	});
 }
+
 function resumenGastosCamion(datos) {
 	resetGraficoGastosCamion();
 	$('.tabla-gastos-categoria-camion tbody').empty();
