@@ -56,7 +56,6 @@
         <?php script('/vendors/pnotify/dist/pnotify.buttons.js') ?>
         <?php script('/vendors/pnotify/dist/pnotify.nonblock.js') ?>
 
-        <?php script('/vendors/fullcalendar/dist/lang/es.js') ?>
 
         <!-- Custom Theme Scripts -->
         <!-- <script src="../build/js/custom.min.js"></script> -->

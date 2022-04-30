@@ -1,7 +1,25 @@
 $(document).ready(function () {
-     $("#calendario").fullCalendar({
+    calendario();
+    $(document).on('click', '#btn-editar-transporte-cliente', function () {
+        id = $(this).val();
+        window.open(base_url + "/Transporte/editarTransporte/" + id);
+    });
+});
+
+function calendario() {
+    $("#calendario").fullCalendar({
         themeSystem: 'bootstrap',
-        locale: 'es',
+        dayNames: ['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
+        dayNamesShort: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sáb'],
+        monthNamesShort: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+        monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+        buttonText: {
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            list: 'Lista'
+        },
         header: {
             left: 'prev,next',
             center: 'title',
@@ -34,7 +52,7 @@ $(document).ready(function () {
                     $(doc).each(function () {
                         events.push({
                             id: $(this).attr('ID_transporte'),
-                            title: $(this).attr('NombreCliente') + ' ' + $(this).attr('ApellidosCliente') ,
+                            title: $(this).attr('NombreCliente') + ' ' + $(this).attr('ApellidosCliente'),
                             start: $(this).attr('Fecha'),
                             descripcion: $(this).attr('Descripcion'),
                             origen: $(this).attr('NombrePredioOringen'),
@@ -48,8 +66,4 @@ $(document).ready(function () {
             });
         }
     });
-    $(document).on('click', '#btn-editar-transporte-cliente', function () {
-		id = $(this).val();
-		window.open(base_url + "/Transporte/editarTransporte/" + id);
-	});
-});
+}

@@ -47,13 +47,13 @@
         <span class="count_bottom"> Balance de la empresa</span>
       </div>
     </div>
-    
+
     <!-- Grafica de transporte! -->
     <div class="row">
       <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Grafico transporte general </h2>
+            <h2>transporte </h2>
             <ul class="nav navbar-right panel_toolbox">
               <select name="year" id="year" class="form-control">
                 <?php foreach ($year as $row) : ?>
@@ -74,7 +74,7 @@
 
     <div class="row">
       <!-- Paneles de informacion! -->
-      <div class="col-md-12 col-sm-12 col-xs-12">
+      <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="x_panel">
           <div class="x_title">
             <h2>Balance </h2>
@@ -88,13 +88,26 @@
             <div class="clearfix"></div>
           </div>
           <div class="x_content">
-            <div class="graficoBalanceMensual" id="graficoBalanceMensual" style="position: relative; height: 250px;">
-                  <canvas id="balanceMensual"></canvas>
+            <div class="graficoBalanceMensual" id="graficoBalanceMensual" style="position: relative; height: 350px;">
+              <canvas id="balanceMensual"></canvas>
             </div>
           </div>
         </div>
       </div>
       <!-- Paneles reportes! -->
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="x_panel">
+          <div class="x_title">
+            <h2>Calendario </h2>
+            <div class="clearfix"></div>
+          </div>
+          <div class="x_content">
+
+            <div id="calendario"></div>
+
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -551,3 +564,32 @@
   </div>
 </div>
 <!-- /.modal -->
+
+
+<div class="modal fade" id="modal-calendario">
+    <div class="modal-dialog modal-xs">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titulo"></h4>
+            </div>
+            <div class="modal-body ui-front">
+
+                <b>Descripcion</b>
+                <h5 id="descripcion"></h5>
+                <b>Origen</b>
+                <h5 id="origen"></h5>
+                <b>Destino</b>
+                <h5 id="destino"></h5>
+                <b>Balance</b>
+                <h5 id="total"></h5>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btn-editar-transporte-cliente" class="btn btn-warning">Editar</button>
+                <button type="button" class="btn btn-danger pull-left" data-dismiss="modal">Cerrar</button>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
