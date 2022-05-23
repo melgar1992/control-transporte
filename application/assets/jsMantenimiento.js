@@ -121,7 +121,16 @@ function agregarProducto() {
 		html += "<td><input type='hidden' name= 'ID_taller[]' value ='" + ID_taller + "'>" + taller + "</td>";
 		html += "<td><input type='hidden' name = 'ID_categoria_mantenimiento[]' value ='" + ID_categoria_mantenimiento + "'>" + mantenimiento + "</td>";
 		html += "<td><input type='hidden' name = 'ID_camion[]' value ='" + ID_camion + "'>" + placa + "</td>";
-		html += "<td><input type='hidden' name = 'Porpagar[]' value ='" + PorPagar + "'>" + Textopargar + "</td>";
+		html += "<td>";
+		html += "<select name='Porpagar[]'>";
+		html += "<option value='0' ";
+		html += (PorPagar == 0) ? 'seleceted' : '';
+		html += " >Contado</option>";
+		html += "<option value='1' "
+		html += (PorPagar != 0) ? 'selected' : '';
+		html += ">Por pagar</option>";
+		html += "</select>";
+		html += "</td>";
 		html += "<td><input type='text' maxlength='30' name = 'Descripcion[]' value =''></td>";
 		html += "<td><input type = 'number' class='PrecioUnitario' min = '0'  name = 'PrecioUnitario[]' value = '0'></td>";
 		html += "<td><input type = 'number' class='Cantidad' min = '0'  name = 'Cantidad[]' value = '1'></td>";

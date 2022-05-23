@@ -37,7 +37,7 @@
                               <div class="col-md-12">
 
                                   <form action="<?php echo site_url(); ?>/mantenimiento/actualizarMantenimiento" method="POST" class="form-horizontal">
-                                  <input type="text" hidden='hidden' id="ID_mantenimiento" name="ID_mantenimiento" value="<?php echo $mantenimiento['ID_Mantenimiento'] ?>">
+                                      <input type="text" hidden='hidden' id="ID_mantenimiento" name="ID_mantenimiento" value="<?php echo $mantenimiento['ID_Mantenimiento'] ?>">
                                       <div class="form-group">
                                           <div class="col-md-3">
                                               <label for="">Empleado a cargo:</label>
@@ -145,7 +145,12 @@
                                                           <td><input type='hidden' name='ID_taller[]' value='<?php echo $row->ID_taller ?>'><?php echo $row->NombreTaller ?></td>
                                                           <td><input type='hidden' name='ID_categoria_mantenimiento[]' value='<?php echo $row->ID_categoria_mantenimiento ?>'><?php echo $row->NombreCategoria ?></td>
                                                           <td><input type='hidden' name='ID_camion[]' value='<?php echo $row->ID_camion ?>'><?php echo $row->Placa ?></td>
-                                                          <td><input type='hidden' name='Porpagar[]' value='<?php echo $row->Porpagar ?>'><?php echo ($row->Porpagar == 0) ? 'Contado' : 'Por pagar'; ?></td>
+                                                          <td>
+                                                              <select name="Porpagar[]">
+                                                                  <option value="0" <?php if ($row->Porpagar == 0) echo "selected"  ?>>Contado</option>
+                                                                  <option value="1" <?php if ($row->Porpagar != 0) echo "selected"  ?>>Por pagar</option>
+                                                              </select>
+                                                          </td>
                                                           <td><input type='text' maxlength='30' name='Descripcion[]' value='<?php echo $row->Descripcion ?>'></td>
                                                           <td><input type='number' class='PrecioUnitario' min='0' name='PrecioUnitario[]' value='<?php echo $row->PrecioUnitario ?>'></td>
                                                           <td><input type='number' class='Cantidad' min='0' name='Cantidad[]' value='<?php echo $row->Cantidad ?>'></td>
