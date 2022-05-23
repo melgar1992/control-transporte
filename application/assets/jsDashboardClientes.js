@@ -127,6 +127,7 @@ $(document).ready(function () {
 	});
 	$(document).on('submit', '#reporteCliente', function (e) {
 		e.preventDefault();
+		$("#DetalleCliente").empty();
 		ID_Cliente = $.trim($('#ID_Cliente').val());
 		fechaIni = $.trim($('#fechaIni').val());
 		fechaFin = $.trim($('#fechaFin').val());
