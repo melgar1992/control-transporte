@@ -98,6 +98,27 @@ class Reportes_model extends CI_Model
         $this->db->from('balance_proveedores');
         return $this->db->get()->result_array();
     }
+    public function saldoAnteriorTaller($ID_taller, $fechaIni)
+    {
+        $this->db->select('t.NombreTaller ,(sum(dt.Debe) - sum(dt.Haber)) as balance');
+        $this->db->from('detalletaller  dt');
+        $this->db->join('taller t', 't.ID_taller = dt.ID_taller');
+        $this->db->where('dt.ID_taller', $ID_taller);
+        $this->db->where('Fecha <=', $fechaIni);
+        
+        return $this->db->get()->row_array();
+    }
+    public function obtenerDetalleTallerEntreFecha($ID_taller, $fechaIni, $fechaFin)
+    {
+        $this->db->select('dt.Fecha ,t.NombreTaller , dt.N_placa, dt.Descripcion, dt.PrecioUnitario, dt.Cantidad, dt.Debe, dt.Haber');
+        $this->db->from('detalletaller  dt');
+        $this->db->join('taller t', 't.ID_taller = dt.ID_taller');
+        $this->db->where('dt.ID_taller', $ID_taller);
+        $this->db->where('dt.Fecha <=', $fechaFin);
+        $this->db->where('dt.Fecha >=', $fechaIni);
+
+        return $this->db->get()->result_array();
+    }
     public function obtenerDetalleBalanceTaller()
     {
         $this->db->select('ID_taller, NombreTaller, Departamento, (CuentasPagar + GastosMantenimiento) as balance');

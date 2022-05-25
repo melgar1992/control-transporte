@@ -9,6 +9,7 @@
                       <li><a href=<?php echo site_url("DashboardEmpleado/index") ?>>Dashboard de empleados</a></li>
                       <li><a href=<?php echo site_url("DashboardClientes/index") ?>>Dashboard de Clientes</a></li>
                       <li><a href=<?php echo site_url("DashboardProveedores/index") ?>>Dashboard de Proveedores</a></li>
+                      <li><a href=<?php echo site_url("DashboardTaller/index") ?>>Dashboard de otras cuentas</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fas fa-calendar"></i> Calendario<span class="fas fa-chevron-down"></span></a>
