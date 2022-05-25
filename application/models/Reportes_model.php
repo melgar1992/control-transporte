@@ -116,6 +116,7 @@ class Reportes_model extends CI_Model
         $this->db->where('dt.ID_taller', $ID_taller);
         $this->db->where('dt.Fecha <=', $fechaFin);
         $this->db->where('dt.Fecha >=', $fechaIni);
+        $this->db->order_by('dt.Fecha');
 
         return $this->db->get()->result_array();
     }
