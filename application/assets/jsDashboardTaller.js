@@ -66,9 +66,10 @@ $(document).ready(function () {
 							detalleTaller[i]['Debe'],
 							detalleTaller[i]['Haber'],
 							balance.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')
-						]).draw();
+						]);
 
 					}
+					tabla_reporte.draw();
 					$("#balance_actual").text(balance.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,'));
 					$('.reportetaller').removeClass('hidden');
 				}
