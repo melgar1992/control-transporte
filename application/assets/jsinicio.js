@@ -539,8 +539,9 @@ $(document).ready(function () {
 							(detalleCamionEmpresa[i]['ID_transporte'] > 0) ?
 							"<td><button type='button' value = '" + detalleCamionEmpresa[i]['ID_transporte'] + "' class='btn btn-warning btn-editar-transporte_camion'><span class='fas fa-pencil-alt'></span></button></td>" :
 							null,
-						]).draw();
+						]);
 					}
+					tablaDetalleCamion.draw();
 					$(".ingreso_camion").text(Number(sumIngresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
 					$(".egreso_camion").text(Number(sumEgresos).toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,') + "Bs");
 					eficiancia = ((sumIngresos - sumEgresos) * 100) / sumIngresos;
