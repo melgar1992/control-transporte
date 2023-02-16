@@ -176,8 +176,35 @@ $(document).ready(function () {
 	});
 	var tablaDetalleCamion = $('#tabla_detalle_camion').DataTable({
 		responsive: "true",
+		dom: "Bfrtip",
 		"order": [
 			[1, "asc"]
+		],
+		buttons: [
+		{
+			extend: 'print',
+			title: "Reporte de camion",
+			exportOptions: {
+				columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+
+			}
+		},
+		{
+			extend: 'copy',
+			title: "Reporte de camion",
+			exportOptions: {
+				columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+			}
+
+		},
+		{
+			extend: 'excelHtml5',
+			title: "Reporte de camion",
+			exportOptions: {
+				columns: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+			}
+
+		},
 		],
 		"language": {
 			'lengthMenu': "Mostrar _MENU_ registros",

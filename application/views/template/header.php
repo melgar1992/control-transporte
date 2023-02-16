@@ -31,6 +31,7 @@ if (isset($this->session->userdata['logged_in'])) {
     <!-- <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet"> -->
     <!-- DataTables -->
     <?php css('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') ?>
+    <?php css('/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css') ?>
     <!-- bootstrap-progressbar -->
     <?php css('/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') ?>
     <!-- <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet"> -->

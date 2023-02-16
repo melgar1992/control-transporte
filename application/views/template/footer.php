@@ -49,6 +49,15 @@
         <!-- DataTables -->
         <?php script('/vendors/datatables.net/js/jquery.dataTables.min.js') ?>
         <?php script('/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') ?>
+
+        <!-- Data Tables export -->
+        <?php script('/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') ?>
+        <?php script('/vendors/datatables.net-buttons/js/buttons.colVis.min.js') ?>
+        <?php script('/vendors/datatables.net-buttons/js/buttons.flash.min.js') ?>
+        <?php script('/vendors/datatables.net-buttons/js/buttons.html5.min.js') ?>
+        <?php script('/vendors/datatables.net-buttons/js/buttons.print.min.js') ?>
+        <?php script('/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>
+        
         <!-- Jquery Print, sirve para imprimir -->
         <?php script('/vendors/jquery-print/jquery.print.js') ?>
         <!-- PNotify -->
