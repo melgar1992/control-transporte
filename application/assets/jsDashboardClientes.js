@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	var tabla_pagos = $('#tabla_pagos').DataTable({
-		dom: "Brtip",
+		dom: "rtip",
 		"paging": false,
 		"ordering": false,
 		"info": false,
@@ -60,7 +60,7 @@ $(document).ready(function () {
 		},
 	});
 	var tabla_servicios = $('#tabla_servicios').DataTable({
-		dom: "Brtip",
+		dom: "rtip",
 		"paging": false,
 		"ordering": false,
 		"info": false,

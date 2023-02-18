@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	var tabla_reporte = $('#tabla_reporte').DataTable({
-		dom: "Brtip",
+		dom: "rtip",
 		"paging": false,
 		"ordering": false,
 		"info": false,
