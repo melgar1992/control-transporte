@@ -88,7 +88,7 @@ class Reportes_model extends CI_Model
     }
     public function obtenerDetalleBalanceClientes()
     {
-        $this->db->select('b.ID_cliente, b.Nombre, b.Apellidos, (b.transporte + b.Balancepago) as balance');
+        $this->db->select('b.ID_Cliente, b.Nombre, b.Apellidos, (b.transporte + b.Balancepago) as balance');
         $this->db->from('balance_cliente b');
         return $this->db->get()->result_array();
     }

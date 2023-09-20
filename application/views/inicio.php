@@ -267,7 +267,7 @@
                         foreach ($DetalleBalanceCliente as $row) {
                           if ($row['balance'] != 0) { ?>
                             <tr>
-                              <td><?php echo $row['ID_cliente'] ?></td>
+                              <td><?php echo $row['ID_Cliente'] ?></td>
                               <td><?php echo $row['Nombre'] ?></td>
                               <td><?php echo $row['Apellidos'] ?></td>
                               <td><?php echo number_format($row['balance'], 2) ?></td>
