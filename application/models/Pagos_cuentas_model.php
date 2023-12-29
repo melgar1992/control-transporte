@@ -14,7 +14,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->from('pago_cuentas p');
         $this->db->join('cliente c', 'c.ID_Cliente = p.ID_Cliente');
         $this->db->order_by('p.fecha','DESC');
-        $this->db->limit(500);
+        $this->db->limit(200);
         return $this->db->get()->result();
     }
     public function ingresarPagoCliente($ID_Cliente, $Fecha, $Descripcion, $Debe, $Haber)
@@ -61,7 +61,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->select('p.*, t.NombreTaller, t.Departamento, t.Direccion');
         $this->db->from('pago_cuentas p');
         $this->db->join('taller t', 't.ID_taller = p.ID_taller');
-        $this->db->limit(500);
+        $this->db->limit(200);
         $this->db->order_by('p.fecha','DESC');
         return $this->db->get()->result();
     }
@@ -104,7 +104,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->select('p.*,po.CI, po.Nombres, po.Apellidos, po.Calificacion, po.Descripcion as DescripcionProveedor, po.Direccion, po.Departamento, po.Telefono_01, po.Telefono_02');
         $this->db->from('pago_cuentas p');
         $this->db->join('proveedor po', 'po.ID_proveedor = p.ID_proveedor');
-        $this->db->limit(500);
+        $this->db->limit(200);
         $this->db->order_by('p.fecha','DESC');
         return $this->db->get()->result();
     }
@@ -147,7 +147,7 @@ class Pagos_cuentas_model extends CI_Model
         $this->db->select('p.*,ce.Nombre_cuenta, ce.Descripcion as DescripcionCuenta');
         $this->db->from('pago_cuentas p');
         $this->db->join('cuenta_empresa ce', 'ce.ID_cuenta_empresa = p.ID_cuenta_empresa');
-        $this->db->limit(500);
+        $this->db->limit(200);
         $this->db->order_by('p.Fecha', 'DESC');
         return $this->db->get()->result();
     }
