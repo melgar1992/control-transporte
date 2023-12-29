@@ -9,6 +9,8 @@ class Mantenimiento_model extends CI_Model
         $this->db->join('empleado e', 'e.ID_empleado = m.ID_empleado');
         $this->db->join('persona p', 'p.ID_persona = e.ID_persona');
         $this->db->where('m.Estado', 'Activo');
+        $this->db->order_by('m.Fecha_mantenimiento', 'DESC');
+        $this->db->limit(200);
         return $this->db->get()->result();
     }
     public function obtenerCategoriasMantenimientos()
